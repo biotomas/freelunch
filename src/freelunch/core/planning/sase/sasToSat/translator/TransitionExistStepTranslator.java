@@ -97,7 +97,7 @@ public class TransitionExistStepTranslator extends TranslatorBase implements Sas
         }/**/
     }
     
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "unlikely-arg-type" })
     protected void sortActionsByTransitions(SasParallelPlan plan, int[] model) {
         int time = 0;
         List<Transition>[] activeTransitions = new List[problem.getVariables().size()];

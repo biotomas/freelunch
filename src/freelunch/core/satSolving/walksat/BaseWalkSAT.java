@@ -265,7 +265,8 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
         return lastRemovableClauseId;
     }
     
-    @Override
+    @SuppressWarnings("unlikely-arg-type")
+	@Override
     public void removeClause(int clauseId) {
         LSClause c = removableClauseMap.get(clauseId);
         clManager.removeClause(c);
