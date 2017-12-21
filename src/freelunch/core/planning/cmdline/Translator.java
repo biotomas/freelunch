@@ -35,6 +35,7 @@ import freelunch.core.planning.sase.sasToSat.translator.CompactReinforcedSaseTra
 import freelunch.core.planning.sase.sasToSat.translator.DirectDoubleLinkedTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.DirectTranslator;
+import freelunch.core.planning.sase.sasToSat.translator.DirectTranslatorSingleAction;
 import freelunch.core.planning.sase.sasToSat.translator.DisertDirectTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.MiniBinTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.ReinforcedSaseTranslator;
@@ -48,7 +49,7 @@ import freelunch.core.satSolving.FormulaAnalyzer;
 public class Translator {
     
     public enum TranslationMethod {
-        direct, sase, isase, action, linear, reinforced, exist, disertDirect, compactDirect, compactReinforced, binaryReinforced, selective, miniBin;
+        shortest, direct, sase, isase, action, linear, reinforced, exist, disertDirect, compactDirect, compactReinforced, binaryReinforced, selective, miniBin;
     }
 
     public static void main(String[] args) {
@@ -115,6 +116,9 @@ public class Translator {
 	    case direct:
 	        translator = new DirectTranslator(problem);
 	        break;
+	    case shortest:
+	    	translator = new DirectTranslatorSingleAction(problem);
+	    	break;
 	    case sase:
 	        SaseTranslatorSettings settings = new SaseTranslatorSettings();
 	        settings.setUseOriginalGoalEncoding(true);

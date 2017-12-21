@@ -44,6 +44,10 @@ public class SymbolicReachabilityProblemGenerator {
     public SasParallelPlan decodePlan(List<int[]> model) {
         return translator.decodePlan(model);
     }
+    
+    public int getVariables() {
+    	return variables;
+    }
 	
 	public SymbolicReachabilityProblem getSRProblem() {
 			
@@ -51,6 +55,8 @@ public class SymbolicReachabilityProblemGenerator {
 		SymbolicReachabilityProblem srProblem = new SymbolicReachabilityProblem();
 		
 		try {
+			// action variables
+			srProblem.actionVariables = translator.getActionVariables();
 			// initial conditions
 			solver.setVariablesCount(variables / 2);
 			translator.addInitialStateConstraints(solver);

@@ -21,6 +21,7 @@ package freelunch.core.planning.sase.optimizer;
 import java.util.List;
 
 import freelunch.core.planning.model.Condition;
+import freelunch.core.planning.model.ConditionalEffect;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
@@ -55,10 +56,32 @@ public class PlanVerifier {
                         return false;
                     }
                 }
+                
                 //apply effects
                 for (Condition eff : op.getEffects()) {
                     int var = eff.getVariable().getId();
                     state[var] = eff.getValue();
+                }
+                
+                //check and apply conditional effects
+                if (op.getConditionalEffects() != null) {
+	                outer:
+	                for (ConditionalEffect cef : op.getConditionalEffects()) {
+	                	for (Condition ec : cef.getEffectConditions()) {
+	                		if (state[ec.getVariable().getId()] != ec.getValue()) {
+	                			continue outer;
+	                		}
+	                	}
+	                	if (cef.getRequiredValue() != -1) {
+	                		if (state[cef.getVar().getId()] != cef.getRequiredValue()) {
+	                            System.out.println(String.format(
+	                                    "Plan invalid: action (%s) at time %d has an unsatisfied conditional effect %s",
+	                                    op.getActionInfo().getName(), time, cef.toString()));
+	                            return false;                			
+	                		}
+	                	}
+	                	state[cef.getVar().getId()] = cef.getNewValue();                	
+	                }
                 }
             }
             time++;

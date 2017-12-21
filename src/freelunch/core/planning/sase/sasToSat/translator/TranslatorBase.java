@@ -76,6 +76,15 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
     }
     
+	public List<Integer> getActionVariables() {
+		List<Integer> res = new ArrayList<Integer>();
+        for (SasAction a : actions) {
+        	res.add(actionVariables.getVariable(a.getId(), 0));
+        }
+		return res;
+	}
+
+    
     @Override
     public BasicSatFormula makeFormulaForMakespan(int makespan) {
         BasicSatFormulaGenerator sgen = new BasicSatFormulaGenerator();
@@ -509,6 +518,18 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         return true;
     }
     
+    protected void computeInterferingActionsAll() {
+        interferingActionPairs = new HashSet<Pair<SasAction>>();
+        for (SasAction a1 : actions) {
+            for (SasAction a2 : actions) {
+                if (a1.getId() < a2.getId()) {
+                    // save some time on symmetry
+                    interferingActionPairs.add(new Pair<SasAction>(a1, a2));
+                }
+            }
+        }   	
+    }
+    
     //TODO remove transition dependency
     protected void computeInterferingActionPairsTransitionBased() {
         interferingActionPairs = new HashSet<Pair<SasAction>>();
@@ -685,6 +706,21 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             }
             solver.addAtMostOneConstraint(vec);
         }
+    }
+    
+    /**
+     * At most one action per step is allowed.
+     * @param solver
+     * @param time
+     * @throws SatContradictionException
+     */
+    protected void universal_atMostOneAction(IncrementalSatSolver solver, int time) throws SatContradictionException {
+    	//TODO fixme
+        IntVector vec = new IntVector(10);
+        for (SasAction a : actions) {
+        	vec.add(actionVariables.getVariable(a.getId(), time));
+        }
+        solver.addAtMostOneConstraint(vec);
     }
     
     protected void universal_transitionsImplyPreconditonAssignment(IncrementalSatSolver solver, int time) throws SatContradictionException {

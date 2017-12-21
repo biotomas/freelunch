@@ -98,4 +98,6 @@ public interface SasToSatTranslator {
 	 */
 	public SasParallelPlan decodePlan(List<int[]> model);
 
+	public List<Integer> getActionVariables();
+
 }

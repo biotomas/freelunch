@@ -20,7 +20,6 @@ package freelunch.core.planning.tests;
 
 import java.io.IOException;
 
-import junit.framework.TestCase;
 import freelunch.core.planning.NonexistentPlanException;
 import freelunch.core.planning.SasProblemAnalyzer;
 import freelunch.core.planning.Solver;
@@ -28,8 +27,8 @@ import freelunch.core.planning.TimeoutException;
 import freelunch.core.planning.benchmarking.BenchmarkProvider;
 import freelunch.core.planning.benchmarking.providers.LogisticsBenchmarkProvider;
 import freelunch.core.planning.forwardSearch.BasicForwardSearchSolver;
-import freelunch.core.planning.forwardSearch.ForwardSearchSettings;
 import freelunch.core.planning.forwardSearch.BasicForwardSearchSolver.ForwardSearchStatistics;
+import freelunch.core.planning.forwardSearch.ForwardSearchSettings;
 import freelunch.core.planning.forwardSearch.heuristics.NeverRestartHeuristic;
 import freelunch.core.planning.forwardSearch.heuristics.SparrowHeuristic;
 import freelunch.core.planning.model.SasParallelPlan;
@@ -49,6 +48,7 @@ import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectDoubleLinkedTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.DirectTranslator;
+import freelunch.core.planning.sase.sasToSat.translator.DirectTranslatorSingleAction;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings;
@@ -59,6 +59,7 @@ import freelunch.core.satSolving.Sat4JSolver;
 import freelunch.core.satSolving.SatSolver;
 import freelunch.core.satSolving.walksat.Sparrow;
 import freelunch.core.utilities.Stopwatch;
+import junit.framework.TestCase;
 
 public class LogisticsBenchmarkTest extends TestCase {
     
@@ -122,12 +123,14 @@ public class LogisticsBenchmarkTest extends TestCase {
 	}
 	
     public void testEasyLogisticsSeries() {
-        BenchmarkProvider pp = getHardSet();
+        BenchmarkProvider pp = getEasySet();
         SasProblem sasProb = pp.getNext();
         Stopwatch time = new Stopwatch();
         while (sasProb != null) {
-            IterativeSatBasedSolver s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(sasProb,1));
-            solveProblem(s, sasProb, false, false);
+            //IterativeSatBasedSolver s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(sasProb,1));
+            IterativeSatBasedSolver s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectTranslatorSingleAction(sasProb));
+            s.getSettings().setVerbose(true);
+            solveProblem(s, sasProb, false, true);
             sasProb = pp.getNext();
         }
         System.out.println(time.elapsedFormatedSeconds());

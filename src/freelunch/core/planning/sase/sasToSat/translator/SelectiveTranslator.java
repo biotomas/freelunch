@@ -25,6 +25,7 @@ public class SelectiveTranslator implements SasToSatTranslator {
             translator = new CompactReinforcedSaseTranslator(problem);
             usingExist = false;
         } else {
+        	translator = new DirectExistStepTranslator(problem, 4);
             usingExist = true;
         }
     }
@@ -80,6 +81,11 @@ public class SelectiveTranslator implements SasToSatTranslator {
     public SasParallelPlan decodePlan(List<int[]> model) {
         return translator.decodePlan(model);
     }
+
+	@Override
+	public List<Integer> getActionVariables() {
+		return translator.getActionVariables();
+	}
 
 
 
