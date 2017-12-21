@@ -18,6 +18,8 @@
  ******************************************************************************/
 package freelunch.core.planning.tests;
 
+import java.io.IOException;
+
 import freelunch.core.planning.cmdline.Translator.TranslationMethod;
 import freelunch.core.planning.model.Condition;
 import freelunch.core.planning.model.SasAction;
@@ -30,6 +32,19 @@ import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProble
 import junit.framework.TestCase;
 
 public class SymbolicReachabilityTest extends TestCase {
+	
+	public void testSrtParser() {
+		String filename = "testfiles/test.srt";
+		try {
+			SymbolicReachabilityProblem srp = new SymbolicReachabilityProblem(filename);
+			System.out.println(srp.initialConditions.getVariables());
+			System.out.println(srp.universalConditions.getVariables());
+			System.out.println(srp.transitionConditions.getVariables());
+			System.out.println(srp.goalConditions.getVariables());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void testTrivialExample() {
 		

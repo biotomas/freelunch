@@ -175,38 +175,57 @@ public class SasParallelPlan {
         out.close();
     }
     
-    public static SasParallelPlan loadFromFile(String filename, SasProblem problem) {
-        Map<String, SasAction> actions = new HashMap<String, SasAction>();
-        for (SasAction a : problem.getOperators()) {
-            actions.put(a.getActionInfo().getName().toUpperCase(), a);
+    public String getPlanIpcFormat() {
+        String planString = "";
+        for (List<SasAction> step : plan) {
+            for (SasAction a : step) {
+                planString += String.format("(%s)\n", a.getActionInfo().getName());
+            }
         }
-        List<List<SasAction>> plan = new ArrayList<List<SasAction>>();
-        
+        return planString;
+    }
+    
+    public static SasParallelPlan loadFromFile(String filename, SasProblem problem) {
+    	String planString = "";
         try {
             FileReader fr;
             fr = new FileReader(filename);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
-                if (line.startsWith("(")) {
-                    String actionName = line.substring(1, line.length() - 1).toUpperCase();
-                    if (!actions.containsKey(actionName)) {
-                        System.err.println("Action not found in the problem: " + actionName);
-                        reader.close();
-                        return null;
-                    }
-                    List<SasAction> step = new ArrayList<SasAction>(1);
-                    step.add(actions.get(actionName));
-                    plan.add(step);
-                }
+            	planString += line;
                 line = reader.readLine();
             }
             fr.close();
-            return new SasParallelPlan(plan);
+            return loadFromString(planString, problem);
         } catch (IOException e) {
             System.err.println("IO expception while loading plan file.");
             return null;
         }
+    }
+    
+    public static SasParallelPlan loadFromString(String planString, SasProblem problem) {
+        Map<String, SasAction> actions = new HashMap<String, SasAction>();
+        for (SasAction a : problem.getOperators()) {
+            actions.put(a.getActionInfo().getName().toUpperCase(), a);
+        }
+        for (SasAction a : problem.getConditionalOperators()) {
+            actions.put(a.getActionInfo().getName().toUpperCase(), a);
+        }
+        List<List<SasAction>> plan = new ArrayList<List<SasAction>>();
+        for (String line : planString.split("\n")) {
+            if (line.startsWith("(")) {
+                String actionName = line.substring(1, line.length() - 1).toUpperCase();
+                if (!actions.containsKey(actionName)) {
+                    System.err.println("Action not found in the problem: " + actionName);
+                    return null;
+                }
+                List<SasAction> step = new ArrayList<SasAction>(1);
+                step.add(actions.get(actionName));
+                plan.add(step);
+            }
+        }
+        return new SasParallelPlan(plan);
     }
 
 }

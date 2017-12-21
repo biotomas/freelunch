@@ -20,7 +20,6 @@ package freelunch.core.satSolving.symbolicReachability;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
@@ -44,7 +43,7 @@ public class Sat4jReachSolver implements SymbolicReachabilitySolver {
     }
     
     private ArrayList<int[]> solveProblemForSize(SymbolicReachabilityProblem prob, int n) {
-        BasicSatFormula f = getFormulaForSize(prob, n);
+        BasicSatFormula f = prob.makeFormulaForMakespan(n);
         try {
             ArrayList<int[]> res = solveFormula(f, n);
             return res;
@@ -77,45 +76,4 @@ public class Sat4jReachSolver implements SymbolicReachabilitySolver {
         }
         return null;
     }
-    
-    private BasicSatFormula getFormulaForSize(SymbolicReachabilityProblem prob, int n) {
-        int sig = prob.initialConditions.getVariables();
-        List<int[]> clauses = new ArrayList<int[]>();
-        
-        //initial conds
-        for (int[] clause : prob.initialConditions.getClauses()) {
-            clauses.add(makeClause(clause, sig, 0));
-        }
-        //goal conds
-        for (int[] clause : prob.goalConditions.getClauses()) {
-            clauses.add(makeClause(clause, sig, n-1));
-        }
-        //universal conds
-        for (int i = 0; i < n; i++) {
-            for (int[] clause : prob.universalConditions.getClauses()) {
-                clauses.add(makeClause(clause, sig, i));
-            }
-        }
-        //transitional conds
-        for (int i = 0; i+1 < n; i++) {
-            for (int[] clause : prob.transitionConditions.getClauses()) {
-                clauses.add(makeClause(clause, sig, i));
-            }
-        }
-        
-        return new BasicSatFormula(sig*n, clauses);
-    }
-    
-    private int[] makeClause(int[] clause, int sig, int time) {
-        int[] result = Arrays.copyOf(clause, clause.length);
-        for (int i = 0; i < clause.length; i++) {
-            int var = Math.abs(result[i]);
-            var += sig*time;
-            result[i] = result[i] > 0 ? var : -var;
-        }        
-        return result;
-    }
-    
-    
-
 }

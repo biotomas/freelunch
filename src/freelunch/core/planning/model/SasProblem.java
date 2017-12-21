@@ -27,6 +27,7 @@ public class SasProblem {
     private List<Condition> goal;
     private List<StateVariable> variables;
     private List<SasAction> operators;
+    private List<SasAction> conditionalOperators;
     private List<List<Condition>> mutexGroups;
     private String description;
     
@@ -36,6 +37,44 @@ public class SasProblem {
             op.setId(actionId);
             actionId++;
         }
+    }
+    
+    public void compileConditionalActions() {
+		int sizeBefore = operators.size();
+    	for (SasAction csa : conditionalOperators) {
+    		compileAwayConditionalAction(csa);
+    	}
+		System.err.println(String.format("Compiled %d conditional actions into %s actions", 
+				conditionalOperators.size(), (operators.size() - sizeBefore)));
+    	setActionIDs();
+    }
+    
+    private void compileAwayConditionalAction(SasAction csa) {
+    	//System.err.println("Compiling action " + csa.toString());
+   		ConditionalEffect ce = csa.getConditionalEffects().get(0);
+   		if (ce.getEffectConditions().size() > 1) {
+    		throw new RuntimeException("ERROR: Conditional effects with multiple conditions are not supported.");
+   		}
+   		Condition effectCond = ce.getEffectConditions().get(0);
+   		for (int val = 0; val < effectCond.getVariable().getDomain(); val++) {
+   			SasAction a = new SasAction(csa);
+   			a.getConditionalEffects().remove(0);
+   			if (val == effectCond.getValue()) {
+   				a.getPreconditions().add(effectCond);
+   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
+   				if (ce.getRequiredValue() != -1) {
+   					a.getPreconditions().add(new Condition(ce.getVar(), ce.getRequiredValue()));
+   				}
+   			} else {
+   				a.getPreconditions().add(new Condition(ce.getVar(), val));
+   			}
+   			if (a.getConditionalEffects().size() == 0) {
+   				operators.add(a);
+   				//System.out.println("Compilation added action " + a.toString());
+   			} else {
+   				compileAwayConditionalAction(a);
+   			}
+   		}
     }
     
     /**
@@ -48,6 +87,7 @@ public class SasProblem {
 		this.variables = other.variables;
 		this.operators = other.operators;
 		this.mutexGroups = other.mutexGroups;
+		this.conditionalOperators = other.conditionalOperators;
 	}
 
 	public SasProblem() {
@@ -151,10 +191,21 @@ public class SasProblem {
         	if (!operators.equals(o.operators)) {
         		return false;
         	}
+        	if (!conditionalOperators.equals(o.conditionalOperators)) {
+        		return false;
+        	}
     		return true;
     	} else {
     		return false;
     	}
     }
+
+	public List<SasAction> getConditionalOperators() {
+		return conditionalOperators;
+	}
+
+	public void setConditionalOperators(List<SasAction> conditionalOperators) {
+		this.conditionalOperators = conditionalOperators;
+	}
 
 }

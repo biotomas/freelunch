@@ -2,13 +2,10 @@ package freelunch.core.planning.cmdline;
 
 import java.io.IOException;
 
-import freelunch.core.planning.SasProblemAnalyzer;
-import freelunch.core.planning.SasProblemAnalyzer.SasProblemProperties;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.FormulaAnalyzer;
-import freelunch.core.utilities.Logger;
 
 public class Analyzer {
 
@@ -44,11 +41,12 @@ public class Analyzer {
             SasProblem prob;
             try {
                 prob = SasIO.parse(filename);
-                Logger.print(0, "start");
-                SasProblemAnalyzer spa = new SasProblemAnalyzer(prob);
-                SasProblemProperties spp = spa.analyzeSasProblem();
-                System.out.println(spp);
-                Logger.print(0, "done");
+                prob.compileConditionalActions();
+                //Logger.print(0, "start");
+                //SasProblemAnalyzer spa = new SasProblemAnalyzer(prob);
+                //SasProblemProperties spp = spa.analyzeSasProblem();
+                //System.out.println(spp);
+                //Logger.print(0, "done");
             } catch (IOException e) {
                 System.out.println("sas file cannot be opened");
             }

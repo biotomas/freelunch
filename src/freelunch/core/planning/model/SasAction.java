@@ -28,6 +28,8 @@ public class SasAction {
     private List<Condition> preconditions;
     private List<Condition> prevailConditions = null;
     private List<Condition> effects;
+	private List<ConditionalEffect> conditionalEffects;
+
     private int id;
     // the default cost of an action is 1
     private int cost = 1;
@@ -39,10 +41,23 @@ public class SasAction {
     public SasAction(String name) {
         this.actionInfo = new StringActionInfo(name);
         preconditions = new ArrayList<>();
+        conditionalEffects = new ArrayList<>();
         effects = new ArrayList<>();
     }
 
-    /**
+    public SasAction(SasAction other) {
+    	this.actionInfo = other.actionInfo;
+    	this.preconditions = new ArrayList<>(other.preconditions);
+    	this.effects = new ArrayList<>(other.effects);
+    	this.cost = other.cost;
+    	this.conditionalEffects = new ArrayList<>(other.conditionalEffects);
+	}
+    
+    public List<ConditionalEffect> getConditionalEffects() {
+    	return conditionalEffects;
+    }
+
+	/**
      * @param preconditions the preconditions to set
      */
     public void setPreconditions(List<Condition> preconditions) {
@@ -93,10 +108,11 @@ public class SasAction {
 
     @Override
     public String toString() {
-        return String.format("\n%s: prec=%s eff=%s cost=%d",
+        return String.format("\n%s: prec=%s eff=%s condeff=%s cost=%d",
                 actionInfo.getName(),
                 preconditions.toString(),
                 effects.toString(),
+                conditionalEffects.toString(),
                 cost);
     }
 

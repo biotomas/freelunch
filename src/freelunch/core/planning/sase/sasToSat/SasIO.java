@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import freelunch.core.planning.model.Condition;
+import freelunch.core.planning.model.ConditionalEffect;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
-import freelunch.core.planning.model.StringActionInfo;
 
 
 
@@ -126,7 +126,7 @@ public class SasIO {
         problem.setDescription(filename);
         String line = reader.readLine();
         List<StateVariable> stateVars = new ArrayList<StateVariable>();
-        List<Condition> conditions = new ArrayList<Condition>();
+        List<Condition> preConditions = new ArrayList<Condition>();
 
         // version
         assert (line.equals("begin_version"));
@@ -212,34 +212,37 @@ public class SasIO {
         for (int i = 0; i < vars; i++) {
             line = reader.readLine();
             int state = Integer.parseInt(line);
-            conditions.add(new Condition(problem.getVariables().get(i), state));
+            preConditions.add(new Condition(problem.getVariables().get(i), state));
         }
-        problem.setInitialState(new ArrayList<Condition>(conditions));
+        problem.setInitialState(new ArrayList<Condition>(preConditions));
         line = reader.readLine();
         assert line.equals("end_state");
 
         // goal state
-        conditions.clear();
+        preConditions.clear();
         while (!line.equals("begin_goal")) {
             line = reader.readLine();
         }
         int goals = Integer.parseInt(reader.readLine());
         for (int i = 0; i < goals; i++) {
             line = reader.readLine();
-            conditions.add(parseCondition(line, problem));
+            preConditions.add(parseCondition(line, problem));
         }
-        problem.setGoal(new ArrayList<Condition>(conditions));
+        problem.setGoal(new ArrayList<Condition>(preConditions));
         line = reader.readLine();
         assert line.equals("end_goal");
 
         //operators
         List<SasAction> operatorList = new ArrayList<SasAction>();
+        List<SasAction> conditionalOperatorList = new ArrayList<>();
+        
         int operators = Integer.parseInt(reader.readLine());
         for (int i = 0; i < operators; i++) {
             line = reader.readLine();
             assert line.equals("begin_operator");
             line = reader.readLine();
-            SasAction op = new SasAction(new StringActionInfo(line.trim()));
+            SasAction op = new SasAction(line.trim());
+            
             line = reader.readLine();
 
             int prevailConds = Integer.parseInt(line);
@@ -251,28 +254,41 @@ public class SasIO {
             line = reader.readLine();
 
             int effects = Integer.parseInt(line);
-            conditions.clear();
+            preConditions.clear();
             List<Condition> effectList = new ArrayList<Condition>();
             for (int ef = 0; ef < effects; ef++) {
                 line = reader.readLine().trim();
                 String[] parts = line.split(" ");
                 int effectConditions = Integer.parseInt(parts[0]);
                 if (effectConditions > 0) {
-                	reader.close();
-                    throw new UnsupportedOperationException("The problem contains conditional effects. Conditional effects are not supported.");
+	                int varId = Integer.parseInt(parts[parts.length-3]);
+	                StateVariable var = problem.getVariables().get(varId);
+	                int reqVal = Integer.parseInt(parts[parts.length-2]);
+	                int newVal = Integer.parseInt(parts[parts.length-1]);
+	                ConditionalEffect ceff = new ConditionalEffect(var, reqVal, newVal);
+	                
+                	for (int eci = 0; eci < effectConditions; eci++) {
+                		int ecivarid = Integer.parseInt(parts[1+2*eci]);
+                		StateVariable ecivar = problem.getVariables().get(ecivarid);
+                		int ecireqval = Integer.parseInt(parts[2+2*eci]);
+                		ceff.addEffectCondition(new Condition(ecivar, ecireqval));
+                	}
+                	op.getConditionalEffects().add(ceff);
+                } else {
+                	// normal effect
+	                int varId = Integer.parseInt(parts[parts.length-3]);
+	                StateVariable var = problem.getVariables().get(varId);
+	                int reqVal = Integer.parseInt(parts[parts.length-2]);
+	                int newVal = Integer.parseInt(parts[parts.length-1]);
+	                // -1 means no required value
+	                if (reqVal != -1) {
+	                    preConditions.add(new Condition(var, reqVal));
+	                }
+	                effectList.add(new Condition(var, newVal));
                 }
-                int varId = Integer.parseInt(parts[parts.length-3]);
-                StateVariable var = problem.getVariables().get(varId);
-                int reqVal = Integer.parseInt(parts[parts.length-2]);
-                int newVal = Integer.parseInt(parts[parts.length-1]);
-                // -1 means no required value
-                if (reqVal != -1) {
-                    conditions.add(new Condition(var, reqVal));
-                }
-                effectList.add(new Condition(var, newVal));
             }
             op.setEffects(new ArrayList<Condition>(effectList));
-            op.setPreconditions(new ArrayList<Condition>(conditions));
+            op.setPreconditions(new ArrayList<Condition>(preConditions));
             op.getPreconditions().addAll(prevailConditions);
             line = reader.readLine();
             int cost = Integer.parseInt(line.trim());
@@ -283,9 +299,14 @@ public class SasIO {
             	reader.close();
                 throw new RuntimeException("SAS format error, 'end operator' expected");
             }
-            operatorList.add(op);
+            if (op.getConditionalEffects().isEmpty()) {
+            	operatorList.add(op);
+            } else {
+            	conditionalOperatorList.add(op);
+            }
         }
         problem.setOperators(new ArrayList<SasAction>(operatorList));
+        problem.setConditionalOperators(new ArrayList<SasAction>(conditionalOperatorList));
         
         // axiom rules
         line = reader.readLine();
@@ -296,6 +317,7 @@ public class SasIO {
         }
         
         reader.close();
+        System.err.println("Warning: Problem contains actions with conditional effects.");
         return problem;
     }
 
