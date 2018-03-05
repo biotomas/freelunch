@@ -19,6 +19,7 @@
 package freelunch.core.satSolving.symbolicReachability;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -48,6 +49,13 @@ public class SymbolicReachabilityProblem {
 		goalConditions.printClauses(out);
 		out.println(String.format("t cnf %d %d", transitionConditions.getVariables(), transitionConditions.getClauses().size()));
 		transitionConditions.printClauses(out);
+	}
+	
+	public void printToFile(String filename) throws IOException {
+        File f = new File(filename);
+        PrintStream ps = new PrintStream(f);
+        print(ps);
+        ps.close();
 	}
 	
 	public BasicSatFormula makeFormulaForMakespan(int makespan) {

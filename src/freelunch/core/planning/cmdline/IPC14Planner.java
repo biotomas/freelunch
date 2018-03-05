@@ -17,7 +17,7 @@ import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslato
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.satSolving.ExternalSatSolver;
 
-public class IPCPlanner {
+public class IPC14Planner {
 
     public static void main(String[] args) throws IOException {
         if (args.length < 2) {

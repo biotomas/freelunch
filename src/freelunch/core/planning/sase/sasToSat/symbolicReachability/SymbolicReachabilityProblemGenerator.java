@@ -18,6 +18,10 @@
  ******************************************************************************/
 package freelunch.core.planning.sase.sasToSat.symbolicReachability;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import freelunch.core.planning.cmdline.Translator;
@@ -27,6 +31,7 @@ import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.satSolving.BasicSatFormulaGenerator;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.symbolicReachability.SymbolicReachVerifier;
 import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProblem;
 
 
@@ -44,6 +49,91 @@ public class SymbolicReachabilityProblemGenerator {
     public SasParallelPlan decodePlan(List<int[]> model) {
         return translator.decodePlan(model);
     }
+    
+    public SasParallelPlan decodePlanFromFile(String filename) throws IOException {
+    	ArrayList<int[]> model = getSrtModelFromFile(filename);
+	    SymbolicReachVerifier srVerifier = new SymbolicReachVerifier();
+	    boolean srvalid = srVerifier.solutionValid(getSRProblem(), model);
+        if (srvalid) {
+            System.out.println("SR model is VALID");
+        } else {
+            System.out.println("SR model is INVALID");
+        }
+        // decode and verify the plan
+	    SasParallelPlan plan = decodePlan(model);
+	    return plan;
+    }
+    
+    public ArrayList<int[]> getSrtModelFromFile(String filename) throws IOException {
+	    ArrayList<int[]> model = parseSymbolicReachModel(filename);
+	    if (model == null) {
+	    	model = parseCnfModel(filename, variables/2);
+	    }
+	    return model;    	
+    }
+    
+	private ArrayList<int[]> parseCnfModel(String filename, int variables) throws IOException {
+        FileReader fr = new FileReader(filename);
+        BufferedReader reader = new BufferedReader(fr);
+        String line = reader.readLine();
+        ArrayList<int[]> result = new ArrayList<int[]>();
+        while (line != null) {
+            if (line.startsWith("v")) {
+                String[] sol = line.split(" ");
+                for (int i = 1; i < sol.length; i++) {
+                	int lit = Integer.parseInt(sol[i]);
+                	if (lit == 0) {
+                		continue;
+                	}
+                	int var = Math.abs(lit);
+                	int m = var / (variables);
+                	int v = var % (variables);
+                	if (v == 0) {
+                		m--; v = variables;
+                	}
+                	while (result.size() <= m) {
+                		result.add(new int[variables+1]);
+                	}
+                	result.get(m)[v] = lit > 0 ? v : -v;
+                }
+            }
+            line = reader.readLine();
+        }
+        reader.close();
+        return result;
+	}
+	
+	
+	private ArrayList<int[]> parseSymbolicReachModel(String filename) throws IOException {
+        FileReader fr = new FileReader(filename);
+        BufferedReader reader = new BufferedReader(fr);
+        String line = reader.readLine();
+        ArrayList<int[]> result = new ArrayList<int[]>();
+        while (line != null) {
+            if (line.startsWith("solution")) {
+                String[] sol = line.split(" ");
+                int vars = Integer.parseInt(sol[1]);
+                int makespan = Integer.parseInt(sol[2]);
+                for (int time = 0; time < makespan; time++) {
+                    String ln = reader.readLine();
+                    String[] lits = ln.split(" ");
+                    int[] submodel = new int[vars + 1];
+                    for (String lit : lits) {
+                        int l = Integer.parseInt(lit);
+                        int var = Math.abs(l);
+                        submodel[var] = l;
+                    }
+                    result.add(submodel);
+                }
+                reader.close();
+                return result;
+            }
+            line = reader.readLine();
+        }
+        reader.close();
+        return null;
+	}
+
     
     public int getVariables() {
     	return variables;

@@ -18,8 +18,6 @@
  ******************************************************************************/
 package freelunch.core.planning.cmdline;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,10 +91,7 @@ public class SymbolicReachabilityMain {
 				problem.compileConditionalActions();
 	            SymbolicReachabilityProblemGenerator gen = new SymbolicReachabilityProblemGenerator(problem, translation);
 			    // read and verify the SR solution
-			    ArrayList<int[]> model = parseSymbolicReachModel(args[3]);
-			    if (model == null) {
-			    	model = parseCnfModel(args[3], gen.getVariables()/2);
-			    }
+			    ArrayList<int[]> model = gen.getSrtModelFromFile(args[3]);
 			    SymbolicReachVerifier srVerifier = new SymbolicReachVerifier();
 			    boolean srvalid = srVerifier.solutionValid(gen.getSRProblem(), model);
                 if (srvalid) {
@@ -135,66 +130,4 @@ public class SymbolicReachabilityMain {
 			e.printStackTrace();
 		}
 	}
-	
-	private static ArrayList<int[]> parseCnfModel(String filename, int variables) throws IOException {
-        FileReader fr = new FileReader(filename);
-        BufferedReader reader = new BufferedReader(fr);
-        String line = reader.readLine();
-        ArrayList<int[]> result = new ArrayList<int[]>();
-        while (line != null) {
-            if (line.startsWith("v")) {
-                String[] sol = line.split(" ");
-                for (int i = 1; i < sol.length; i++) {
-                	int lit = Integer.parseInt(sol[i]);
-                	if (lit == 0) {
-                		continue;
-                	}
-                	int var = Math.abs(lit);
-                	int m = var / (variables);
-                	int v = var % (variables);
-                	if (v == 0) {
-                		m--; v = variables;
-                	}
-                	while (result.size() <= m) {
-                		result.add(new int[variables+1]);
-                	}
-                	result.get(m)[v] = lit > 0 ? v : -v;
-                }
-            }
-            line = reader.readLine();
-        }
-        reader.close();
-        return result;
 	}
-	
-	
-	private static ArrayList<int[]> parseSymbolicReachModel(String filename) throws IOException {
-        FileReader fr = new FileReader(filename);
-        BufferedReader reader = new BufferedReader(fr);
-        String line = reader.readLine();
-        ArrayList<int[]> result = new ArrayList<int[]>();
-        while (line != null) {
-            if (line.startsWith("solution")) {
-                String[] sol = line.split(" ");
-                int vars = Integer.parseInt(sol[1]);
-                int makespan = Integer.parseInt(sol[2]);
-                for (int time = 0; time < makespan; time++) {
-                    String ln = reader.readLine();
-                    String[] lits = ln.split(" ");
-                    int[] submodel = new int[vars + 1];
-                    for (String lit : lits) {
-                        int l = Integer.parseInt(lit);
-                        int var = Math.abs(l);
-                        submodel[var] = l;
-                    }
-                    result.add(submodel);
-                }
-                reader.close();
-                return result;
-            }
-            line = reader.readLine();
-        }
-        reader.close();
-        return null;
-	}
-}
