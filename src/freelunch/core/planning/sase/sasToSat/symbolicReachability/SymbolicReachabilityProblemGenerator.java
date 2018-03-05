@@ -78,9 +78,9 @@ public class SymbolicReachabilityProblemGenerator {
         String line = reader.readLine();
         ArrayList<int[]> result = new ArrayList<int[]>();
         while (line != null) {
-            if (line.startsWith("v")) {
+            if (!line.startsWith("c")) {
                 String[] sol = line.split(" ");
-                for (int i = 1; i < sol.length; i++) {
+                for (int i = 0; i < sol.length; i++) {
                 	int lit = Integer.parseInt(sol[i]);
                 	if (lit == 0) {
                 		continue;
