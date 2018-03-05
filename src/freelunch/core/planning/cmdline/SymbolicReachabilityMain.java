@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with freeLunch.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package freelunch.core.planning.sase.sasToSat.symbolicReachability;
+package freelunch.core.planning.cmdline;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,6 +29,7 @@ import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.sasToSat.SasIO;
+import freelunch.core.planning.sase.sasToSat.symbolicReachability.SymbolicReachabilityProblemGenerator;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.symbolicReachability.SymbolicReachVerifier;
 import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProblem;

@@ -317,7 +317,6 @@ public class SasIO {
         }
         
         reader.close();
-        System.err.println("Warning: Problem contains actions with conditional effects.");
         return problem;
     }
 

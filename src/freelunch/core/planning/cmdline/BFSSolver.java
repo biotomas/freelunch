@@ -26,6 +26,7 @@ import freelunch.core.planning.TimeoutException;
 import freelunch.core.planning.forwardSearch.MemoryEfficientForwardSearchSolver;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
+import freelunch.core.planning.sase.optimizer.ActionEliminationOptimizer;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.preprocessing.ReachabilityAnalysis;
 import freelunch.core.planning.sase.sasToSat.SasIO;
@@ -44,7 +45,7 @@ public class BFSSolver {
         String message = "Solved";
         int planSize = 0;
         if (args.length < 1) {
-            System.out.println("USAGE: java -jar bfs.jar <problem.sas> [-p] [plan-file]");
+            System.out.println("USAGE: java -jar bfs.jar <problem.sas> [-p] [-pp] [plan-file]");
             return;
         }
         ParametersProcessor params = new ParametersProcessor(args);
@@ -52,6 +53,7 @@ public class BFSSolver {
         String planFile = params.getParameter(1);
         try {
             SasProblem problem = SasIO.parse(filename);
+            problem.compileConditionalActions();
             
             if (params.isSet("p")) {
             	int unreach = ReachabilityAnalysis.testGoalReachabilityAndRemoveUnreachableActions(problem);
@@ -68,9 +70,18 @@ public class BFSSolver {
                 System.out.println(filename + ";Invalid plan found");
                 return;
             }
-
+            if (params.isSet("pp")) {
+            	ActionEliminationOptimizer aeopt = new ActionEliminationOptimizer();
+            	int orgSize = plan.getPlanLength();
+            	aeopt.optimizePlan(problem, plan);
+            	int newSize = plan.getPlanLength();
+            	System.out.println("Plan optimizer reduced the plan length from " + orgSize + " to " + newSize);
+            }
             if (planFile != null) {
                 plan.saveToFileIpcFormat(planFile);
+            } else {
+            	System.out.println();
+            	System.out.println(plan.toString());            	
             }
             
         } catch (IOException e) {
@@ -88,6 +99,7 @@ public class BFSSolver {
         }
         System.out.println("header;file;result;planSize;time");
         System.out.println(String.format("data;%s;%s;%d;%s", filename, message, planSize, watch.elapsedFormatedSeconds()));
+        
     }
 
 }

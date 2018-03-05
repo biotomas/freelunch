@@ -28,7 +28,7 @@ public class ActionEliminationOptimizer {
         lplan = windowedReducer(problem, lplan);
         PlanningUtils.listToPlan(lplan, plan);
     }
-
+    
     public int optimizePlanFixPoint(SasProblem problem, SasParallelPlan plan) {
         int i = 1;
         int oldSize = plan.getPlanLength();
