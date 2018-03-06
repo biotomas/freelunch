@@ -19,7 +19,7 @@ public class IPC18Planner {
 
 	public static void main(String[] args) {
         if (args.length < 2) {
-            System.out.println("USAGE: freelunch.jar {bfs|srt|dec} <problem.sas> <plan.out> [srt|srt-sol]");
+            System.out.println("USAGE: freelunch.jar {bfs|srt|dec} <problem.sas> <plan.out> [tlimit|srt|srt-sol]");
             return;
         }
         String mode = args[0];
@@ -27,6 +27,7 @@ public class IPC18Planner {
         String planFile = args[2];
         String srtFile = args[3];
         String srtSol = args[3];
+        String bfsTimeLimit = args[3];
         
         SasProblem problem = null;
         try {
@@ -43,8 +44,10 @@ public class IPC18Planner {
 		}
 
         if (mode.equals("bfs")) {
-        	System.out.println("running bfs");
+        	int seconds = Integer.parseInt(bfsTimeLimit);
+        	System.out.println("running bfs for " + seconds + " seconds.");
             Solver solver = new MemoryEfficientForwardSearchSolver(problem);
+            solver.getSettings().setTimelimit(seconds);
             SasParallelPlan plan;
 			try {
 				plan = solver.solve();
@@ -61,6 +64,7 @@ public class IPC18Planner {
 	        	System.out.println("Plan optimizer reduced the plan length from " + orgSize + " to " + newSize);
 	            plan.saveToFileIpcFormat(planFile);
 			} catch (TimeoutException e) {
+				System.out.println("Time limit exceeded");
 			} catch (NonexistentPlanException e) {
 				System.out.println("Plan does not exist");
 			} catch (IOException e) {
