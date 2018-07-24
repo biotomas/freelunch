@@ -9,20 +9,20 @@
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
     <path id="JUnit 5.libraryclasspath">
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.api_5.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.engine_5.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.jupiter.params_5.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.commons_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.engine_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.launcher_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.runner_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.platform.suite.api_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit.vintage.engine_4.12.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.opentest4j_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.apiguardian_1.0.0.v20170910-2246.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+        <pathelement location="elib/org.junit.jupiter.api_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.jupiter.engine_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.jupiter.migrationsupport_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.jupiter.params_5.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.platform.commons_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.platform.engine_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.platform.launcher_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.platform.runner_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.platform.suite.api_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.junit.vintage.engine_4.12.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.opentest4j_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/org.apiguardian_1.0.0.v20170910-2246.jar"/>
+        <pathelement location="elib/junit.jar"/>
+        <pathelement location="elib/org.hamcrest.core_1.3.0.v201303031735.jar"/>
     </path>
     <path id="freelunch.classpath">
         <pathelement location="bin"/>
@@ -48,7 +48,7 @@
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+        <javac encoding="UTF-8" debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
             <classpath refid="freelunch.classpath"/>
         </javac>

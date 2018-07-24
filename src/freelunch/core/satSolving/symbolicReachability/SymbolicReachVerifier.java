@@ -19,7 +19,6 @@
 package freelunch.core.satSolving.symbolicReachability;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SymbolicReachVerifier {
 	
@@ -84,8 +83,8 @@ public class SymbolicReachVerifier {
 	            return true;
 	        }
 	    }
-        System.err.println(Arrays.toString(cl));
-        System.err.println(Arrays.toString(assignment));
+        //System.err.println(Arrays.toString(cl));
+        //System.err.println(Arrays.toString(assignment));
 	    return false;
 	}
 

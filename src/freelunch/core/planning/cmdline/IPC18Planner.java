@@ -85,7 +85,12 @@ public class IPC18Planner {
         			new SymbolicReachabilityProblemGenerator(problem, TranslationMethod.selective);
         	try {
 				SasParallelPlan plan = gen.decodePlanFromFile(srtSol);
-				plan.saveToFileIpcFormat(planFile);
+				boolean valid = PlanVerifier.verifyPlan(problem, plan);
+				if (valid) {
+					plan.saveToFileIpcFormat(planFile);
+				} else {
+					System.out.println("Plan Invalid");
+				}
 			} catch (IOException e) {
 				System.out.println("Could not read solution file or save plan");
 			}
