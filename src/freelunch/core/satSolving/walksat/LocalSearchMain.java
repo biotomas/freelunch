@@ -2,7 +2,7 @@ package freelunch.core.satSolving.walksat;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.SatSolver;
+import freelunch.core.satSolving.solvers.SatSolver;
 import freelunch.core.satSolving.walksat.BaseWalkSAT.BaseWalkSatSettings;
 import freelunch.core.utilities.Stopwatch;
 

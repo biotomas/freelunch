@@ -30,7 +30,7 @@ import freelunch.core.planning.sase.sasToSat.incremental.IncrementalSolverSettin
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
-import freelunch.core.satSolving.Sat4JSolver;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.utilities.Stopwatch;
 
 

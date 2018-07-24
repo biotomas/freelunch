@@ -39,9 +39,9 @@ import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslato
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings;
 import freelunch.core.satSolving.FormulaAnalyzer;
-import freelunch.core.satSolving.Sat4JSolver;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.FormulaAnalyzer.FormulaProperties;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.utilities.Logger;
 import freelunch.core.utilities.Stopwatch;
 

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with freeLunch.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package freelunch.core.satSolving;
+package freelunch.core.satSolving.solvers;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,6 +30,7 @@ import org.sat4j.specs.ISolver;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.utilities.IntVector;
 import freelunch.core.utilities.Stopwatch;
 

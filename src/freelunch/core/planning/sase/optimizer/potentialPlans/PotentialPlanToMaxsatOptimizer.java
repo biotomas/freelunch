@@ -11,12 +11,12 @@ import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.translator.CompactDirect;
 import freelunch.core.satModelling.intModellers.IntVarGroupManager.IntVarGroup;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.IncrementalSatSolver;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.maxsat.MaxSatSolver;
 import freelunch.core.satSolving.maxsat.Sat4JMaxsatSolver;
 import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula;
 import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.utilities.IntVector;
 
 public class PotentialPlanToMaxsatOptimizer {

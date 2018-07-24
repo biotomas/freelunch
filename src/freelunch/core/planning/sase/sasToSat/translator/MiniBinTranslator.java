@@ -8,9 +8,9 @@ import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.BasicSatFormulaGenerator;
-import freelunch.core.satSolving.IncrementalSatSolver;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 
 public class MiniBinTranslator extends TranslatorBase implements SasToSatTranslator {
 

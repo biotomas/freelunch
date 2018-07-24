@@ -1,8 +1,8 @@
 package freelunch.core.planning.sase.sasToSat.translator;
 
 import freelunch.core.planning.model.SasProblem;
-import freelunch.core.satSolving.IncrementalSatSolver;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 
 public class CompactDirect extends TranslatorBase implements SasToSatTranslator {
 

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with freeLunch.  If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
-package freelunch.core.satSolving;
+package freelunch.core.satSolving.solvers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

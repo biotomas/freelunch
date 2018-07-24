@@ -22,8 +22,8 @@ import java.util.List;
 
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.IncrementalSatSolver;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 
 
 /**

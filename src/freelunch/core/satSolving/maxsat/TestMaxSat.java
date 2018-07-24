@@ -4,9 +4,9 @@ import junit.framework.TestCase;
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.RandomFormulaGenerator;
-import freelunch.core.satSolving.Sat4JSolver;
-import freelunch.core.satSolving.SatSolver;
 import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
+import freelunch.core.satSolving.solvers.SatSolver;
 import freelunch.core.satSolving.walksat.LocalSearchMain;
 
 public class TestMaxSat extends TestCase {

@@ -15,7 +15,7 @@ import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
-import freelunch.core.satSolving.ExternalSatSolver;
+import freelunch.core.satSolving.solvers.ExternalSatSolver;
 
 public class IPC14Planner {
 

@@ -23,9 +23,9 @@ import java.util.Arrays;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.IncrementalSatSolver;
-import freelunch.core.satSolving.Sat4JSolver;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.utilities.IntVector;
 
 

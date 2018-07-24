@@ -26,9 +26,9 @@ import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslator;
-import freelunch.core.satSolving.IncrementalSatSolver;
-import freelunch.core.satSolving.Sat4JSolver;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.utilities.Stopwatch;
 
 public class IncrementalSolver implements Solver {

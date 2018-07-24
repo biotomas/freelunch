@@ -28,8 +28,8 @@ import java.util.Random;
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.planning.model.BasicSettings;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.IncrementalSatSolver;
 import freelunch.core.satSolving.SatContradictionException;
+import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.utilities.IntVector;
 import freelunch.core.utilities.Stopwatch;
 

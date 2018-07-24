@@ -15,8 +15,8 @@ import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.ReinforcedSaseTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SelectiveTranslator;
-import freelunch.core.satSolving.Sat4JSolver;
 import freelunch.core.satSolving.maxsat.Sat4JMaxsatSolver;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
 
 /**
  * Convenient static methods for easy usage of the freelunch

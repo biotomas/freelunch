@@ -145,7 +145,6 @@ public class LookAheadPreprocessor {
 		return learned - start;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private int learnBinaries() {
 		int start = learned;
 		List<Integer> lff = null, ltt = null, ltf = null, lft = null;

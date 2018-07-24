@@ -33,9 +33,9 @@ import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satSolving.ExternalSatSolver;
-import freelunch.core.satSolving.Sat4JSolver;
-import freelunch.core.satSolving.SatSolver;
+import freelunch.core.satSolving.solvers.ExternalSatSolver;
+import freelunch.core.satSolving.solvers.Sat4JSolver;
+import freelunch.core.satSolving.solvers.SatSolver;
 
 public class TestActionRanking extends TestCase {
     
