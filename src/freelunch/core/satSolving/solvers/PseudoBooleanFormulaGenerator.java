@@ -1,5 +1,6 @@
 package freelunch.core.satSolving.solvers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import freelunch.core.planning.TimeoutException;
@@ -14,6 +15,12 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	private int variables;
 	private List<int[]> clauses;
 	private List<int[]> amoConstraints;
+	
+	public PseudoBooleanFormulaGenerator() {
+		variables = 0;
+		clauses = new ArrayList<>();
+		amoConstraints = new ArrayList<>();
+	}
 	
 	public PseudoBooleanFormula getFormula() {
 		PseudoBooleanFormula fla = new PseudoBooleanFormula(variables);
@@ -63,7 +70,8 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 
 	@Override
 	public int addRemovableClause(IntVector literals) throws SatContradictionException {
-		throw new UnsupportedOperationException();
+		clauses.add(literals.getArrayCopy());
+		return 0;
 	}
 
 	@Override

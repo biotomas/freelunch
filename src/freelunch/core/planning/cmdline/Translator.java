@@ -44,6 +44,7 @@ import freelunch.core.planning.sase.sasToSat.translator.SaseTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings;
 import freelunch.core.planning.sase.sasToSat.translator.SelectiveTranslator;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.FormulaAnalyzer;
 
 public class Translator {
@@ -54,8 +55,9 @@ public class Translator {
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.out.println("USAGE: java -jar translator.jar <problem.sas> <method> <makespan> [-m : multivalued sat output] [-a : add double actions]" +
-            		"[-s : staticstics of formula");
+            System.out.println("USAGE: java -jar translator.jar <problem.sas> <method> <makespan> OPTIONS\n"
+            		+ "OPTIONS:\n -m : multivalued sat output\n -a : add double actions\n -p : pseudo Boolean output\n" +
+            		" -s : staticstics of formula");
             System.out.println("Methods: " + Arrays.toString(TranslationMethod.values()));
             return;
         }
@@ -66,6 +68,7 @@ public class Translator {
         boolean multiValued = contains(args, "-m");
         boolean doubleActions = contains(args, "-a");
         boolean statistics = contains(args, "-s");
+        boolean pseudoBoolean = contains(args, "-p");
         
         SasProblem problem = null;
 
@@ -79,7 +82,11 @@ public class Translator {
             }
             
             problem.setActionIDs();
-            if (!multiValued) {
+            if (pseudoBoolean) {
+                SasToSatTranslator translator = makeTranslator(problem, method, 5);
+                PseudoBooleanFormula pbf = translator.makePseudoBooleanFormulaForMakespan(makeSpan);
+                pbf.printFormula(System.out);
+            } else if (!multiValued) {
                 SasToSatTranslator translator = makeTranslator(problem, method, 5);
                 BasicSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
                 if (statistics) {

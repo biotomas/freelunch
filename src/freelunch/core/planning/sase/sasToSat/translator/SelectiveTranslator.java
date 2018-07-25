@@ -6,6 +6,7 @@ import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.TransitionGenerator;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 
@@ -29,6 +30,11 @@ public class SelectiveTranslator implements SasToSatTranslator {
             usingExist = true;
         }
     }
+    
+	@Override
+	public PseudoBooleanFormula makePseudoBooleanFormulaForMakespan(int makespan) {
+		return translator.makePseudoBooleanFormulaForMakespan(makespan);
+	}
 
     @Override
     public BasicSatFormula makeFormulaForMakespan(int makespan) {

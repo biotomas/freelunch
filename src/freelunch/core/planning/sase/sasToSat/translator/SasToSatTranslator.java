@@ -22,6 +22,7 @@ import java.util.List;
 
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 
@@ -41,6 +42,13 @@ public interface SasToSatTranslator {
      * @return
      */
     public BasicSatFormula makeFormulaForMakespan(int makespan);
+    
+    /**
+     * Construct a Pseudo Boolean formula for the given makespan.
+     * @param makespan
+     * @return
+     */
+    public PseudoBooleanFormula makePseudoBooleanFormulaForMakespan(int makespan);
 	
 	/**
 	 * Add constraints that enforce the initial state to hold.

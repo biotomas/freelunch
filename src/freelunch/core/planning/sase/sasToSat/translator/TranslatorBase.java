@@ -37,9 +37,11 @@ import freelunch.core.planning.sase.sasToSat.TransitionGenerator;
 import freelunch.core.satModelling.intModellers.IntVarGroupManager;
 import freelunch.core.satModelling.intModellers.IntVarGroupManager.IntVarGroup;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.core.satSolving.solvers.PseudoBooleanFormulaGenerator;
 import freelunch.core.utilities.IntVector;
 import freelunch.core.utilities.Pair;
 
@@ -84,7 +86,25 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
 		return res;
 	}
 
-    
+	
+	@Override
+	public PseudoBooleanFormula makePseudoBooleanFormulaForMakespan(int makespan) {
+		PseudoBooleanFormulaGenerator pbfg = new PseudoBooleanFormulaGenerator();
+		setMaxTimespan(makespan);
+		try {
+			addInitialStateConstraints(pbfg);
+            for (int time = 0; time < makespan; time++) {
+                addUniversalStateConstraints(pbfg, time);
+                addTransitionConstraints(pbfg, time);
+            }
+            addUniversalStateConstraints(pbfg, makespan);
+            setGoalStateConstraints(pbfg, makespan);
+		} catch (SatContradictionException e) {
+			return null;
+		}
+		
+		return pbfg.getFormula();
+	}    
     @Override
     public BasicSatFormula makeFormulaForMakespan(int makespan) {
         BasicSatFormulaGenerator sgen = new BasicSatFormulaGenerator();

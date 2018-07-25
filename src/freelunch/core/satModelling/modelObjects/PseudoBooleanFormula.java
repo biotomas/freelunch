@@ -2,6 +2,7 @@ package freelunch.core.satModelling.modelObjects;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,14 +51,16 @@ public class PseudoBooleanFormula {
 
 		public static PseudoBooleanEquality makeFromAtMostOneConstraint(int[] lits) {
 			PseudoBooleanEquality pbe = new PseudoBooleanEquality(lits.length);
+			int negs = 0;
 			for (int l : lits) {
 				if (l > 0) {
 					pbe.addTerm(-1, l);
 				} else {
 					pbe.addTerm(1, -l);
+					negs++;
 				}
 			}
-			pbe.setRightHandValue(-1);
+			pbe.setRightHandValue(negs - 1);
 			return pbe;
 		}
 			
@@ -85,6 +88,12 @@ public class PseudoBooleanFormula {
 		equalities.add(pbe);
 	}
 	
+	public void printFormula(PrintStream out) {
+        for (PseudoBooleanEquality pbe : equalities) {
+            out.println(pbe.toString());
+        }
+	}
+	
 	public void printToFile(String filename) throws IOException {
         FileWriter out = new FileWriter(filename);
         out.write(String.format("* planning problem with %d variables\n", variables));
@@ -93,6 +102,16 @@ public class PseudoBooleanFormula {
             out.write('\n');
         }
         out.close();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (PseudoBooleanEquality pbe : equalities) {
+			sb.append(pbe.toString());
+			sb.append("\n");
+		}
+		return sb.toString();
 	}
 
 }
