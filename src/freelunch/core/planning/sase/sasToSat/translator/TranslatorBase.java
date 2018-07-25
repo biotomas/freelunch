@@ -90,7 +90,8 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
 	@Override
 	public PseudoBooleanFormula makePseudoBooleanFormulaForMakespan(int makespan) {
 		PseudoBooleanFormulaGenerator pbfg = new PseudoBooleanFormulaGenerator();
-		setMaxTimespan(makespan);
+		int vars = setMaxTimespan(makespan);
+		pbfg.setVariablesCount(vars);
 		try {
 			addInitialStateConstraints(pbfg);
             for (int time = 0; time < makespan; time++) {

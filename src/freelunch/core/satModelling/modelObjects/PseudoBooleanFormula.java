@@ -1,9 +1,12 @@
 package freelunch.core.satModelling.modelObjects;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PseudoBooleanFormula {
@@ -84,6 +87,10 @@ public class PseudoBooleanFormula {
 		equalities = new ArrayList<>();
 	}
 	
+	public int getVariables() {
+		return variables;
+	}
+	
 	public void addEquality(PseudoBooleanEquality pbe) {
 		equalities.add(pbe);
 	}
@@ -102,6 +109,46 @@ public class PseudoBooleanFormula {
             out.write('\n');
         }
         out.close();
+	}
+	
+	public static int[] parseSolutionFromFile(String filename, int vars) {
+		int[] model = new int[vars+1];
+		boolean isSat = false;
+		Arrays.fill(model, 0);
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(filename));
+			String line = reader.readLine();
+			while (line != null) {
+				if (line.contains("s UNSATISFIABLE")) {
+					reader.close();
+					return null;
+				}
+				if (line.contains("s SATISFIABLE") || line.contains("s OPTIMUM FOUND")) {
+					isSat = true;
+				}
+				if (line.startsWith("v")) {
+					String[] parts = line.split(" +");
+					for (String p : parts) {
+						int lit = 0;
+						if (p.startsWith("x")) {
+							lit = Integer.parseInt(p.substring(1));
+						}
+						if (p.startsWith("-x")) {
+							lit = -Integer.parseInt(p.substring(2));							
+						}					
+						int var = Math.abs(lit);
+						model[var] = lit;
+					}
+				}
+				line = reader.readLine();
+				
+			}
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return isSat ? model : null;
 	}
 	
 	@Override

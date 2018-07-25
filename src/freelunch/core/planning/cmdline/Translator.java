@@ -23,7 +23,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import freelunch.core.planning.model.SasAction;
+import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
+import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.preprocessing.DoubleActionCodec;
 import freelunch.core.planning.sase.sasToMultiSat.MultiValuedCNF;
 import freelunch.core.planning.sase.sasToMultiSat.SasToMVSat;
@@ -55,16 +57,26 @@ public class Translator {
 
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.out.println("USAGE: java -jar translator.jar <problem.sas> <method> <makespan> OPTIONS\n"
+            System.out.println("USAGE:\njava -jar translator.jar encode <problem.sas> <method> <makespan> OPTIONS\n-OR-\n"
+            		+ "java -jar translator.jar decode <problem.sas> <method> <makespan> <sat-model.txt> OPTIONS\n"
             		+ "OPTIONS:\n -m : multivalued sat output\n -a : add double actions\n -p : pseudo Boolean output\n" +
             		" -s : staticstics of formula");
             System.out.println("Methods: " + Arrays.toString(TranslationMethod.values()));
             return;
         }
         // input
-        String problemName = args[0];
-        TranslationMethod method = TranslationMethod.valueOf(args[1]);
-        int makeSpan = Integer.parseInt(args[2]);
+        boolean encode = true;
+        if (args[0].equals("decode")) {
+        	encode = false;
+        }
+        
+        String problemName = args[1];
+        TranslationMethod method = TranslationMethod.valueOf(args[2]);
+        int makeSpan = Integer.parseInt(args[3]);
+        String satModelFile = null;
+        if (!encode) {
+        	satModelFile = args[4];
+        }
         boolean multiValued = contains(args, "-m");
         boolean doubleActions = contains(args, "-a");
         boolean statistics = contains(args, "-s");
@@ -82,6 +94,31 @@ public class Translator {
             }
             
             problem.setActionIDs();
+            
+            if (!encode) {
+            	if (pseudoBoolean) {
+                    SasToSatTranslator translator = makeTranslator(problem, method, 5);
+                    PseudoBooleanFormula pbf = translator.makePseudoBooleanFormulaForMakespan(makeSpan);
+            		int vars = pbf.getVariables(); 
+            		int[] model = PseudoBooleanFormula.parseSolutionFromFile(satModelFile, vars);
+            		SasParallelPlan plan = translator.decodePlan(model, makeSpan);
+            		System.out.println(plan.getPlanIpcFormat());
+            		if (PlanVerifier.verifyPlan(problem, plan)) {
+            			System.out.println("Plan verified!");
+            		}
+            	} else {
+                    SasToSatTranslator translator = makeTranslator(problem, method, 5);
+                    BasicSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
+                    int vars = formula.getVariables();
+                    int[] model = BasicSatFormula.parseSolutionFromFile(satModelFile, vars);
+            		SasParallelPlan plan = translator.decodePlan(model, makeSpan);
+            		System.out.println(plan.getPlanIpcFormat());
+            		if (PlanVerifier.verifyPlan(problem, plan)) {
+            			System.out.println("Plan verified!");
+            		}
+            	}
+            } else
+                        
             if (pseudoBoolean) {
                 SasToSatTranslator translator = makeTranslator(problem, method, 5);
                 PseudoBooleanFormula pbf = translator.makePseudoBooleanFormulaForMakespan(makeSpan);
