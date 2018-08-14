@@ -38,6 +38,7 @@ import freelunch.core.satModelling.intModellers.IntVarGroupManager;
 import freelunch.core.satModelling.intModellers.IntVarGroupManager.IntVarGroup;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
+import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
@@ -92,6 +93,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
 		PseudoBooleanFormulaGenerator pbfg = new PseudoBooleanFormulaGenerator();
 		int vars = setMaxTimespan(makespan);
 		pbfg.setVariablesCount(vars);
+		
 		try {
 			addInitialStateConstraints(pbfg);
             for (int time = 0; time < makespan; time++) {
@@ -104,6 +106,15 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
 			return null;
 		}
 		
+		// objective function
+		PseudoBooleanObjectiveFunction objective = 
+				new PseudoBooleanObjectiveFunction(makespan*actions.size());
+		for (SasAction a : actions) {
+			for (int time = 0; time < makespan; time++) {
+				objective.addTerm(a.getCost(), actionVariables.getVariable(a.getId(), time));
+			}
+		}
+		pbfg.setObjectiveFunction(objective);
 		return pbfg.getFormula();
 	}    
     @Override

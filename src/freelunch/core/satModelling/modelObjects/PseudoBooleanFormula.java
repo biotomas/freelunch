@@ -10,17 +10,12 @@ import java.util.List;
 
 public class PseudoBooleanFormula {
 	
-	/**
-	 * The equality looks like: 
-	 * 	1 x1 -3 x4 5 x6 >= -3
-	 */
-	public static class PseudoBooleanEquality {
+	public static class PseudoBooleanTermList {
 		public int[] weigths;
 		public int[] variables;
-		public int rigthHandValue;
 		public int lastIndex;
 		
-		public PseudoBooleanEquality(int variablesCount) {
+		public PseudoBooleanTermList(int variablesCount) {
 			weigths = new int[variablesCount];
 			variables = new int[variablesCount];
 			lastIndex = 0;
@@ -32,8 +27,39 @@ public class PseudoBooleanFormula {
 			lastIndex++;
 		}
 		
+		@Override
+		public String toString() {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < weigths.length; i++) {
+				sb.append(String.format("%d x%d ", weigths[i], variables[i]));
+			}
+			return sb.toString();
+		}
+	}
+
+	public static class PseudoBooleanObjectiveFunction extends PseudoBooleanTermList {
+
+		public PseudoBooleanObjectiveFunction(int variablesCount) {
+			super(variablesCount);
+		}
+		
+		@Override
+		public String toString() {
+			return "min: " + super.toString() + ";";
+		}
+		
+	}
+	
+	
+	public static class PseudoBooleanEquality extends PseudoBooleanTermList {
+		public int rigthHandValue;
+
 		public void setRightHandValue(int rigthHandValue) {
 			this.rigthHandValue = rigthHandValue;
+		}
+				
+		public PseudoBooleanEquality(int variablesCount) {
+			super(variablesCount);
 		}
 		
 		public static PseudoBooleanEquality makeFromClause(int[] lits) {
@@ -65,21 +91,16 @@ public class PseudoBooleanFormula {
 			pbe.setRightHandValue(negs - 1);
 			return pbe;
 		}
-			
+		
 		@Override
 		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < weigths.length; i++) {
-				sb.append(String.format("%d x%d ", weigths[i], variables[i]));
-			}
-			sb.append(String.format(">= %d;", rigthHandValue));
-			return sb.toString();
+			return super.toString() + String.format(">= %d;", rigthHandValue); 
 		}
 	}
 	
-	
 	private int variables;
 	private List<PseudoBooleanEquality> equalities;
+	private PseudoBooleanObjectiveFunction objective = null;
 	
 	public PseudoBooleanFormula(int variables) {
 		this.variables = variables;
@@ -94,9 +115,16 @@ public class PseudoBooleanFormula {
 		equalities.add(pbe);
 	}
 	
+	public void setObjective(PseudoBooleanObjectiveFunction objective) {
+		this.objective = objective;
+	}
+	
 	public void printFormula(PrintStream out) {
 		out.println(String.format("* #variable= %d #constraint= %d", 
 				variables, equalities.size()));
+		if (objective != null) {
+			out.println(objective.toString());
+		}
         for (PseudoBooleanEquality pbe : equalities) {
             out.println(pbe.toString());
         }

@@ -7,6 +7,7 @@ import freelunch.core.planning.TimeoutException;
 import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula.PseudoBooleanEquality;
+import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.utilities.IntVector;
 
@@ -15,6 +16,7 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	private int variables;
 	private List<int[]> clauses;
 	private List<int[]> amoConstraints;
+	private PseudoBooleanObjectiveFunction objective;
 	
 	public PseudoBooleanFormulaGenerator() {
 		variables = 0;
@@ -22,8 +24,13 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 		amoConstraints = new ArrayList<>();
 	}
 	
+	public void setObjectiveFunction(PseudoBooleanObjectiveFunction objective) {
+		this.objective = objective;
+	}
+	
 	public PseudoBooleanFormula getFormula() {
 		PseudoBooleanFormula fla = new PseudoBooleanFormula(variables);
+		fla.setObjective(objective);
 		for (int[] cl : clauses) {
 			fla.addEquality(PseudoBooleanEquality.makeFromClause(cl));
 		}
