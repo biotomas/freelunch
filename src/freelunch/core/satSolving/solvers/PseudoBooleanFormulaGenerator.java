@@ -23,8 +23,6 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	}
 	
 	public PseudoBooleanFormula getFormula() {
-		System.out.println(String.format("* formula had %d clauses and %d amo constraints.\n", 
-				clauses.size(), amoConstraints.size()));
 		PseudoBooleanFormula fla = new PseudoBooleanFormula(variables);
 		for (int[] cl : clauses) {
 			fla.addEquality(PseudoBooleanEquality.makeFromClause(cl));

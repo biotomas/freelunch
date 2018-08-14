@@ -2,7 +2,6 @@ package freelunch.core.satModelling.modelObjects;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -73,7 +72,7 @@ public class PseudoBooleanFormula {
 			for (int i = 0; i < weigths.length; i++) {
 				sb.append(String.format("%d x%d ", weigths[i], variables[i]));
 			}
-			sb.append(String.format(">= %d", rigthHandValue));
+			sb.append(String.format(">= %d;", rigthHandValue));
 			return sb.toString();
 		}
 	}
@@ -96,19 +95,17 @@ public class PseudoBooleanFormula {
 	}
 	
 	public void printFormula(PrintStream out) {
+		out.println(String.format("* #variable= %d #constraint= %d", 
+				variables, equalities.size()));
         for (PseudoBooleanEquality pbe : equalities) {
             out.println(pbe.toString());
         }
 	}
 	
 	public void printToFile(String filename) throws IOException {
-        FileWriter out = new FileWriter(filename);
-        out.write(String.format("* planning problem with %d variables\n", variables));
-        for (PseudoBooleanEquality pbe : equalities) {
-            out.write(pbe.toString());
-            out.write('\n');
-        }
-        out.close();
+        PrintStream pout = new PrintStream(filename);
+        printFormula(pout);
+        pout.close();
 	}
 	
 	public static int[] parseSolutionFromFile(String filename, int vars) {
