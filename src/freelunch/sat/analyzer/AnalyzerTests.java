@@ -4,13 +4,28 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.List;
 
-import junit.framework.TestCase;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
+import freelunch.sat.solver.Sat4JSolver;
+import junit.framework.TestCase;
 
 public class AnalyzerTests extends TestCase {
+	
+	public void testBinarySatPreprocessor() {
+		RandomFormulaGenerator rfg = new RandomFormulaGenerator(5);
+		BasicFormula f = rfg.getRandomFormula(5, 7, 0);
+		BinarySatPreprocessor bsp = new BinarySatPreprocessor();
+		bsp.simplify(f);
+		Sat4JSolver s = new Sat4JSolver();
+		if(s.isSatisfiable(f)) {
+			System.out.println(Arrays.toString(s.getModel()));			
+		} else {
+			System.out.println("UNSAT");
+		}
+		
+	}
 	
 	public void testHittingSetSolver() {
 		HittingSetSolver hss = new HittingSetSolver();
