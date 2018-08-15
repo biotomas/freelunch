@@ -86,6 +86,7 @@ public class Translator {
 
         try {
             problem = SasIO.parse(problemName);
+            problem.compileConditionalActions();
             
             if (doubleActions) {
                 DoubleActionCodec dac = new DoubleActionCodec();
