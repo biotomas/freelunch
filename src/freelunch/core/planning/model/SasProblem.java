@@ -52,28 +52,58 @@ public class SasProblem {
     private void compileAwayConditionalAction(SasAction csa) {
     	//System.err.println("Compiling action " + csa.toString());
    		ConditionalEffect ce = csa.getConditionalEffects().get(0);
-   		if (ce.getEffectConditions().size() > 1) {
-    		throw new RuntimeException("ERROR: Conditional effects with multiple conditions are not supported.");
+   		if (ce.getEffectConditions().size() > 2) {
+    		throw new RuntimeException("ERROR: Conditional effects with more than 2 conditions are not supported.");
    		}
-   		Condition effectCond = ce.getEffectConditions().get(0);
-   		for (int val = 0; val < effectCond.getVariable().getDomain(); val++) {
-   			SasAction a = new SasAction(csa);
-   			a.getConditionalEffects().remove(0);
-   			if (val == effectCond.getValue()) {
-   				a.getPreconditions().add(effectCond);
-   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
-   				if (ce.getRequiredValue() != -1) {
-   					a.getPreconditions().add(new Condition(ce.getVar(), ce.getRequiredValue()));
-   				}
-   			} else {
-   				a.getPreconditions().add(new Condition(ce.getVar(), val));
-   			}
-   			if (a.getConditionalEffects().size() == 0) {
-   				operators.add(a);
-   				//System.out.println("Compilation added action " + a.toString());
-   			} else {
-   				compileAwayConditionalAction(a);
-   			}
+   		if (ce.getEffectConditions().size() == 1) {
+   			// 1 effect condition
+	   		Condition effectCond = ce.getEffectConditions().get(0);
+	   		for (int val = 0; val < effectCond.getVariable().getDomain(); val++) {
+	   			SasAction a = new SasAction(csa);
+	   			a.getConditionalEffects().remove(0);
+	   			if (val == effectCond.getValue()) {
+	   				a.getPreconditions().add(effectCond);
+	   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
+	   				if (ce.getRequiredValue() != -1) {
+	   					a.getPreconditions().add(new Condition(ce.getVar(), ce.getRequiredValue()));
+	   				}
+	   			} else {
+	   				a.getPreconditions().add(new Condition(effectCond.getVariable(), val));
+	   			}
+	   			if (a.getConditionalEffects().size() == 0) {
+	   				operators.add(a);
+	   				//System.out.println("Compilation added action " + a.toString());
+	   			} else {
+	   				compileAwayConditionalAction(a);
+	   			}
+	   		}
+   		} else {
+   			// 2 effect conditions
+	   		Condition ec1 = ce.getEffectConditions().get(0);
+	   		Condition ec2 = ce.getEffectConditions().get(0);
+	   		for (int val1 = 0; val1 < ec1.getVariable().getDomain(); val1++) {   			
+		   		for (int val2 = 0; val2 < ec2.getVariable().getDomain(); val2++) {
+		   			SasAction a = new SasAction(csa);
+		   			a.getConditionalEffects().remove(0);
+		   			if (val1 == ec1.getValue() && val2 == ec2.getValue()) {
+		   				a.getPreconditions().add(ec1);
+		   				a.getPreconditions().add(ec2);
+		   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
+		   				if (ce.getRequiredValue() != -1) {
+		   					a.getPreconditions().add(new Condition(ce.getVar(), ce.getRequiredValue()));
+		   				}
+		   			} else {
+		   				a.getPreconditions().add(new Condition(ec1.getVariable() , val1));
+		   				a.getPreconditions().add(new Condition(ec2.getVariable() , val2));
+		   			}
+		   			if (a.getConditionalEffects().size() == 0) {
+		   				operators.add(a);
+		   				//System.out.println("Compilation added action " + a.toString());
+		   			} else {
+		   				compileAwayConditionalAction(a);
+		   			}
+		   		}
+	   		}
    		}
     }
     

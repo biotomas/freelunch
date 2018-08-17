@@ -29,6 +29,7 @@ public class SasProblemAnalyzer extends TranslatorBase {
         public String name;
         public int variables;
         public int operators;
+        public int operatorsWithConds;
         public int moves;
         public int condMoves;
         public int swaps;
@@ -46,6 +47,20 @@ public class SasProblemAnalyzer extends TranslatorBase {
         
         @Override
         public String toString() {
+        	StringBuilder sb = new StringBuilder();
+            for (Field f : getClass().getFields()) {
+                try {
+                    String fname = f.getName();
+                    String value = (f.get(this)).toString();
+                    sb.append(String.format("%20s = %s\n", fname, value));
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            return sb.toString();
+        }
+        
+        public String getCsv() {
             StringBuilder sb1 = new StringBuilder();
             sb1.append("header");
             StringBuilder sb2 = new StringBuilder();
@@ -62,7 +77,7 @@ public class SasProblemAnalyzer extends TranslatorBase {
                     System.out.println(e.getMessage());
                 }
             }
-            return sb1.append("\n").append(sb2).toString();
+            return sb1.append("\n").append(sb2).toString();        	
         }
     }
     
@@ -72,6 +87,7 @@ public class SasProblemAnalyzer extends TranslatorBase {
         res.name = problem.getDescription();
         res.variables = problem.getVariables().size();
         res.operators = problem.getOperators().size();
+        res.operatorsWithConds = problem.getConditionalOperators().size();
         List<Integer> domains = new ArrayList<>();
         res.totalDomain = 0;
         res.varMutexSize = 0;
