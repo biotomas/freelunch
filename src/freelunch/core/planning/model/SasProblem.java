@@ -64,9 +64,6 @@ public class SasProblem {
 	   			if (val == effectCond.getValue()) {
 	   				a.getPreconditions().add(effectCond);
 	   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
-	   				if (ce.getRequiredValue() != -1) {
-	   					a.getPreconditions().add(new Condition(ce.getVar(), ce.getRequiredValue()));
-	   				}
 	   			} else {
 	   				a.getPreconditions().add(new Condition(effectCond.getVariable(), val));
 	   			}
@@ -89,9 +86,6 @@ public class SasProblem {
 		   				a.getPreconditions().add(ec1);
 		   				a.getPreconditions().add(ec2);
 		   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
-		   				if (ce.getRequiredValue() != -1) {
-		   					a.getPreconditions().add(new Condition(ce.getVar(), ce.getRequiredValue()));
-		   				}
 		   			} else {
 		   				a.getPreconditions().add(new Condition(ec1.getVariable() , val1));
 		   				a.getPreconditions().add(new Condition(ec2.getVariable() , val2));

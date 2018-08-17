@@ -265,8 +265,12 @@ public class SasIO {
 	                StateVariable var = problem.getVariables().get(varId);
 	                int reqVal = Integer.parseInt(parts[parts.length-2]);
 	                int newVal = Integer.parseInt(parts[parts.length-1]);
-	                ConditionalEffect ceff = new ConditionalEffect(var, reqVal, newVal);
-	                
+                	if (reqVal != -1) {
+                		reader.close();
+                		throw new RuntimeException("Undefined behaviour, connditional effect has required value: " + line);
+                	}
+
+	                ConditionalEffect ceff = new ConditionalEffect(var, newVal);	                
                 	for (int eci = 0; eci < effectConditions; eci++) {
                 		int ecivarid = Integer.parseInt(parts[1+2*eci]);
                 		StateVariable ecivar = problem.getVariables().get(ecivarid);

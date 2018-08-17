@@ -72,14 +72,6 @@ public class PlanVerifier {
 	                			continue outer;
 	                		}
 	                	}
-	                	if (cef.getRequiredValue() != -1) {
-	                		if (state[cef.getVar().getId()] != cef.getRequiredValue()) {
-	                            System.out.println(String.format(
-	                                    "Plan invalid: action (%s) at time %d has an unsatisfied conditional effect %s",
-	                                    op.getActionInfo().getName(), time, cef.toString()));
-	                            return false;                			
-	                		}
-	                	}
 	                	state[cef.getVar().getId()] = cef.getNewValue();                	
 	                }
                 }

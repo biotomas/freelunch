@@ -30,9 +30,10 @@ public class IPC18Planner {
         String bfsTimeLimit = args[3];
         
         SasProblem problem = null;
+        SasProblem vanillaProblem;
         try {
 			problem = SasIO.parse(problemFile);
-            problem.compileConditionalActions();
+			vanillaProblem = SasIO.parse(problemFile);
         	int unreach = ReachabilityAnalysis.testGoalReachabilityAndRemoveUnreachableActions(problem);
             System.out.println(String.format("preprocessing removed %d unreachable actions.", unreach));
 		} catch (IOException e) {
@@ -51,9 +52,11 @@ public class IPC18Planner {
             SasParallelPlan plan;
 			try {
 				plan = solver.solve();
-	            boolean valid = PlanVerifier.verifyPlan(problem, plan);
-	            
-	            if (!valid) {
+				System.out.println();
+	            if (PlanVerifier.verifyPlan(vanillaProblem, plan)) {
+	                System.out.println("Valid plan found :)");	
+	                System.out.println(plan.toString());
+	            } else {
 	                System.out.println("Invalid plan found");
 	                return;
 	            }
@@ -62,6 +65,12 @@ public class IPC18Planner {
 	        	aeopt.optimizePlan(problem, plan);
 	        	int newSize = plan.getPlanLength();
 	        	System.out.println("Plan optimizer reduced the plan length from " + orgSize + " to " + newSize);
+	            if (PlanVerifier.verifyPlan(vanillaProblem, plan)) {
+	                System.out.println("Valid plan found :)");	            	
+	            } else {
+	                System.out.println("Invalid plan found");
+	                return;
+	            }
 	            plan.saveToFileIpcFormat(planFile);
 			} catch (TimeoutException e) {
 				System.out.println("Time limit exceeded");
@@ -73,6 +82,7 @@ public class IPC18Planner {
 
         } else if (mode.equals("srt")) {
         	System.out.println("generating srt file");
+            problem.compileConditionalActions();
         	SymbolicReachabilityProblemGenerator gen = 
         			new SymbolicReachabilityProblemGenerator(problem, TranslationMethod.selective);
         	try {
@@ -85,7 +95,7 @@ public class IPC18Planner {
         			new SymbolicReachabilityProblemGenerator(problem, TranslationMethod.selective);
         	try {
 				SasParallelPlan plan = gen.decodePlanFromFile(srtSol);
-				boolean valid = PlanVerifier.verifyPlan(problem, plan);
+				boolean valid = PlanVerifier.verifyPlan(vanillaProblem, plan);
 				if (valid) {
 					plan.saveToFileIpcFormat(planFile);
 				} else {

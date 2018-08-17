@@ -7,6 +7,7 @@ import java.util.Set;
 
 import freelunch.core.planning.NonexistentPlanException;
 import freelunch.core.planning.model.Condition;
+import freelunch.core.planning.model.ConditionalEffect;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasProblem;
 
@@ -30,6 +31,17 @@ public class ReachabilityAnalysis {
 				if (reachableConds.containsAll(a.getPreconditions())) {
 					reachableConds.addAll(a.getEffects());
 				}
+			}
+			for (SasAction a : problem.getConditionalOperators()) {
+				if (reachableConds.containsAll(a.getPreconditions())) {
+					reachableConds.addAll(a.getEffects());
+				}
+				for (ConditionalEffect ce : a.getConditionalEffects()) {
+					if (reachableConds.containsAll(ce.getEffectConditions())) {
+						reachableConds.add(new Condition(ce.getVar(), ce.getNewValue()));
+					}
+				}
+				
 			}
 		}
 		

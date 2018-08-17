@@ -6,14 +6,12 @@ import java.util.List;
 public class ConditionalEffect {
 	
 	private StateVariable var;
-	private int requiredValue;
 	private int newValue;
 	
 	private List<Condition> effectConditions;
 	
-	public ConditionalEffect(StateVariable var, int requiredValue, int newValue) {
+	public ConditionalEffect(StateVariable var, int newValue) {
 		this.var = var;
-		this.requiredValue = requiredValue;
 		this.newValue = newValue;
 		this.effectConditions = new ArrayList<Condition>();
 	}
@@ -31,14 +29,6 @@ public class ConditionalEffect {
 		this.var = var;
 	}
 	
-	public int getRequiredValue() {
-		return requiredValue;
-	}
-	
-	public void setRequiredValue(int requiredValue) {
-		this.requiredValue = requiredValue;
-	}
-	
 	public int getNewValue() {
 		return newValue;
 	}
@@ -53,7 +43,7 @@ public class ConditionalEffect {
 	
 	@Override
 	public String toString() {
-		return String.format("var%d:%d->%d under %s", var.getId(), requiredValue, newValue, effectConditions.toString());
+		return String.format("var%d = %d under %s", var.getId(), newValue, effectConditions.toString());
 	}
 
 }

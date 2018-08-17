@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 import freelunch.core.planning.model.Condition;
+import freelunch.core.planning.model.ConditionalEffect;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
@@ -70,6 +71,11 @@ public abstract class AbstractSolver implements Solver {
                 operatorsIndex[c.getVariable().getId()][c.getValue()].add(op);
             }
         }
+        for (SasAction op : problem.getConditionalOperators()) {
+            for (Condition c : op.getPreconditions()) {
+                operatorsIndex[c.getVariable().getId()][c.getValue()].add(op);
+            }
+        }
     }
 
     protected Set<SasAction> getApplicableActions(int[] state) {
@@ -95,11 +101,13 @@ public abstract class AbstractSolver implements Solver {
         // add new applicable actions for changed state variables
         for (int i = 0; i < changes.length; i += 2) {
         	int var = changes[i];
-            for (SasAction action : operatorsIndex[var][newState[var]]) {
-                if (isActionApplicable(action, newState)) {
-                    actions.add(action);
-                }
-            }
+        	if (var > -1) {
+	            for (SasAction action : operatorsIndex[var][newState[var]]) {
+	                if (isActionApplicable(action, newState)) {
+	                    actions.add(action);
+	                }
+	            }
+        	}
         }
     }
 
@@ -146,12 +154,34 @@ public abstract class AbstractSolver implements Solver {
         for (Condition c : action.getEffects()) {
             newState[c.getVariable().getId()] = c.getValue();
         }
+        outer:
+        for (ConditionalEffect ce : action.getConditionalEffects()) {
+        	for (Condition cec : ce.getEffectConditions()) {
+        		if (state[cec.getVariable().getId()] != cec.getValue()) {
+        			continue outer;
+        		}
+        	}
+    		newState[ce.getVar().getId()] = ce.getNewValue();
+        }
         return newState;
     }
     
     protected int[] applyActionInPlace(SasAction action, int[] state) {
-    	int[] oldVals = new int[action.getEffects().size()*2];
+    	int[] oldVals = new int[(action.getEffects().size()+action.getConditionalEffects().size())*2];
+    	Arrays.fill(oldVals, -1);
     	int i = 0;
+        outer:
+        for (ConditionalEffect ce : action.getConditionalEffects()) {
+        	for (Condition cec : ce.getEffectConditions()) {
+        		if (state[cec.getVariable().getId()] != cec.getValue()) {
+        			continue outer;
+        		}
+        	}
+        	int varId = ce.getVar().getId();
+        	oldVals[i++] = varId;
+        	oldVals[i++] = state[varId];
+        	state[varId] = ce.getNewValue();
+        }
         for (Condition c : action.getEffects()) {
         	int varId = c.getVariable().getId();
         	oldVals[i++] = varId;
@@ -163,7 +193,9 @@ public abstract class AbstractSolver implements Solver {
     
     protected void restoreState(int[] state, int[] oldVals) {
     	for (int i = 0; i < oldVals.length; i += 2) {
-    		state[oldVals[i]] = oldVals[i+1]; 
+    		if (oldVals[i] > -1) {
+    			state[oldVals[i]] = oldVals[i+1];
+    		}
     	}
     }
     
