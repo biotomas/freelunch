@@ -57,12 +57,6 @@ public class PlanVerifier {
                     }
                 }
                 
-                //apply effects
-                for (Condition eff : op.getEffects()) {
-                    int var = eff.getVariable().getId();
-                    state[var] = eff.getValue();
-                }
-                
                 //check and apply conditional effects
                 if (op.getConditionalEffects() != null) {
 	                outer:
@@ -74,6 +68,11 @@ public class PlanVerifier {
 	                	}
 	                	state[cef.getVar().getId()] = cef.getNewValue();                	
 	                }
+                }
+                //apply effects
+                for (Condition eff : op.getEffects()) {
+                    int var = eff.getVariable().getId();
+                    state[var] = eff.getValue();
                 }
             }
             time++;

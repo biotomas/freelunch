@@ -266,8 +266,7 @@ public class SasIO {
 	                int reqVal = Integer.parseInt(parts[parts.length-2]);
 	                int newVal = Integer.parseInt(parts[parts.length-1]);
                 	if (reqVal != -1) {
-                		reader.close();
-                		throw new RuntimeException("Undefined behaviour, connditional effect has required value: " + line);
+                		preConditions.add(new Condition(var, reqVal));
                 	}
 
 	                ConditionalEffect ceff = new ConditionalEffect(var, newVal);	                
