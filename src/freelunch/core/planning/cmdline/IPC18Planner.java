@@ -55,7 +55,7 @@ public class IPC18Planner {
 				System.out.println();
 	            if (PlanVerifier.verifyPlan(vanillaProblem, plan)) {
 	                System.out.println("Valid plan found :)");	
-	                System.out.println(plan.toString());
+	                //System.out.println(plan.toString());
 	            } else {
 	                System.out.println("Invalid plan found");
 	                return;

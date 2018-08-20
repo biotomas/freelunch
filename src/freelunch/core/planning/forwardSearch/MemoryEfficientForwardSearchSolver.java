@@ -65,6 +65,13 @@ public class MemoryEfficientForwardSearchSolver extends AbstractSolver implement
             iterationsSinceRestart = 0;
             depth = 0;
         }
+        
+        public void print() {
+        	System.out.println(String.format("iters = %d bts = %d maxd = %d", 
+        		statistics.getIterations(), statistics.backtracksSinceRestart,
+        		statistics.maxDepth));
+        }
+
     }
 
     protected ForwardSearchStatistics statistics;
@@ -108,7 +115,7 @@ public class MemoryEfficientForwardSearchSolver extends AbstractSolver implement
 
         while (!isGoalState(state)) {
             if (timelimit > 0 && watch.limitExceeded(timelimit)) {
-                System.out.print(String.format(" iters = %d bts = %d ", statistics.iterationsSinceRestart, statistics.backtracksSinceRestart));
+                statistics.print();
             	throw new TimeoutException();
             }
             
@@ -137,7 +144,7 @@ public class MemoryEfficientForwardSearchSolver extends AbstractSolver implement
             
             if (candidateActions.isEmpty()) {
                 if (plan.isEmpty()) {
-                    System.out.print(String.format(" iters = %d bts = %d ", statistics.iterationsSinceRestart, statistics.backtracksSinceRestart));
+                	statistics.print();
                     throw new NonexistentPlanException();
                 }
                 // backtracking
@@ -168,7 +175,7 @@ public class MemoryEfficientForwardSearchSolver extends AbstractSolver implement
             step.add(op);
             pplan.add(step);
         }
-        System.out.print(String.format(" iters = %d bts = %d ", statistics.iterations, statistics.backtracksSinceRestart));
+        statistics.print();
         return new SasParallelPlan(pplan);
     }
 
