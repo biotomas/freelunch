@@ -44,8 +44,6 @@ public class ExternalSolverPlanner {
 
         try {
             problem = SasIO.parse(problemName);
-            problem.setActionIDs();
-
             SasToSatTranslator translator = Translator.makeTranslator(problem, method, ranking);
             
             Stopwatch solveTime = new Stopwatch();

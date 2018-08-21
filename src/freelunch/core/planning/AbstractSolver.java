@@ -50,7 +50,6 @@ public abstract class AbstractSolver implements Solver {
     @SuppressWarnings("unchecked")
     public AbstractSolver(SasProblem problem) {
         this.problem = problem;
-        problem.setActionIDs();
         // initialize the state
         int totalVars = problem.getVariables().size();
         initialState = new int[totalVars];

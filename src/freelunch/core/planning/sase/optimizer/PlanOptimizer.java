@@ -43,7 +43,6 @@ public class PlanOptimizer {
 
     public PlanOptimizerStatistics optimizePlan(SasProblem problem, SasParallelPlan plan, PlanOptimizerParameters params) {
         stopper = new Stopwatch();
-        problem.setActionIDs();
         this.params = params;
         this.plan = plan;
         this.problem = problem;

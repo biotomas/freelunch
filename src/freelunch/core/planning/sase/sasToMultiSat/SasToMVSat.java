@@ -197,7 +197,6 @@ public class SasToMVSat {
     
     public MultiValuedCNF translate(SasProblem problem, int makespan) {
         this.problem = problem;
-        problem.setActionIDs();
         TransitionGenerator tgen = new TransitionGenerator(problem, problem.getOperators());
         transitions = tgen.getTransitionList();
         transitionVariableIndex = tgen.getTransitionsByVariables();

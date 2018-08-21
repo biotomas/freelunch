@@ -30,12 +30,21 @@ public class SasProblem {
     private List<SasAction> conditionalOperators;
     private List<List<Condition>> mutexGroups;
     private String description;
+    private boolean conditionalEffectsCompiled = false;
     
-    public void setActionIDs() {
+    public boolean isConditionalEffectsCompiled() {
+    	return conditionalEffectsCompiled;
+    }
+    
+    private void resetActionIDs() {
         int actionId = 0;
         for (SasAction op : operators) {
             op.setId(actionId);
             actionId++;
+        }
+        for (SasAction op : conditionalOperators) {
+        	op.setId(actionId);
+        	actionId++;
         }
     }
     
@@ -44,9 +53,11 @@ public class SasProblem {
     	for (SasAction csa : conditionalOperators) {
     		compileAwayConditionalAction(csa);
     	}
+    	conditionalOperators.clear();
 		System.err.println(String.format("Compiled %d conditional actions into %s actions", 
 				conditionalOperators.size(), (operators.size() - sizeBefore)));
-    	setActionIDs();
+		conditionalEffectsCompiled = true;
+    	resetActionIDs();
     }
     
     private void compileAwayConditionalAction(SasAction csa) {
@@ -112,6 +123,8 @@ public class SasProblem {
 		this.operators = other.operators;
 		this.mutexGroups = other.mutexGroups;
 		this.conditionalOperators = other.conditionalOperators;
+		this.description = other.description;
+		this.conditionalEffectsCompiled = other.conditionalEffectsCompiled;
 	}
 
 	public SasProblem() {
@@ -143,6 +156,7 @@ public class SasProblem {
      */
     public void setOperators(List<SasAction> operators) {
         this.operators = operators;
+        resetActionIDs();
     }
 
     /**
@@ -230,6 +244,7 @@ public class SasProblem {
 
 	public void setConditionalOperators(List<SasAction> conditionalOperators) {
 		this.conditionalOperators = conditionalOperators;
+		resetActionIDs();
 	}
 
 }

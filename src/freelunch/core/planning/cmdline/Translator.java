@@ -94,8 +94,6 @@ public class Translator {
                 problem.getOperators().addAll(actionsPairs);
             }
             
-            problem.setActionIDs();
-            
             if (!encode) {
             	if (pseudoBoolean) {
                     SasToSatTranslator translator = makeTranslator(problem, method, 5);
