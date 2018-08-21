@@ -6,19 +6,19 @@ import java.util.BitSet;
 
 import junit.framework.TestCase;
 import freelunch.sat.bce.utilities.WeightedRandomPicker;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class RandomPickerTest extends TestCase {
 	
 	public void testArrays() {
-		BasicFormula bf1 = new BasicFormula();
+		CnfSatFormula bf1 = new CnfSatFormula();
 		bf1.variablesCount = 4;
 		bf1.clauses = new ArrayList<int[]>();
 		bf1.clauses.add(new int[] {1,2,3});
 		bf1.clauses.add(new int[] {2,3});
 		bf1.clauses.add(new int[] {-3,4});
 		
-		BasicFormula bf2 = bf1.copy();
+		CnfSatFormula bf2 = bf1.copy();
 
 		bf2.printDimacs(System.out);
 

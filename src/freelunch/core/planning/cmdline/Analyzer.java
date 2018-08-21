@@ -5,8 +5,8 @@ import java.io.IOException;
 import freelunch.core.planning.SasProblemAnalyzer;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.SasIO;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.FormulaAnalyzer;
+import freelunch.sat.model.CnfSatFormula;
 
 public class Analyzer {
 
@@ -17,8 +17,8 @@ public class Analyzer {
             return;
         }
         if (args[0].equals("check")) {
-        	BasicSatFormula f = BasicSatFormula.parseFromFile(args[1]);
-        	int[] model = BasicSatFormula.parseSolutionFromFile(args[2], f.getVariables());
+        	CnfSatFormula f = CnfSatFormula.parseFromFile(args[1]);
+        	int[] model = CnfSatFormula.parseSolutionFromFile(args[2], f.variablesCount);
         	if (model == null) {
         		System.out.println("Formula not SAT.");
         		return;
@@ -31,12 +31,12 @@ public class Analyzer {
         	return;
         }
         if (args[0].equals("val")) {
-        	BasicSatFormula.validateCnfFile(args[1]);
+        	CnfSatFormula.validateCnfFile(args[1]);
         	return;
         }
         String filename = args[0];
         if (filename.contains("cnf")) {
-            BasicSatFormula f = BasicSatFormula.parseFromFile(filename);
+        	CnfSatFormula f = CnfSatFormula.parseFromFile(filename);
             System.out.println(filename + ";" + FormulaAnalyzer.analyzeFormula(f).csv());
         } else {
             SasProblem prob;

@@ -2,7 +2,7 @@ package freelunch.sat.satLifter.translation.mutex;
 
 import java.util.List;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public interface MutexFinder {
     
@@ -11,6 +11,6 @@ public interface MutexFinder {
      * @param formula
      * @return
      */
-    public List<MutexPair> findMutexPairs(BasicFormula formula);
+    public List<MutexPair> findMutexPairs(CnfSatFormula formula);
 
 }

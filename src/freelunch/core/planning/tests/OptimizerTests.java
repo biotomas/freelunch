@@ -46,7 +46,7 @@ import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslato
 import freelunch.core.satSolving.maxsat.PartialMaxSatFormula;
 import freelunch.core.satSolving.maxsat.Sat4JMaxsatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 public class OptimizerTests extends TestCase {
 	

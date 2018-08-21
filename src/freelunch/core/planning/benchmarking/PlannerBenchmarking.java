@@ -42,8 +42,8 @@ import freelunch.core.satSolving.FormulaAnalyzer;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.FormulaAnalyzer.FormulaProperties;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
-import freelunch.core.utilities.Logger;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Logger;
+import freelunch.utilities.Stopwatch;
 
 public class PlannerBenchmarking extends TestCase {
     

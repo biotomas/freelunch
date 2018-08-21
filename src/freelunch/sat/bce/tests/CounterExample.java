@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
 import freelunch.sat.bce.decomposers.FormulaDecomposer;
 import freelunch.sat.bce.decomposers.PureDecomposer;
 import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.SimplifiedArminsBCEliminator;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
+import junit.framework.TestCase;
 
 public class CounterExample extends TestCase {
 	
 	public void testCe() {
-		BasicFormula f = DimacsParser.parseFromFile("counterex.cnf");
+		CnfSatFormula f = CnfSatFormula.parseFromFile("counterex.cnf");
 		tryFormula(f);
 	}
 	
@@ -29,9 +28,9 @@ public class CounterExample extends TestCase {
 				for (int tri = bin+1; tri < 15; tri+=1) {
 					for (int i = 0; i < 10; i++) {
 						FormulaDecomposer dec = new PureDecomposer();
-						BasicFormula f = rfg.getRandomFormula(vars, bin, tri);
-						BasicFormula l = new BasicFormula();
-						BasicFormula r = new BasicFormula();
+						CnfSatFormula f = rfg.getRandomFormula(vars, bin, tri);
+						CnfSatFormula l = new CnfSatFormula();
+						CnfSatFormula r = new CnfSatFormula();
 						dec.decomposeFormula(f, l, r);
 						assertTrue(tryFormula(l));
 						System.out.println(String.format("var %d bin %d tri %d nr. %d OK", vars, bin, tri, i));
@@ -39,15 +38,15 @@ public class CounterExample extends TestCase {
 				}
 	}
 	
-	public boolean tryFormula(BasicFormula f) {
+	public boolean tryFormula(CnfSatFormula f) {
 		if (!isBlocked(f)) {
 			System.out.println("Error, input formula not blocked");
 			return false;
 		}
 		for (int var = 1; var <= f.variablesCount; var++) {
-			BasicFormula f1 = simplify(f, var);
+			CnfSatFormula f1 = simplify(f, var);
 			boolean b1 = isBlocked(f1);
-			BasicFormula f2 = simplify(f, -var);
+			CnfSatFormula f2 = simplify(f, -var);
 			boolean b2 = isBlocked(f2);
 			
 			System.out.println(var + ": " + b1 + ", " + b2);
@@ -62,7 +61,7 @@ public class CounterExample extends TestCase {
 		return true;
 	}
 	
-	public boolean isBlocked(BasicFormula f) {
+	public boolean isBlocked(CnfSatFormula f) {
 		BCEliminator elim = new SimplifiedArminsBCEliminator();
 		List<int[]> clauses = elim.eliminateBlockedClauses(f);
 		System.out.println("==================");
@@ -74,8 +73,8 @@ public class CounterExample extends TestCase {
 		return clauses.size() == f.clauses.size();
 	}
 	
-	public BasicFormula simplify(BasicFormula f, int l) {
-		BasicFormula sf = new BasicFormula();
+	public CnfSatFormula simplify(CnfSatFormula f, int l) {
+		CnfSatFormula sf = new CnfSatFormula();
 		sf.variablesCount = f.variablesCount;
 		sf.clauses = new ArrayList<int[]>();
 

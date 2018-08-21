@@ -27,11 +27,11 @@ import java.util.Random;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.planning.model.BasicSettings;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
-import freelunch.core.utilities.IntVector;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.IntVector;
+import freelunch.utilities.Stopwatch;
 
 
 public abstract class BaseWalkSAT implements IncrementalSatSolver {
@@ -176,9 +176,9 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     }
     
     @Override
-    public Boolean isSatisfiable(BasicSatFormula formula) throws TimeoutException {
+    public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
         reset();
-        setVariablesCount(formula.getVariables());
+        setVariablesCount(formula.variablesCount);
         for (int[] c : formula.getClauses()) {
             clManager.addPermanentClause(new LSClause(c));
         }

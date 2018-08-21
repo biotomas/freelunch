@@ -10,7 +10,7 @@ import java.util.Set;
 import freelunch.sat.bce.utilities.BCESimplifier;
 import freelunch.sat.bce.utilities.BinaryHeap;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class HornAdvisor extends HiddenHornMaximizer {
 	
@@ -57,7 +57,7 @@ public class HornAdvisor extends HiddenHornMaximizer {
 	 * @param outAdvice
 	 * @param outFlipped
 	 */
-	public List<Integer> preprocessFormula(BasicFormula f, int adviceSize) {
+	public List<Integer> preprocessFormula(CnfSatFormula f, int adviceSize) {
 		// do unit propagation simplification
 		UnitPropagationSimplifier.simplifyByUnitPropagation(f, true);
 		// remove blocked clauses (includes removing pure literals)

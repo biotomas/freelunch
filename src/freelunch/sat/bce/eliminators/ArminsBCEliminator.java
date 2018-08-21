@@ -8,8 +8,8 @@ import java.util.Set;
 
 import freelunch.sat.bce.utilities.BinaryHeap;
 import freelunch.sat.bce.utilities.ClauseIndex;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class ArminsBCEliminator extends TrivialBCEliminator implements BCEliminator {
 	
@@ -57,7 +57,7 @@ public class ArminsBCEliminator extends TrivialBCEliminator implements BCElimina
 	}
 
 	@Override
-	public ArrayList<int[]> eliminateBlockedClauses(BasicFormula formula) {
+	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula) {
 		Stopwatch watch = new Stopwatch();
 		literals = new LiteralOccurrence[2+2*formula.variablesCount];
 		List<LiteralOccurrence> occurrenceList = new ArrayList<LiteralOccurrence>();

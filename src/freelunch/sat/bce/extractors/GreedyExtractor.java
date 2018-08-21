@@ -8,7 +8,7 @@ import freelunch.sat.bce.solver.ChoiceMaker;
 import freelunch.sat.bce.solver.RandomChoiceMaker;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
 import freelunch.sat.bce.utilities.WeightedRandomPicker;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class GreedyExtractor extends RandomExtractor {
 
@@ -20,7 +20,7 @@ public class GreedyExtractor extends RandomExtractor {
 	 * @param formula
 	 */
 	@Override
-	public void extractBackBones(BasicFormula formula) {
+	public void extractBackBones(CnfSatFormula formula) {
 		this.formula = formula;
 		BlockedSetSolver solver = new BlockedSetSolver();
 		int[] result = solver.solveBlockedFormula(formula, new RandomChoiceMaker(2013));

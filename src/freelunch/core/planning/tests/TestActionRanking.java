@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
 import freelunch.core.planning.NonexistentPlanException;
 import freelunch.core.planning.Solver;
 import freelunch.core.planning.TimeoutException;
@@ -32,10 +31,11 @@ import freelunch.core.planning.problemGenerator.MultiRobotPathPlanningGenerator;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.solvers.ExternalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.satSolving.solvers.SatSolver;
+import freelunch.sat.model.CnfSatFormula;
+import junit.framework.TestCase;
 
 public class TestActionRanking extends TestCase {
     
@@ -47,7 +47,7 @@ public class TestActionRanking extends TestCase {
         clauses.add(new int[] {-2});
         clauses.add(new int[] {1, 2});
         
-        BasicSatFormula fla = new BasicSatFormula(5, clauses);
+        CnfSatFormula fla = new CnfSatFormula(5, clauses);
         
         try {
             boolean sat = solver.isSatisfiable(fla);

@@ -16,7 +16,7 @@ import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.CompactDirect;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 public class PotentialPlanTests extends TestCase {
 	

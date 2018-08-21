@@ -6,7 +6,7 @@ import java.util.List;
 
 import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class UnitAndBlockedSetEncoder {
 
@@ -18,14 +18,14 @@ public class UnitAndBlockedSetEncoder {
 	 * @param r
 	 * @return
 	 */
-	public static BasicFormula encode(BasicFormula l, BasicFormula r) {
+	public static CnfSatFormula encode(CnfSatFormula l, CnfSatFormula r) {
 		BCEliminator elim = new IncrementalQueueBasedBCEliminator();
 		List<int[]> stack = elim.eliminateBlockedClauses(l);
 		if (stack.size() != l.clauses.size()) {
 			throw new IllegalArgumentException("l is not blocked");
 		}
 		l.clauses = stack;
-		BasicFormula result = new BasicFormula();
+		CnfSatFormula result = new CnfSatFormula();
 		result.variablesCount = l.variablesCount + 1;
 		int newVar = l.variablesCount + 1;
 		result.clauses = new ArrayList<int[]>();

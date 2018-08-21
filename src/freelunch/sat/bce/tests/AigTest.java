@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 import freelunch.sat.bce.encoding.aig.AigEncoder;
 import freelunch.sat.bce.encoding.aig.AigerCircuit;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import junit.framework.TestCase;
 
 public class AigTest extends TestCase {
 	
 	public void testAigTranslation() throws IOException {
-		BasicFormula bf = new BasicFormula();
+		CnfSatFormula bf = new CnfSatFormula();
 		bf.variablesCount = 3;
 		bf.clauses = new ArrayList<int[]>();
 		bf.clauses.add(new int[] {-2});

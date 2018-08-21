@@ -55,7 +55,7 @@ public class SymbolicReachVerifier {
 	    }
 		// verify the transitional state
 	    for (int step = 0; step < solution.size() - 1; step++) {
-	        int signature = problem.initialConditions.getVariables();
+	        int signature = problem.initialConditions.variablesCount;
 	        assignment = new int[2*signature+2];
 	        for (int l = 0; l <= signature; l++) {
 	            assignment[l] = solution.get(step)[l];

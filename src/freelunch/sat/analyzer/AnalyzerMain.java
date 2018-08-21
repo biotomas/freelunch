@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class AnalyzerMain {
 
@@ -30,7 +29,7 @@ public class AnalyzerMain {
 			System.out.println("USAGE: formula.cnf output.cnf advice.adv");
 			return;
 		}
-		BasicFormula f = DimacsParser.parseFromFile(args[0]);
+		CnfSatFormula f = CnfSatFormula.parseFromFile(args[0]);
 		if (f == null) {
 			Logger.print(0, "Formula too big, aborting");
 			return;
@@ -41,9 +40,7 @@ public class AnalyzerMain {
 		
 		try {
 			// print the new formula
-			FileWriter outf = new FileWriter(args[1]);
-			f.printDimacsToFile(outf);
-			outf.close();
+			f.printDimacsToFile(args[1]);
 			// print the advice
 			FileWriter outa = new FileWriter(args[2]);
 			outa.write(String.format("%d\n", advice.size()));

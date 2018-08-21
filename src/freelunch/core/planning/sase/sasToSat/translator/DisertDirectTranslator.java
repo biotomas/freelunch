@@ -24,10 +24,10 @@ import java.util.List;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.sat.model.CnfSatFormula;
 
 public class DisertDirectTranslator extends TranslatorBase implements SasToSatTranslator {
 
@@ -63,7 +63,7 @@ public class DisertDirectTranslator extends TranslatorBase implements SasToSatTr
     }
     
     @Override
-    public BasicSatFormula makeFormulaForMakespan(int makespan) {
+    public CnfSatFormula makeFormulaForMakespan(int makespan) {
         BasicSatFormulaGenerator sgen = new BasicSatFormulaGenerator();
         actionVariables.setDimensionSize(1, makespan);
         assignmentVariables.setDimensionSize(1, makespan + 1);
@@ -80,7 +80,7 @@ public class DisertDirectTranslator extends TranslatorBase implements SasToSatTr
         } catch (SatContradictionException e) {
             return null;
         }
-        BasicSatFormula formula = sgen.getFormula();
+        CnfSatFormula formula = sgen.getFormula();
         return formula;
     }
 

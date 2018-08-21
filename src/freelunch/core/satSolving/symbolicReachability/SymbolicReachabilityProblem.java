@@ -28,26 +28,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 
 public class SymbolicReachabilityProblem {
 	public List<Integer> actionVariables;
 	
-	public BasicSatFormula initialConditions;
-	public BasicSatFormula universalConditions;
-	public BasicSatFormula goalConditions;
-	public BasicSatFormula transitionConditions;
+	public CnfSatFormula initialConditions;
+	public CnfSatFormula universalConditions;
+	public CnfSatFormula goalConditions;
+	public CnfSatFormula transitionConditions;
 
 	public void print(PrintStream out) {
 		out.println("c action-vars " + actionVariables.toString());
-		out.println(String.format("i cnf %d %d", initialConditions.getVariables(), initialConditions.getClauses().size()));
+		out.println(String.format("i cnf %d %d", initialConditions.variablesCount, initialConditions.getClauses().size()));
 		initialConditions.printClauses(out);
-		out.println(String.format("u cnf %d %d", universalConditions.getVariables(), universalConditions.getClauses().size()));
+		out.println(String.format("u cnf %d %d", universalConditions.variablesCount, universalConditions.getClauses().size()));
 		universalConditions.printClauses(out);
-		out.println(String.format("g cnf %d %d", goalConditions.getVariables(), goalConditions.getClauses().size()));
+		out.println(String.format("g cnf %d %d", goalConditions.variablesCount, goalConditions.getClauses().size()));
 		goalConditions.printClauses(out);
-		out.println(String.format("t cnf %d %d", transitionConditions.getVariables(), transitionConditions.getClauses().size()));
+		out.println(String.format("t cnf %d %d", transitionConditions.variablesCount, transitionConditions.getClauses().size()));
 		transitionConditions.printClauses(out);
 	}
 	
@@ -58,8 +58,8 @@ public class SymbolicReachabilityProblem {
         ps.close();
 	}
 	
-	public BasicSatFormula makeFormulaForMakespan(int makespan) {
-        int sig = initialConditions.getVariables();
+	public CnfSatFormula makeFormulaForMakespan(int makespan) {
+        int sig = initialConditions.variablesCount;
         List<int[]> clauses = new ArrayList<int[]>();
         
         //initial conds
@@ -83,7 +83,7 @@ public class SymbolicReachabilityProblem {
             }
         }
         
-        return new BasicSatFormula(sig*makespan, clauses);
+        return new CnfSatFormula(sig*makespan, clauses);
     }
     
     private int[] makeClause(int[] clause, int sig, int time) {
@@ -103,7 +103,7 @@ public class SymbolicReachabilityProblem {
         FileReader fr = new FileReader(filename);
         BufferedReader reader = new BufferedReader(fr);
         String line = reader.readLine();
-        BasicSatFormula currentfla = null;
+        CnfSatFormula currentfla = null;
 		while (line != null) {
             if (line.startsWith("c")) {
 				line = reader.readLine();
@@ -112,7 +112,7 @@ public class SymbolicReachabilityProblem {
             if (line.contains("cnf")) {
                 String[] tokens = line.split(" +");
                 int variables = Integer.parseInt(tokens[2]);
-                currentfla = new BasicSatFormula(variables, new ArrayList<int[]>());
+                currentfla = new CnfSatFormula(variables, new ArrayList<int[]>());
             	
             	switch (line.charAt(0)) {
 				case 'i':

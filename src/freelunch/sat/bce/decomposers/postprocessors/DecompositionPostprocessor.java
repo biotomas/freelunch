@@ -1,6 +1,6 @@
 package freelunch.sat.bce.decomposers.postprocessors;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public interface DecompositionPostprocessor {
 	
@@ -10,7 +10,7 @@ public interface DecompositionPostprocessor {
 	 * @param small
 	 * @return the number of moved clauses
 	 */
-	public int moveToLarge(BasicFormula large, BasicFormula small);
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small);
 	
 	/**
 	 * Set the time limit for post-processing

@@ -34,8 +34,8 @@ import freelunch.core.planning.model.BasicSettings;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
-import freelunch.core.utilities.MoveToFrontHashTable;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.MoveToFrontHashTable;
+import freelunch.utilities.Stopwatch;
 
 
 /**

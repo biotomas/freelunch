@@ -25,10 +25,10 @@ import freelunch.core.planning.model.BasicSettings;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.TransitionExistStepTranslator;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.FormulaAnalyzer;
 import freelunch.core.satSolving.solvers.SatSolver;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.Stopwatch;
 
 public class IterativeSatBasedSolver implements Solver {
     
@@ -67,7 +67,7 @@ public class IterativeSatBasedSolver implements Solver {
         
         while (true) {
             makespan++;
-            BasicSatFormula formula = translator.makeFormulaForMakespan(makespan);
+            CnfSatFormula formula = translator.makeFormulaForMakespan(makespan);
             if (formula == null) {
                 continue;
             }

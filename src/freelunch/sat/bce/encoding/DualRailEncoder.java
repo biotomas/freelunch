@@ -2,12 +2,12 @@ package freelunch.sat.bce.encoding;
 
 import java.util.ArrayList;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class DualRailEncoder {
 	
-	public static BasicFormula getDualRailEncoding(BasicFormula f) {
-		BasicFormula result = new BasicFormula();
+	public static CnfSatFormula getDualRailEncoding(CnfSatFormula f) {
+		CnfSatFormula result = new CnfSatFormula();
 		result.variablesCount = f.variablesCount*2;
 		result.clauses = new ArrayList<int[]>();
 		

@@ -10,7 +10,7 @@ import freelunch.sat.bce.eliminators.SimplifiedArminsBCEliminator;
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class UnitDecomposer implements FormulaDecomposer {
 	
@@ -18,13 +18,13 @@ public class UnitDecomposer implements FormulaDecomposer {
 	public boolean exitIfNotUD = false;
 	
 	@Override
-	public void decomposeFormula(BasicFormula input, BasicFormula largeBlocked, BasicFormula rest) {
+	public void decomposeFormula(CnfSatFormula input, CnfSatFormula largeBlocked, CnfSatFormula rest) {
 		bceSolved = false;
 		largeBlocked.variablesCount = input.variablesCount;
 		largeBlocked.clauses = new ArrayList<int[]>();
 		rest.variablesCount = input.variablesCount;
 		rest.clauses = new ArrayList<int[]>();
-		BasicFormula tmpFormula = new BasicFormula();
+		CnfSatFormula tmpFormula = new CnfSatFormula();
 		tmpFormula.variablesCount = input.variablesCount;
 		tmpFormula.clauses = new ArrayList<int[]>();
 		List<Integer> units = new ArrayList<Integer>();

@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 import freelunch.sat.bce.utilities.Logger;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class HiddenHornMaximizer {
 	
@@ -24,7 +24,7 @@ public class HiddenHornMaximizer {
 		occurrence.get(lit).add(cl);
 	}
 	
-	protected void initializeIndices(BasicFormula f) {
+	protected void initializeIndices(CnfSatFormula f) {
 		flips = 0;
 		flippedVars = new BitSet(f.variablesCount+1);
 		occurrence = new HashMap<Integer, Set<int[]>>();
@@ -57,7 +57,7 @@ public class HiddenHornMaximizer {
 	 * @param seconds time limit for hornification
 	 * @return a bitset with flipped literals
 	 */
-	public BitSet hornify(BasicFormula f, int seconds) {
+	public BitSet hornify(CnfSatFormula f, int seconds) {
 		initializeIndices(f);
 		
 		Logger.print(1, String.format("c initial horn cls %d (%d%%), timelit: %d",

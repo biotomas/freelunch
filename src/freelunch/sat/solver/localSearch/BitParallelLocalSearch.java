@@ -1,6 +1,6 @@
 package freelunch.sat.solver.localSearch;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.solver.LocalSearchSatSolver;
 
 public class BitParallelLocalSearch implements LocalSearchSatSolver {
@@ -10,7 +10,7 @@ public class BitParallelLocalSearch implements LocalSearchSatSolver {
 	private long timeout;
 
 	@Override
-	public Boolean isSatisfiable(BasicFormula formula) {
+	public Boolean isSatisfiable(CnfSatFormula formula) {
 		return null;
 	}
 

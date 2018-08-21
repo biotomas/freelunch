@@ -13,8 +13,8 @@ import freelunch.sat.bce.utilities.ClauseIdIndex;
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.bce.utilities.ClauseIdIndex.Clause;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class EagerBlockableClauseMover implements DecompositionPostprocessor {
 	
@@ -22,7 +22,7 @@ public class EagerBlockableClauseMover implements DecompositionPostprocessor {
 	private long timelimit = 0;
 
 	@Override
-	public int moveToLarge(BasicFormula large, BasicFormula small) {
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
 		Stopwatch watch = new Stopwatch();
 		
 		//sort the clauses in the small set
@@ -59,10 +59,10 @@ public class EagerBlockableClauseMover implements DecompositionPostprocessor {
 		return 0;
 	}
 	
-	public static Boolean tryAdding(BasicFormula large, List<int[]> clauses, int timelimit) {
+	public static Boolean tryAdding(CnfSatFormula large, List<int[]> clauses, int timelimit) {
 		BCEliminator elim = new IncrementalQueueBasedBCEliminator();
 		elim.setTimeLimit(timelimit);
-		BasicFormula tmp = new BasicFormula();
+		CnfSatFormula tmp = new CnfSatFormula();
 		tmp.variablesCount = large.variablesCount;
 		tmp.clauses = new ArrayList<int[]>();
 		tmp.clauses.addAll(large.clauses);
@@ -90,7 +90,7 @@ public class EagerBlockableClauseMover implements DecompositionPostprocessor {
 	 * @param large
 	 * @param small
 	 */
-	public static void sortClauses(BasicFormula large, BasicFormula small) {
+	public static void sortClauses(CnfSatFormula large, CnfSatFormula small) {
 		ClauseIndex cindex = new ClauseIndex(large);
 		final Map<int[], Integer> clauseScores = new HashMap<int[], Integer>();
 		for (int[] cl : small.clauses) {
@@ -106,7 +106,7 @@ public class EagerBlockableClauseMover implements DecompositionPostprocessor {
 		});
 	}
 	
-	public static void sortClausesByFirstBlitConflict(BasicFormula large, BasicFormula small) {
+	public static void sortClausesByFirstBlitConflict(CnfSatFormula large, CnfSatFormula small) {
 		ClauseIdIndex cindex = new ClauseIdIndex(large.variablesCount, null);
 		int id = 0;
 		for (int[] cl : large.clauses) {

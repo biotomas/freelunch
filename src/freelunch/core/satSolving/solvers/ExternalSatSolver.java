@@ -31,8 +31,8 @@ import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.Stopwatch;
 
 public class ExternalSatSolver implements SatSolver {
     
@@ -44,10 +44,10 @@ public class ExternalSatSolver implements SatSolver {
     private int[] model = null;
     
     @Override
-    public Boolean isSatisfiable(BasicSatFormula formula) throws TimeoutException {
+    public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
         
         String filename = UUID.randomUUID() + ".cnf";
-        int variables = formula.getVariables();
+        int variables = formula.variablesCount;
         ExecuteWatchdog watchdog = null; 
         File formulaFile = null;
         sat = null;

@@ -20,8 +20,8 @@ package freelunch.sat.solver.localSearch;
 
 import java.util.Random;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.solver.LocalSearchSatSolver;
 import freelunch.sat.solver.localSearch.selectors.LocalSearchSelector;
 
@@ -115,7 +115,7 @@ public class BaseWalkSAT implements LocalSearchSatSolver {
     }
     
     @Override
-    public Boolean isSatisfiable(BasicFormula formula) {
+    public Boolean isSatisfiable(CnfSatFormula formula) {
     	lsData.clManager = new SimpleClauseManager();
         setVariablesCount(formula.variablesCount);
         for (int[] c : formula.clauses) {

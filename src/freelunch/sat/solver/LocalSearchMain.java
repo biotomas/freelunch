@@ -2,9 +2,8 @@ package freelunch.sat.solver;
 
 import java.util.Arrays;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.localSearch.BaseWalkSAT;
 import freelunch.sat.solver.localSearch.selectors.BSeeker;
@@ -46,7 +45,7 @@ public class LocalSearchMain {
 		}
 		
 		Stopwatch watch = new Stopwatch();
-		BasicFormula f = DimacsParser.parseFromFile(args[0]);
+		CnfSatFormula f = CnfSatFormula.parseFromFile(args[0]);
 		
 		LocalSearchSelector selector = null;
 		String alg = "bseeker";
@@ -104,7 +103,7 @@ public class LocalSearchMain {
 		}
 	}
 	
-	public static boolean solutionValid(BasicFormula f, int[] model) {
+	public static boolean solutionValid(CnfSatFormula f, int[] model) {
 		clauses:
 		for (int[] cl : f.clauses) {
 			for (int lit : cl) {

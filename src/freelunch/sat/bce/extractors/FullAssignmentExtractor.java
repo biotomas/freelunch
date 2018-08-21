@@ -6,7 +6,7 @@ import java.util.Random;
 
 import freelunch.sat.bce.solver.BlockedSetSolver;
 import freelunch.sat.bce.solver.ChoiceMaker;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class FullAssignmentExtractor extends RandomExtractor {
 	
@@ -14,7 +14,7 @@ public class FullAssignmentExtractor extends RandomExtractor {
 	private Random rnd = new Random(2013);
 	
 	@Override
-	public void extractBackBones(BasicFormula formula) {
+	public void extractBackBones(CnfSatFormula formula) {
 		this.formula = formula;
 		int[] assignment = new int[formula.variablesCount+1];
 		makeRandomAssignment(assignment);

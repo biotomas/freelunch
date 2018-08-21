@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class HornAnalyzer {
 	
@@ -15,7 +15,7 @@ public class HornAnalyzer {
 	 * @param f
 	 * @return
 	 */
-	public static List<Integer> getHornBackDoorVariables(BasicFormula f) {
+	public static List<Integer> getHornBackDoorVariables(CnfSatFormula f) {
 		List<int[]> notPHorn = new ArrayList<int[]>();
 		List<int[]> notNHorn = new ArrayList<int[]>();
 		for (int[] cl : f.clauses) {

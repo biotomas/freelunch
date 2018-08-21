@@ -28,7 +28,7 @@ import freelunch.core.planning.sase.optimizer.model.PlanOptimizerStatistics;
 import freelunch.core.planning.sase.optimizer.model.SubPlanStructure;
 import freelunch.core.planning.sase.sasToSat.incremental.IncrementalSolver;
 import freelunch.core.planning.sase.sasToSat.incremental.IncrementalSolverSettings;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 
 public class PlanOptimizer {

@@ -5,10 +5,10 @@ import java.util.List;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.TransitionGenerator;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 
 public class SelectiveTranslator implements SasToSatTranslator {
     
@@ -37,7 +37,7 @@ public class SelectiveTranslator implements SasToSatTranslator {
 	}
 
     @Override
-    public BasicSatFormula makeFormulaForMakespan(int makespan) {
+    public CnfSatFormula makeFormulaForMakespan(int makespan) {
         if (usingExist) {
             int ranking = 6;
             if (makespan % 2 == 0) {

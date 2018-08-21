@@ -7,15 +7,15 @@ import java.util.List;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.bce.utilities.Logger;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class BlockableClauseMover implements DecompositionPostprocessor {
 	
 	private long timelimit = 0;
 
 	@Override
-	public int moveToLarge(BasicFormula large, BasicFormula small) {
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
 		Stopwatch watch = new Stopwatch();
 
 		// sort the clauses, short clauses first

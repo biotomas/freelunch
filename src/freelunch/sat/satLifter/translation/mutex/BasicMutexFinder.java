@@ -3,13 +3,13 @@ package freelunch.sat.satLifter.translation.mutex;
 import java.util.ArrayList;
 import java.util.List;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.sat.Propagator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class BasicMutexFinder implements MutexFinder {
 
     @Override
-    public List<MutexPair> findMutexPairs(BasicFormula formula) {
+    public List<MutexPair> findMutexPairs(CnfSatFormula formula) {
         Propagator propagator = new Propagator(formula.variablesCount);
         for (int[] clause : formula.clauses) {
             propagator.addClause(clause);

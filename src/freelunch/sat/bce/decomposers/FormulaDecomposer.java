@@ -1,9 +1,9 @@
 package freelunch.sat.bce.decomposers;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public interface FormulaDecomposer {
 	
-	public void decomposeFormula(BasicFormula input, BasicFormula largeBlocked, BasicFormula rest);
+	public void decomposeFormula(CnfSatFormula input, CnfSatFormula largeBlocked, CnfSatFormula rest);
 
 }

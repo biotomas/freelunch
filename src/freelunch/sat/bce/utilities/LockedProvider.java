@@ -2,7 +2,7 @@ package freelunch.sat.bce.utilities;
 
 import java.util.BitSet;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class LockedProvider {
 	
@@ -27,7 +27,7 @@ public class LockedProvider {
 	 * @param f
 	 * @return
 	 */
-	public static BitSet lockPresentVars(BasicFormula f) {
+	public static BitSet lockPresentVars(CnfSatFormula f) {
 		BitSet result = new BitSet(f.variablesCount+1);
 		result.clear();
 		for (int[] cl : f.clauses) {
@@ -38,7 +38,7 @@ public class LockedProvider {
 		return result;
 	}
 	
-	public static BitSet lockCommonBlits(BasicFormula l, BasicFormula r) {
+	public static BitSet lockCommonBlits(CnfSatFormula l, CnfSatFormula r) {
     	BitSet lvars = new BitSet(l.variablesCount+1);
     	BitSet rvars = new BitSet(l.variablesCount+1);
     	lvars.clear();
@@ -60,7 +60,7 @@ public class LockedProvider {
 	 * @param f
 	 * @return
 	 */
-	public static BitSet lockBlits(BasicFormula f) {
+	public static BitSet lockBlits(CnfSatFormula f) {
 		BitSet result = new BitSet(f.variablesCount+1);
 		result.clear();
 		for (int[] cl : f.clauses) {

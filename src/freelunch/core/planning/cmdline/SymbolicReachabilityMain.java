@@ -28,9 +28,9 @@ import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.planning.sase.sasToSat.symbolicReachability.SymbolicReachabilityProblemGenerator;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.symbolicReachability.SymbolicReachVerifier;
 import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProblem;
+import freelunch.sat.model.CnfSatFormula;
 
 
 public class SymbolicReachabilityMain {
@@ -63,10 +63,10 @@ public class SymbolicReachabilityMain {
 		
 		if (args[0].equals("comb")) {
 			SymbolicReachabilityProblem srp = new SymbolicReachabilityProblem();
-			srp.initialConditions = BasicSatFormula.parseFromFile(args[1]);
-			srp.universalConditions = BasicSatFormula.parseFromFile(args[2]);
-			srp.transitionConditions = BasicSatFormula.parseFromFile(args[3]);
-			srp.goalConditions = BasicSatFormula.parseFromFile(args[4]);
+			srp.initialConditions = CnfSatFormula.parseFromFile(args[1]);
+			srp.universalConditions = CnfSatFormula.parseFromFile(args[2]);
+			srp.transitionConditions = CnfSatFormula.parseFromFile(args[3]);
+			srp.goalConditions = CnfSatFormula.parseFromFile(args[4]);
 			srp.print(System.out);
 			return;
 		}
@@ -76,7 +76,7 @@ public class SymbolicReachabilityMain {
 			try {
 				SymbolicReachabilityProblem srp = new SymbolicReachabilityProblem(args[2]);
 				System.out.println("c generated from " + args[2] + " for makespan " + makespan);
-				srp.makeFormulaForMakespan(makespan).printFormula(System.out);
+				srp.makeFormulaForMakespan(makespan).printDimacs(System.out);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

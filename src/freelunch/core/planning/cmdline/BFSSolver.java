@@ -30,8 +30,8 @@ import freelunch.core.planning.sase.optimizer.ActionEliminationOptimizer;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.preprocessing.ReachabilityAnalysis;
 import freelunch.core.planning.sase.sasToSat.SasIO;
-import freelunch.core.utilities.ParametersProcessor;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.ParametersProcessor;
+import freelunch.utilities.Stopwatch;
 
 
 public class BFSSolver {

@@ -37,7 +37,7 @@ import freelunch.core.planning.forwardSearch.heuristics.StatisticsRuledRestartHe
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 public class BfsBenchmarking extends TestCase {
 	

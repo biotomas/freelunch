@@ -21,10 +21,10 @@ package freelunch.core.planning.sase.sasToSat.translator;
 import java.util.List;
 
 import freelunch.core.planning.model.SasParallelPlan;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 
 
 /**
@@ -41,7 +41,7 @@ public interface SasToSatTranslator {
      * @param makespan
      * @return
      */
-    public BasicSatFormula makeFormulaForMakespan(int makespan);
+    public CnfSatFormula makeFormulaForMakespan(int makespan);
     
     /**
      * Construct a Pseudo Boolean formula for the given makespan.

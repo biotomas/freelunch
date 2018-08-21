@@ -3,10 +3,10 @@ package freelunch.sat.satLifter.tests;
 import java.util.ArrayList;
 import java.util.List;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF.Assignment;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF.MVClause;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.translation.SatToMultiValuedSat;
 import freelunch.sat.satLifter.translation.covering.CliqueCoverGenerator;
 import freelunch.sat.satLifter.translation.covering.GreedyLeftistCliqueCoverGenerator;
@@ -20,7 +20,7 @@ public class TranslationTest extends TestCase {
     
     public void testTrivialExample() {
         MutexFinder finder = new BasicMutexFinder();
-        BasicFormula formula = new BasicFormula();
+        CnfSatFormula formula = new CnfSatFormula();
         formula.variablesCount = 10;
         
         formula.clauses = new ArrayList<int[]>();
@@ -73,7 +73,7 @@ public class TranslationTest extends TestCase {
         
         for (int i = 10; i < 30; i++) {
             int vars = i * 5;
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             List<MutexPair> mutexPairs = basic.findMutexPairs(f);
             //CliqueCoverGenerator ccg = new GreedyLeftistCliqueCoverGenerator(2012, f.variablesCount, mutexPairs);
             CliqueCoverGenerator ccg = new NaiveRandomizedCliqueCoverGenerator(2012, f.variablesCount, mutexPairs);

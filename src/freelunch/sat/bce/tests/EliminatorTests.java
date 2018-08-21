@@ -3,23 +3,22 @@ package freelunch.sat.bce.tests;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
 import freelunch.sat.bce.eliminators.ArminsBCEliminator;
 import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.ImprovedBCEliminator;
 import freelunch.sat.bce.eliminators.SimplifiedArminsBCEliminator;
 import freelunch.sat.bce.eliminators.TrivialBCEliminator;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
+import junit.framework.TestCase;
 
 public class EliminatorTests extends TestCase {
 	
 	public void testFile() {
 		BCEliminator elim = new SimplifiedArminsBCEliminator();
-		BasicFormula f = DimacsParser.parseFromFile("test.bcnf");
+		CnfSatFormula f = CnfSatFormula.parseFromFile("test.bcnf");
 		//BasicFormula f = DimacsParser.parseFromFile("result.cnf");
 
 		System.out.println(f.clauses.size());
@@ -32,7 +31,7 @@ public class EliminatorTests extends TestCase {
 	public void testTrivialEliminator() {
 		BCEliminator elim = new TrivialBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(10, 10, 10);
+		CnfSatFormula f = rfg.getRandomFormula(10, 10, 10);
 		
 		System.out.println(f);
 		printClauses(elim.eliminateBlockedClauses(f));
@@ -41,7 +40,7 @@ public class EliminatorTests extends TestCase {
 	public void testArminsEliminator() {
 		BCEliminator elim = new ArminsBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(10, 10, 10);
+		CnfSatFormula f = rfg.getRandomFormula(10, 10, 10);
 		
 		//System.out.println(f);
 		printClauses(elim.eliminateBlockedClauses(f));
@@ -50,7 +49,7 @@ public class EliminatorTests extends TestCase {
 	public void testSimplifiedArminsEliminator() {
 		BCEliminator elim = new SimplifiedArminsBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(10, 10, 10);
+		CnfSatFormula f = rfg.getRandomFormula(10, 10, 10);
 		
 		//System.out.println(f);
 		printClauses(elim.eliminateBlockedClauses(f));
@@ -59,7 +58,7 @@ public class EliminatorTests extends TestCase {
 	public void testImprovedEliminator() {
 		BCEliminator elim = new ImprovedBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(10, 10, 10);
+		CnfSatFormula f = rfg.getRandomFormula(10, 10, 10);
 		
 		//System.out.println(f);
 		printClauses(elim.eliminateBlockedClauses(f));
@@ -75,7 +74,7 @@ public class EliminatorTests extends TestCase {
 	public void testTrivialEliminatorSpeed() {
 		BCEliminator elim = new TrivialBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(1000000, 1000000, 4000000);
+		CnfSatFormula f = rfg.getRandomFormula(1000000, 1000000, 4000000);
 		Stopwatch watch = new Stopwatch();
 		int eliminated = elim.eliminateBlockedClauses(f).size();
 		System.out.println(watch.elapsedFormatedSeconds());
@@ -87,7 +86,7 @@ public class EliminatorTests extends TestCase {
 	public void testImprovedEliminatorSpeed() {
 		BCEliminator elim = new ImprovedBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(1000000, 1000000, 4000000);
+		CnfSatFormula f = rfg.getRandomFormula(1000000, 1000000, 4000000);
 		Stopwatch watch = new Stopwatch();
 		int eliminated = elim.eliminateBlockedClauses(f).size();
 		System.out.println(watch.elapsedFormatedSeconds());
@@ -112,7 +111,7 @@ public class EliminatorTests extends TestCase {
 	public void testSimplifiedArminEliminatorSpeed() {
 		BCEliminator elim = new SimplifiedArminsBCEliminator();
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(1000000, 1000000, 4000000);
+		CnfSatFormula f = rfg.getRandomFormula(1000000, 1000000, 4000000);
 		Stopwatch watch = new Stopwatch();
 		int eliminated = elim.eliminateBlockedClauses(f).size();
 		System.out.println(watch.elapsedFormatedSeconds());

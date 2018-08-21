@@ -8,7 +8,7 @@ import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.ISolver;
 import org.sat4j.specs.TimeoutException;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class Sat4JSolver implements SatSolver {
 	
@@ -25,7 +25,7 @@ public class Sat4JSolver implements SatSolver {
 	}
 
     @Override
-    public Boolean isSatisfiable(BasicFormula formula) {
+    public Boolean isSatisfiable(CnfSatFormula formula) {
         solver.reset();
         solver.newVar(formula.variablesCount);
         solver.setExpectedNumberOfClauses(formula.clauses.size());

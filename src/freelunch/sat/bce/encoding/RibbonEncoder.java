@@ -5,12 +5,12 @@ import java.util.Arrays;
 
 import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class RibbonEncoder {
 
-	public static BasicFormula encodeReconstruction(BasicFormula blockedSet, BasicFormula rest) {
-		BasicFormula result = new BasicFormula();
+	public static CnfSatFormula encodeReconstruction(CnfSatFormula blockedSet, CnfSatFormula rest) {
+		CnfSatFormula result = new CnfSatFormula();
 		result.variablesCount = blockedSet.variablesCount + blockedSet.clauses.size() + rest.clauses.size();
 		result.clauses = new ArrayList<int[]>();
 		
@@ -43,7 +43,7 @@ public class RibbonEncoder {
 		}
 		
 		// encode the rest
-		BasicFormula restClauses = new BasicFormula();
+		CnfSatFormula restClauses = new CnfSatFormula();
 		restClauses.clauses = new ArrayList<int[]>();
 		lastVarId = ReconstructionEncoder.encodeStack(stack, restClauses, currentName, originalName, lastVarId);
 

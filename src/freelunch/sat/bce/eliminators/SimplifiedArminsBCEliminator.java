@@ -6,15 +6,15 @@ import java.util.Iterator;
 import java.util.Stack;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class SimplifiedArminsBCEliminator implements BCEliminator {
 	
 	private long timelimit = 0;
 	
 	@Override
-	public ArrayList<int[]> eliminateBlockedClauses(BasicFormula formula) {
+	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula) {
 		Stopwatch watch = new Stopwatch();
 		Stack<Integer> litsToCheck = new Stack<Integer>();
 		BitSet notInStack = new BitSet(2+2*formula.variablesCount);

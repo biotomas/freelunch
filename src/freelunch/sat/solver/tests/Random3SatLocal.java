@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.LocalSearchMain;
 import freelunch.sat.solver.LocalSearchSatSolver;
@@ -43,7 +42,7 @@ public class Random3SatLocal extends TestCase {
 		long totalFlips = 0;
         for (File file : files) {
         	System.out.print(String.format("(%3d/%d) ", problemNr++, files.length));
-        	BasicFormula f = DimacsParser.parseFromFile(file.getAbsolutePath());
+        	CnfSatFormula f = CnfSatFormula.parseFromFile(file.getAbsolutePath());
         	//BasicFormula f = DimacsParser.parseFromFile("/home/tbalyo/big3sat.cnf");
 			Stopwatch timer = new Stopwatch();
 			totalTime.unpause();
@@ -70,7 +69,7 @@ public class Random3SatLocal extends TestCase {
 	}
 	
 	public void testQudraticUnsat() {
-		BasicFormula f = new BasicFormula();
+		CnfSatFormula f = new CnfSatFormula();
 		f.variablesCount = 2;
 		f.clauses = new ArrayList<int[]>();
 		f.clauses.add(new int[] {1,2});
@@ -93,14 +92,14 @@ public class Random3SatLocal extends TestCase {
 		Stopwatch totalTime = new Stopwatch();
 		totalTime.pause();
 		while (tests > 0) {
-			BasicFormula f = rfg.getRandomFormula(vars, 0, clauses);
+			CnfSatFormula f = rfg.getRandomFormula(vars, 0, clauses);
 			boolean s4jres = sat4j.isSatisfiable(f);
 			if (s4jres) {
 				continue;
 			}
 			tests--;
 			
-			BasicFormula f2 = f.copy();
+			CnfSatFormula f2 = f.copy();
 			
 			ResolutionRefutation.extendAllVariables(f2, 1);
 
@@ -120,7 +119,7 @@ public class Random3SatLocal extends TestCase {
 	
 	public void testHitAndWalk() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(5000);
-		BasicFormula f = rfg.getRandomSatisfiableFormula(100, 430);
+		CnfSatFormula f = rfg.getRandomSatisfiableFormula(100, 430);
 		SatSolver s = new HitAndWalkSolver(2017);
 		System.out.println(s.isSatisfiable(f));
 	}
@@ -139,7 +138,7 @@ public class Random3SatLocal extends TestCase {
 		Stopwatch totalTime = new Stopwatch();
 		totalTime.pause();
 		while (tests > 0) {
-			BasicFormula f = rfg.getRandomSatisfiableFormula(vars, clauses);
+			CnfSatFormula f = rfg.getRandomSatisfiableFormula(vars, clauses);
 			//FileWriter fw = new FileWriter("/home/balyo/tmp/rsat/rnd"+tests+".cnf");
 			//f.printDimacsToFile(fw);
 			//fw.close();

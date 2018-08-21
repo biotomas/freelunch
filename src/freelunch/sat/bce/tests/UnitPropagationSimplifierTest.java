@@ -3,13 +3,13 @@ package freelunch.sat.bce.tests;
 import java.util.ArrayList;
 
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import junit.framework.TestCase;
 
 public class UnitPropagationSimplifierTest extends TestCase {
 	
 	public void testSimplifier() {
-		BasicFormula f = new BasicFormula();
+		CnfSatFormula f = new CnfSatFormula();
 		f.clauses = new ArrayList<int[]>();
 		f.clauses.add(new int[] {1, 2, -3});
 		f.clauses.add(new int[] {-1, -3, 5});

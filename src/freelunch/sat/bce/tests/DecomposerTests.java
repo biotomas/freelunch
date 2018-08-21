@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import junit.framework.TestCase;
 import freelunch.sat.bce.decomposers.CombinedDecomposer;
 import freelunch.sat.bce.decomposers.FormulaDecomposer;
 import freelunch.sat.bce.decomposers.PureDecomposer;
@@ -21,11 +20,11 @@ import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
 import freelunch.sat.bce.eliminators.SimplifiedArminsBCEliminator;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
 import freelunch.sat.bce.utilities.Logger;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.Sat4JSolver;
+import junit.framework.TestCase;
 
 public class DecomposerTests extends TestCase {
 	
@@ -52,15 +51,15 @@ public class DecomposerTests extends TestCase {
 		});
         BCEliminator elim = new IncrementalQueueBasedBCEliminator();
         for (File file : files) {
-        	BasicFormula f = DimacsParser.parseFromFile(file.getAbsolutePath());
+        	CnfSatFormula f = CnfSatFormula.parseFromFile(file.getAbsolutePath());
         	//System.out.println("ORIG =========================");
     		//FormulaAnalyzer.analyzeFormula(f).print();
     		FormulaDecomposer dec = new UnitDecomposer();
-    		BasicFormula l = new BasicFormula();
-    		BasicFormula r = new BasicFormula();
+    		CnfSatFormula l = new CnfSatFormula();
+    		CnfSatFormula r = new CnfSatFormula();
     		dec.decomposeFormula(f, l, r);
     		
-    		BasicFormula tmp = new BasicFormula();
+    		CnfSatFormula tmp = new CnfSatFormula();
     		tmp.variablesCount = l.variablesCount;
     		tmp.clauses = new ArrayList<int[]>();
     		tmp.clauses.addAll(l.clauses);
@@ -102,12 +101,12 @@ public class DecomposerTests extends TestCase {
         Stopwatch watch = new Stopwatch();
         int filenum = 0;
         for (File file : files) {
-        	BasicFormula f = DimacsParser.parseFromFile(file.getAbsolutePath());
+        	CnfSatFormula f = CnfSatFormula.parseFromFile(file.getAbsolutePath());
         	//System.out.println("ORIG =========================");
     		//FormulaAnalyzer.analyzeFormula(f).print();
     		FormulaDecomposer dec = new PureDecomposer();
-    		BasicFormula l = new BasicFormula();
-    		BasicFormula r = new BasicFormula();
+    		CnfSatFormula l = new CnfSatFormula();
+    		CnfSatFormula r = new CnfSatFormula();
     		dec.decomposeFormula(f, l, r);
 
         	//System.out.println("LARGE =========================");
@@ -161,12 +160,12 @@ public class DecomposerTests extends TestCase {
 		SimplifiedArminsBCEliminator elim = new SimplifiedArminsBCEliminator();
 		
 		for (int i = 0; i < tests; i++) {
-			BasicFormula f = rfg.getRandomFormula(vars, 3, 0, 41*vars/10);
+			CnfSatFormula f = rfg.getRandomFormula(vars, 3, 0, 41*vars/10);
 			boolean satOrig = solver.isSatisfiable(f);
 			
 			FormulaDecomposer decomposer = new CombinedDecomposer();
-			BasicFormula l = new BasicFormula();
-			BasicFormula r = new BasicFormula();
+			CnfSatFormula l = new CnfSatFormula();
+			CnfSatFormula r = new CnfSatFormula();
 			decomposer.decomposeFormula(f, l, r);
 			
 			System.out.println(l.clauses.size() + " " + r.clauses.size());
@@ -183,7 +182,7 @@ public class DecomposerTests extends TestCase {
 			System.out.println(FormulaAnalyzer.compareFormulas(l, r));
 			
 			
-			BasicFormula joined = new BasicFormula();
+			CnfSatFormula joined = new CnfSatFormula();
 			joined.variablesCount = f.variablesCount;
 			joined.clauses = new ArrayList<int[]>(l.clauses);
 			joined.clauses.addAll(r.clauses);
@@ -202,13 +201,13 @@ public class DecomposerTests extends TestCase {
 	
 	public void testPureDecomposer() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
-		BasicFormula f = rfg.getRandomFormula(100000, 100000, 400000);
+		CnfSatFormula f = rfg.getRandomFormula(100000, 100000, 400000);
 		Stopwatch watch = new Stopwatch();
 		
 		FormulaDecomposer decomposer = new PureDecomposer();
 		decomposer = new UnitDecomposer();
-		BasicFormula l = new BasicFormula();
-		BasicFormula r = new BasicFormula();
+		CnfSatFormula l = new CnfSatFormula();
+		CnfSatFormula r = new CnfSatFormula();
 		decomposer.decomposeFormula(f, l, r);
 		
 		System.out.println(String.format("large: %d (%d%%), small %d", l.clauses.size(), (100*l.clauses.size()/f.clauses.size()), r.clauses.size()));
@@ -236,7 +235,7 @@ public class DecomposerTests extends TestCase {
 		for (int vars = 100; vars < 250; vars += 10) {
 			int sat = 0;
 			for (int i = 0; i < 100; i++) {
-				BasicFormula f = rfg.getRandomFormula(vars, (int)(vars*0.03), (int)(vars*0.05), 4*vars);
+				CnfSatFormula f = rfg.getRandomFormula(vars, (int)(vars*0.03), (int)(vars*0.05), 4*vars);
 				if (solver.isSatisfiable(f)) {
 					sat++;
 				}

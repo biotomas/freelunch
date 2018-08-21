@@ -3,15 +3,15 @@ package freelunch.sat.bce.eliminators;
 import java.util.ArrayList;
 import java.util.List;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class StupidEliminator implements BCEliminator {
 	
 	private long timelimit = 0;
 
 	@Override
-	public ArrayList<int[]> eliminateBlockedClauses(BasicFormula formula) {
+	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula) {
 		Stopwatch watch = new Stopwatch();
 		ArrayList<int[]> result = new ArrayList<int[]>();
 		List<int[]> remainingClauses = new ArrayList<int[]>(formula.clauses);

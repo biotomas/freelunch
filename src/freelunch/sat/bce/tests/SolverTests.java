@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import junit.framework.TestCase;
 import freelunch.sat.bce.decomposers.FormulaDecomposer;
 import freelunch.sat.bce.decomposers.PureDecomposer;
 import freelunch.sat.bce.eliminators.BCEliminator;
@@ -12,23 +11,23 @@ import freelunch.sat.bce.eliminators.SimplifiedArminsBCEliminator;
 import freelunch.sat.bce.solver.BlockedSetSolver;
 import freelunch.sat.bce.solver.ChoiceMaker;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
+import junit.framework.TestCase;
 
 public class SolverTests extends TestCase {
 	
 	public void testSolver() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(10);
-		BasicFormula f = rfg.getRandomFormula(100000, 100000, 400000);
+		CnfSatFormula f = rfg.getRandomFormula(100000, 100000, 400000);
 		//BasicFormula f = rfg.getRandomSat(10, 5, 10);
 		
 		FormulaDecomposer decomposer = new PureDecomposer();
-		BasicFormula l = new BasicFormula();
-		BasicFormula r = new BasicFormula();
+		CnfSatFormula l = new CnfSatFormula();
+		CnfSatFormula r = new CnfSatFormula();
 		decomposer.decomposeFormula(f, l, r);
 		// order the clauses of l properly
-		l = DimacsParser.parseFromFile("result.cnf");
+		l = CnfSatFormula.parseFromFile("result.cnf");
 		
 		BCEliminator elim = new SimplifiedArminsBCEliminator();
 		l.clauses = elim.eliminateBlockedClauses(l);

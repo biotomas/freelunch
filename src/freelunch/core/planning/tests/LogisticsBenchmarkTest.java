@@ -58,7 +58,7 @@ import freelunch.core.satSolving.solvers.ExternalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.satSolving.solvers.SatSolver;
 import freelunch.core.satSolving.walksat.Sparrow;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 import junit.framework.TestCase;
 
 public class LogisticsBenchmarkTest extends TestCase {

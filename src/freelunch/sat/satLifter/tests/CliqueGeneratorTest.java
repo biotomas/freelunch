@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.translation.covering.CliqueCoverGenerator;
 import freelunch.sat.satLifter.translation.covering.GreedyLeftistCliqueCoverGenerator;
 import freelunch.sat.satLifter.translation.covering.NaiveRandomizedCliqueCoverGenerator;
@@ -18,7 +18,7 @@ public class CliqueGeneratorTest extends TestCase {
     public void testGreedyRandomized() {
         
         MutexFinder finder = new BasicMutexFinder();
-        BasicFormula formula = new BasicFormula();
+        CnfSatFormula formula = new CnfSatFormula();
         formula.variablesCount = 10;
         
         formula.clauses = new ArrayList<int[]>();
@@ -51,7 +51,7 @@ public class CliqueGeneratorTest extends TestCase {
         for (int i = 10; i < 30; i++) {
             int vars = i * 5;
             System.out.println(vars);
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             List<MutexPair> mutexPairs = basic.findMutexPairs(f);
             //CliqueCoverGenerator ccg = new NaiveRandomizedCliqueCoverGenerator(2012, f.variablesCount, mutexPairs);
             CliqueCoverGenerator ccg = new GreedyLeftistCliqueCoverGenerator(2012, f.variablesCount, mutexPairs);

@@ -13,8 +13,8 @@ import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.satSolving.solvers.ExternalSatSolver;
-import freelunch.core.utilities.ArrayUtils;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.ArrayUtils;
+import freelunch.utilities.Stopwatch;
 
 public class ExternalSolverPlanner {	
   

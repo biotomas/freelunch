@@ -6,9 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.translation.SatToMultiValuedSat;
 import freelunch.sat.satLifter.translation.covering.CliqueCoverGenerator;
 import freelunch.sat.satLifter.translation.covering.GreedyLeftistCliqueCoverGenerator;
@@ -40,8 +39,8 @@ public class Main {
         Set<Integer> inPartition = readListForPartition(partsFile, part);
         Set<Integer> atBorder = new HashSet<Integer>();
                
-        BasicFormula formula = DimacsParser.parseFromFile(cnfFile);
-        BasicFormula result = new BasicFormula(formula.variablesCount);
+        CnfSatFormula formula = CnfSatFormula.parseFromFile(cnfFile);
+        CnfSatFormula result = new CnfSatFormula(formula.variablesCount);
         for (int[] c : formula.clauses) {
         	boolean inside = false;
         	for (int lit : c) {
@@ -97,7 +96,7 @@ public class Main {
 			return;
 		}
         String filename = args[0];
-        BasicFormula formula = DimacsParser.parseFromFile(filename);
+        CnfSatFormula formula = CnfSatFormula.parseFromFile(filename);
         InteractionGraph g = new InteractionGraph(formula.variablesCount);
         for (int[] c : formula.clauses) {
         	g.addClause(c);
@@ -136,7 +135,7 @@ public class Main {
         }
         
         String filename = args[0];
-        BasicFormula formula = DimacsParser.parseFromFile(filename);
+        CnfSatFormula formula = CnfSatFormula.parseFromFile(filename);
         
         // the default method
         Method method = Method.basic_naive;

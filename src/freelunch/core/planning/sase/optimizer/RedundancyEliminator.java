@@ -14,7 +14,6 @@ import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.maxsat.MaxSatSolver;
 import freelunch.core.satSolving.maxsat.PartialMaxSatFormula;
@@ -23,7 +22,8 @@ import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula.WeightedCla
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.satSolving.solvers.SatSolver;
-import freelunch.core.utilities.IntVector;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.IntVector;
 
 public class RedundancyEliminator {
 	
@@ -35,8 +35,8 @@ public class RedundancyEliminator {
     
     public PartialMaxSatFormula encodeToPMaxSat(SasProblem problem, SasParallelPlan plan) {
         List<SasAction> lplan = PlanningUtils.planToList(plan);
-        BasicSatFormula planf = encodePlan(problem, lplan);
-        PartialMaxSatFormula pmaxf = new PartialMaxSatFormula(planf.getVariables());
+        CnfSatFormula planf = encodePlan(problem, lplan);
+        PartialMaxSatFormula pmaxf = new PartialMaxSatFormula(planf.variablesCount);
         // plan clauses are the hard clauses
         pmaxf.getHardClauses().addAll(planf.getClauses());
 
@@ -50,8 +50,8 @@ public class RedundancyEliminator {
 
     public WeightedPartialMaxSatFormula encodeToWeightedPMaxSat(SasProblem problem, SasParallelPlan plan) {
         List<SasAction> lplan = PlanningUtils.planToList(plan);
-        BasicSatFormula planf = encodePlan(problem, lplan);
-        WeightedPartialMaxSatFormula wpmaxf = new WeightedPartialMaxSatFormula(planf.getVariables());
+        CnfSatFormula planf = encodePlan(problem, lplan);
+        WeightedPartialMaxSatFormula wpmaxf = new WeightedPartialMaxSatFormula(planf.variablesCount);
         // plan clauses are the hard clauses
         wpmaxf.getHardClauses().addAll(planf.getClauses());
 
@@ -68,7 +68,7 @@ public class RedundancyEliminator {
     
     public void updatePlanUsingMaxSatSolution(SasProblem problem, SasParallelPlan plan, String maxResultFile) throws IOException {
         List<SasAction> lplan = PlanningUtils.planToList(plan);
-        BasicSatFormula planf = encodePlan(problem, lplan);
+        CnfSatFormula planf = encodePlan(problem, lplan);
         
         FileReader fr = new FileReader(maxResultFile);
         BufferedReader reader = new BufferedReader(fr);
@@ -76,7 +76,7 @@ public class RedundancyEliminator {
         while (line != null) {
             if (line.startsWith("v")) {
                 String[] parts = line.split(" ");
-                int[] model = new int[planf.getVariables()+1];
+                int[] model = new int[planf.variablesCount+1];
                 for (int i = 1; i < parts.length; i++) {
                     int lit = Integer.parseInt(parts[i]);
                     model[Math.abs(lit)] = lit;
@@ -112,7 +112,7 @@ public class RedundancyEliminator {
         SatSolver solver = new Sat4JSolver();
 
         while (true) {
-            BasicSatFormula f = encodeRedundancy(problem, lplan);
+        	CnfSatFormula f = encodeRedundancy(problem, lplan);
             if (solver.isSatisfiable(f)) {
                 lplan = improvePlan(lplan, solver.getModel());
             } else {
@@ -126,8 +126,8 @@ public class RedundancyEliminator {
     public void optimizePlanIncremental(SasProblem problem, SasParallelPlan plan) throws TimeoutException {
         List<SasAction> lplan = PlanningUtils.planToList(plan);
         IncrementalSatSolver solver = new Sat4JSolver();
-        BasicSatFormula f = encodeRedundancy(problem, lplan);
-        solver.setVariablesCount(f.getVariables());
+        CnfSatFormula f = encodeRedundancy(problem, lplan);
+        solver.setVariablesCount(f.variablesCount);
         try {
             for (int[] c : f.getClauses()) {
                 solver.addNewClause(new IntVector(c));
@@ -173,7 +173,7 @@ public class RedundancyEliminator {
     @Deprecated
     @SuppressWarnings("unused")
     //TODO FIXME unfinished
-    private BasicSatFormula encodeRedundancyChainy(SasProblem problem, List<SasAction> plan) {
+    private CnfSatFormula encodeRedundancyChainy(SasProblem problem, List<SasAction> plan) {
         // the first n variables represent the actions
         variables = 2 + plan.size();
         List<int[]> clauses = new ArrayList<int[]>();
@@ -215,14 +215,14 @@ public class RedundancyEliminator {
             actionId++;
         }
         
-        BasicSatFormula fla = new BasicSatFormula(variables, clauses);
+        CnfSatFormula fla = new CnfSatFormula(variables, clauses);
         return fla;
         
     }
     
     
-    private BasicSatFormula encodeRedundancy(SasProblem problem, List<SasAction> plan) {
-        BasicSatFormula fla = encodePlan(problem, plan);
+    private CnfSatFormula encodeRedundancy(SasProblem problem, List<SasAction> plan) {
+    	CnfSatFormula fla = encodePlan(problem, plan);
         // at least one action should not be used
         int[] cardClause = new int[plan.size()];
         for (int i = 1; i <= plan.size(); i++) {
@@ -233,7 +233,7 @@ public class RedundancyEliminator {
     }
     
     private int variables;
-    private BasicSatFormula encodePlan(SasProblem problem, List<SasAction> plan) {
+    private CnfSatFormula encodePlan(SasProblem problem, List<SasAction> plan) {
         // the first n variables represent the actions
         variables = 1 + plan.size();
         List<int[]> clauses = new ArrayList<int[]>();
@@ -255,7 +255,7 @@ public class RedundancyEliminator {
             clauses.addAll(getConditionClauses(false, plan.size() + 1, c, initState, plan));            
         }
         
-        BasicSatFormula fla = new BasicSatFormula(variables, clauses);
+        CnfSatFormula fla = new CnfSatFormula(variables, clauses);
         return fla;
     }
     

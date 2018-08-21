@@ -18,7 +18,7 @@
  ******************************************************************************/
 package freelunch.sat.solver;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 
 public interface SatSolver {
@@ -27,7 +27,7 @@ public interface SatSolver {
      * Test if the formula is satisfiable
      * @return true if satisfiable, false if unsatisfiable, null if unknown
      */
-    public Boolean isSatisfiable(BasicFormula formula);
+    public Boolean isSatisfiable(CnfSatFormula formula);
     
     /**
      * Get the satisfying assignment of the formula if exists and is known.

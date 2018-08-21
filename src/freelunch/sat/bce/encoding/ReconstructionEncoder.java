@@ -6,12 +6,12 @@ import java.util.BitSet;
 import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
 import freelunch.sat.bce.utilities.LockedProvider;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class ReconstructionEncoder {
 	
-	public static BasicFormula encodeReconstruction(BasicFormula blockedSet, BasicFormula rest, boolean closeCycle, BitSet locked) {
-		BasicFormula result = new BasicFormula();
+	public static CnfSatFormula encodeReconstruction(CnfSatFormula blockedSet, CnfSatFormula rest, boolean closeCycle, BitSet locked) {
+		CnfSatFormula result = new CnfSatFormula();
 		result.variablesCount = blockedSet.variablesCount + blockedSet.clauses.size() ;
 		result.clauses = new ArrayList<int[]>();
 		
@@ -61,11 +61,11 @@ public class ReconstructionEncoder {
 		return result;
 	}
 	
-	protected static int encodeStack(ArrayList<int[]> stack, BasicFormula outFormula, int[] currentName, int[] originalName, int lastVarId) {
+	protected static int encodeStack(ArrayList<int[]> stack, CnfSatFormula outFormula, int[] currentName, int[] originalName, int lastVarId) {
 		return encodeStack(stack, outFormula, currentName, originalName, lastVarId, LockedProvider.lockNone(lastVarId));
 	}
 	
-	protected static int encodeStack(ArrayList<int[]> stack, BasicFormula outFormula, int[] currentName, int[] originalName, int lastVarId, BitSet locked) {
+	protected static int encodeStack(ArrayList<int[]> stack, CnfSatFormula outFormula, int[] currentName, int[] originalName, int lastVarId, BitSet locked) {
 		int lastBlit = 0;
 		for (int i = stack.size() - 1; i >= 0; i--) {
 			int[] clause = stack.get(i);

@@ -3,7 +3,7 @@ package freelunch.sat.bce.solver;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class BlockedSetSolver {
 	
@@ -15,7 +15,7 @@ public class BlockedSetSolver {
 	 * @param chooser
 	 * @return
 	 */
-	public int[] solveBlockedFormula(BasicFormula formula, ChoiceMaker chooser) {
+	public int[] solveBlockedFormula(CnfSatFormula formula, ChoiceMaker chooser) {
 		int[] assignment = new int[formula.variablesCount + 1];
 		Arrays.fill(assignment, Unset);
 		return solveBlockedFormula(formula, chooser, assignment);
@@ -28,7 +28,7 @@ public class BlockedSetSolver {
 	 * @param assignment
 	 * @return
 	 */
-	public int[] solveBlockedFormula(BasicFormula formula, ChoiceMaker chooser, int[] assignment) {
+	public int[] solveBlockedFormula(CnfSatFormula formula, ChoiceMaker chooser, int[] assignment) {
 		
 		if (!(formula.clauses instanceof ArrayList<?>)) {
 			formula.clauses = new ArrayList<int[]>(formula.clauses);

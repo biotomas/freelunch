@@ -3,7 +3,7 @@ package freelunch.sat.bce.utilities;
 import java.util.HashSet;
 import java.util.Set;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class ClauseIndex {
 
@@ -18,7 +18,7 @@ public class ClauseIndex {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ClauseIndex(BasicFormula formula) {
+	public ClauseIndex(CnfSatFormula formula) {
 		clauseIndex = new Set[2 + 2*formula.variablesCount];
 		for (int i = 1; i < 2 + 2*formula.variablesCount; i++) {
 			clauseIndex[i] = new HashSet<int[]>();

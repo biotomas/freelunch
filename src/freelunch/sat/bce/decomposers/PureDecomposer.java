@@ -9,12 +9,12 @@ import java.util.Set;
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class PureDecomposer implements FormulaDecomposer {
 	
 	@Override
-	public void decomposeFormula(BasicFormula input, BasicFormula largeBlocked, BasicFormula rest) {
+	public void decomposeFormula(CnfSatFormula input, CnfSatFormula largeBlocked, CnfSatFormula rest) {
 		
 		largeBlocked.variablesCount = input.variablesCount;
 		largeBlocked.clauses = new ArrayList<int[]>();
@@ -35,7 +35,7 @@ public class PureDecomposer implements FormulaDecomposer {
 		pureDecomposeCore(input, largeBlocked, rest);
 	}
 	
-	public static void pureDecomposeCore(BasicFormula input, BasicFormula largeBlocked, BasicFormula rest) {
+	public static void pureDecomposeCore(CnfSatFormula input, CnfSatFormula largeBlocked, CnfSatFormula rest) {
 		ClauseIndex cindex = new ClauseIndex(input);
 		Set<int[]> large, small; 
 		List<int[]> trash = new ArrayList<int[]>();

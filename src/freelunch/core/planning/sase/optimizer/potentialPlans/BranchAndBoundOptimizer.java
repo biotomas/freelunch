@@ -13,7 +13,7 @@ import freelunch.core.planning.PlanningUtils.HashableState;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
-import freelunch.core.utilities.Tuple;
+import freelunch.utilities.Tuple;
 
 public class BranchAndBoundOptimizer {
 	

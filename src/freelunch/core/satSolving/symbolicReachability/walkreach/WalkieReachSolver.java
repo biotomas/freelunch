@@ -26,7 +26,7 @@ import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProble
 import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilitySolver;
 import freelunch.core.satSolving.symbolicReachability.walkreach.model.ReachClause;
 import freelunch.core.satSolving.symbolicReachability.walkreach.model.WalkieReachParamaters;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 
 public class WalkieReachSolver implements SymbolicReachabilitySolver {
@@ -45,7 +45,7 @@ public class WalkieReachSolver implements SymbolicReachabilitySolver {
     }
     
     private void initializeWalksat(SymbolicReachabilityProblem problem, boolean includeInitAndGoal) {
-        signatureSize = problem.initialConditions.getVariables();
+        signatureSize = problem.initialConditions.variablesCount;
         searchMakespan = params.getSearchMakespan();
         
         walksatSolver = new WeightedWalkSat(params.getSeed(), params.getRandomWalkProb());

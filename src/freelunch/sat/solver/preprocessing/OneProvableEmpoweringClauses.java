@@ -6,9 +6,9 @@ import java.util.Stack;
 
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.sat.Propagator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 /**
  * Einheitspropagationsbeweisbareermächtigungsklauselerzeugungsverfahren
@@ -29,7 +29,7 @@ public class OneProvableEmpoweringClauses {
 	}
 	
 	private Propagator unitPropagator;
-	private BasicFormula f;
+	private CnfSatFormula f;
 	private Stack<Integer> trail;
 	private Statistics stats;
 	private Stopwatch watch;
@@ -43,7 +43,7 @@ public class OneProvableEmpoweringClauses {
 	 * @param maxLength maximum length of the added clauses
 	 * @return false if the formula is UNSAT
 	 */
-	public boolean addOneProvableEmpoweringClauses(BasicFormula f, int maxLength, long seconds) {
+	public boolean addOneProvableEmpoweringClauses(CnfSatFormula f, int maxLength, long seconds) {
 		stats = new Statistics();
 		watch = new Stopwatch();
 		timelimit = seconds*1000*1000*1000;

@@ -8,26 +8,26 @@ import freelunch.sat.bce.decomposers.PureDecomposer;
 import freelunch.sat.bce.encoding.DualRailEncoder;
 import freelunch.sat.bce.encoding.ReconstructionEncoder;
 import freelunch.sat.bce.utilities.LockedProvider;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.Sat4JSolver;
 
 public class EncodingTest extends TestCase {
 	
 	public void testReconstructionEncoding() {
-		BasicFormula f = new BasicFormula();
+		CnfSatFormula f = new CnfSatFormula();
 		f.variablesCount = 3;
 		f.clauses = new ArrayList<int[]>();
 		f.clauses.add(new int[]{-1,2});
 		f.clauses.add(new int[]{-1,3});
 		f.clauses.add(new int[]{1,-2,-3});
-		BasicFormula g = new BasicFormula();
+		CnfSatFormula g = new CnfSatFormula();
 		g.variablesCount = 3;
 		g.clauses = new ArrayList<int[]>();
 		g.clauses.add(new int[]{-2});
 		
-		BasicFormula enc = ReconstructionEncoder.encodeReconstruction(f, g, true, LockedProvider.lockNone(f.variablesCount));
+		CnfSatFormula enc = ReconstructionEncoder.encodeReconstruction(f, g, true, LockedProvider.lockNone(f.variablesCount));
 		assertNotNull(enc);
 		//System.out.println(enc);
 	}
@@ -42,16 +42,16 @@ public class EncodingTest extends TestCase {
 		Stopwatch reencTime = new Stopwatch();
 		//Logger.setVerbosity(1);
 		for (int i = 0; i < tests; i++) {
-			BasicFormula f = rfg.getRandomFormula(vars, 3, 0, 41*vars/10);
+			CnfSatFormula f = rfg.getRandomFormula(vars, 3, 0, 41*vars/10);
 			origTime.unpause();
 			boolean satOrig = solver.isSatisfiable(f);
 			origTime.pause();
 			
 			PureDecomposer decomposer = new PureDecomposer();
-			BasicFormula l = new BasicFormula();
-			BasicFormula r = new BasicFormula();
+			CnfSatFormula l = new CnfSatFormula();
+			CnfSatFormula r = new CnfSatFormula();
 			
-			BasicFormula g = f;
+			CnfSatFormula g = f;
 			//BasicFormula g = DualRailEncoder.getDualRailEncoding(f);
 			
 			decomposer.decomposeFormula(g, l, r);
@@ -61,7 +61,7 @@ public class EncodingTest extends TestCase {
 			//BitSet locked = LockedProvider.lockNone(l.variablesCount);
 			BitSet locked = LockedProvider.lockBlits(r);
 			System.out.println("locked " + locked.cardinality());
-			BasicFormula reencoded = ReconstructionEncoder.encodeReconstruction(l, r, false, locked);
+			CnfSatFormula reencoded = ReconstructionEncoder.encodeReconstruction(l, r, false, locked);
 			//BasicFormula reencoded = ButterflyEncoder.encodeReconstruction(l, r, locked);
 			//BasicFormula reencoded = SelectiveEncoder.encodeReconstruction(l, r);
 			//BasicFormula reencoded = RibbonEncoder.encodeReconstruction(l, r);
@@ -82,14 +82,14 @@ public class EncodingTest extends TestCase {
 	}
 	
 	public void testDualRailEncoding() {
-		BasicFormula f = new BasicFormula();
+		CnfSatFormula f = new CnfSatFormula();
 		f.variablesCount = 3;
 		f.clauses = new ArrayList<int[]>();
 		f.clauses.add(new int[]{-1,2});
 		f.clauses.add(new int[]{-1,3});
 		f.clauses.add(new int[]{1,-2,-3});
 
-		BasicFormula drf = DualRailEncoder.getDualRailEncoding(f);
+		CnfSatFormula drf = DualRailEncoder.getDualRailEncoding(f);
 		assertEquals(f.variablesCount*2, drf.variablesCount);
 		assertEquals(f.clauses.size() + f.variablesCount, drf.clauses.size());
 		//System.out.println(f);

@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.sat.Propagator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import junit.framework.TestCase;
 
 public class PropagatorTest extends TestCase {
@@ -19,7 +19,7 @@ public class PropagatorTest extends TestCase {
         
         for (int i = 10; i < 100; i++) {
             int vars = i * 50;
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             Propagator pr = new Propagator(f.variablesCount);
             for (int[] cl : f.clauses) {
                 pr.addClause(cl);
@@ -52,7 +52,7 @@ public class PropagatorTest extends TestCase {
 	public void testPropagatorRevert() {
         RandomFormulaGenerator fgen = new RandomFormulaGenerator(2013);
         int vars = 5;
-        BasicFormula f = fgen.getRandomFormula(vars, vars/2, vars);
+        CnfSatFormula f = fgen.getRandomFormula(vars, vars/2, vars);
         //f.printDimacs(System.out);
         //System.out.println("======");
 		Propagator p1 = new Propagator(vars);
@@ -90,7 +90,7 @@ public class PropagatorTest extends TestCase {
         
         for (int i = 10; i < 100; i++) {
             int vars = i * 50;
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             Propagator p = new Propagator(f.variablesCount);
             for (int[] cl : f.clauses) {
                 p.addClause(cl);
@@ -111,7 +111,7 @@ public class PropagatorTest extends TestCase {
     }
     
     
-    private ArrayList<Integer> trivialPropagate(BasicFormula f, int lit1, int lit2) {
+    private ArrayList<Integer> trivialPropagate(CnfSatFormula f, int lit1, int lit2) {
         int[] values = new int[f.variablesCount+1];
         ArrayList<Integer> assignments = new ArrayList<Integer>();
         Arrays.fill(values, 0);

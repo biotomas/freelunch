@@ -20,7 +20,7 @@ package freelunch.core.satSolving.solvers;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.utilities.IntVector;
+import freelunch.utilities.IntVector;
 
 /**
  * Interface for incremental SAT solvers

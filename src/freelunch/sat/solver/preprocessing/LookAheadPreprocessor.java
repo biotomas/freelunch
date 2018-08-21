@@ -9,13 +9,13 @@ import java.util.Set;
 
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
 import freelunch.sat.bce.utilities.Utils;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.sat.Propagator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class LookAheadPreprocessor {
 	
 	private Propagator p;
-	private BasicFormula f;
+	private CnfSatFormula f;
 	private int learned;
 	private boolean unsat;
 	private Set<String> seenCls;
@@ -26,7 +26,7 @@ public class LookAheadPreprocessor {
 	 * @param f
 	 * @return false if unsat
 	 */
-	public boolean preprocess(BasicFormula f) {
+	public boolean preprocess(CnfSatFormula f) {
 		this.f = f;
 		learned = 0;
 		unsat = false;

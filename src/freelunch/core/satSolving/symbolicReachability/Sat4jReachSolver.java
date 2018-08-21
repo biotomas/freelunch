@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
-import freelunch.core.utilities.IntVector;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.IntVector;
 
 
 public class Sat4jReachSolver implements SymbolicReachabilitySolver {
@@ -43,7 +43,7 @@ public class Sat4jReachSolver implements SymbolicReachabilitySolver {
     }
     
     private ArrayList<int[]> solveProblemForSize(SymbolicReachabilityProblem prob, int n) {
-        BasicSatFormula f = prob.makeFormulaForMakespan(n);
+        CnfSatFormula f = prob.makeFormulaForMakespan(n);
         try {
             ArrayList<int[]> res = solveFormula(f, n);
             return res;
@@ -54,16 +54,16 @@ public class Sat4jReachSolver implements SymbolicReachabilitySolver {
         }
     }
     
-    private ArrayList<int[]> solveFormula(BasicSatFormula f, int n) throws SatContradictionException, TimeoutException {
+    private ArrayList<int[]> solveFormula(CnfSatFormula f, int n) throws SatContradictionException, TimeoutException {
         IncrementalSatSolver solver = new Sat4JSolver();
-        solver.setVariablesCount(f.getVariables());
+        solver.setVariablesCount(f.variablesCount);
         for (int[] cl : f.getClauses()) {
             solver.addNewClause(new IntVector(cl));
         }
         if (solver.isSatisfiable()) {
             int[] model = solver.getModel();
             ArrayList<int[]> res = new ArrayList<int[]>(n);
-            int sig = f.getVariables() / n;
+            int sig = f.variablesCount / n;
             for (int i = 0; i < n; i++) {
                 int[] subModel = Arrays.copyOfRange(model, i*sig, 1 + (i+1)*sig);
                 for (int j = 1; j <= sig; j++) {

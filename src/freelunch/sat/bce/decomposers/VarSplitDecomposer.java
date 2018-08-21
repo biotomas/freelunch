@@ -8,7 +8,7 @@ import java.util.Set;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 /**
  * Decompose the formula in a way that the large and the small set
@@ -35,7 +35,7 @@ public class VarSplitDecomposer implements FormulaDecomposer {
 	}
 
 	@Override
-	public void decomposeFormula(BasicFormula input, BasicFormula largeBlocked, BasicFormula rest) {
+	public void decomposeFormula(CnfSatFormula input, CnfSatFormula largeBlocked, CnfSatFormula rest) {
 		
 		largeBlocked.variablesCount = input.variablesCount;
 		largeBlocked.clauses = new ArrayList<int[]>();

@@ -1,6 +1,6 @@
 package freelunch.sat.solver;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 
 public class GeneratorMain {
@@ -14,7 +14,7 @@ public class GeneratorMain {
 		int seed = Integer.parseInt(args[1]);
 
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(vars + seed);
-		BasicFormula bf;// = rfg.getRandomSat(vars, 0, cls);
+		CnfSatFormula bf;// = rfg.getRandomSat(vars, 0, cls);
 		bf = rfg.getRandomFormula(vars, 3, 0, 41*vars/10);
 		bf.printDimacs(System.out);		
 	}

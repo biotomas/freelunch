@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.Set;
 
 import freelunch.sat.bce.utilities.Logger;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class QuickDecompose implements DecompositionPostprocessor {
 
 	private static final int ELIMINATION_LIMIT = 3;
-	private BasicFormula large;
-	private BasicFormula small;
+	private CnfSatFormula large;
+	private CnfSatFormula small;
 	private List<int[]> garbage;
 	private Stopwatch watch;
 	private long timelimit = 0;
 
 	@Override
-	public int moveToLarge(BasicFormula large, BasicFormula small) {
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
 		watch = new Stopwatch();
 		EagerBlockableClauseMover.sortClauses(large, small);
 		this.large = large;

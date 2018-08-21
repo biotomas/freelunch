@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.sat.Propagator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class ImprovedMutexFinder implements MutexFinder {
 
     @Override
-    public List<MutexPair> findMutexPairs(BasicFormula formula) {
+    public List<MutexPair> findMutexPairs(CnfSatFormula formula) {
         HashSet<Integer> binaryClauseLiterals = new HashSet<Integer>();
         Propagator propagator = new Propagator(formula.variablesCount);
         for (int[] clause : formula.clauses) {

@@ -5,8 +5,7 @@ import java.util.BitSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class FormulaAnalyzer {
     
@@ -35,7 +34,7 @@ public class FormulaAnalyzer {
         }
     }
     
-    public static FormulaProperties analyzeFormula(BasicFormula formula) {
+    public static FormulaProperties analyzeFormula(CnfSatFormula formula) {
         FormulaProperties fp = new FormulaProperties();
         fp.vars = formula.variablesCount;
         fp.clauses = formula.clauses.size();
@@ -69,7 +68,7 @@ public class FormulaAnalyzer {
 			System.out.println("USAGE java -jar fanalyzer.jar <formula.cnf> [-c csv]");
 			return;
 		}
-		BasicFormula f = DimacsParser.parseFromFile(args[0]);
+		CnfSatFormula f = CnfSatFormula.parseFromFile(args[0]);
 		if (f == null) {
 			System.err.println("File not found");
 			return;
@@ -82,7 +81,7 @@ public class FormulaAnalyzer {
 		}
 	}
     
-    public static BitSet commonVariables(BasicFormula l, BasicFormula r) {
+    public static BitSet commonVariables(CnfSatFormula l, CnfSatFormula r) {
     	BitSet lvars = new BitSet(l.variablesCount+1);
     	BitSet rvars = new BitSet(l.variablesCount+1);
     	lvars.clear();
@@ -101,7 +100,7 @@ public class FormulaAnalyzer {
     	return lvars;
     }
     
-    public static int commonBlitVariables(BasicFormula l, BasicFormula r) {
+    public static int commonBlitVariables(CnfSatFormula l, CnfSatFormula r) {
     	BitSet lvars = new BitSet(l.variablesCount+1);
     	BitSet rvars = new BitSet(l.variablesCount+1);
     	lvars.clear();
@@ -116,7 +115,7 @@ public class FormulaAnalyzer {
     	return lvars.cardinality();
     }
 
-	public static String compareFormulas(BasicFormula l, BasicFormula r) {
+	public static String compareFormulas(CnfSatFormula l, CnfSatFormula r) {
 		Set<Integer> varsl = new HashSet<Integer>();
 		Set<Integer> varsr = new HashSet<Integer>();
 		Set<Integer> blitl = new HashSet<Integer>();
@@ -138,7 +137,7 @@ public class FormulaAnalyzer {
 				blitl.size(), blitr.size(), 100*blitr.size()/l.variablesCount, bintersect.size());
 	}
 
-	public static boolean solutionOk(BasicFormula f, int[] assignment) {
+	public static boolean solutionOk(CnfSatFormula f, int[] assignment) {
 		clausesloop:
 		for (int[] c : f.clauses) {
 			for (int l : c) {

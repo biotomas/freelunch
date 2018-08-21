@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.solver.SatSolver;
 
 public class ResolutionRefutation implements SatSolver {
 	
-	public static void extendAllVariables(BasicFormula f, int rounds) {
+	public static void extendAllVariables(CnfSatFormula f, int rounds) {
 		for (int i = 0; i < rounds; i++) {
 			int lastVar = f.variablesCount;
 			for (int var1 = 1; var1 <= f.variablesCount; var1++) {
@@ -29,7 +29,7 @@ public class ResolutionRefutation implements SatSolver {
 	
 
 	@Override
-	public Boolean isSatisfiable(BasicFormula formula) {
+	public Boolean isSatisfiable(CnfSatFormula formula) {
 		Set<String> clauseset = new HashSet<String>();
 		ClauseIndex ci = new ClauseIndex(formula);
 		for (int[] cl : formula.clauses) {

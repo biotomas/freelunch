@@ -8,11 +8,11 @@ import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
 import freelunch.sat.bce.utilities.LockedProvider;
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class SelectiveEncoder {
 	
-	public static BasicFormula encodeReconstruction(BasicFormula blockedSet, BasicFormula rest) {
+	public static CnfSatFormula encodeReconstruction(CnfSatFormula blockedSet, CnfSatFormula rest) {
 		BCEliminator eliminator = new IncrementalQueueBasedBCEliminator();
 		List<int[]> stackList = eliminator.eliminateBlockedClauses(blockedSet);
 		if (stackList.size() != blockedSet.clauses.size()) {
@@ -27,7 +27,7 @@ public class SelectiveEncoder {
 		BitSet locked = LockedProvider.lockPresentVars(rest);
 		Logger.print(1, String.format("c locked %d of %d variables (%d%%)", locked.cardinality(), blockedSet.variablesCount, (100*locked.cardinality())/blockedSet.variablesCount));
 		
-		BasicFormula result = new BasicFormula();
+		CnfSatFormula result = new CnfSatFormula();
 		result.clauses = new ArrayList<int[]>();
 		
 		int lastVarId = blockedSet.variablesCount;

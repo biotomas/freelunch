@@ -1,6 +1,6 @@
 package freelunch.sat.solver.tests;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.Sat4JSolver;
 import freelunch.sat.solver.preprocessing.LookAheadPreprocessor;
@@ -18,7 +18,7 @@ public class PreprocessorTest extends TestCase {
 		int cls = (4*vars) + (vars/4);
 		
 		for (int i = 0; i < 40; i++) {
-			BasicFormula f = rfg.getRandomFormula(vars, 0, cls);
+			CnfSatFormula f = rfg.getRandomFormula(vars, 0, cls);
 			boolean sres = solver.isSatisfiable(f);
 			boolean res = true;
 			opec.addOneProvableEmpoweringClauses(f, 3, 60);
@@ -40,7 +40,7 @@ public class PreprocessorTest extends TestCase {
 		int cls = (4*vars) + (vars/4);
 		
 		for (int i = 0; i < 200; i++) {
-			BasicFormula f = rfg.getRandomFormula(vars, 0, cls);
+			CnfSatFormula f = rfg.getRandomFormula(vars, 0, cls);
 			boolean sres = solver.isSatisfiable(f);
 			if (sres) System.out.print("SAT   "); else System.out.print("UNSAT ");
 			

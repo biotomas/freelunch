@@ -7,11 +7,11 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.traverse.TopologicalOrderIterator;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class BinarySatPreprocessor {
 	
-	public void simplify(BasicFormula f) {
+	public void simplify(CnfSatFormula f) {
 		System.out.println(f.toString());
 		
 		Graph<Integer, DefaultEdge> binGraph = new SimpleGraph<>(DefaultEdge.class);

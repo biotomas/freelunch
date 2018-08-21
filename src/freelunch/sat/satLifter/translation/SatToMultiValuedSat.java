@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF.Assignment;
 import freelunch.sat.satLifter.multiSat.MultiValuedCNF.MVClause;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class SatToMultiValuedSat {
     
-    public MultiValuedCNF translate(BasicFormula formula, List<List<Integer>> cover) {
+    public MultiValuedCNF translate(CnfSatFormula formula, List<List<Integer>> cover) {
         MultiValuedCNF multiCnf = new MultiValuedCNF();
         
         TranslationHelper thelper = new TranslationHelper(cover, formula.variablesCount);

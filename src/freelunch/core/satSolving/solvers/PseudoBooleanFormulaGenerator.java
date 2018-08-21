@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula.PseudoBooleanEquality;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
 import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.utilities.IntVector;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanEquality;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
+import freelunch.utilities.IntVector;
 
 public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 
@@ -41,7 +41,7 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public Boolean isSatisfiable(BasicSatFormula formula) throws TimeoutException {
+	public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
 		throw new UnsupportedOperationException();
 	}
 

@@ -26,7 +26,7 @@ import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
 import freelunch.core.planning.sase.sasToSat.SasProblemBuilder;
-import freelunch.core.utilities.ArrayUtils;
+import freelunch.utilities.ArrayUtils;
 
 
 public class SlidingPuzzleGenerator {

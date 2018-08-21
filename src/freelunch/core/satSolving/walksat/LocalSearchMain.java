@@ -1,10 +1,10 @@
 package freelunch.core.satSolving.walksat;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.solvers.SatSolver;
 import freelunch.core.satSolving.walksat.BaseWalkSAT.BaseWalkSatSettings;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.Stopwatch;
 
 public class LocalSearchMain {
 
@@ -16,7 +16,7 @@ public class LocalSearchMain {
 		}
 		
 		Stopwatch watch = new Stopwatch();
-		BasicSatFormula f = BasicSatFormula.parseFromFile(args[0]);
+		CnfSatFormula f = CnfSatFormula.parseFromFile(args[0]);
 		
 		BaseWalkSatSettings settings = new BaseWalkSatSettings();
 		settings.setRestartsToImprove(Integer.MAX_VALUE);
@@ -33,8 +33,9 @@ public class LocalSearchMain {
 		System.out.println("c running " + solver.getClass().getCanonicalName());
 		boolean sat = solver.isSatisfiable(f);
 		System.out.println("c CPU Time " + watch.elapsedFormatedSeconds());
+
 		
-		if (!solutionValid(f, solver.getModel())) {
+		if (!f.validateSolution(solver.getModel())) {
 			System.err.println("INVALID SOLUTION");
 		}
 		
@@ -44,20 +45,6 @@ public class LocalSearchMain {
 			System.out.println("s UNKNOWN");
 		}
 
-	}
-	
-	public static boolean solutionValid(BasicSatFormula f, int[] model) {
-		clauses:
-		for (int[] cl : f.getClauses()) {
-			for (int lit : cl) {
-				int var = Math.abs(lit);
-				if (model[var] == lit) {
-					continue clauses;
-				}
-			}
-			return false;
-		}
-		return true;
 	}
 
 }

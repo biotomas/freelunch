@@ -5,7 +5,7 @@ import java.util.BitSet;
 
 import freelunch.sat.bce.encoding.aig.AigerCircuit.AndGate;
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class ImprovedAigEncoder {
 	
@@ -13,7 +13,7 @@ public class ImprovedAigEncoder {
 	protected int lastNewVar;
 	protected BitSet isInput;
 	
-	public AigerCircuit encode(BasicFormula formula) {
+	public AigerCircuit encode(CnfSatFormula formula) {
 		Logger.print(1, "c starting aiger circuit construction");
 		AigerCircuit ac = new AigerCircuit();
 		currentName = new int[formula.variablesCount+1];

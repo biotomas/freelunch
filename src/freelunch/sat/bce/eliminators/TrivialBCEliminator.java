@@ -7,8 +7,8 @@ import java.util.ListIterator;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.bce.utilities.Logger;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class TrivialBCEliminator implements BCEliminator {
 	
@@ -16,7 +16,7 @@ public class TrivialBCEliminator implements BCEliminator {
 	protected long timelimit = 0;
 
 	@Override
-	public ArrayList<int[]> eliminateBlockedClauses(BasicFormula formula) {
+	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula) {
 		Stopwatch watch = new Stopwatch();
 		cindex = new ClauseIndex(formula);
 		LinkedList<int[]> clauses = new LinkedList<int[]>(formula.clauses);
@@ -42,7 +42,7 @@ public class TrivialBCEliminator implements BCEliminator {
 		return eliminatedClauses;
 	}
 	
-	public static boolean checkBlockedSet(BasicFormula formula) {
+	public static boolean checkBlockedSet(CnfSatFormula formula) {
 		ClauseIndex cindex = new ClauseIndex(formula);
 		for (int[] cl : formula.clauses) {
 			if (!cindex.literalBlocksClause(cl[0], cl)) {

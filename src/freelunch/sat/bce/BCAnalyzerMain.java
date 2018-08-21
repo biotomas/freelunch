@@ -11,8 +11,7 @@ import freelunch.sat.bce.decomposers.UnitDecomposer;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
 import freelunch.sat.bce.utilities.LockedProvider;
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class BCAnalyzerMain {
 	
@@ -37,7 +36,7 @@ public class BCAnalyzerMain {
 			System.out.println("Usage: java -jar analyzer.jar <formula.cnf>");
 			return;
 		}
-		BasicFormula inputf = DimacsParser.parseFromFile(args[0]);
+		CnfSatFormula inputf = CnfSatFormula.parseFromFile(args[0]);
 		if (inputf == null) {
 			System.err.println("Input file not found / cannot be opened");
 			return;
@@ -56,15 +55,15 @@ public class BCAnalyzerMain {
 		//decomposers.add(new VarSplitDecomposer());
 		
 		for (FormulaDecomposer decomposer : decomposers) {
-			BasicFormula mf = new BasicFormula();
+			CnfSatFormula mf = new CnfSatFormula();
 			mf.variablesCount = inputf.variablesCount;
 			mf.clauses = new ArrayList<int[]>();
 			for (int[] cl : inputf.clauses) {
 				mf.clauses.add(Arrays.copyOf(cl, cl.length));
 			}
 			
-			BasicFormula large = new BasicFormula();
-			BasicFormula small = new BasicFormula();
+			CnfSatFormula large = new CnfSatFormula();
+			CnfSatFormula small = new CnfSatFormula();
 			Logger.print(1, String.format("c Starting %s on the input formula", decomposer.getClass().getName()));
 			decomposer.decomposeFormula(mf, large, small);
 			Logger.print(1, String.format("c %s result: large: %d (%d%%), small %d", decomposer.getClass().getName(), 

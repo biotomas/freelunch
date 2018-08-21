@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class OneByOneMover implements DecompositionPostprocessor {
 	
 	private long timelimit = 0;
 
 	@Override
-	public int moveToLarge(BasicFormula large, BasicFormula small) {
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
 		Stopwatch watch = new Stopwatch();
 		EagerBlockableClauseMover.sortClauses(large, small);
 		Collections.reverse(small.clauses);

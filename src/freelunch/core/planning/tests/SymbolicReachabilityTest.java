@@ -37,10 +37,10 @@ public class SymbolicReachabilityTest extends TestCase {
 		String filename = "testfiles/test.srt";
 		try {
 			SymbolicReachabilityProblem srp = new SymbolicReachabilityProblem(filename);
-			System.out.println(srp.initialConditions.getVariables());
-			System.out.println(srp.universalConditions.getVariables());
-			System.out.println(srp.transitionConditions.getVariables());
-			System.out.println(srp.goalConditions.getVariables());
+			System.out.println(srp.initialConditions.variablesCount);
+			System.out.println(srp.universalConditions.variablesCount);
+			System.out.println(srp.transitionConditions.variablesCount);
+			System.out.println(srp.goalConditions.variablesCount);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

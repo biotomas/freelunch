@@ -5,8 +5,8 @@ import java.util.BitSet;
 import java.util.List;
 
 import freelunch.sat.bce.utilities.Logger;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.Sat4JSolver;
 import junit.framework.TestCase;
@@ -15,7 +15,7 @@ public class AnalyzerTests extends TestCase {
 	
 	public void testBinarySatPreprocessor() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(5);
-		BasicFormula f = rfg.getRandomFormula(5, 7, 0);
+		CnfSatFormula f = rfg.getRandomFormula(5, 7, 0);
 		BinarySatPreprocessor bsp = new BinarySatPreprocessor();
 		bsp.simplify(f);
 		Sat4JSolver s = new Sat4JSolver();
@@ -38,7 +38,7 @@ public class AnalyzerTests extends TestCase {
 	
 	public void testHornAnalyzerRandom3Sat() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(1);
-		BasicFormula f = rfg.getRandomFormula(10, 0, 42);
+		CnfSatFormula f = rfg.getRandomFormula(10, 0, 42);
 		Stopwatch watch = new Stopwatch();
 		List<Integer> bd = HornAnalyzer.getHornBackDoorVariables(f);
 		System.out.println(watch.elapsedFormatedSeconds());
@@ -48,7 +48,7 @@ public class AnalyzerTests extends TestCase {
 	public void testHiddenHornMaximizer() {
 		Logger.setVerbosity(2);
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(1);
-		BasicFormula f = rfg.getRandomFormula(100000, 0, 425000);
+		CnfSatFormula f = rfg.getRandomFormula(100000, 0, 425000);
 		//System.out.println(f);
 		HornAnalyzer.getHornBackDoorVariables(f);
 		HiddenHornMaximizer hhm = new HiddenHornMaximizer();
@@ -62,7 +62,7 @@ public class AnalyzerTests extends TestCase {
 		Logger.setVerbosity(2);
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(1);
 		//BasicFormula f = rfg.getRandomSat(10, 0, 20);
-		BasicFormula f = rfg.getRandomFormula(100000, 0, 425000);
+		CnfSatFormula f = rfg.getRandomFormula(100000, 0, 425000);
 
 		HornAdvisor ha = new HornAdvisor();
 		List<Integer> advice = ha.preprocessFormula(f, 20);

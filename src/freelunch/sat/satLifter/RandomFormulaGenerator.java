@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Random;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class RandomFormulaGenerator {
     
@@ -15,13 +15,13 @@ public class RandomFormulaGenerator {
         random = new Random(seed);
     }
     
-    public BasicFormula getRandomSatisfiableFormula(int variables, int clauses3) {
+    public CnfSatFormula getRandomSatisfiableFormula(int variables, int clauses3) {
     	return getRandomSatisfiableFormula(variables, clauses3, 0.35f, 0.25f, 0.1f);
     }
 
     	
-    public BasicFormula getRandomSatisfiableFormula(int variables, int clauses3, float pl1, float pl2, float pl3) {
-    	BasicFormula f = new BasicFormula();
+    public CnfSatFormula getRandomSatisfiableFormula(int variables, int clauses3, float pl1, float pl2, float pl3) {
+    	CnfSatFormula f = new CnfSatFormula();
     	f.variablesCount = variables;
     	f.clauses = new ArrayList<int[]>();
     	// generate the planted solution
@@ -64,12 +64,12 @@ public class RandomFormulaGenerator {
     	return f;
     }
     
-    public BasicFormula getRandomFormula(int variables, int clauses2, int clauses3) {
+    public CnfSatFormula getRandomFormula(int variables, int clauses2, int clauses3) {
     	return getRandomFormula(variables, 0, clauses2, clauses3);
     }
     
-    public BasicFormula getRandomFormula(int variables, int units, int clauses2, int clauses3) {
-        BasicFormula formula = new BasicFormula();
+    public CnfSatFormula getRandomFormula(int variables, int units, int clauses2, int clauses3) {
+        CnfSatFormula formula = new CnfSatFormula();
         formula.variablesCount = variables;
         formula.clauses = new ArrayList<int[]>();
         

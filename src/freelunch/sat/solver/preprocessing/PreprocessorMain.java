@@ -1,13 +1,11 @@
 package freelunch.sat.solver.preprocessing;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class PreprocessorMain {
 
@@ -21,7 +19,7 @@ public class PreprocessorMain {
 		}
 		System.out.println("c args: " + Arrays.toString(args));
 		Logger.setVerbosity(3);
-		BasicFormula f = DimacsParser.parseFromFile(args[0]);
+		CnfSatFormula f = CnfSatFormula.parseFromFile(args[0]);
 		
 		if (f == null) {
 			System.out.println("c formula not found or too big.");
@@ -33,16 +31,14 @@ public class PreprocessorMain {
 		boolean res = opec.addOneProvableEmpoweringClauses(f, 4, limit);
 		if (!res) {
 			System.out.println("UNSAT, outputing fla with empty clause.");
-			f = new BasicFormula();
+			f = new CnfSatFormula();
 			f.variablesCount = 1;
 			f.clauses = new ArrayList<int[]>();
 			f.clauses.add(new int[]{});
 		}
 		Logger.print(1, String.format("c nr. of clauses %d -> %d", oldCls, f.clauses.size()));
 		try {
-			FileWriter fw = new FileWriter(args[1]);
-			f.printDimacsToFile(fw);
-			fw.close();
+			f.printDimacsToFile(args[1]);
 		} catch (IOException e) {
 			System.err.println("Output cannot be written.");
 		}

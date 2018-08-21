@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.utilities.IntVector;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.IntVector;
 
 
 /**
@@ -112,10 +112,10 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
 	 * Get the current formula.
 	 * @return
 	 */
-	public BasicSatFormula getFormula() {
+	public CnfSatFormula getFormula() {
 		List<int[]> fclauses = new ArrayList<int[]>(clauses);
 		fclauses.addAll(removableClauses.values());
-		return new BasicSatFormula(variables, fclauses);
+		return new CnfSatFormula(variables, fclauses);
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
     }
 
     @Override
-    public Boolean isSatisfiable(BasicSatFormula formula) throws TimeoutException {
+    public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
         throw new UnsupportedOperationException();
     }
     

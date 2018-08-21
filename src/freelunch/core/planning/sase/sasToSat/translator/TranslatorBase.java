@@ -34,17 +34,17 @@ import freelunch.core.planning.model.StateVariable;
 import freelunch.core.planning.model.Transition;
 import freelunch.core.planning.model.Transition.TransitionType;
 import freelunch.core.planning.sase.sasToSat.TransitionGenerator;
-import freelunch.core.satModelling.intModellers.IntVarGroupManager;
-import freelunch.core.satModelling.intModellers.IntVarGroupManager.IntVarGroup;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.satSolving.solvers.PseudoBooleanFormulaGenerator;
-import freelunch.core.utilities.IntVector;
-import freelunch.core.utilities.Pair;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.modelling.IntVarGroupManager;
+import freelunch.sat.modelling.IntVarGroupManager.IntVarGroup;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
+import freelunch.utilities.IntVector;
+import freelunch.utilities.Pair;
 
 public abstract class TranslatorBase extends ActionAssignmentTransitionIndices implements SasToSatTranslator {
     
@@ -119,7 +119,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
 		return pbfg.getFormula();
 	}    
     @Override
-    public BasicSatFormula makeFormulaForMakespan(int makespan) {
+    public CnfSatFormula makeFormulaForMakespan(int makespan) {
         BasicSatFormulaGenerator sgen = new BasicSatFormulaGenerator();
         int vars = setMaxTimespan(makespan);
         sgen.setVariablesCount(vars);
@@ -134,7 +134,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         } catch (SatContradictionException e) {
             return null;
         }
-        BasicSatFormula formula = sgen.getFormula();
+        CnfSatFormula formula = sgen.getFormula();
         return formula;
     }
     

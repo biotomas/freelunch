@@ -6,12 +6,12 @@ import java.util.BitSet;
 import freelunch.sat.bce.eliminators.BCEliminator;
 import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
 import freelunch.sat.bce.utilities.Logger;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class ButterflyEncoder {
 	
-	public static BasicFormula encodeReconstruction(BasicFormula blockedSet, BasicFormula rest, BitSet locked) {
-		BasicFormula result = new BasicFormula();
+	public static CnfSatFormula encodeReconstruction(CnfSatFormula blockedSet, CnfSatFormula rest, BitSet locked) {
+		CnfSatFormula result = new CnfSatFormula();
 		// upper bound on variables
 		result.variablesCount = blockedSet.variablesCount + blockedSet.clauses.size() + rest.clauses.size();
 		result.clauses = new ArrayList<int[]>();

@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.sat.Propagator;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class UnitPropagationSimplifier {
 	
@@ -19,7 +19,7 @@ public class UnitPropagationSimplifier {
 	 * @param f
 	 * @return null if conflict
 	 */
-	public static List<Integer> simplifyByUnitPropagation(BasicFormula f, boolean simplifyClauses) {
+	public static List<Integer> simplifyByUnitPropagation(CnfSatFormula f, boolean simplifyClauses) {
 		// Find the unit clauses
 		int origClauseCount = f.clauses.size();
 		Set<Integer> unitLiterals = new HashSet<Integer>();
@@ -66,7 +66,7 @@ public class UnitPropagationSimplifier {
 		return assignments;
 	}
 	
-	public static void simplifyFormula(BasicFormula f, List<Integer> units, boolean simplifyClauses) {
+	public static void simplifyFormula(CnfSatFormula f, List<Integer> units, boolean simplifyClauses) {
 		if (units.isEmpty()) {
 			return;
 		}
@@ -78,7 +78,7 @@ public class UnitPropagationSimplifier {
 		simplifyFormula(f, assignment, simplifyClauses);
 	}
 	
-	public static void simplifyFormula(BasicFormula f, int[] assignment, boolean simplifyClauses) {
+	public static void simplifyFormula(CnfSatFormula f, int[] assignment, boolean simplifyClauses) {
 		List<int[]> newClauses = new ArrayList<int[]>();
 		simplified = 0;
 		for (int[] cl : f.clauses) {

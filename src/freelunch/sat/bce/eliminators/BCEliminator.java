@@ -2,7 +2,7 @@ package freelunch.sat.bce.eliminators;
 
 import java.util.ArrayList;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public interface BCEliminator {
 	
@@ -13,7 +13,7 @@ public interface BCEliminator {
 	 * @param formula
 	 * @return
 	 */
-	public ArrayList<int[]> eliminateBlockedClauses(BasicFormula formula);
+	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula);
 	
 	/**
 	 * Set the time limit for elimination

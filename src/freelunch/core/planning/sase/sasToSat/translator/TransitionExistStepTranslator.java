@@ -33,8 +33,8 @@ import freelunch.core.planning.model.Transition;
 import freelunch.core.planning.model.Transition.TransitionType;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
-import freelunch.core.utilities.IntVector;
-import freelunch.core.utilities.Pair;
+import freelunch.utilities.IntVector;
+import freelunch.utilities.Pair;
 
 /**
  * FIXME unfinished not working

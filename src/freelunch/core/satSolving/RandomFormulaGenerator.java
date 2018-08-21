@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class RandomFormulaGenerator {
     
@@ -14,16 +14,16 @@ public class RandomFormulaGenerator {
         random = new Random(seed);
     }
     
-    public BasicSatFormula getRandomSat(int variables) {
+    public CnfSatFormula getRandomSat(int variables) {
     	return getRandomSat(variables, 0, (4*variables) + (variables >> 2));
     }
     
     
-    public BasicSatFormula getRandomSat(int variables, int clauses2, int clauses3) {
+    public CnfSatFormula getRandomSat(int variables, int clauses2, int clauses3) {
     	return getRandomSat(variables, 0, clauses2, clauses3);
     }
     
-    public BasicSatFormula getRandomSat(int variables, int units, int clauses2, int clauses3) {
+    public CnfSatFormula getRandomSat(int variables, int units, int clauses2, int clauses3) {
         List<int[]> clauses = new ArrayList<int[]>();
         
         for (int i = 0; i < units; i++) {
@@ -57,7 +57,7 @@ public class RandomFormulaGenerator {
             clauses.add(clause);
             
         }
-        return new BasicSatFormula(variables, clauses);
+        return new CnfSatFormula(variables, clauses);
     }
     
     private int randomLiteral(int variables) {

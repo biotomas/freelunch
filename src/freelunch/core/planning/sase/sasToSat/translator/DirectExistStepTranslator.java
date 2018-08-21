@@ -30,10 +30,10 @@ import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
 import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
-import freelunch.core.utilities.ArrayUtils;
-import freelunch.core.utilities.IntVector;
-import freelunch.core.utilities.Triple;
-import freelunch.core.utilities.Tuple;
+import freelunch.utilities.ArrayUtils;
+import freelunch.utilities.IntVector;
+import freelunch.utilities.Triple;
+import freelunch.utilities.Tuple;
 
 public class DirectExistStepTranslator extends TranslatorBase implements SasToSatTranslator {
     

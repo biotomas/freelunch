@@ -1,6 +1,6 @@
 package freelunch.sat.bce.decomposers;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 /**
  * Combines unit decomposition and pure decomposition.
@@ -11,7 +11,7 @@ import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 public class CombinedDecomposer implements FormulaDecomposer {
 
 	@Override
-	public void decomposeFormula(BasicFormula input, BasicFormula largeBlocked,	BasicFormula rest) {
+	public void decomposeFormula(CnfSatFormula input, CnfSatFormula largeBlocked,	CnfSatFormula rest) {
 		UnitDecomposer dec = new UnitDecomposer();
 		dec.exitIfNotUD = true;
 		dec.decomposeFormula(input.shallowCopy(), largeBlocked, rest);

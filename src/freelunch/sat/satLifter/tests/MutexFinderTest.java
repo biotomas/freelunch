@@ -3,7 +3,7 @@ package freelunch.sat.satLifter.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.translation.mutex.BasicMutexFinder;
 import freelunch.sat.satLifter.translation.mutex.ImprovedMutexFinder;
 import freelunch.sat.satLifter.translation.mutex.MutexFinder;
@@ -15,7 +15,7 @@ public class MutexFinderTest extends TestCase {
     public void testBasicMutexFinder() {
         
         MutexFinder finder = new BasicMutexFinder();
-        BasicFormula formula = new BasicFormula();
+        CnfSatFormula formula = new CnfSatFormula();
         formula.variablesCount = 10;
         
         formula.clauses = new ArrayList<int[]>();
@@ -32,7 +32,7 @@ public class MutexFinderTest extends TestCase {
     public void testImprovedMutexFinder() {
         
         MutexFinder finder = new ImprovedMutexFinder();
-        BasicFormula formula = new BasicFormula();
+        CnfSatFormula formula = new CnfSatFormula();
         formula.variablesCount = 10;
         
         formula.clauses = new ArrayList<int[]>();
@@ -52,7 +52,7 @@ public class MutexFinderTest extends TestCase {
         
         for (int i = 10; i < 30; i++) {
             int vars = i * 20;
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             List<MutexPair> resultImproved = improved.findMutexPairs(f);
             System.out.println(resultImproved.size());
         }
@@ -65,7 +65,7 @@ public class MutexFinderTest extends TestCase {
         
         for (int i = 10; i < 30; i++) {
             int vars = i * 20;
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             List<MutexPair> resultBasic = basic.findMutexPairs(f);
             System.out.println(resultBasic.size());
         }
@@ -78,7 +78,7 @@ public class MutexFinderTest extends TestCase {
         
         for (int i = 10; i < 30; i++) {
             int vars = i * 5;
-            BasicFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
+            CnfSatFormula f = fgen.getRandomFormula(vars, vars, 5*vars);
             
             List<MutexPair> resultBasic = basic.findMutexPairs(f);
             List<MutexPair> resultImproved = improved.findMutexPairs(f);

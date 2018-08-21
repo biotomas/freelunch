@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class ImprovedBCEliminator extends TrivialBCEliminator implements BCEliminator {
 	
@@ -24,7 +24,7 @@ public class ImprovedBCEliminator extends TrivialBCEliminator implements BCElimi
 	
 
 	@Override
-	public ArrayList<int[]> eliminateBlockedClauses(BasicFormula formula) {
+	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula) {
 		cindex = new ClauseIndex(formula);
 		HashSet<int[]> candidates = new HashSet<int[]>();
 		

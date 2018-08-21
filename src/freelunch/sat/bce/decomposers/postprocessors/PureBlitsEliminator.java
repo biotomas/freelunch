@@ -7,7 +7,7 @@ import java.util.List;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.bce.utilities.UnitPropagationSimplifier;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 /**
  * Literals which are not shared between the blocked sets
@@ -25,7 +25,7 @@ public class PureBlitsEliminator implements DecompositionPostprocessor {
 	private BitSet commonVars;
 	
 	@Override
-	public int moveToLarge(BasicFormula large, BasicFormula small) {
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
 		commonVars = FormulaAnalyzer.commonVariables(small, large);
 		
 		List<Integer> ncpbLarge = notCommonPureBlits(large);
@@ -43,14 +43,14 @@ public class PureBlitsEliminator implements DecompositionPostprocessor {
 		return 0;
 	}
 	
-	private void addUnits(BasicFormula f, List<Integer> units) {
+	private void addUnits(CnfSatFormula f, List<Integer> units) {
 		for (int lit : units) {
 			f.clauses.add(new int[]{lit});
 		}
 	}
 	
 	
-	private List<Integer> notCommonPureBlits(BasicFormula f) {
+	private List<Integer> notCommonPureBlits(CnfSatFormula f) {
 		List<Integer> result = new ArrayList<Integer>();
 		// has positive occurrence
 		BitSet positiveOcc = new BitSet(f.variablesCount+1);

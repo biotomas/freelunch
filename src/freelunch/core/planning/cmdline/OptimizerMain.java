@@ -30,7 +30,7 @@ import freelunch.core.planning.sase.optimizer.model.PlanOptimizerParameters;
 import freelunch.core.planning.sase.optimizer.model.PlanOptimizerStatistics;
 import freelunch.core.planning.sase.optimizer.model.PlanOptimizerParameters.SelectionAlgorithm;
 import freelunch.core.planning.sase.sasToSat.SasIO;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 
 

@@ -9,18 +9,18 @@ import freelunch.sat.bce.extractors.FullAssignmentExtractor;
 import freelunch.sat.bce.extractors.GreedyExtractor;
 import freelunch.sat.bce.extractors.RandomExtractor;
 import freelunch.sat.bce.extractors.SparrowExtractor;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 
 public class ExtractorTest extends TestCase {
 	
 	public void testRandomExtractor() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(10);
-		BasicFormula f = rfg.getRandomFormula(10, 10, 20);
+		CnfSatFormula f = rfg.getRandomFormula(10, 10, 20);
 		
 		FormulaDecomposer decomposer = new PureDecomposer();
-		BasicFormula l = new BasicFormula();
-		BasicFormula r = new BasicFormula();
+		CnfSatFormula l = new CnfSatFormula();
+		CnfSatFormula r = new CnfSatFormula();
 		decomposer.decomposeFormula(f, l, r);
 		
 		l.clauses.add(new int[] {-1, -2});
@@ -36,12 +36,12 @@ public class ExtractorTest extends TestCase {
 	
 	public void testBackBoneExtractor() {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(10);
-		BasicFormula f = rfg.getRandomFormula(10000, 10000, 20000);
+		CnfSatFormula f = rfg.getRandomFormula(10000, 10000, 20000);
 		//BasicFormula f = rfg.getRandomSat(50, 50, 100);
 		
 		FormulaDecomposer decomposer = new PureDecomposer();
-		BasicFormula l = new BasicFormula();
-		BasicFormula r = new BasicFormula();
+		CnfSatFormula l = new CnfSatFormula();
+		CnfSatFormula r = new CnfSatFormula();
 		decomposer.decomposeFormula(f, l, r);
 		
 		l.clauses.add(new int[] {-1, -2});

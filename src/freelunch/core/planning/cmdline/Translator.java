@@ -45,9 +45,9 @@ import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings;
 import freelunch.core.planning.sase.sasToSat.translator.SelectiveTranslator;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
-import freelunch.core.satModelling.modelObjects.PseudoBooleanFormula;
 import freelunch.core.satSolving.FormulaAnalyzer;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 
 public class Translator {
     
@@ -107,9 +107,9 @@ public class Translator {
             		}
             	} else {
                     SasToSatTranslator translator = makeTranslator(problem, method, 5);
-                    BasicSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
-                    int vars = formula.getVariables();
-                    int[] model = BasicSatFormula.parseSolutionFromFile(satModelFile, vars);
+                    CnfSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
+                    int vars = formula.variablesCount;
+                    int[] model = CnfSatFormula.parseSolutionFromFile(satModelFile, vars);
             		SasParallelPlan plan = translator.decodePlan(model, makeSpan);
             		System.out.println(plan.getPlanIpcFormat());
             		if (PlanVerifier.verifyPlan(problem, plan)) {
@@ -124,12 +124,12 @@ public class Translator {
                 pbf.printFormula(System.out);
             } else if (!multiValued) {
                 SasToSatTranslator translator = makeTranslator(problem, method, 5);
-                BasicSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
+                CnfSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
                 if (statistics) {
                     String csv = FormulaAnalyzer.analyzeFormula(formula).csv();
                     System.out.println(problemName + ";" + csv);
                 } else {
-                    formula.printFormula(System.out);
+                    formula.printDimacs(System.out);
                 }
             } else {
                 SasToMVSat translator = new SasToMVSat();

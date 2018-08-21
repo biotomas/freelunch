@@ -1,7 +1,6 @@
 package freelunch.sat.bce.encoding;
 
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -23,8 +22,7 @@ import freelunch.sat.bce.utilities.FormulaAnalyzer;
 import freelunch.sat.bce.utilities.LockedProvider;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.bce.utilities.ParametersProcessor;
-import freelunch.sat.satLifter.sat.DimacsParser;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class EncodingMain {
 	
@@ -92,7 +90,7 @@ public class EncodingMain {
 		}
 		Logger.resetWatch();
 		Logger.print(1, String.format("c enc.jar version %s params: %s", version, Arrays.toString(args)));
-		BasicFormula f = DimacsParser.parseFromFile(pp.getParameter(0));
+		CnfSatFormula f = CnfSatFormula.parseFromFile(pp.getParameter(0));
 		
 		if (f == null) {
 			System.err.println("Input file not found / cannot be opened");
@@ -116,8 +114,8 @@ public class EncodingMain {
 			return;
 		}
 		
-		BasicFormula large = new BasicFormula();
-		BasicFormula small = new BasicFormula();
+		CnfSatFormula large = new CnfSatFormula();
+		CnfSatFormula small = new CnfSatFormula();
 		Logger.print(1, String.format("c Starting %s on the input formula", decomposer.getClass().getName()));
 		decomposer.decomposeFormula(f, large, small);
 		Logger.print(1, String.format("c %s result: large: %d (%d%%), small %d", decomposer.getClass().getName(), 
@@ -162,32 +160,24 @@ public class EncodingMain {
 					if (pp.isSet("s")) {
 						Logger.print(0, String.format("c enc.jar BLOCKED %d OUT OF %d CLAUSES", large.clauses.size(), f.clauses.size()));
 						large.clauses.addAll(small.clauses);
-						FileWriter writer = new FileWriter(outfile);
-						large.printDimacsToFile(writer);
-						writer.close();
+						large.printDimacsToFile(outfile);
 					} else if (pp.isSet("a")) {
-						BasicFormula unitAndBS = UnitAndBlockedSetEncoder.encode(large, small);
+						CnfSatFormula unitAndBS = UnitAndBlockedSetEncoder.encode(large, small);
 						AigEncoder aige = new AigEncoder();
 						//ImprovedAigEncoder aige = new ImprovedAigEncoder();
 						aige.encode(unitAndBS).printToAigerFile(outfile);
 						Logger.print(1, String.format("c aiger file saved to %s", outfile));
 					} else if (pp.isSet("z")) {
 						// solitaire
-						BasicFormula unitAndBS = UnitAndBlockedSetEncoder.encode(large, small);
+						CnfSatFormula unitAndBS = UnitAndBlockedSetEncoder.encode(large, small);
 						Logger.print(2, "c starting blocked clause elimination on the output formula");
 						BCESimplifier.simplify(unitAndBS);
 						Logger.print(2, "c starting to write the output file");
-						FileWriter writer = new FileWriter(outfile);
-						unitAndBS.printDimacsToFile(writer);
-						writer.close();
+						unitAndBS.printDimacsToFile(outfile);
 						Logger.print(1, String.format("c solitaire saved to %s", outfile));
 					} else {
-						FileWriter writer1 = new FileWriter(outfile+".bsl");
-						FileWriter writer2 = new FileWriter(outfile+".bss");
-						large.printDimacsToFile(writer1);
-						small.printDimacsToFile(writer2);
-						writer1.close();
-						writer2.close();
+						large.printDimacsToFile(outfile+".bsl");
+						small.printDimacsToFile(outfile+".bss");
 						Logger.print(1, String.format("c Large blocked saved to %s, small blocked set saved to %s", outfile+".bsl", outfile+".bss"));
 					}
 				} catch (FileNotFoundException e) {
@@ -229,7 +219,7 @@ public class EncodingMain {
 			Logger.print(1, String.format("c flipped the locked variables, now locked: %d of %d (%d%%)", locked.cardinality(), large.variablesCount, (100*locked.cardinality())/large.variablesCount));
 		}
 		
-		BasicFormula result;
+		CnfSatFormula result;
 		String encType = pp.getOptionValue("e");
 		if (encType == null) {
 			encType = "o";
@@ -257,9 +247,7 @@ public class EncodingMain {
 		if (pp.getOptionValue("o") != null) {
 			String outfile = pp.getOptionValue("o");
 			try {
-				FileWriter out = new FileWriter(outfile);
-				result.printDimacsToFile(out);
-				out.close();
+				result.printDimacsToFile(outfile);
 			} catch (FileNotFoundException e) {
 				System.err.println("Output cannot be written: " + e.getMessage());
 				return;

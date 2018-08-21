@@ -1,13 +1,12 @@
 package freelunch.core.satSolving.maxsat;
 
-import junit.framework.TestCase;
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.RandomFormulaGenerator;
 import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.satSolving.solvers.SatSolver;
-import freelunch.core.satSolving.walksat.LocalSearchMain;
+import freelunch.sat.model.CnfSatFormula;
+import junit.framework.TestCase;
 
 public class TestMaxSat extends TestCase {
 	
@@ -16,10 +15,10 @@ public class TestMaxSat extends TestCase {
 		SatSolver s = new Sat4JSolver();
 		MaxSatSolver m = new Sat4JMaxsatSolver();
 		for (int i = 0; i < 50; i++) {
-			BasicSatFormula f = rfg.getRandomSat(50);
+			CnfSatFormula f = rfg.getRandomSat(50);
 			boolean sat = s.isSatisfiable(f);
 			
-			WeightedPartialMaxSatFormula wf = new WeightedPartialMaxSatFormula(f.getVariables());
+			WeightedPartialMaxSatFormula wf = new WeightedPartialMaxSatFormula(f.variablesCount);
 			wf.getHardClauses().addAll(f.getClauses());
 			wf.getSoftClauses().add(new WeightedClause(1, new int[] {1}));
 			
@@ -32,7 +31,7 @@ public class TestMaxSat extends TestCase {
 			if (!sat && model != null) {
 				System.out.println("error unsat -> sat");
 			}
-			if (model != null && LocalSearchMain.solutionValid(f, model) == false) {
+			if (model != null && f.validateSolution(model) == false) {
 				System.out.println("error invalid model");
 			}
 		}

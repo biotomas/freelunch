@@ -11,15 +11,15 @@ import freelunch.sat.bce.eliminators.IncrementalQueueBasedBCEliminator;
 import freelunch.sat.bce.utilities.ClauseIdIndex;
 import freelunch.sat.bce.utilities.SparseTable;
 import freelunch.sat.bce.utilities.ClauseIdIndex.Clause;
+import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class IncrementalMaximalMover implements DecompositionPostprocessor {
 	
 	private long timelimit = 0;
 
 	@Override
-	public int moveToLarge(BasicFormula large, BasicFormula small) {
+	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
 		Stopwatch watch = new Stopwatch();
 		BCEliminator elim = new IncrementalQueueBasedBCEliminator();
 		List<int[]> stack = elim.eliminateBlockedClauses(large);

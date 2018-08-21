@@ -18,7 +18,7 @@
  ******************************************************************************/
 package freelunch.core.satSolving;
 
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class FormulaAnalyzer {
     
@@ -48,9 +48,9 @@ public class FormulaAnalyzer {
         }
     }
     
-    public static FormulaProperties analyzeFormula(BasicSatFormula formula) {
+    public static FormulaProperties analyzeFormula(CnfSatFormula formula) {
         FormulaProperties fp = new FormulaProperties();
-        fp.vars = formula.getVariables();
+        fp.vars = formula.variablesCount;
         fp.clauses = formula.getClauses().size();
         int hornPos = 0;
         for (int[] clause : formula.getClauses()) {

@@ -29,10 +29,10 @@ import org.sat4j.specs.IConstr;
 import org.sat4j.specs.ISolver;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
 import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.utilities.IntVector;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.sat.model.CnfSatFormula;
+import freelunch.utilities.IntVector;
+import freelunch.utilities.Stopwatch;
 
 
 /**
@@ -75,9 +75,9 @@ public class Sat4JSolver implements IncrementalSatSolver {
 	}
 	
     @Override
-    public Boolean isSatisfiable(BasicSatFormula formula) throws TimeoutException {
+    public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
         solver.reset();
-        solver.newVar(formula.getVariables());
+        solver.newVar(formula.variablesCount);
         try {
             for (int[] c : formula.getClauses()) {
                 solver.addClause(new VecInt(c));

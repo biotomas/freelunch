@@ -19,7 +19,7 @@
 package freelunch.core.satSolving.solvers;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satModelling.modelObjects.BasicSatFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public interface SatSolver {
     
@@ -27,7 +27,7 @@ public interface SatSolver {
      * Test if the formula is satisfiable
      * @return true if satisfiable, false if unsatisfiable, null if unknown
      */
-    public Boolean isSatisfiable(BasicSatFormula formula) throws TimeoutException;
+    public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException;
     
     /**
      * Get the time required to solve the formula in milliseconds.

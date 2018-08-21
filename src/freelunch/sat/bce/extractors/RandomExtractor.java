@@ -9,7 +9,7 @@ import java.util.List;
 import freelunch.sat.bce.solver.BlockedSetSolver;
 import freelunch.sat.bce.solver.RandomChoiceMaker;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
-import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
+import freelunch.sat.model.CnfSatFormula;
 
 public class RandomExtractor {
 
@@ -17,7 +17,7 @@ public class RandomExtractor {
 	protected int[] stars;
 	protected int starsCount = 0;
 	protected int bonesCount = 0;
-	protected BasicFormula formula;
+	protected CnfSatFormula formula;
 	protected List<List<Integer>> equivalences = null;
 	protected List<Integer>[] equivalenceIndex;
 	
@@ -88,7 +88,7 @@ public class RandomExtractor {
 	 * with the first literal of each clause being the blocking literal.
 	 * @param formula
 	 */
-	public void extractBackBones(BasicFormula formula) {
+	public void extractBackBones(CnfSatFormula formula) {
 		this.formula = formula;
 
 		BlockedSetSolver solver = new BlockedSetSolver();

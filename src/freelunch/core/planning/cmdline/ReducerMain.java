@@ -20,7 +20,7 @@ import freelunch.core.planning.sase.optimizer.potentialPlans.PotentialPlan;
 import freelunch.core.planning.sase.optimizer.potentialPlans.PotentialPlanMaker;
 import freelunch.core.planning.sase.optimizer.potentialPlans.RecursivePotentialPlanMaker;
 import freelunch.core.planning.sase.sasToSat.SasIO;
-import freelunch.core.utilities.Stopwatch;
+import freelunch.utilities.Stopwatch;
 
 public class ReducerMain {
     
