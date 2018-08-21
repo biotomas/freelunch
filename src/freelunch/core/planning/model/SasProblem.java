@@ -38,13 +38,18 @@ public class SasProblem {
     
     private void resetActionIDs() {
         int actionId = 0;
-        for (SasAction op : operators) {
-            op.setId(actionId);
-            actionId++;
+        if (operators != null) {
+	        for (SasAction op : operators) {
+	            op.setId(actionId);
+	            actionId++;
+	        }
         }
-        for (SasAction op : conditionalOperators) {
-        	op.setId(actionId);
-        	actionId++;
+        
+        if (conditionalOperators != null) {
+	        for (SasAction op : conditionalOperators) {
+	        	op.setId(actionId);
+	        	actionId++;
+	        }
         }
     }
     
