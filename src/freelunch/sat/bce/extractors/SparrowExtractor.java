@@ -10,6 +10,7 @@ import freelunch.sat.bce.utilities.WeightedRandomPicker;
 import freelunch.sat.satLifter.sat.DimacsParser.BasicFormula;
 
 public class SparrowExtractor extends RandomExtractor {
+	@Override
 	public void extractBackBones(BasicFormula formula) {
 		this.formula = formula;
 		BlockedSetSolver solver = new BlockedSetSolver();

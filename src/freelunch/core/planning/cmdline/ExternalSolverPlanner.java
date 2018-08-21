@@ -55,7 +55,7 @@ public class ExternalSolverPlanner {
             SasParallelPlan plan = solver.solve();
             
             System.out.println(String.format("SOLVED in %s with %d steps sat-time %.2f", solveTime.elapsedFormatedSeconds(), plan.getPlanLength(),
-                    ((float)solver.getStats().satTime)/1000f));
+                    (solver.getStats().satTime)/1000f));
             
             if (printPlan) {
                 System.out.println(plan);

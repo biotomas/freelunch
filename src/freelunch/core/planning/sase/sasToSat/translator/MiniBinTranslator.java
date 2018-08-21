@@ -67,7 +67,8 @@ public class MiniBinTranslator extends TranslatorBase implements SasToSatTransla
     }
 
     
-    public SasParallelPlan decodePlan(int[] model, int makespan) {
+    @Override
+	public SasParallelPlan decodePlan(int[] model, int makespan) {
         List<List<SasAction>> plan = new ArrayList<List<SasAction>>(makespan);
         List<SasAction> selectedActions = new ArrayList<SasAction>();
         

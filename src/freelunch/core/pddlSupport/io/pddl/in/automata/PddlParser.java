@@ -2,10 +2,6 @@
 package freelunch.core.pddlSupport.io.pddl.in.automata;
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
 
 import org.antlr.runtime.tree.*;
@@ -171,11 +167,14 @@ public void setTreeAdaptor(TreeAdaptor adaptor) {
 public TreeAdaptor getTreeAdaptor() {
     return adaptor;
 }
-    public String[] getTokenNames() { return PddlParser.tokenNames; }
-    public String getGrammarFileName() { return "C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g"; }
+    @Override
+	public String[] getTokenNames() { return PddlParser.tokenNames; }
+    @Override
+	public String getGrammarFileName() { return "C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g"; }
 
 
-    	public void displayRecognitionError(String[] tokenNames,
+    	@Override
+		public void displayRecognitionError(String[] tokenNames,
                                             RecognitionException e) {
             String hdr = getErrorHeader(e);
             String msg = getErrorMessage(e, tokenNames);
@@ -189,7 +188,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class pddlDoc_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -270,7 +270,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:78:11: domain
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_domain_in_pddlDoc246);
@@ -285,7 +285,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:78:20: problem
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_problem_in_pddlDoc250);
@@ -304,14 +304,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -327,7 +327,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class domain_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -611,14 +612,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 92:7: -> ^( DOMAIN domainName ( requireDef )? ( typesDef )? ( constantsDef )? ( predicatesDef )? ( functionsDef )? ( constraints )? ( structureDef )* )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:92:10: ^( DOMAIN domainName ( requireDef )? ( typesDef )? ( constantsDef )? ( predicatesDef )? ( functionsDef )? ( constraints )? ( structureDef )* )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(DOMAIN, "DOMAIN")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(DOMAIN, "DOMAIN")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_domainName.nextTree());
@@ -688,14 +689,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -711,7 +712,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class domainName_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -773,14 +775,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 99:6: -> ^( DOMAIN_NAME NAME )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:99:9: ^( DOMAIN_NAME NAME )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(DOMAIN_NAME, "DOMAIN_NAME")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(DOMAIN_NAME, "DOMAIN_NAME")
                 , root_1);
 
                 adaptor.addChild(root_1, 
@@ -803,14 +805,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -826,7 +828,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class requireDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -918,14 +921,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 104:2: -> ^( REQUIREMENTS ( REQUIRE_KEY )+ )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:104:5: ^( REQUIREMENTS ( REQUIRE_KEY )+ )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(REQUIREMENTS, "REQUIREMENTS")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(REQUIREMENTS, "REQUIREMENTS")
                 , root_1);
 
                 if ( !(stream_REQUIRE_KEY.hasNext()) ) {
@@ -955,14 +958,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -978,7 +981,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class typesDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1042,14 +1046,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 109:4: -> ^( TYPES typedNameList )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:109:7: ^( TYPES typedNameList )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(TYPES, "TYPES")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(TYPES, "TYPES")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_typedNameList.nextTree());
@@ -1070,14 +1074,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1093,7 +1097,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class typedNameList_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1121,7 +1126,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:114:5: ( ( ( NAME )* | ( singleTypeNameList )+ ( NAME )* ) )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:114:7: ( ( NAME )* | ( singleTypeNameList )+ ( NAME )* )
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:114:7: ( ( NAME )* | ( singleTypeNameList )+ ( NAME )* )
@@ -1149,7 +1154,7 @@ public TreeAdaptor getTreeAdaptor() {
                     	    NAME26=(Token)match(input,NAME,FOLLOW_NAME_in_typedNameList519); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
                     	    NAME26_tree = 
-                    	    (Object)adaptor.create(NAME26)
+                    	    adaptor.create(NAME26)
                     	    ;
                     	    adaptor.addChild(root_0, NAME26_tree);
                     	    }
@@ -1217,7 +1222,7 @@ public TreeAdaptor getTreeAdaptor() {
                     	    NAME28=(Token)match(input,NAME,FOLLOW_NAME_in_typedNameList527); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
                     	    NAME28_tree = 
-                    	    (Object)adaptor.create(NAME28)
+                    	    adaptor.create(NAME28)
                     	    ;
                     	    adaptor.addChild(root_0, NAME28_tree);
                     	    }
@@ -1244,14 +1249,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1267,7 +1272,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class singleTypeNameList_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1361,7 +1367,7 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
             RewriteRuleSubtreeStream stream_t=new RewriteRuleSubtreeStream(adaptor,"rule t",t!=null?t.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 119:4: -> ( ^( NAME $t) )+
             {
                 if ( !(stream_NAME.hasNext()||stream_t.hasNext()) ) {
@@ -1370,8 +1376,8 @@ public TreeAdaptor getTreeAdaptor() {
                 while ( stream_NAME.hasNext()||stream_t.hasNext() ) {
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:119:7: ^( NAME $t)
                     {
-                    Object root_1 = (Object)adaptor.nil();
-                    root_1 = (Object)adaptor.becomeRoot(
+                    Object root_1 = adaptor.nil();
+                    root_1 = adaptor.becomeRoot(
                     stream_NAME.nextNode()
                     , root_1);
 
@@ -1397,14 +1403,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1420,7 +1426,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class type_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1541,14 +1548,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 124:4: -> ^( EITHER_TYPE ( primType )+ )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:124:7: ^( EITHER_TYPE ( primType )+ )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(EITHER_TYPE, "EITHER_TYPE")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(EITHER_TYPE, "EITHER_TYPE")
                         , root_1);
 
                         if ( !(stream_primType.hasNext()) ) {
@@ -1574,7 +1581,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:125:4: primType
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_primType_in_type607);
@@ -1593,14 +1600,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1616,7 +1623,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class primType_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1640,13 +1648,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:128:10: ( NAME )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:128:12: NAME
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             NAME36=(Token)match(input,NAME,FOLLOW_NAME_in_primType617); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             NAME36_tree = 
-            (Object)adaptor.create(NAME36)
+            adaptor.create(NAME36)
             ;
             adaptor.addChild(root_0, NAME36_tree);
             }
@@ -1658,14 +1666,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1681,7 +1689,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class functionsDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1745,14 +1754,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 132:2: -> ^( FUNCTIONS functionList )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:132:5: ^( FUNCTIONS functionList )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(FUNCTIONS, "FUNCTIONS")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(FUNCTIONS, "FUNCTIONS")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_functionList.nextTree());
@@ -1773,14 +1782,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1796,7 +1805,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class functionList_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1820,7 +1830,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:137:2: ( ( fOuterBody ^)* )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:137:4: ( fOuterBody ^)*
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:137:4: ( fOuterBody ^)*
@@ -1843,7 +1853,7 @@ public TreeAdaptor getTreeAdaptor() {
 
             	    state._fsp--;
             	    if (state.failed) return retval;
-            	    if ( state.backtracking==0 ) root_0 = (Object)adaptor.becomeRoot(fOuterBody41.getTree(), root_0);
+            	    if ( state.backtracking==0 ) root_0 = adaptor.becomeRoot(fOuterBody41.getTree(), root_0);
 
             	    }
             	    break;
@@ -1861,14 +1871,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1884,7 +1894,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fOuterBody_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -1927,14 +1938,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 140:17: -> ^( FUNCTION_BODY functionBody )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:140:20: ^( FUNCTION_BODY functionBody )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(FUNCTION_BODY, "FUNCTION_BODY")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(FUNCTION_BODY, "FUNCTION_BODY")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_functionBody.nextTree());
@@ -1955,14 +1966,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1978,7 +1989,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class functionBody_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2006,7 +2018,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:143:2: ( atomicFunctionSkeleton ( '-' functionType )? )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:144:3: atomicFunctionSkeleton ( '-' functionType )?
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             pushFollow(FOLLOW_atomicFunctionSkeleton_in_functionBody692);
@@ -2030,7 +2042,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal44=(Token)match(input,60,FOLLOW_60_in_functionBody695); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal44_tree = 
-                    (Object)adaptor.create(char_literal44)
+                    adaptor.create(char_literal44)
                     ;
                     adaptor.addChild(root_0, char_literal44_tree);
                     }
@@ -2055,14 +2067,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2078,7 +2090,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class atomicFunctionSkeleton_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2108,7 +2121,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:150:2: ( '(' ! functionSymbol ^ typedVariableList ')' !)
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:150:4: '(' ! functionSymbol ^ typedVariableList ')' !
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             char_literal46=(Token)match(input,55,FOLLOW_55_in_atomicFunctionSkeleton715); if (state.failed) return retval;
@@ -2118,7 +2131,7 @@ public TreeAdaptor getTreeAdaptor() {
 
             state._fsp--;
             if (state.failed) return retval;
-            if ( state.backtracking==0 ) root_0 = (Object)adaptor.becomeRoot(functionSymbol47.getTree(), root_0);
+            if ( state.backtracking==0 ) root_0 = adaptor.becomeRoot(functionSymbol47.getTree(), root_0);
 
             pushFollow(FOLLOW_typedVariableList_in_atomicFunctionSkeleton721);
             typedVariableList48=typedVariableList();
@@ -2136,14 +2149,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2159,7 +2172,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class functionSymbol_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2183,13 +2197,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:156:16: ( NAME )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:156:18: NAME
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             NAME50=(Token)match(input,NAME,FOLLOW_NAME_in_functionSymbol740); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             NAME50_tree = 
-            (Object)adaptor.create(NAME50)
+            adaptor.create(NAME50)
             ;
             adaptor.addChild(root_0, NAME50_tree);
             }
@@ -2201,14 +2215,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2224,7 +2238,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class functionType_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2248,13 +2263,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:158:14: ( 'number' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:158:16: 'number'
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             string_literal51=(Token)match(input,109,FOLLOW_109_in_functionType749); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             string_literal51_tree = 
-            (Object)adaptor.create(string_literal51)
+            adaptor.create(string_literal51)
             ;
             adaptor.addChild(root_0, string_literal51_tree);
             }
@@ -2266,14 +2281,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2289,7 +2304,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class constantsDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2353,14 +2369,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 162:2: -> ^( CONSTANTS typedNameList )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:162:5: ^( CONSTANTS typedNameList )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(CONSTANTS, "CONSTANTS")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(CONSTANTS, "CONSTANTS")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_typedNameList.nextTree());
@@ -2381,14 +2397,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2404,7 +2420,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class predicatesDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2498,14 +2515,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 167:2: -> ^( PREDICATES ( atomicFormulaSkeleton )+ )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:167:5: ^( PREDICATES ( atomicFormulaSkeleton )+ )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PREDICATES, "PREDICATES")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PREDICATES, "PREDICATES")
                 , root_1);
 
                 if ( !(stream_atomicFormulaSkeleton.hasNext()) ) {
@@ -2533,14 +2550,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2556,7 +2573,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class atomicFormulaSkeleton_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2647,13 +2665,13 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 172:2: -> ^( predicate ( typedVariableList )? )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:172:5: ^( predicate ( typedVariableList )? )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(stream_predicate.nextNode(), root_1);
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(stream_predicate.nextNode(), root_1);
 
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:172:17: ( typedVariableList )?
                 if ( stream_typedVariableList.hasNext() ) {
@@ -2678,14 +2696,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2701,7 +2719,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class predicate_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2725,13 +2744,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:175:11: ( NAME )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:175:13: NAME
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             NAME64=(Token)match(input,NAME,FOLLOW_NAME_in_predicate840); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             NAME64_tree = 
-            (Object)adaptor.create(NAME64)
+            adaptor.create(NAME64)
             ;
             adaptor.addChild(root_0, NAME64_tree);
             }
@@ -2743,14 +2762,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2766,7 +2785,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class typedVariableList_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -2794,7 +2814,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:179:5: ( ( ( VARIABLE )* | ( singleTypeVarList )+ ( VARIABLE )* ) )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:179:7: ( ( VARIABLE )* | ( singleTypeVarList )+ ( VARIABLE )* )
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:179:7: ( ( VARIABLE )* | ( singleTypeVarList )+ ( VARIABLE )* )
@@ -2822,7 +2842,7 @@ public TreeAdaptor getTreeAdaptor() {
                     	    VARIABLE65=(Token)match(input,VARIABLE,FOLLOW_VARIABLE_in_typedVariableList857); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
                     	    VARIABLE65_tree = 
-                    	    (Object)adaptor.create(VARIABLE65)
+                    	    adaptor.create(VARIABLE65)
                     	    ;
                     	    adaptor.addChild(root_0, VARIABLE65_tree);
                     	    }
@@ -2890,7 +2910,7 @@ public TreeAdaptor getTreeAdaptor() {
                     	    VARIABLE67=(Token)match(input,VARIABLE,FOLLOW_VARIABLE_in_typedVariableList865); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
                     	    VARIABLE67_tree = 
-                    	    (Object)adaptor.create(VARIABLE67)
+                    	    adaptor.create(VARIABLE67)
                     	    ;
                     	    adaptor.addChild(root_0, VARIABLE67_tree);
                     	    }
@@ -2917,14 +2937,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -2940,7 +2960,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class singleTypeVarList_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3034,7 +3055,7 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
             RewriteRuleSubtreeStream stream_t=new RewriteRuleSubtreeStream(adaptor,"rule t",t!=null?t.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 184:7: -> ( ^( VARIABLE $t) )+
             {
                 if ( !(stream_t.hasNext()||stream_VARIABLE.hasNext()) ) {
@@ -3043,8 +3064,8 @@ public TreeAdaptor getTreeAdaptor() {
                 while ( stream_t.hasNext()||stream_VARIABLE.hasNext() ) {
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:184:10: ^( VARIABLE $t)
                     {
-                    Object root_1 = (Object)adaptor.nil();
-                    root_1 = (Object)adaptor.becomeRoot(
+                    Object root_1 = adaptor.nil();
+                    root_1 = adaptor.becomeRoot(
                     stream_VARIABLE.nextNode()
                     , root_1);
 
@@ -3070,14 +3091,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3093,7 +3114,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class constraints_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3123,7 +3145,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:188:2: ( '(' ! ':constraints' ^ conGD ')' !)
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:188:4: '(' ! ':constraints' ^ conGD ')' !
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             char_literal70=(Token)match(input,55,FOLLOW_55_in_constraints924); if (state.failed) return retval;
@@ -3131,9 +3153,9 @@ public TreeAdaptor getTreeAdaptor() {
             string_literal71=(Token)match(input,65,FOLLOW_65_in_constraints927); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             string_literal71_tree = 
-            (Object)adaptor.create(string_literal71)
+            adaptor.create(string_literal71)
             ;
-            root_0 = (Object)adaptor.becomeRoot(string_literal71_tree, root_0);
+            root_0 = adaptor.becomeRoot(string_literal71_tree, root_0);
             }
 
             pushFollow(FOLLOW_conGD_in_constraints930);
@@ -3152,14 +3174,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3175,7 +3197,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class structureDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3243,7 +3266,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:192:4: actionDef
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_actionDef_in_structureDef944);
@@ -3258,7 +3281,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:193:4: durativeActionDef
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_durativeActionDef_in_structureDef949);
@@ -3273,7 +3296,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:194:4: derivedDef
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_derivedDef_in_structureDef954);
@@ -3292,14 +3315,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3315,7 +3338,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class actionDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3399,14 +3423,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 204:8: -> ^( ACTION actionSymbol params actionDefBody )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:204:11: ^( ACTION actionSymbol params actionDefBody )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(ACTION, "ACTION")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(ACTION, "ACTION")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_actionSymbol.nextTree());
@@ -3431,14 +3455,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3454,7 +3478,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class actionSymbol_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3478,13 +3503,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:207:14: ( NAME )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:207:16: NAME
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             NAME83=(Token)match(input,NAME,FOLLOW_NAME_in_actionSymbol1024); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             NAME83_tree = 
-            (Object)adaptor.create(NAME83)
+            adaptor.create(NAME83)
             ;
             adaptor.addChild(root_0, NAME83_tree);
             }
@@ -3496,14 +3521,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3519,7 +3544,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class params_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3562,14 +3588,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 209:21: -> ^( OTHERBODY paramsBody )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:209:24: ^( OTHERBODY paramsBody )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(OTHERBODY, "OTHERBODY")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(OTHERBODY, "OTHERBODY")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_paramsBody.nextTree());
@@ -3590,14 +3616,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3613,7 +3639,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class paramsBody_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3645,7 +3672,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:212:2: ( ':parameters' ! ( '(' ! ( typedVariableList )? ')' !| '()' ) )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:213:3: ':parameters' ! ( '(' ! ( typedVariableList )? ')' !| '()' )
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             string_literal85=(Token)match(input,76,FOLLOW_76_in_paramsBody1055); if (state.failed) return retval;
@@ -3715,7 +3742,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal89=(Token)match(input,56,FOLLOW_56_in_paramsBody1068); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal89_tree = 
-                    (Object)adaptor.create(string_literal89)
+                    adaptor.create(string_literal89)
                     ;
                     adaptor.addChild(root_0, string_literal89_tree);
                     }
@@ -3733,14 +3760,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -3756,7 +3783,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class actionDefBody_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -3985,14 +4013,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 222:4: -> ^( PRECONDITION ( goalDesc )? ) ^( EFFECT ( effect )? )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:222:7: ^( PRECONDITION ( goalDesc )? )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PRECONDITION, "PRECONDITION")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PRECONDITION, "PRECONDITION")
                 , root_1);
 
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:222:22: ( goalDesc )?
@@ -4007,9 +4035,9 @@ public TreeAdaptor getTreeAdaptor() {
 
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:222:33: ^( EFFECT ( effect )? )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(EFFECT, "EFFECT")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(EFFECT, "EFFECT")
                 , root_1);
 
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:222:42: ( effect )?
@@ -4035,14 +4063,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -4058,7 +4086,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class goalDesc_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -4225,7 +4254,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:227:4: atomicTermFormula
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_atomicTermFormula_in_goalDesc1152);
@@ -4295,14 +4324,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 229:12: -> ^( AND_GD ( goalDesc )* )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:229:15: ^( AND_GD ( goalDesc )* )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(AND_GD, "AND_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(AND_GD, "AND_GD")
                         , root_1);
 
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:229:24: ( goalDesc )*
@@ -4381,14 +4410,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 231:12: -> ^( OR_GD ( goalDesc )* )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:231:15: ^( OR_GD ( goalDesc )* )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(OR_GD, "OR_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(OR_GD, "OR_GD")
                         , root_1);
 
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:231:23: ( goalDesc )*
@@ -4443,14 +4472,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 233:12: -> ^( NOT_GD goalDesc )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:233:15: ^( NOT_GD goalDesc )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(NOT_GD, "NOT_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(NOT_GD, "NOT_GD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_goalDesc.nextTree());
@@ -4507,14 +4536,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 235:12: -> ^( IMPLY_GD goalDesc goalDesc )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:235:15: ^( IMPLY_GD goalDesc goalDesc )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(IMPLY_GD, "IMPLY_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(IMPLY_GD, "IMPLY_GD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_goalDesc.nextTree());
@@ -4581,14 +4610,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 237:12: -> ^( EXISTS_GD typedVariableList goalDesc )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:237:15: ^( EXISTS_GD typedVariableList goalDesc )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(EXISTS_GD, "EXISTS_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(EXISTS_GD, "EXISTS_GD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_typedVariableList.nextTree());
@@ -4655,14 +4684,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 239:12: -> ^( FORALL_GD typedVariableList goalDesc )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:239:15: ^( FORALL_GD typedVariableList goalDesc )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(FORALL_GD, "FORALL_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(FORALL_GD, "FORALL_GD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_typedVariableList.nextTree());
@@ -4702,14 +4731,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 241:15: -> ^( COMPARISON_GD fComp )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:241:18: ^( COMPARISON_GD fComp )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(COMPARISON_GD, "COMPARISON_GD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(COMPARISON_GD, "COMPARISON_GD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_fComp.nextTree());
@@ -4732,14 +4761,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -4755,7 +4784,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fComp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -4787,7 +4817,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:245:2: ( '(' ! binaryComp fExp fExp ')' !)
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:245:4: '(' ! binaryComp fExp fExp ')' !
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             char_literal131=(Token)match(input,55,FOLLOW_55_in_fComp1402); if (state.failed) return retval;
@@ -4822,14 +4852,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -4845,7 +4875,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class atomicTermFormula_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -4936,14 +4967,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 249:28: -> ^( PRED_HEAD predicate ( term )* )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:249:31: ^( PRED_HEAD predicate ( term )* )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PRED_HEAD, "PRED_HEAD")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PRED_HEAD, "PRED_HEAD")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_predicate.nextTree());
@@ -4971,14 +5002,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -4994,7 +5025,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class term_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -5018,15 +5050,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:253:6: ( NAME | VARIABLE )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set140=(Token)input.LT(1);
+            set140=input.LT(1);
 
             if ( input.LA(1)==NAME||input.LA(1)==VARIABLE ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set140)
+                adaptor.create(set140)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -5045,14 +5077,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -5068,7 +5100,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class durativeActionDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -5171,14 +5204,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 261:8: -> ^( DURATIVE_ACTION actionSymbol typedVariableList daDefBody )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:261:11: ^( DURATIVE_ACTION actionSymbol typedVariableList daDefBody )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(DURATIVE_ACTION, "DURATIVE_ACTION")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(DURATIVE_ACTION, "DURATIVE_ACTION")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_actionSymbol.nextTree());
@@ -5203,14 +5236,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -5226,7 +5259,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class daDefBody_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -5296,13 +5330,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:265:4: ':duration' durationConstraint
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     string_literal150=(Token)match(input,68,FOLLOW_68_in_daDefBody1538); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal150_tree = 
-                    (Object)adaptor.create(string_literal150)
+                    adaptor.create(string_literal150)
                     ;
                     adaptor.addChild(root_0, string_literal150_tree);
                     }
@@ -5319,13 +5353,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:266:4: ':condition' ( ( '(' ')' ) | daGD )
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     string_literal152=(Token)match(input,63,FOLLOW_63_in_daDefBody1546); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal152_tree = 
-                    (Object)adaptor.create(string_literal152)
+                    adaptor.create(string_literal152)
                     ;
                     adaptor.addChild(root_0, string_literal152_tree);
                     }
@@ -5370,7 +5404,7 @@ public TreeAdaptor getTreeAdaptor() {
                             char_literal153=(Token)match(input,55,FOLLOW_55_in_daDefBody1550); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             char_literal153_tree = 
-                            (Object)adaptor.create(char_literal153)
+                            adaptor.create(char_literal153)
                             ;
                             adaptor.addChild(root_0, char_literal153_tree);
                             }
@@ -5378,7 +5412,7 @@ public TreeAdaptor getTreeAdaptor() {
                             char_literal154=(Token)match(input,57,FOLLOW_57_in_daDefBody1552); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             char_literal154_tree = 
-                            (Object)adaptor.create(char_literal154)
+                            adaptor.create(char_literal154)
                             ;
                             adaptor.addChild(root_0, char_literal154_tree);
                             }
@@ -5409,13 +5443,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:267:7: ':effect' ( ( '(' ')' ) | daEffect )
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     string_literal156=(Token)match(input,70,FOLLOW_70_in_daDefBody1566); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal156_tree = 
-                    (Object)adaptor.create(string_literal156)
+                    adaptor.create(string_literal156)
                     ;
                     adaptor.addChild(root_0, string_literal156_tree);
                     }
@@ -5460,7 +5494,7 @@ public TreeAdaptor getTreeAdaptor() {
                             char_literal157=(Token)match(input,55,FOLLOW_55_in_daDefBody1570); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             char_literal157_tree = 
-                            (Object)adaptor.create(char_literal157)
+                            adaptor.create(char_literal157)
                             ;
                             adaptor.addChild(root_0, char_literal157_tree);
                             }
@@ -5468,7 +5502,7 @@ public TreeAdaptor getTreeAdaptor() {
                             char_literal158=(Token)match(input,57,FOLLOW_57_in_daDefBody1572); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             char_literal158_tree = 
-                            (Object)adaptor.create(char_literal158)
+                            adaptor.create(char_literal158)
                             ;
                             adaptor.addChild(root_0, char_literal158_tree);
                             }
@@ -5503,14 +5537,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -5526,7 +5560,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class daGD_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -5614,7 +5649,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:271:4: prefTimedGD
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_prefTimedGD_in_daGD1592);
@@ -5629,13 +5664,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:272:4: '(' 'and' ( daGD )* ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal161=(Token)match(input,55,FOLLOW_55_in_daGD1598); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal161_tree = 
-                    (Object)adaptor.create(char_literal161)
+                    adaptor.create(char_literal161)
                     ;
                     adaptor.addChild(root_0, char_literal161_tree);
                     }
@@ -5643,7 +5678,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal162=(Token)match(input,92,FOLLOW_92_in_daGD1600); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal162_tree = 
-                    (Object)adaptor.create(string_literal162)
+                    adaptor.create(string_literal162)
                     ;
                     adaptor.addChild(root_0, string_literal162_tree);
                     }
@@ -5682,7 +5717,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal164=(Token)match(input,57,FOLLOW_57_in_daGD1605); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal164_tree = 
-                    (Object)adaptor.create(char_literal164)
+                    adaptor.create(char_literal164)
                     ;
                     adaptor.addChild(root_0, char_literal164_tree);
                     }
@@ -5692,13 +5727,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:273:4: '(' 'forall' '(' typedVariableList ')' daGD ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal165=(Token)match(input,55,FOLLOW_55_in_daGD1610); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal165_tree = 
-                    (Object)adaptor.create(char_literal165)
+                    adaptor.create(char_literal165)
                     ;
                     adaptor.addChild(root_0, char_literal165_tree);
                     }
@@ -5706,7 +5741,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal166=(Token)match(input,100,FOLLOW_100_in_daGD1612); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal166_tree = 
-                    (Object)adaptor.create(string_literal166)
+                    adaptor.create(string_literal166)
                     ;
                     adaptor.addChild(root_0, string_literal166_tree);
                     }
@@ -5714,7 +5749,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal167=(Token)match(input,55,FOLLOW_55_in_daGD1614); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal167_tree = 
-                    (Object)adaptor.create(char_literal167)
+                    adaptor.create(char_literal167)
                     ;
                     adaptor.addChild(root_0, char_literal167_tree);
                     }
@@ -5729,7 +5764,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal169=(Token)match(input,57,FOLLOW_57_in_daGD1618); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal169_tree = 
-                    (Object)adaptor.create(char_literal169)
+                    adaptor.create(char_literal169)
                     ;
                     adaptor.addChild(root_0, char_literal169_tree);
                     }
@@ -5744,7 +5779,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal171=(Token)match(input,57,FOLLOW_57_in_daGD1622); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal171_tree = 
-                    (Object)adaptor.create(char_literal171)
+                    adaptor.create(char_literal171)
                     ;
                     adaptor.addChild(root_0, char_literal171_tree);
                     }
@@ -5758,14 +5793,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -5781,7 +5816,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class prefTimedGD_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -5846,7 +5882,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:277:4: timedGD
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_timedGD_in_prefTimedGD1633);
@@ -5861,13 +5897,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:278:4: '(' 'preference' ( NAME )? timedGD ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal173=(Token)match(input,55,FOLLOW_55_in_prefTimedGD1638); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal173_tree = 
-                    (Object)adaptor.create(char_literal173)
+                    adaptor.create(char_literal173)
                     ;
                     adaptor.addChild(root_0, char_literal173_tree);
                     }
@@ -5875,7 +5911,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal174=(Token)match(input,112,FOLLOW_112_in_prefTimedGD1640); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal174_tree = 
-                    (Object)adaptor.create(string_literal174)
+                    adaptor.create(string_literal174)
                     ;
                     adaptor.addChild(root_0, string_literal174_tree);
                     }
@@ -5894,7 +5930,7 @@ public TreeAdaptor getTreeAdaptor() {
                             NAME175=(Token)match(input,NAME,FOLLOW_NAME_in_prefTimedGD1642); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             NAME175_tree = 
-                            (Object)adaptor.create(NAME175)
+                            adaptor.create(NAME175)
                             ;
                             adaptor.addChild(root_0, NAME175_tree);
                             }
@@ -5915,7 +5951,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal177=(Token)match(input,57,FOLLOW_57_in_prefTimedGD1647); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal177_tree = 
-                    (Object)adaptor.create(char_literal177)
+                    adaptor.create(char_literal177)
                     ;
                     adaptor.addChild(root_0, char_literal177_tree);
                     }
@@ -5929,14 +5965,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -5952,7 +5988,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class timedGD_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6025,13 +6062,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:282:4: '(' '<remove_this_if_you_know_what_you_are_doing>at' timeSpecifier goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal178=(Token)match(input,55,FOLLOW_55_in_timedGD1658); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal178_tree = 
-                    (Object)adaptor.create(char_literal178)
+                    adaptor.create(char_literal178)
                     ;
                     adaptor.addChild(root_0, char_literal178_tree);
                     }
@@ -6039,7 +6076,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal179=(Token)match(input,83,FOLLOW_83_in_timedGD1660); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal179_tree = 
-                    (Object)adaptor.create(string_literal179)
+                    adaptor.create(string_literal179)
                     ;
                     adaptor.addChild(root_0, string_literal179_tree);
                     }
@@ -6061,7 +6098,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal182=(Token)match(input,57,FOLLOW_57_in_timedGD1666); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal182_tree = 
-                    (Object)adaptor.create(char_literal182)
+                    adaptor.create(char_literal182)
                     ;
                     adaptor.addChild(root_0, char_literal182_tree);
                     }
@@ -6071,13 +6108,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:283:4: '(' 'over' interval goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal183=(Token)match(input,55,FOLLOW_55_in_timedGD1671); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal183_tree = 
-                    (Object)adaptor.create(char_literal183)
+                    adaptor.create(char_literal183)
                     ;
                     adaptor.addChild(root_0, char_literal183_tree);
                     }
@@ -6085,7 +6122,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal184=(Token)match(input,111,FOLLOW_111_in_timedGD1673); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal184_tree = 
-                    (Object)adaptor.create(string_literal184)
+                    adaptor.create(string_literal184)
                     ;
                     adaptor.addChild(root_0, string_literal184_tree);
                     }
@@ -6107,7 +6144,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal187=(Token)match(input,57,FOLLOW_57_in_timedGD1679); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal187_tree = 
-                    (Object)adaptor.create(char_literal187)
+                    adaptor.create(char_literal187)
                     ;
                     adaptor.addChild(root_0, char_literal187_tree);
                     }
@@ -6121,14 +6158,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6144,7 +6181,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class timeSpecifier_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6168,15 +6206,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:286:15: ( 'start' | 'end' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set188=(Token)input.LT(1);
+            set188=input.LT(1);
 
             if ( input.LA(1)==98||input.LA(1)==119 ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set188)
+                adaptor.create(set188)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -6195,14 +6233,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6218,7 +6256,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class interval_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6242,13 +6281,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:287:10: ( 'all' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:287:12: 'all'
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             string_literal189=(Token)match(input,89,FOLLOW_89_in_interval1701); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             string_literal189_tree = 
-            (Object)adaptor.create(string_literal189)
+            adaptor.create(string_literal189)
             ;
             adaptor.addChild(root_0, string_literal189_tree);
             }
@@ -6260,14 +6299,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6283,7 +6322,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class derivedDef_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6315,7 +6355,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:292:2: ( '(' ! ':derived' ^ typedVariableList goalDesc ')' !)
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:292:4: '(' ! ':derived' ^ typedVariableList goalDesc ')' !
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             char_literal190=(Token)match(input,55,FOLLOW_55_in_derivedDef1714); if (state.failed) return retval;
@@ -6323,9 +6363,9 @@ public TreeAdaptor getTreeAdaptor() {
             string_literal191=(Token)match(input,66,FOLLOW_66_in_derivedDef1717); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             string_literal191_tree = 
-            (Object)adaptor.create(string_literal191)
+            adaptor.create(string_literal191)
             ;
-            root_0 = (Object)adaptor.becomeRoot(string_literal191_tree, root_0);
+            root_0 = adaptor.becomeRoot(string_literal191_tree, root_0);
             }
 
             pushFollow(FOLLOW_typedVariableList_in_derivedDef1720);
@@ -6351,14 +6391,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6374,7 +6414,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fExp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6469,13 +6510,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:298:4: NUMBER
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     NUMBER195=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_fExp1739); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER195_tree = 
-                    (Object)adaptor.create(NUMBER195)
+                    adaptor.create(NUMBER195)
                     ;
                     adaptor.addChild(root_0, NUMBER195_tree);
                     }
@@ -6526,14 +6567,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 299:32: -> ^( BINARY_OP binaryOp fExp fExp2 )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:299:35: ^( BINARY_OP binaryOp fExp fExp2 )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(BINARY_OP, "BINARY_OP")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(BINARY_OP, "BINARY_OP")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_binaryOp.nextTree());
@@ -6587,14 +6628,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 300:21: -> ^( UNARY_MINUS fExp )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:300:24: ^( UNARY_MINUS fExp )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(UNARY_MINUS, "UNARY_MINUS")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(UNARY_MINUS, "UNARY_MINUS")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_fExp.nextTree());
@@ -6613,7 +6654,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 4 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:301:4: fHead
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_fHead_in_fExp1788);
@@ -6632,14 +6673,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6655,7 +6696,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fExp2_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6679,7 +6721,7 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:306:7: ( fExp )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:306:9: fExp
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             pushFollow(FOLLOW_fExp_in_fExp21800);
@@ -6696,14 +6738,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6719,7 +6761,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fHead_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -6831,14 +6874,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 309:33: -> ^( FUNC_HEAD functionSymbol ( term )* )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:309:36: ^( FUNC_HEAD functionSymbol ( term )* )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(FUNC_HEAD, "FUNC_HEAD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(FUNC_HEAD, "FUNC_HEAD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_functionSymbol.nextTree());
@@ -6883,14 +6926,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 310:19: -> ^( FUNC_HEAD functionSymbol )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:310:22: ^( FUNC_HEAD functionSymbol )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(FUNC_HEAD, "FUNC_HEAD")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(FUNC_HEAD, "FUNC_HEAD")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_functionSymbol.nextTree());
@@ -6913,14 +6956,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -6936,7 +6979,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class effect_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -7057,14 +7101,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 314:27: -> ^( AND_EFFECT ( cEffect )* )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:314:30: ^( AND_EFFECT ( cEffect )* )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(AND_EFFECT, "AND_EFFECT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(AND_EFFECT, "AND_EFFECT")
                         , root_1);
 
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:314:43: ( cEffect )*
@@ -7088,7 +7132,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:315:4: cEffect
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_cEffect_in_effect1873);
@@ -7107,14 +7151,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -7130,7 +7174,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class cEffect_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -7277,14 +7322,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 320:4: -> ^( FORALL_EFFECT typedVariableList effect )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:320:7: ^( FORALL_EFFECT typedVariableList effect )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(FORALL_EFFECT, "FORALL_EFFECT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(FORALL_EFFECT, "FORALL_EFFECT")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_typedVariableList.nextTree());
@@ -7343,14 +7388,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 322:4: -> ^( WHEN_EFFECT goalDesc condEffect )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:322:7: ^( WHEN_EFFECT goalDesc condEffect )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(WHEN_EFFECT, "WHEN_EFFECT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(WHEN_EFFECT, "WHEN_EFFECT")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_goalDesc.nextTree());
@@ -7371,7 +7416,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:323:4: pEffect
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_pEffect_in_cEffect1940);
@@ -7390,14 +7435,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -7413,7 +7458,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class pEffect_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -7546,14 +7592,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 328:4: -> ^( ASSIGN_EFFECT assignOp fHead fExp )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:328:7: ^( ASSIGN_EFFECT assignOp fHead fExp )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(ASSIGN_EFFECT, "ASSIGN_EFFECT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(ASSIGN_EFFECT, "ASSIGN_EFFECT")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_assignOp.nextTree());
@@ -7607,14 +7653,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 330:4: -> ^( NOT_EFFECT atomicTermFormula )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:330:7: ^( NOT_EFFECT atomicTermFormula )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(NOT_EFFECT, "NOT_EFFECT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(NOT_EFFECT, "NOT_EFFECT")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_atomicTermFormula.nextTree());
@@ -7633,7 +7679,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:331:4: atomicTermFormula
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_atomicTermFormula_in_pEffect2001);
@@ -7652,14 +7698,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -7675,7 +7721,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class condEffect_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -7796,14 +7843,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 337:27: -> ^( AND_EFFECT ( pEffect )* )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:337:30: ^( AND_EFFECT ( pEffect )* )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(AND_EFFECT, "AND_EFFECT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(AND_EFFECT, "AND_EFFECT")
                         , root_1);
 
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:337:43: ( pEffect )*
@@ -7827,7 +7874,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:338:4: pEffect
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_pEffect_in_condEffect2035);
@@ -7846,14 +7893,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -7869,7 +7916,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class binaryOp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -7893,15 +7941,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:342:10: ( '*' | '+' | '-' | '/' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set245=(Token)input.LT(1);
+            set245=input.LT(1);
 
             if ( (input.LA(1) >= 58 && input.LA(1) <= 61) ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set245)
+                adaptor.create(set245)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -7920,14 +7968,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -7943,7 +7991,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class binaryComp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -7967,15 +8016,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:344:12: ( '>' | '<' | '=' | '>=' | '<=' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set246=(Token)input.LT(1);
+            set246=input.LT(1);
 
             if ( (input.LA(1) >= 81 && input.LA(1) <= 82)||(input.LA(1) >= 85 && input.LA(1) <= 87) ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set246)
+                adaptor.create(set246)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -7994,14 +8043,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -8017,7 +8066,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class assignOp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -8041,15 +8091,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:346:10: ( 'assign' | 'scale-up' | 'scale-down' | 'increase' | 'decrease' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set247=(Token)input.LT(1);
+            set247=input.LT(1);
 
             if ( (input.LA(1) >= 93 && input.LA(1) <= 94)||input.LA(1)==104||(input.LA(1) >= 114 && input.LA(1) <= 115) ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set247)
+                adaptor.create(set247)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -8068,14 +8118,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -8091,7 +8141,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class durationConstraint_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -8170,13 +8221,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:352:4: '(' 'and' ( simpleDurationConstraint )+ ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal248=(Token)match(input,55,FOLLOW_55_in_durationConstraint2122); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal248_tree = 
-                    (Object)adaptor.create(char_literal248)
+                    adaptor.create(char_literal248)
                     ;
                     adaptor.addChild(root_0, char_literal248_tree);
                     }
@@ -8184,7 +8235,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal249=(Token)match(input,92,FOLLOW_92_in_durationConstraint2124); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal249_tree = 
-                    (Object)adaptor.create(string_literal249)
+                    adaptor.create(string_literal249)
                     ;
                     adaptor.addChild(root_0, string_literal249_tree);
                     }
@@ -8229,7 +8280,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal251=(Token)match(input,57,FOLLOW_57_in_durationConstraint2129); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal251_tree = 
-                    (Object)adaptor.create(char_literal251)
+                    adaptor.create(char_literal251)
                     ;
                     adaptor.addChild(root_0, char_literal251_tree);
                     }
@@ -8239,13 +8290,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:353:4: '(' ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal252=(Token)match(input,55,FOLLOW_55_in_durationConstraint2134); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal252_tree = 
-                    (Object)adaptor.create(char_literal252)
+                    adaptor.create(char_literal252)
                     ;
                     adaptor.addChild(root_0, char_literal252_tree);
                     }
@@ -8253,7 +8304,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal253=(Token)match(input,57,FOLLOW_57_in_durationConstraint2136); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal253_tree = 
-                    (Object)adaptor.create(char_literal253)
+                    adaptor.create(char_literal253)
                     ;
                     adaptor.addChild(root_0, char_literal253_tree);
                     }
@@ -8263,7 +8314,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:354:4: simpleDurationConstraint
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_simpleDurationConstraint_in_durationConstraint2141);
@@ -8282,14 +8333,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -8305,7 +8356,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class simpleDurationConstraint_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -8378,13 +8430,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:358:4: '(' durOp '?duration' durValue ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal255=(Token)match(input,55,FOLLOW_55_in_simpleDurationConstraint2152); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal255_tree = 
-                    (Object)adaptor.create(char_literal255)
+                    adaptor.create(char_literal255)
                     ;
                     adaptor.addChild(root_0, char_literal255_tree);
                     }
@@ -8399,7 +8451,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal257=(Token)match(input,88,FOLLOW_88_in_simpleDurationConstraint2156); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal257_tree = 
-                    (Object)adaptor.create(string_literal257)
+                    adaptor.create(string_literal257)
                     ;
                     adaptor.addChild(root_0, string_literal257_tree);
                     }
@@ -8414,7 +8466,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal259=(Token)match(input,57,FOLLOW_57_in_simpleDurationConstraint2160); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal259_tree = 
-                    (Object)adaptor.create(char_literal259)
+                    adaptor.create(char_literal259)
                     ;
                     adaptor.addChild(root_0, char_literal259_tree);
                     }
@@ -8424,13 +8476,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:359:4: '(' '<remove_this_if_you_know_what_you_are_doing>at' timeSpecifier simpleDurationConstraint ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal260=(Token)match(input,55,FOLLOW_55_in_simpleDurationConstraint2165); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal260_tree = 
-                    (Object)adaptor.create(char_literal260)
+                    adaptor.create(char_literal260)
                     ;
                     adaptor.addChild(root_0, char_literal260_tree);
                     }
@@ -8438,7 +8490,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal261=(Token)match(input,83,FOLLOW_83_in_simpleDurationConstraint2167); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal261_tree = 
-                    (Object)adaptor.create(string_literal261)
+                    adaptor.create(string_literal261)
                     ;
                     adaptor.addChild(root_0, string_literal261_tree);
                     }
@@ -8460,7 +8512,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal264=(Token)match(input,57,FOLLOW_57_in_simpleDurationConstraint2173); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal264_tree = 
-                    (Object)adaptor.create(char_literal264)
+                    adaptor.create(char_literal264)
                     ;
                     adaptor.addChild(root_0, char_literal264_tree);
                     }
@@ -8474,14 +8526,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -8497,7 +8549,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class durOp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -8521,15 +8574,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:362:7: ( '<=' | '>=' | '=' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set265=(Token)input.LT(1);
+            set265=input.LT(1);
 
             if ( input.LA(1)==82||input.LA(1)==85||input.LA(1)==87 ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set265)
+                adaptor.create(set265)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -8548,14 +8601,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -8571,7 +8624,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class durValue_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -8631,13 +8685,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:364:12: NUMBER
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     NUMBER266=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_durValue2200); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER266_tree = 
-                    (Object)adaptor.create(NUMBER266)
+                    adaptor.create(NUMBER266)
                     ;
                     adaptor.addChild(root_0, NUMBER266_tree);
                     }
@@ -8647,7 +8701,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:364:21: fExp
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_fExp_in_durValue2204);
@@ -8666,14 +8720,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -8689,7 +8743,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class daEffect_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -8795,13 +8850,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:367:4: '(' 'and' ( daEffect )* ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal268=(Token)match(input,55,FOLLOW_55_in_daEffect2214); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal268_tree = 
-                    (Object)adaptor.create(char_literal268)
+                    adaptor.create(char_literal268)
                     ;
                     adaptor.addChild(root_0, char_literal268_tree);
                     }
@@ -8809,7 +8864,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal269=(Token)match(input,92,FOLLOW_92_in_daEffect2216); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal269_tree = 
-                    (Object)adaptor.create(string_literal269)
+                    adaptor.create(string_literal269)
                     ;
                     adaptor.addChild(root_0, string_literal269_tree);
                     }
@@ -8848,7 +8903,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal271=(Token)match(input,57,FOLLOW_57_in_daEffect2221); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal271_tree = 
-                    (Object)adaptor.create(char_literal271)
+                    adaptor.create(char_literal271)
                     ;
                     adaptor.addChild(root_0, char_literal271_tree);
                     }
@@ -8858,7 +8913,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:368:4: timedEffect
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_timedEffect_in_daEffect2226);
@@ -8873,13 +8928,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:369:4: '(' 'forall' '(' typedVariableList ')' daEffect ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal273=(Token)match(input,55,FOLLOW_55_in_daEffect2231); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal273_tree = 
-                    (Object)adaptor.create(char_literal273)
+                    adaptor.create(char_literal273)
                     ;
                     adaptor.addChild(root_0, char_literal273_tree);
                     }
@@ -8887,7 +8942,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal274=(Token)match(input,100,FOLLOW_100_in_daEffect2233); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal274_tree = 
-                    (Object)adaptor.create(string_literal274)
+                    adaptor.create(string_literal274)
                     ;
                     adaptor.addChild(root_0, string_literal274_tree);
                     }
@@ -8895,7 +8950,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal275=(Token)match(input,55,FOLLOW_55_in_daEffect2235); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal275_tree = 
-                    (Object)adaptor.create(char_literal275)
+                    adaptor.create(char_literal275)
                     ;
                     adaptor.addChild(root_0, char_literal275_tree);
                     }
@@ -8910,7 +8965,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal277=(Token)match(input,57,FOLLOW_57_in_daEffect2239); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal277_tree = 
-                    (Object)adaptor.create(char_literal277)
+                    adaptor.create(char_literal277)
                     ;
                     adaptor.addChild(root_0, char_literal277_tree);
                     }
@@ -8925,7 +8980,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal279=(Token)match(input,57,FOLLOW_57_in_daEffect2243); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal279_tree = 
-                    (Object)adaptor.create(char_literal279)
+                    adaptor.create(char_literal279)
                     ;
                     adaptor.addChild(root_0, char_literal279_tree);
                     }
@@ -8935,13 +8990,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 4 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:370:4: '(' 'when' daGD timedEffect ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal280=(Token)match(input,55,FOLLOW_55_in_daEffect2248); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal280_tree = 
-                    (Object)adaptor.create(char_literal280)
+                    adaptor.create(char_literal280)
                     ;
                     adaptor.addChild(root_0, char_literal280_tree);
                     }
@@ -8949,7 +9004,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal281=(Token)match(input,121,FOLLOW_121_in_daEffect2250); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal281_tree = 
-                    (Object)adaptor.create(string_literal281)
+                    adaptor.create(string_literal281)
                     ;
                     adaptor.addChild(root_0, string_literal281_tree);
                     }
@@ -8971,7 +9026,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal284=(Token)match(input,57,FOLLOW_57_in_daEffect2256); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal284_tree = 
-                    (Object)adaptor.create(char_literal284)
+                    adaptor.create(char_literal284)
                     ;
                     adaptor.addChild(root_0, char_literal284_tree);
                     }
@@ -8981,13 +9036,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 5 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:371:4: '(' assignOp fHead fExpDA ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal285=(Token)match(input,55,FOLLOW_55_in_daEffect2261); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal285_tree = 
-                    (Object)adaptor.create(char_literal285)
+                    adaptor.create(char_literal285)
                     ;
                     adaptor.addChild(root_0, char_literal285_tree);
                     }
@@ -9016,7 +9071,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal289=(Token)match(input,57,FOLLOW_57_in_daEffect2269); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal289_tree = 
-                    (Object)adaptor.create(char_literal289)
+                    adaptor.create(char_literal289)
                     ;
                     adaptor.addChild(root_0, char_literal289_tree);
                     }
@@ -9030,14 +9085,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -9053,7 +9108,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class timedEffect_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -9139,13 +9195,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:375:4: '(' '<remove_this_if_you_know_what_you_are_doing>at' timeSpecifier daEffect ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal290=(Token)match(input,55,FOLLOW_55_in_timedEffect2280); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal290_tree = 
-                    (Object)adaptor.create(char_literal290)
+                    adaptor.create(char_literal290)
                     ;
                     adaptor.addChild(root_0, char_literal290_tree);
                     }
@@ -9153,7 +9209,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal291=(Token)match(input,83,FOLLOW_83_in_timedEffect2282); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal291_tree = 
-                    (Object)adaptor.create(string_literal291)
+                    adaptor.create(string_literal291)
                     ;
                     adaptor.addChild(root_0, string_literal291_tree);
                     }
@@ -9175,7 +9231,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal294=(Token)match(input,57,FOLLOW_57_in_timedEffect2288); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal294_tree = 
-                    (Object)adaptor.create(char_literal294)
+                    adaptor.create(char_literal294)
                     ;
                     adaptor.addChild(root_0, char_literal294_tree);
                     }
@@ -9185,13 +9241,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:376:4: '(' '<remove_this_if_you_know_what_you_are_doing>at' timeSpecifier fAssignDA ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal295=(Token)match(input,55,FOLLOW_55_in_timedEffect2298); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal295_tree = 
-                    (Object)adaptor.create(char_literal295)
+                    adaptor.create(char_literal295)
                     ;
                     adaptor.addChild(root_0, char_literal295_tree);
                     }
@@ -9199,7 +9255,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal296=(Token)match(input,83,FOLLOW_83_in_timedEffect2300); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal296_tree = 
-                    (Object)adaptor.create(string_literal296)
+                    adaptor.create(string_literal296)
                     ;
                     adaptor.addChild(root_0, string_literal296_tree);
                     }
@@ -9221,7 +9277,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal299=(Token)match(input,57,FOLLOW_57_in_timedEffect2306); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal299_tree = 
-                    (Object)adaptor.create(char_literal299)
+                    adaptor.create(char_literal299)
                     ;
                     adaptor.addChild(root_0, char_literal299_tree);
                     }
@@ -9231,13 +9287,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:377:4: '(' assignOp fHead fExp ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal300=(Token)match(input,55,FOLLOW_55_in_timedEffect2311); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal300_tree = 
-                    (Object)adaptor.create(char_literal300)
+                    adaptor.create(char_literal300)
                     ;
                     adaptor.addChild(root_0, char_literal300_tree);
                     }
@@ -9266,7 +9322,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal304=(Token)match(input,57,FOLLOW_57_in_timedEffect2319); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal304_tree = 
-                    (Object)adaptor.create(char_literal304)
+                    adaptor.create(char_literal304)
                     ;
                     adaptor.addChild(root_0, char_literal304_tree);
                     }
@@ -9280,14 +9336,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -9303,7 +9359,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fAssignDA_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -9335,13 +9392,13 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:381:2: ( '(' assignOp fHead fExpDA ')' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:381:4: '(' assignOp fHead fExpDA ')'
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
             char_literal305=(Token)match(input,55,FOLLOW_55_in_fAssignDA2339); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             char_literal305_tree = 
-            (Object)adaptor.create(char_literal305)
+            adaptor.create(char_literal305)
             ;
             adaptor.addChild(root_0, char_literal305_tree);
             }
@@ -9370,7 +9427,7 @@ public TreeAdaptor getTreeAdaptor() {
             char_literal309=(Token)match(input,57,FOLLOW_57_in_fAssignDA2347); if (state.failed) return retval;
             if ( state.backtracking==0 ) {
             char_literal309_tree = 
-            (Object)adaptor.create(char_literal309)
+            adaptor.create(char_literal309)
             ;
             adaptor.addChild(root_0, char_literal309_tree);
             }
@@ -9382,14 +9439,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -9405,7 +9462,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class fExpDA_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -9489,13 +9547,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:385:4: '(' ( ( binaryOp fExpDA fExpDA ) | ( '-' fExpDA ) ) ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal310=(Token)match(input,55,FOLLOW_55_in_fExpDA2358); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal310_tree = 
-                    (Object)adaptor.create(char_literal310)
+                    adaptor.create(char_literal310)
                     ;
                     adaptor.addChild(root_0, char_literal310_tree);
                     }
@@ -9575,7 +9633,7 @@ public TreeAdaptor getTreeAdaptor() {
                             char_literal314=(Token)match(input,60,FOLLOW_60_in_fExpDA2372); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             char_literal314_tree = 
-                            (Object)adaptor.create(char_literal314)
+                            adaptor.create(char_literal314)
                             ;
                             adaptor.addChild(root_0, char_literal314_tree);
                             }
@@ -9599,7 +9657,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal316=(Token)match(input,57,FOLLOW_57_in_fExpDA2378); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal316_tree = 
-                    (Object)adaptor.create(char_literal316)
+                    adaptor.create(char_literal316)
                     ;
                     adaptor.addChild(root_0, char_literal316_tree);
                     }
@@ -9609,13 +9667,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:386:4: '?duration'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     string_literal317=(Token)match(input,88,FOLLOW_88_in_fExpDA2383); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal317_tree = 
-                    (Object)adaptor.create(string_literal317)
+                    adaptor.create(string_literal317)
                     ;
                     adaptor.addChild(root_0, string_literal317_tree);
                     }
@@ -9625,7 +9683,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:387:4: fExp
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_fExp_in_fExpDA2388);
@@ -9644,14 +9702,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -9667,7 +9725,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class problem_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -9881,14 +9940,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 403:7: -> ^( PROBLEM problemDecl problemDomain ( requireDef )? ( objectDecl )? init goal ( probConstraints )? ( metricSpec )? )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:403:10: ^( PROBLEM problemDecl problemDomain ( requireDef )? ( objectDecl )? init goal ( probConstraints )? ( metricSpec )? )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PROBLEM, "PROBLEM")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PROBLEM, "PROBLEM")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_problemDecl.nextTree());
@@ -9943,14 +10002,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -9966,7 +10025,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class problemDecl_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10028,14 +10088,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 409:5: -> ^( PROBLEM_NAME NAME )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:409:8: ^( PROBLEM_NAME NAME )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PROBLEM_NAME, "PROBLEM_NAME")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PROBLEM_NAME, "PROBLEM_NAME")
                 , root_1);
 
                 adaptor.addChild(root_1, 
@@ -10058,14 +10118,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -10081,7 +10141,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class problemDomain_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10143,14 +10204,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 414:2: -> ^( PROBLEM_DOMAIN NAME )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:414:5: ^( PROBLEM_DOMAIN NAME )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PROBLEM_DOMAIN, "PROBLEM_DOMAIN")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PROBLEM_DOMAIN, "PROBLEM_DOMAIN")
                 , root_1);
 
                 adaptor.addChild(root_1, 
@@ -10173,14 +10234,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -10196,7 +10257,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class objectDecl_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10260,14 +10322,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 419:2: -> ^( OBJECTS typedNameList )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:419:5: ^( OBJECTS typedNameList )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(OBJECTS, "OBJECTS")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(OBJECTS, "OBJECTS")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_typedNameList.nextTree());
@@ -10288,14 +10350,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -10311,7 +10373,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class init_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10399,14 +10462,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 424:2: -> ^( INIT ( initEl )* )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:424:5: ^( INIT ( initEl )* )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(INIT, "INIT")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(INIT, "INIT")
                 , root_1);
 
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:424:12: ( initEl )*
@@ -10432,14 +10495,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -10455,7 +10518,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class initEl_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10546,7 +10610,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:428:4: nameLiteral
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_nameLiteral_in_initEl2647);
@@ -10596,14 +10660,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 429:37: -> ^( INIT_EQ fHead NUMBER )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:429:40: ^( INIT_EQ fHead NUMBER )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(INIT_EQ, "INIT_EQ")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(INIT_EQ, "INIT_EQ")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_fHead.nextTree());
@@ -10661,14 +10725,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 430:81: -> ^( INIT_AT NUMBER nameLiteral )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:430:84: ^( INIT_AT NUMBER nameLiteral )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(INIT_AT, "INIT_AT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(INIT_AT, "INIT_AT")
                         , root_1);
 
                         adaptor.addChild(root_1, 
@@ -10695,14 +10759,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -10718,7 +10782,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class nameLiteral_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10784,7 +10849,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:434:4: atomicNameFormula
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_atomicNameFormula_in_nameLiteral2713);
@@ -10830,14 +10895,14 @@ public TreeAdaptor getTreeAdaptor() {
                     retval.tree = root_0;
                     RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
                     // 435:36: -> ^( NOT_PRED_INIT atomicNameFormula )
                     {
                         // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:435:39: ^( NOT_PRED_INIT atomicNameFormula )
                         {
-                        Object root_1 = (Object)adaptor.nil();
-                        root_1 = (Object)adaptor.becomeRoot(
-                        (Object)adaptor.create(NOT_PRED_INIT, "NOT_PRED_INIT")
+                        Object root_1 = adaptor.nil();
+                        root_1 = adaptor.becomeRoot(
+                        adaptor.create(NOT_PRED_INIT, "NOT_PRED_INIT")
                         , root_1);
 
                         adaptor.addChild(root_1, stream_atomicNameFormula.nextTree());
@@ -10860,14 +10925,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -10883,7 +10948,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class atomicNameFormula_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -10971,14 +11037,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 439:28: -> ^( PRED_INST predicate ( NAME )* )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:439:31: ^( PRED_INST predicate ( NAME )* )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PRED_INST, "PRED_INST")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PRED_INST, "PRED_INST")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_predicate.nextTree());
@@ -11008,14 +11074,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -11031,7 +11097,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class goal_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -11095,14 +11162,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 446:33: -> ^( GOAL goalDesc )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:446:36: ^( GOAL goalDesc )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(GOAL, "GOAL")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(GOAL, "GOAL")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_goalDesc.nextTree());
@@ -11123,14 +11190,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -11146,7 +11213,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class probConstraints_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -11210,14 +11278,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 450:4: -> ^( PROBLEM_CONSTRAINT prefConGD )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:450:7: ^( PROBLEM_CONSTRAINT prefConGD )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PROBLEM_CONSTRAINT, "PROBLEM_CONSTRAINT")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PROBLEM_CONSTRAINT, "PROBLEM_CONSTRAINT")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_prefConGD.nextTree());
@@ -11238,14 +11306,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -11261,7 +11329,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class prefConGD_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -11354,13 +11423,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:454:4: '(' 'and' ( prefConGD )* ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal374=(Token)match(input,55,FOLLOW_55_in_prefConGD2828); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal374_tree = 
-                    (Object)adaptor.create(char_literal374)
+                    adaptor.create(char_literal374)
                     ;
                     adaptor.addChild(root_0, char_literal374_tree);
                     }
@@ -11368,7 +11437,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal375=(Token)match(input,92,FOLLOW_92_in_prefConGD2830); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal375_tree = 
-                    (Object)adaptor.create(string_literal375)
+                    adaptor.create(string_literal375)
                     ;
                     adaptor.addChild(root_0, string_literal375_tree);
                     }
@@ -11407,7 +11476,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal377=(Token)match(input,57,FOLLOW_57_in_prefConGD2835); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal377_tree = 
-                    (Object)adaptor.create(char_literal377)
+                    adaptor.create(char_literal377)
                     ;
                     adaptor.addChild(root_0, char_literal377_tree);
                     }
@@ -11417,13 +11486,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:455:4: '(' 'forall' '(' typedVariableList ')' prefConGD ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal378=(Token)match(input,55,FOLLOW_55_in_prefConGD2840); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal378_tree = 
-                    (Object)adaptor.create(char_literal378)
+                    adaptor.create(char_literal378)
                     ;
                     adaptor.addChild(root_0, char_literal378_tree);
                     }
@@ -11431,7 +11500,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal379=(Token)match(input,100,FOLLOW_100_in_prefConGD2842); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal379_tree = 
-                    (Object)adaptor.create(string_literal379)
+                    adaptor.create(string_literal379)
                     ;
                     adaptor.addChild(root_0, string_literal379_tree);
                     }
@@ -11439,7 +11508,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal380=(Token)match(input,55,FOLLOW_55_in_prefConGD2844); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal380_tree = 
-                    (Object)adaptor.create(char_literal380)
+                    adaptor.create(char_literal380)
                     ;
                     adaptor.addChild(root_0, char_literal380_tree);
                     }
@@ -11454,7 +11523,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal382=(Token)match(input,57,FOLLOW_57_in_prefConGD2848); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal382_tree = 
-                    (Object)adaptor.create(char_literal382)
+                    adaptor.create(char_literal382)
                     ;
                     adaptor.addChild(root_0, char_literal382_tree);
                     }
@@ -11469,7 +11538,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal384=(Token)match(input,57,FOLLOW_57_in_prefConGD2852); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal384_tree = 
-                    (Object)adaptor.create(char_literal384)
+                    adaptor.create(char_literal384)
                     ;
                     adaptor.addChild(root_0, char_literal384_tree);
                     }
@@ -11479,13 +11548,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:456:4: '(' 'preference' ( NAME )? conGD ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal385=(Token)match(input,55,FOLLOW_55_in_prefConGD2857); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal385_tree = 
-                    (Object)adaptor.create(char_literal385)
+                    adaptor.create(char_literal385)
                     ;
                     adaptor.addChild(root_0, char_literal385_tree);
                     }
@@ -11493,7 +11562,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal386=(Token)match(input,112,FOLLOW_112_in_prefConGD2859); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal386_tree = 
-                    (Object)adaptor.create(string_literal386)
+                    adaptor.create(string_literal386)
                     ;
                     adaptor.addChild(root_0, string_literal386_tree);
                     }
@@ -11512,7 +11581,7 @@ public TreeAdaptor getTreeAdaptor() {
                             NAME387=(Token)match(input,NAME,FOLLOW_NAME_in_prefConGD2861); if (state.failed) return retval;
                             if ( state.backtracking==0 ) {
                             NAME387_tree = 
-                            (Object)adaptor.create(NAME387)
+                            adaptor.create(NAME387)
                             ;
                             adaptor.addChild(root_0, NAME387_tree);
                             }
@@ -11533,7 +11602,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal389=(Token)match(input,57,FOLLOW_57_in_prefConGD2866); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal389_tree = 
-                    (Object)adaptor.create(char_literal389)
+                    adaptor.create(char_literal389)
                     ;
                     adaptor.addChild(root_0, char_literal389_tree);
                     }
@@ -11543,7 +11612,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 4 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:457:4: conGD
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_conGD_in_prefConGD2871);
@@ -11562,14 +11631,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -11585,7 +11654,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class metricSpec_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -11659,14 +11729,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.tree = root_0;
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
             // 462:4: -> ^( PROBLEM_METRIC optimization metricFExp )
             {
                 // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:462:7: ^( PROBLEM_METRIC optimization metricFExp )
                 {
-                Object root_1 = (Object)adaptor.nil();
-                root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PROBLEM_METRIC, "PROBLEM_METRIC")
+                Object root_1 = adaptor.nil();
+                root_1 = adaptor.becomeRoot(
+                adaptor.create(PROBLEM_METRIC, "PROBLEM_METRIC")
                 , root_1);
 
                 adaptor.addChild(root_1, stream_optimization.nextTree());
@@ -11689,14 +11759,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -11712,7 +11782,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class optimization_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -11736,15 +11807,15 @@ public TreeAdaptor getTreeAdaptor() {
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:465:14: ( 'minimize' | 'maximize' )
             // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = adaptor.nil();
 
 
-            set396=(Token)input.LT(1);
+            set396=input.LT(1);
 
             if ( (input.LA(1) >= 106 && input.LA(1) <= 107) ) {
                 input.consume();
                 if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                (Object)adaptor.create(set396)
+                adaptor.create(set396)
                 );
                 state.errorRecovery=false;
                 state.failed=false;
@@ -11763,14 +11834,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -11786,7 +11857,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class metricFExp_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -11915,13 +11987,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:468:4: '(' binaryOp metricFExp metricFExp ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal397=(Token)match(input,55,FOLLOW_55_in_metricFExp2927); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal397_tree = 
-                    (Object)adaptor.create(char_literal397)
+                    adaptor.create(char_literal397)
                     ;
                     adaptor.addChild(root_0, char_literal397_tree);
                     }
@@ -11950,7 +12022,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal401=(Token)match(input,57,FOLLOW_57_in_metricFExp2935); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal401_tree = 
-                    (Object)adaptor.create(char_literal401)
+                    adaptor.create(char_literal401)
                     ;
                     adaptor.addChild(root_0, char_literal401_tree);
                     }
@@ -11960,23 +12032,23 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:469:4: '(' ( '*' | '/' ) metricFExp ( metricFExp )+ ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal402=(Token)match(input,55,FOLLOW_55_in_metricFExp2940); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal402_tree = 
-                    (Object)adaptor.create(char_literal402)
+                    adaptor.create(char_literal402)
                     ;
                     adaptor.addChild(root_0, char_literal402_tree);
                     }
 
-                    set403=(Token)input.LT(1);
+                    set403=input.LT(1);
 
                     if ( input.LA(1)==58||input.LA(1)==61 ) {
                         input.consume();
                         if ( state.backtracking==0 ) adaptor.addChild(root_0, 
-                        (Object)adaptor.create(set403)
+                        adaptor.create(set403)
                         );
                         state.errorRecovery=false;
                         state.failed=false;
@@ -12035,7 +12107,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal406=(Token)match(input,57,FOLLOW_57_in_metricFExp2953); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal406_tree = 
-                    (Object)adaptor.create(char_literal406)
+                    adaptor.create(char_literal406)
                     ;
                     adaptor.addChild(root_0, char_literal406_tree);
                     }
@@ -12045,13 +12117,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:470:4: '(' '-' metricFExp ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal407=(Token)match(input,55,FOLLOW_55_in_metricFExp2958); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal407_tree = 
-                    (Object)adaptor.create(char_literal407)
+                    adaptor.create(char_literal407)
                     ;
                     adaptor.addChild(root_0, char_literal407_tree);
                     }
@@ -12059,7 +12131,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal408=(Token)match(input,60,FOLLOW_60_in_metricFExp2960); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal408_tree = 
-                    (Object)adaptor.create(char_literal408)
+                    adaptor.create(char_literal408)
                     ;
                     adaptor.addChild(root_0, char_literal408_tree);
                     }
@@ -12074,7 +12146,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal410=(Token)match(input,57,FOLLOW_57_in_metricFExp2964); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal410_tree = 
-                    (Object)adaptor.create(char_literal410)
+                    adaptor.create(char_literal410)
                     ;
                     adaptor.addChild(root_0, char_literal410_tree);
                     }
@@ -12084,13 +12156,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 4 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:471:4: NUMBER
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     NUMBER411=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_metricFExp2969); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER411_tree = 
-                    (Object)adaptor.create(NUMBER411)
+                    adaptor.create(NUMBER411)
                     ;
                     adaptor.addChild(root_0, NUMBER411_tree);
                     }
@@ -12100,13 +12172,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 5 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:472:4: '(' functionSymbol ( NAME )* ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal412=(Token)match(input,55,FOLLOW_55_in_metricFExp2974); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal412_tree = 
-                    (Object)adaptor.create(char_literal412)
+                    adaptor.create(char_literal412)
                     ;
                     adaptor.addChild(root_0, char_literal412_tree);
                     }
@@ -12136,7 +12208,7 @@ public TreeAdaptor getTreeAdaptor() {
                     	    NAME414=(Token)match(input,NAME,FOLLOW_NAME_in_metricFExp2978); if (state.failed) return retval;
                     	    if ( state.backtracking==0 ) {
                     	    NAME414_tree = 
-                    	    (Object)adaptor.create(NAME414)
+                    	    adaptor.create(NAME414)
                     	    ;
                     	    adaptor.addChild(root_0, NAME414_tree);
                     	    }
@@ -12153,7 +12225,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal415=(Token)match(input,57,FOLLOW_57_in_metricFExp2981); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal415_tree = 
-                    (Object)adaptor.create(char_literal415)
+                    adaptor.create(char_literal415)
                     ;
                     adaptor.addChild(root_0, char_literal415_tree);
                     }
@@ -12163,7 +12235,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 6 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:473:4: functionSymbol
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     pushFollow(FOLLOW_functionSymbol_in_metricFExp2986);
@@ -12178,13 +12250,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 7 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:474:7: 'total-time'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     string_literal417=(Token)match(input,120,FOLLOW_120_in_metricFExp2994); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal417_tree = 
-                    (Object)adaptor.create(string_literal417)
+                    adaptor.create(string_literal417)
                     ;
                     adaptor.addChild(root_0, string_literal417_tree);
                     }
@@ -12194,13 +12266,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 8 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:475:4: '(' 'is-violated' NAME ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal418=(Token)match(input,55,FOLLOW_55_in_metricFExp2999); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal418_tree = 
-                    (Object)adaptor.create(char_literal418)
+                    adaptor.create(char_literal418)
                     ;
                     adaptor.addChild(root_0, char_literal418_tree);
                     }
@@ -12208,7 +12280,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal419=(Token)match(input,105,FOLLOW_105_in_metricFExp3001); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal419_tree = 
-                    (Object)adaptor.create(string_literal419)
+                    adaptor.create(string_literal419)
                     ;
                     adaptor.addChild(root_0, string_literal419_tree);
                     }
@@ -12216,7 +12288,7 @@ public TreeAdaptor getTreeAdaptor() {
                     NAME420=(Token)match(input,NAME,FOLLOW_NAME_in_metricFExp3003); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NAME420_tree = 
-                    (Object)adaptor.create(NAME420)
+                    adaptor.create(NAME420)
                     ;
                     adaptor.addChild(root_0, NAME420_tree);
                     }
@@ -12224,7 +12296,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal421=(Token)match(input,57,FOLLOW_57_in_metricFExp3005); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal421_tree = 
-                    (Object)adaptor.create(char_literal421)
+                    adaptor.create(char_literal421)
                     ;
                     adaptor.addChild(root_0, char_literal421_tree);
                     }
@@ -12238,14 +12310,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -12261,7 +12333,8 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static class conGD_return extends ParserRuleReturnScope {
         Object tree;
-        public Object getTree() { return tree; }
+        @Override
+		public Object getTree() { return tree; }
     };
 
 
@@ -12488,13 +12561,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:481:4: '(' 'and' ( conGD )* ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal422=(Token)match(input,55,FOLLOW_55_in_conGD3019); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal422_tree = 
-                    (Object)adaptor.create(char_literal422)
+                    adaptor.create(char_literal422)
                     ;
                     adaptor.addChild(root_0, char_literal422_tree);
                     }
@@ -12502,7 +12575,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal423=(Token)match(input,92,FOLLOW_92_in_conGD3021); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal423_tree = 
-                    (Object)adaptor.create(string_literal423)
+                    adaptor.create(string_literal423)
                     ;
                     adaptor.addChild(root_0, string_literal423_tree);
                     }
@@ -12541,7 +12614,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal425=(Token)match(input,57,FOLLOW_57_in_conGD3026); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal425_tree = 
-                    (Object)adaptor.create(char_literal425)
+                    adaptor.create(char_literal425)
                     ;
                     adaptor.addChild(root_0, char_literal425_tree);
                     }
@@ -12551,13 +12624,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:482:4: '(' 'forall' '(' typedVariableList ')' conGD ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal426=(Token)match(input,55,FOLLOW_55_in_conGD3031); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal426_tree = 
-                    (Object)adaptor.create(char_literal426)
+                    adaptor.create(char_literal426)
                     ;
                     adaptor.addChild(root_0, char_literal426_tree);
                     }
@@ -12565,7 +12638,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal427=(Token)match(input,100,FOLLOW_100_in_conGD3033); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal427_tree = 
-                    (Object)adaptor.create(string_literal427)
+                    adaptor.create(string_literal427)
                     ;
                     adaptor.addChild(root_0, string_literal427_tree);
                     }
@@ -12573,7 +12646,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal428=(Token)match(input,55,FOLLOW_55_in_conGD3035); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal428_tree = 
-                    (Object)adaptor.create(char_literal428)
+                    adaptor.create(char_literal428)
                     ;
                     adaptor.addChild(root_0, char_literal428_tree);
                     }
@@ -12588,7 +12661,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal430=(Token)match(input,57,FOLLOW_57_in_conGD3039); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal430_tree = 
-                    (Object)adaptor.create(char_literal430)
+                    adaptor.create(char_literal430)
                     ;
                     adaptor.addChild(root_0, char_literal430_tree);
                     }
@@ -12603,7 +12676,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal432=(Token)match(input,57,FOLLOW_57_in_conGD3043); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal432_tree = 
-                    (Object)adaptor.create(char_literal432)
+                    adaptor.create(char_literal432)
                     ;
                     adaptor.addChild(root_0, char_literal432_tree);
                     }
@@ -12613,13 +12686,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 3 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:483:4: '(' '<remove_this_if_you_know_what_you_are_doing>at' 'end' goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal433=(Token)match(input,55,FOLLOW_55_in_conGD3048); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal433_tree = 
-                    (Object)adaptor.create(char_literal433)
+                    adaptor.create(char_literal433)
                     ;
                     adaptor.addChild(root_0, char_literal433_tree);
                     }
@@ -12627,7 +12700,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal434=(Token)match(input,83,FOLLOW_83_in_conGD3050); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal434_tree = 
-                    (Object)adaptor.create(string_literal434)
+                    adaptor.create(string_literal434)
                     ;
                     adaptor.addChild(root_0, string_literal434_tree);
                     }
@@ -12635,7 +12708,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal435=(Token)match(input,98,FOLLOW_98_in_conGD3052); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal435_tree = 
-                    (Object)adaptor.create(string_literal435)
+                    adaptor.create(string_literal435)
                     ;
                     adaptor.addChild(root_0, string_literal435_tree);
                     }
@@ -12650,7 +12723,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal437=(Token)match(input,57,FOLLOW_57_in_conGD3056); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal437_tree = 
-                    (Object)adaptor.create(char_literal437)
+                    adaptor.create(char_literal437)
                     ;
                     adaptor.addChild(root_0, char_literal437_tree);
                     }
@@ -12660,13 +12733,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 4 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:484:7: '(' 'always' goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal438=(Token)match(input,55,FOLLOW_55_in_conGD3064); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal438_tree = 
-                    (Object)adaptor.create(char_literal438)
+                    adaptor.create(char_literal438)
                     ;
                     adaptor.addChild(root_0, char_literal438_tree);
                     }
@@ -12674,7 +12747,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal439=(Token)match(input,90,FOLLOW_90_in_conGD3066); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal439_tree = 
-                    (Object)adaptor.create(string_literal439)
+                    adaptor.create(string_literal439)
                     ;
                     adaptor.addChild(root_0, string_literal439_tree);
                     }
@@ -12689,7 +12762,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal441=(Token)match(input,57,FOLLOW_57_in_conGD3070); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal441_tree = 
-                    (Object)adaptor.create(char_literal441)
+                    adaptor.create(char_literal441)
                     ;
                     adaptor.addChild(root_0, char_literal441_tree);
                     }
@@ -12699,13 +12772,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 5 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:485:4: '(' 'sometime' goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal442=(Token)match(input,55,FOLLOW_55_in_conGD3075); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal442_tree = 
-                    (Object)adaptor.create(char_literal442)
+                    adaptor.create(char_literal442)
                     ;
                     adaptor.addChild(root_0, char_literal442_tree);
                     }
@@ -12713,7 +12786,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal443=(Token)match(input,116,FOLLOW_116_in_conGD3077); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal443_tree = 
-                    (Object)adaptor.create(string_literal443)
+                    adaptor.create(string_literal443)
                     ;
                     adaptor.addChild(root_0, string_literal443_tree);
                     }
@@ -12728,7 +12801,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal445=(Token)match(input,57,FOLLOW_57_in_conGD3081); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal445_tree = 
-                    (Object)adaptor.create(char_literal445)
+                    adaptor.create(char_literal445)
                     ;
                     adaptor.addChild(root_0, char_literal445_tree);
                     }
@@ -12738,13 +12811,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 6 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:486:5: '(' 'within' NUMBER goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal446=(Token)match(input,55,FOLLOW_55_in_conGD3087); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal446_tree = 
-                    (Object)adaptor.create(char_literal446)
+                    adaptor.create(char_literal446)
                     ;
                     adaptor.addChild(root_0, char_literal446_tree);
                     }
@@ -12752,7 +12825,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal447=(Token)match(input,122,FOLLOW_122_in_conGD3089); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal447_tree = 
-                    (Object)adaptor.create(string_literal447)
+                    adaptor.create(string_literal447)
                     ;
                     adaptor.addChild(root_0, string_literal447_tree);
                     }
@@ -12760,7 +12833,7 @@ public TreeAdaptor getTreeAdaptor() {
                     NUMBER448=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_conGD3091); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER448_tree = 
-                    (Object)adaptor.create(NUMBER448)
+                    adaptor.create(NUMBER448)
                     ;
                     adaptor.addChild(root_0, NUMBER448_tree);
                     }
@@ -12775,7 +12848,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal450=(Token)match(input,57,FOLLOW_57_in_conGD3095); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal450_tree = 
-                    (Object)adaptor.create(char_literal450)
+                    adaptor.create(char_literal450)
                     ;
                     adaptor.addChild(root_0, char_literal450_tree);
                     }
@@ -12785,13 +12858,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 7 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:487:4: '(' '<remove_this_if_you_know_what_you_are_doing>at-most-once' goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal451=(Token)match(input,55,FOLLOW_55_in_conGD3100); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal451_tree = 
-                    (Object)adaptor.create(char_literal451)
+                    adaptor.create(char_literal451)
                     ;
                     adaptor.addChild(root_0, char_literal451_tree);
                     }
@@ -12799,7 +12872,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal452=(Token)match(input,84,FOLLOW_84_in_conGD3102); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal452_tree = 
-                    (Object)adaptor.create(string_literal452)
+                    adaptor.create(string_literal452)
                     ;
                     adaptor.addChild(root_0, string_literal452_tree);
                     }
@@ -12814,7 +12887,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal454=(Token)match(input,57,FOLLOW_57_in_conGD3106); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal454_tree = 
-                    (Object)adaptor.create(char_literal454)
+                    adaptor.create(char_literal454)
                     ;
                     adaptor.addChild(root_0, char_literal454_tree);
                     }
@@ -12824,13 +12897,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 8 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:488:4: '(' 'sometime-after' goalDesc goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal455=(Token)match(input,55,FOLLOW_55_in_conGD3111); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal455_tree = 
-                    (Object)adaptor.create(char_literal455)
+                    adaptor.create(char_literal455)
                     ;
                     adaptor.addChild(root_0, char_literal455_tree);
                     }
@@ -12838,7 +12911,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal456=(Token)match(input,117,FOLLOW_117_in_conGD3113); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal456_tree = 
-                    (Object)adaptor.create(string_literal456)
+                    adaptor.create(string_literal456)
                     ;
                     adaptor.addChild(root_0, string_literal456_tree);
                     }
@@ -12860,7 +12933,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal459=(Token)match(input,57,FOLLOW_57_in_conGD3119); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal459_tree = 
-                    (Object)adaptor.create(char_literal459)
+                    adaptor.create(char_literal459)
                     ;
                     adaptor.addChild(root_0, char_literal459_tree);
                     }
@@ -12870,13 +12943,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 9 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:489:4: '(' 'sometime-before' goalDesc goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal460=(Token)match(input,55,FOLLOW_55_in_conGD3124); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal460_tree = 
-                    (Object)adaptor.create(char_literal460)
+                    adaptor.create(char_literal460)
                     ;
                     adaptor.addChild(root_0, char_literal460_tree);
                     }
@@ -12884,7 +12957,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal461=(Token)match(input,118,FOLLOW_118_in_conGD3126); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal461_tree = 
-                    (Object)adaptor.create(string_literal461)
+                    adaptor.create(string_literal461)
                     ;
                     adaptor.addChild(root_0, string_literal461_tree);
                     }
@@ -12906,7 +12979,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal464=(Token)match(input,57,FOLLOW_57_in_conGD3132); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal464_tree = 
-                    (Object)adaptor.create(char_literal464)
+                    adaptor.create(char_literal464)
                     ;
                     adaptor.addChild(root_0, char_literal464_tree);
                     }
@@ -12916,13 +12989,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 10 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:490:4: '(' 'always-within' NUMBER goalDesc goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal465=(Token)match(input,55,FOLLOW_55_in_conGD3137); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal465_tree = 
-                    (Object)adaptor.create(char_literal465)
+                    adaptor.create(char_literal465)
                     ;
                     adaptor.addChild(root_0, char_literal465_tree);
                     }
@@ -12930,7 +13003,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal466=(Token)match(input,91,FOLLOW_91_in_conGD3139); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal466_tree = 
-                    (Object)adaptor.create(string_literal466)
+                    adaptor.create(string_literal466)
                     ;
                     adaptor.addChild(root_0, string_literal466_tree);
                     }
@@ -12938,7 +13011,7 @@ public TreeAdaptor getTreeAdaptor() {
                     NUMBER467=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_conGD3141); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER467_tree = 
-                    (Object)adaptor.create(NUMBER467)
+                    adaptor.create(NUMBER467)
                     ;
                     adaptor.addChild(root_0, NUMBER467_tree);
                     }
@@ -12960,7 +13033,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal470=(Token)match(input,57,FOLLOW_57_in_conGD3147); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal470_tree = 
-                    (Object)adaptor.create(char_literal470)
+                    adaptor.create(char_literal470)
                     ;
                     adaptor.addChild(root_0, char_literal470_tree);
                     }
@@ -12970,13 +13043,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 11 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:491:4: '(' 'hold-during' NUMBER NUMBER goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal471=(Token)match(input,55,FOLLOW_55_in_conGD3152); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal471_tree = 
-                    (Object)adaptor.create(char_literal471)
+                    adaptor.create(char_literal471)
                     ;
                     adaptor.addChild(root_0, char_literal471_tree);
                     }
@@ -12984,7 +13057,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal472=(Token)match(input,102,FOLLOW_102_in_conGD3154); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal472_tree = 
-                    (Object)adaptor.create(string_literal472)
+                    adaptor.create(string_literal472)
                     ;
                     adaptor.addChild(root_0, string_literal472_tree);
                     }
@@ -12992,7 +13065,7 @@ public TreeAdaptor getTreeAdaptor() {
                     NUMBER473=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_conGD3156); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER473_tree = 
-                    (Object)adaptor.create(NUMBER473)
+                    adaptor.create(NUMBER473)
                     ;
                     adaptor.addChild(root_0, NUMBER473_tree);
                     }
@@ -13000,7 +13073,7 @@ public TreeAdaptor getTreeAdaptor() {
                     NUMBER474=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_conGD3158); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER474_tree = 
-                    (Object)adaptor.create(NUMBER474)
+                    adaptor.create(NUMBER474)
                     ;
                     adaptor.addChild(root_0, NUMBER474_tree);
                     }
@@ -13015,7 +13088,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal476=(Token)match(input,57,FOLLOW_57_in_conGD3162); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal476_tree = 
-                    (Object)adaptor.create(char_literal476)
+                    adaptor.create(char_literal476)
                     ;
                     adaptor.addChild(root_0, char_literal476_tree);
                     }
@@ -13025,13 +13098,13 @@ public TreeAdaptor getTreeAdaptor() {
                 case 12 :
                     // C:\\ROOT\\PROJECTS\\pddlParser\\ext\\Pddl.g:492:4: '(' 'hold-after' NUMBER goalDesc ')'
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = adaptor.nil();
 
 
                     char_literal477=(Token)match(input,55,FOLLOW_55_in_conGD3167); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal477_tree = 
-                    (Object)adaptor.create(char_literal477)
+                    adaptor.create(char_literal477)
                     ;
                     adaptor.addChild(root_0, char_literal477_tree);
                     }
@@ -13039,7 +13112,7 @@ public TreeAdaptor getTreeAdaptor() {
                     string_literal478=(Token)match(input,101,FOLLOW_101_in_conGD3169); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     string_literal478_tree = 
-                    (Object)adaptor.create(string_literal478)
+                    adaptor.create(string_literal478)
                     ;
                     adaptor.addChild(root_0, string_literal478_tree);
                     }
@@ -13047,7 +13120,7 @@ public TreeAdaptor getTreeAdaptor() {
                     NUMBER479=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_conGD3171); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     NUMBER479_tree = 
-                    (Object)adaptor.create(NUMBER479)
+                    adaptor.create(NUMBER479)
                     ;
                     adaptor.addChild(root_0, NUMBER479_tree);
                     }
@@ -13062,7 +13135,7 @@ public TreeAdaptor getTreeAdaptor() {
                     char_literal481=(Token)match(input,57,FOLLOW_57_in_conGD3175); if (state.failed) return retval;
                     if ( state.backtracking==0 ) {
                     char_literal481_tree = 
-                    (Object)adaptor.create(char_literal481)
+                    adaptor.create(char_literal481)
                     ;
                     adaptor.addChild(root_0, char_literal481_tree);
                     }
@@ -13076,14 +13149,14 @@ public TreeAdaptor getTreeAdaptor() {
 
             if ( state.backtracking==0 ) {
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
             }
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -14129,7 +14202,8 @@ public TreeAdaptor getTreeAdaptor() {
             this.special = DFA13_special;
             this.transition = DFA13_transition;
         }
-        public String getDescription() {
+        @Override
+		public String getDescription() {
             return "114:7: ( ( NAME )* | ( singleTypeNameList )+ ( NAME )* )";
         }
     }
@@ -14181,7 +14255,8 @@ public TreeAdaptor getTreeAdaptor() {
             this.special = DFA11_special;
             this.transition = DFA11_transition;
         }
-        public String getDescription() {
+        @Override
+		public String getDescription() {
             return "()+ loopback of 114:16: ( singleTypeNameList )+";
         }
     }
@@ -14233,7 +14308,8 @@ public TreeAdaptor getTreeAdaptor() {
             this.special = DFA24_special;
             this.transition = DFA24_transition;
         }
-        public String getDescription() {
+        @Override
+		public String getDescription() {
             return "179:7: ( ( VARIABLE )* | ( singleTypeVarList )+ ( VARIABLE )* )";
         }
     }
@@ -14285,7 +14361,8 @@ public TreeAdaptor getTreeAdaptor() {
             this.special = DFA22_special;
             this.transition = DFA22_transition;
         }
-        public String getDescription() {
+        @Override
+		public String getDescription() {
             return "()+ loopback of 179:22: ( singleTypeVarList )+";
         }
     }

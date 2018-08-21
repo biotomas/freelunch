@@ -79,6 +79,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
     }
     
+	@Override
 	public List<Integer> getActionVariables() {
 		List<Integer> res = new ArrayList<Integer>();
         for (SasAction a : actions) {

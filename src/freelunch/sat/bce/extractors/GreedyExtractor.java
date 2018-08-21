@@ -19,6 +19,7 @@ public class GreedyExtractor extends RandomExtractor {
 	 * with the first literal of each clause being the blocking literal.
 	 * @param formula
 	 */
+	@Override
 	public void extractBackBones(BasicFormula formula) {
 		this.formula = formula;
 		BlockedSetSolver solver = new BlockedSetSolver();

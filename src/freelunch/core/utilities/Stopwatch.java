@@ -71,7 +71,7 @@ public class Stopwatch {
     }
     
     public float elapsedSecondsFloat() {
-        return ((float)elapsedNanoSeconds()) / 1e9f;
+        return (elapsedNanoSeconds()) / 1e9f;
     }
     
     public long elapsedMilliseconds() {

@@ -258,7 +258,8 @@ public class TransitionExistStepTranslator extends TranslatorBase implements Sas
         }
     }
     
-    protected void transition_assignmetMustBeSupportedByPreviousTransition(IncrementalSatSolver solver, int time) throws SatContradictionException {
+    @Override
+	protected void transition_assignmetMustBeSupportedByPreviousTransition(IncrementalSatSolver solver, int time) throws SatContradictionException {
         IntVector lits = new IntVector(2);
         
         for (StateVariable var : problem.getVariables()) {

@@ -13,6 +13,7 @@ public class FullAssignmentExtractor extends RandomExtractor {
 	private static final int assignments = 512;
 	private Random rnd = new Random(2013);
 	
+	@Override
 	public void extractBackBones(BasicFormula formula) {
 		this.formula = formula;
 		int[] assignment = new int[formula.variablesCount+1];

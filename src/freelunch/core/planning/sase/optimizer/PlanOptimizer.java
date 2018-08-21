@@ -281,7 +281,7 @@ public class PlanOptimizer {
         if (plansize == windowSize) {
             return time;
         }
-        float limit = (float)time / ((float)plansize / (float)windowSize);
+        float limit = time / ((float)plansize / (float)windowSize);
         return 1 + (int) limit;
     }
 

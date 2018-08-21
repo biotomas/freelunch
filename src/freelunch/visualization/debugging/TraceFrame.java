@@ -57,7 +57,8 @@ public class TraceFrame extends JFrame {
         menuBar.add(mnOptions);
         chckbxmntmUpdateEnabled.setSelected(updateDefault);
         chckbxmntmUpdateEnabled.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            @Override
+			public void actionPerformed(ActionEvent e) {
             }
         });
         chckbxmntmUpdateEnabled.setName("chckbxmntmUpdateEnabled");

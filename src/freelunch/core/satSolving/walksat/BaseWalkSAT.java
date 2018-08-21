@@ -38,7 +38,8 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     
     private long satTime = 0;
     
-    public long getSolveTime() {
+    @Override
+	public long getSolveTime() {
         return satTime;
     }
     
