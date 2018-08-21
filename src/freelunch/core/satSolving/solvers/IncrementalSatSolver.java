@@ -20,7 +20,6 @@ package freelunch.core.satSolving.solvers;
 
 import freelunch.core.planning.TimeoutException;
 import freelunch.sat.model.SatContradictionException;
-import freelunch.utilities.IntVector;
 
 /**
  * Interface for incremental SAT solvers
@@ -48,7 +47,7 @@ public interface IncrementalSatSolver extends SatSolver {
 	 * @param literals the literals to add
 	 * @throws SatContradictionException if the formula is unsatisfiable after adding the clause
 	 */
-	public void addNewClause(IntVector literals) throws SatContradictionException;
+	public void addNewClause(int[] literals) throws SatContradictionException;
 	
 	/**
 	 * Add a new removable clause to the formula
@@ -57,7 +56,7 @@ public interface IncrementalSatSolver extends SatSolver {
 	 * @return the clauseId used for removing the clause
 	 * @throws SatContradictionException if the formula is unsatisfiable after adding the clause
 	 */
-	public int addRemovableClause(IntVector literals) throws SatContradictionException;
+	public int addRemovableClause(int[] literals) throws SatContradictionException;
 	
 	/**
 	 * Remove the specified clause from the clause database
@@ -76,7 +75,7 @@ public interface IncrementalSatSolver extends SatSolver {
 	 * @param literals
 	 * @throws SatContradictionException if the formula is unsatisfiable after adding the clause
 	 */
-	public void addAtMostOneConstraint(IntVector literals) throws SatContradictionException;
+	public void addAtMostOneConstraint(int[] literals) throws SatContradictionException;
 
 	/**
 	 * Add a removable constraint that at most one of the literals can be true
@@ -85,7 +84,7 @@ public interface IncrementalSatSolver extends SatSolver {
 	 * @return the constraintId used for removing 
 	 * @throws SatContradictionException if the formula is unsatisfiable after adding the clause
 	 */
-	public int addRemovableAtMostOneConstraint(IntVector literals) throws SatContradictionException;
+	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException;
 	
 	/**
 	 * Remove the specified at-most-one constraint

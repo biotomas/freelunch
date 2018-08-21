@@ -40,7 +40,7 @@ public class PotentialPlanToMaxsatOptimizer {
 	    	Set<SasAction> allowedActions = new HashSet<>(pp.getPlan().get(time));
 	    	for (SasAction a : actions) {
 	    		if (!allowedActions.contains(a)) {
-	    			solver.addNewClause(IntVector.makeUnit(-actionVariables.getVariable(a.getId(), time)));
+	    			solver.addNewClause(new int[] {-actionVariables.getVariable(a.getId(), time)});
 	    		}
 	    	}
 	    	// at most one of the actions in the pp step is allowed
@@ -54,9 +54,9 @@ public class PotentialPlanToMaxsatOptimizer {
 	    		trigger.clear();
 	    		trigger.add(-act);
 	    		trigger.add(actionUsed.getVariable(a.getId()));
-	    		solver.addNewClause(trigger);
+	    		solver.addNewClause(trigger.getArrayCopy());
 	    	}
-	    	solver.addAtMostOneConstraint(literals);
+	    	solver.addAtMostOneConstraint(literals.getArrayCopy());
 	    }
 
 		public PPCompactDirect(SasProblem problem, PotentialPlan pp) {

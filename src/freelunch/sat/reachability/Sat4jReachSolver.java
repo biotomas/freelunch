@@ -26,7 +26,6 @@ import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.SatContradictionException;
-import freelunch.utilities.IntVector;
 
 
 public class Sat4jReachSolver implements SymbolicReachabilitySolver {
@@ -58,7 +57,7 @@ public class Sat4jReachSolver implements SymbolicReachabilitySolver {
         IncrementalSatSolver solver = new Sat4JSolver();
         solver.setVariablesCount(f.variablesCount);
         for (int[] cl : f.getClauses()) {
-            solver.addNewClause(new IntVector(cl));
+            solver.addNewClause(cl);
         }
         if (solver.isSatisfiable()) {
             int[] model = solver.getModel();

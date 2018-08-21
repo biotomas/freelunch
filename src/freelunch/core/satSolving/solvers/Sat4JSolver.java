@@ -31,7 +31,6 @@ import org.sat4j.specs.ISolver;
 import freelunch.core.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.SatContradictionException;
-import freelunch.utilities.IntVector;
 import freelunch.utilities.Stopwatch;
 
 
@@ -105,18 +104,18 @@ public class Sat4JSolver implements IncrementalSatSolver {
 	}
 
 	@Override
-	public void addNewClause(IntVector literals) throws SatContradictionException {
+	public void addNewClause(int[] literals) throws SatContradictionException {
 		try {
-			solver.addClause(new VecInt(literals.getArrayCopy()));
+			solver.addClause(new VecInt(literals));
 		} catch (ContradictionException e) {
 			throw new SatContradictionException();
 		}
 	}
 
 	@Override
-	public int addRemovableClause(IntVector literals) throws SatContradictionException {
+	public int addRemovableClause(int[] literals) throws SatContradictionException {
 		try {
-			IConstr constr = solver.addClause(new VecInt(literals.getArrayCopy()));
+			IConstr constr = solver.addClause(new VecInt(literals));
 			lastConstrId++;
 			constraintsMap.put(lastConstrId, constr);
 			return lastConstrId;
@@ -126,18 +125,18 @@ public class Sat4JSolver implements IncrementalSatSolver {
 	}
 
 	@Override
-	public void addAtMostOneConstraint(IntVector literals) throws SatContradictionException {
+	public void addAtMostOneConstraint(int[] literals) throws SatContradictionException {
 		try {
-			solver.addAtMost(new VecInt(literals.getArrayCopy()), 1);
+			solver.addAtMost(new VecInt(literals), 1);
 		} catch (ContradictionException e) {
 			throw new SatContradictionException();
 		}
 	}
 
 	@Override
-	public int addRemovableAtMostOneConstraint(IntVector literals) throws SatContradictionException {
+	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
 		try {
-			IConstr constr = solver.addAtMost(new VecInt(literals.getArrayCopy()), 1);
+			IConstr constr = solver.addAtMost(new VecInt(literals), 1);
 			lastConstrId++;
 			constraintsMap.put(lastConstrId, constr);
 			return lastConstrId;

@@ -9,7 +9,6 @@ import freelunch.sat.model.SatContradictionException;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanEquality;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;
-import freelunch.utilities.IntVector;
 
 public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 
@@ -71,13 +70,13 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public void addNewClause(IntVector literals) throws SatContradictionException {
-		clauses.add(literals.getArrayCopy());
+	public void addNewClause(int[] literals) throws SatContradictionException {
+		clauses.add(literals);
 	}
 
 	@Override
-	public int addRemovableClause(IntVector literals) throws SatContradictionException {
-		clauses.add(literals.getArrayCopy());
+	public int addRemovableClause(int[] literals) throws SatContradictionException {
+		clauses.add(literals);
 		return 0;
 	}
 
@@ -92,12 +91,12 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public void addAtMostOneConstraint(IntVector literals) throws SatContradictionException {
-		amoConstraints.add(literals.getArrayCopy());
+	public void addAtMostOneConstraint(int[] literals) throws SatContradictionException {
+		amoConstraints.add(literals);
 	}
 
 	@Override
-	public int addRemovableAtMostOneConstraint(IntVector literals) throws SatContradictionException {
+	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
 		throw new UnsupportedOperationException();
 	}
 

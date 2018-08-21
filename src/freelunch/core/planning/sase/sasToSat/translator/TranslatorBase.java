@@ -202,7 +202,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (Condition c : a.getEffects()) {
                 IntVector iv = new IntVector(binCode);
                 iv.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));
-                solver.addNewClause(iv);
+                solver.addNewClause(iv.getArrayCopy());
             }
         }
     }
@@ -223,7 +223,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 lits.add(-assignmentVariables.getVariable(assignmentIds[varId][val], time+1));
                 lits.add(assignmentVariables.getVariable(assignmentIds[varId][val], time));
                 lits.add(-varUnchangedVariables.getVariable(var.getId(), time));
-                solver.addNewClause(lits);
+                solver.addNewClause(lits.getArrayCopy());
             }
         }
     }
@@ -265,7 +265,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (Condition c : a.getPreconditions()) {
                 IntVector iv = new IntVector(binCode);
                 iv.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(iv);
+                solver.addNewClause(iv.getArrayCopy());
             }
             // action implies no changes
             Collection<Integer> scope = getEffectsScope(a);
@@ -275,10 +275,10 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 }
                 IntVector iv = new IntVector(binCode);
                 iv.add(varUnchangedVariables.getVariable(var.getId(), time));
-                solver.addNewClause(iv);
+                solver.addNewClause(iv.getArrayCopy());
             }
             
-            //solver.addNewClause(vec);
+            //solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -308,7 +308,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                     vec.clear();
                     vec.add(-actionVariables.getVariable(acts.get(i).getId(), time));
                     vec.add(-actionVariables.getVariable(acts.get(j).getId(), time));
-                    solver.addNewClause(vec);
+                    solver.addNewClause(vec.getArrayCopy());
                 }
             }
         }
@@ -331,7 +331,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 List<SasAction> acts = new ArrayList<>(grp);
                 vec.add(-actionVariables.getVariable(acts.get(0).getId(), time));
                 vec.add(-actionVariables.getVariable(acts.get(1).getId(), time));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
                 continue;
             }
             
@@ -350,7 +350,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                         int val = 2*on - 1;
                         int lit = val * actionMutexHelperVariables.getVariable(pos+bit, time); 
                         vec.add(-lit);
-                        solver.addNewClause(new IntVector(new int[] {-actionVariables.getVariable(a.getId(), time), lit}));
+                        solver.addNewClause(new int[] {-actionVariables.getVariable(a.getId(), time), lit});
                     }
                     ind += 2;
                 } else {
@@ -359,11 +359,11 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                         int val = 2*on - 1;
                         int lit = val * actionMutexHelperVariables.getVariable(pos+bit, time); 
                         vec.add(-lit);
-                        solver.addNewClause(new IntVector(new int[] {-actionVariables.getVariable(a.getId(), time), lit}));
+                        solver.addNewClause(new int[] {-actionVariables.getVariable(a.getId(), time), lit});
                     }
                     ind += 1;
                 }
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
                 count++;
             }
             pos += log;
@@ -639,7 +639,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), 0));
             }
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -659,7 +659,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 int value = c.getValue();
                 if (initialState[varId] != value) {
                     // action is not applicable
-                    solver.addNewClause(new IntVector(new int[] {-actionVariables.getVariable(a.getId(), 0)}));
+                    solver.addNewClause(new int[] {-actionVariables.getVariable(a.getId(), 0)});
                     break;
                 }
             }
@@ -685,7 +685,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             if (istate[t.getVar().getId()] != t.getOldVal()) {
                 vars.clear();
                 vars.add(-transitionVariables.getVariable(t.getId(), 0));
-                solver.addNewClause(vars);
+                solver.addNewClause(vars.getArrayCopy());
             }
         }
     }
@@ -706,7 +706,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                     vars.add(transitionVariables.getVariable(t.getId(), 0));
                 }
             }
-            solver.addNewClause(vars);
+            solver.addNewClause(vars.getArrayCopy());
         }
     }
     
@@ -719,7 +719,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     protected void initial_initialAssignementsHold(IncrementalSatSolver solver) throws SatContradictionException {
         for (Condition c : problem.getInitialState()) {
             int varValId = assignmentIds[c.getVariable().getId()][c.getValue()];
-            solver.addNewClause(new IntVector(new int[] {assignmentVariables.getVariable(varValId, 0)}));
+            solver.addNewClause(new int[] {assignmentVariables.getVariable(varValId, 0)});
         }
     }
 
@@ -737,7 +737,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (int d = 0; d < var.getDomain(); d++) {
                 vec.add(assignmentVariables.getVariable(assignmentIds[var.getId()][d], time));
             }
-            solver.addAtMostOneConstraint(vec);
+            solver.addAtMostOneConstraint(vec.getArrayCopy());
         }
     }
     
@@ -753,7 +753,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         for (SasAction a : actions) {
         	vec.add(actionVariables.getVariable(a.getId(), time));
         }
-        solver.addAtMostOneConstraint(vec);
+        solver.addAtMostOneConstraint(vec.getArrayCopy());
     }
     
     protected void universal_transitionsImplyPreconditonAssignment(IncrementalSatSolver solver, int time) throws SatContradictionException {
@@ -766,7 +766,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             lits.clear();
             lits.add(tl);
             lits.add(assignmentVariables.getVariable(assignmentIds[t.getVar().getId()][t.getOldVal()], time));
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
 
@@ -777,7 +777,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             lits.clear();
             lits.add(tl);
             lits.add(assignmentVariables.getVariable(assignmentIds[t.getVar().getId()][t.getNewVal()], time));
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
 
@@ -791,7 +791,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             lits.clear();
             lits.add(tl);
             lits.add(assignmentVariables.getVariable(assignmentIds[t.getVar().getId()][t.getOldVal()], time));
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
 
@@ -802,7 +802,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             lits.clear();
             lits.add(tl);
             lits.add(assignmentVariables.getVariable(assignmentIds[t.getVar().getId()][t.getNewVal()], time+1));
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
 
@@ -819,7 +819,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                         lits.add(transitionVariables.getVariable(t.getId(), time));
                     }
                 }
-                solver.addNewClause(lits);
+                solver.addNewClause(lits.getArrayCopy());
             }
         }
     }
@@ -837,7 +837,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                         lits.add(transitionVariables.getVariable(t.getId(), time));
                     }
                 }
-                solver.addNewClause(lits);
+                solver.addNewClause(lits.getArrayCopy());
             }
         }
     }
@@ -856,7 +856,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : varActions) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -878,7 +878,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction action : t.getSupportingActions()) {
                 lits.add(actionVariables.getVariable(action.getId(), time));
             }
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
 
@@ -898,7 +898,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 lits.clear();
                 lits.add(l);
                 lits.add(tv);
-                solver.addNewClause(lits);
+                solver.addNewClause(lits.getArrayCopy());
             }
         }
     }
@@ -917,7 +917,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (Transition t : transitionVariableIndex[svar.getId()]) {
                 lits.add(transitionVariables.getVariable(t.getId(), time));
             }
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
     
@@ -935,7 +935,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (Transition t : clique) {
                 lits.add(transitionVariables.getVariable(t.getId(), time));
             }
-            solver.addAtMostOneConstraint(lits);
+            solver.addAtMostOneConstraint(lits.getArrayCopy());
         }
     }
 
@@ -954,7 +954,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
     }
@@ -973,13 +973,13 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
             for (Condition c : a.getEffects()) {
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
 
@@ -993,7 +993,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             vec.clear();
             vec.add(-assignmentVariables.getVariable(assignmentIds[c1.getVariable().getId()][c1.getValue()], time));
             vec.add(-assignmentVariables.getVariable(assignmentIds[c2.getVariable().getId()][c2.getValue()], time));
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
 
@@ -1010,7 +1010,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             vec.clear();
             vec.add(-actionVariables.getVariable(actionPair.first.getId(), time));
             vec.add(-actionVariables.getVariable(actionPair.second.getId(), time));
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -1030,7 +1030,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -1054,7 +1054,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -1069,7 +1069,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time+1));
             }
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
     
@@ -1080,13 +1080,13 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
             for (Condition c : a.getEffects()) {
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
     }
@@ -1106,7 +1106,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time + 1));
                 vec.add(-actionVariables.getVariable(opponent.getId(), time));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
     }
@@ -1133,7 +1133,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                     lits.add(transitionVariables.getVariable(pt.getId(), time));
                 }
             }
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
     
@@ -1156,7 +1156,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                     lits.add(transitionVariables.getVariable(pt.getId(), time+1));
                 }
             }
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
     
@@ -1174,7 +1174,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time+1));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
     }
@@ -1192,7 +1192,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         // actions opposing a goal condition are forbidden
         for (SasAction action : goalOpposingActions) {
             IntVector vec = new IntVector(new int[] {-actionVariables.getVariable(action.getId(), time)});
-            int constraintId = solver.addRemovableClause(vec);
+            int constraintId = solver.addRemovableClause(vec.getArrayCopy());
             goalConditionIds.add(constraintId);
         }
     }
@@ -1206,7 +1206,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     protected void goal_goalAssignementsHold(IncrementalSatSolver solver, int time) throws SatContradictionException {
         for (Condition c : problem.getGoal()) {
             int varValId = assignmentIds[c.getVariable().getId()][c.getValue()];
-            solver.addNewClause(new IntVector(new int[] {assignmentVariables.getVariable(varValId, time)}));
+            solver.addNewClause(new int[] {assignmentVariables.getVariable(varValId, time)});
         }
     }
 
@@ -1227,7 +1227,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
-            int cid = solver.addRemovableClause(vec);
+            int cid = solver.addRemovableClause(vec.getArrayCopy());
             goalConditionIds.add(cid);
         }
     }
@@ -1249,7 +1249,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
-            int cid = solver.addRemovableClause(vec);
+            int cid = solver.addRemovableClause(vec.getArrayCopy());
             goalConditionIds.add(cid);
         }
     }
@@ -1271,7 +1271,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                     lits.add(transitionVariables.getVariable(t.getId(), time));
                 }
             }
-            int constrId = solver.addRemovableClause(lits);
+            int constrId = solver.addRemovableClause(lits.getArrayCopy());
             goalConditionIds.add(constrId);
         }
     }
@@ -1290,7 +1290,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 if (t.getNewVal() != cond.getValue()) {
                     lits.clear();
                     lits.add(-transitionVariables.getVariable(t.getId(), time));
-                    int constrId = solver.addRemovableClause(lits);
+                    int constrId = solver.addRemovableClause(lits.getArrayCopy());
                     goalConditionIds.add(constrId);
                 }
             }

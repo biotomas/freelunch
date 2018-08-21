@@ -100,26 +100,26 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
             vec.clear();
             vec.add(-actionVariables.getVariable(actionChain.first.getId(), time));
             vec.add(chainVariables.getVariable(actionChain.second, time));
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
         for (Tuple<Integer, Integer> chainChain : chainImpliesAnotherChain) {
             vec.clear();
             vec.add(-chainVariables.getVariable(chainChain.first, time));
             vec.add(chainVariables.getVariable(chainChain.second, time));
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
         for (Tuple<Integer, SasAction> chainAction : chainImpliesNotAction) {
             vec.clear();
             vec.add(-chainVariables.getVariable(chainAction.first, time));
             vec.add(-actionVariables.getVariable(chainAction.second.getId(), time));
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
         for (Triple<Integer, SasAction, Integer> chainActionChain : chainImpliesActionOrChain) {
             vec.clear();
             vec.add(-chainVariables.getVariable(chainActionChain.first, time));
             vec.add(actionVariables.getVariable(chainActionChain.second.getId(), time));
             vec.add(chainVariables.getVariable(chainActionChain.third, time));
-            solver.addNewClause(vec);
+            solver.addNewClause(vec.getArrayCopy());
         }
     }
 
@@ -316,7 +316,7 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
                         vec.add(actionVariables.getVariable(sa.getId(), time));
                     }
                 }
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
             /**/
             for (Condition c : a.getEffects()) {
@@ -330,7 +330,7 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
                         vec.add(actionVariables.getVariable(sa.getId(), time));
                     }
                 }
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
     }
@@ -383,7 +383,7 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
                         vec.add(actionVariables.getVariable(sa.getId(), time));
                     }
                 }
-                solver.addNewClause(vec);
+                solver.addNewClause(vec.getArrayCopy());
             }
         }
     }
@@ -407,7 +407,7 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
                         vec.clear();
                         vec.add(-actionVariables.getVariable(a.getId(), time));
                         vec.add(-actionVariables.getVariable(oppa.getId(), time));
-                        solver.addNewClause(vec);
+                        solver.addNewClause(vec.getArrayCopy());
                     }
                 }                
             }

@@ -130,7 +130,7 @@ public class RedundancyEliminator {
         solver.setVariablesCount(f.variablesCount);
         try {
             for (int[] c : f.getClauses()) {
-                solver.addNewClause(new IntVector(c));
+                solver.addNewClause(c);
             }
         } catch (SatContradictionException e) {
             // f is unsatisfiable
@@ -146,10 +146,10 @@ public class RedundancyEliminator {
                     if (model[i] > 0) {
                         newRedundClause.add(-i);
                     } else {
-                        solver.addNewClause(new IntVector(new int[] {-i}));
+                        solver.addNewClause(new int[] {-i});
                     }
                 }
-                solver.addNewClause(newRedundClause);
+                solver.addNewClause(newRedundClause.getArrayCopy());
             } catch (SatContradictionException e) {
                 break;
             }

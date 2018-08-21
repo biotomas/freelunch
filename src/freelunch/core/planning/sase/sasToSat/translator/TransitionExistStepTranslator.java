@@ -272,7 +272,7 @@ public class TransitionExistStepTranslator extends TranslatorBase implements Sas
                         lits.add(transitionVariables.getVariable(t.getId(), time));
                     }
                 }
-                solver.addNewClause(lits);
+                solver.addNewClause(lits.getArrayCopy());
             }
         }
     }
@@ -297,7 +297,7 @@ public class TransitionExistStepTranslator extends TranslatorBase implements Sas
                     }
                 }
             }
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
     
@@ -314,7 +314,7 @@ public class TransitionExistStepTranslator extends TranslatorBase implements Sas
                         lits.clear();
                         lits.add(tl);
                         lits.add(-transitionVariables.getVariable(pt.getId(), time));
-                        solver.addNewClause(lits);
+                        solver.addNewClause(lits.getArrayCopy());
                     }
                 }
             }
@@ -337,7 +337,7 @@ public class TransitionExistStepTranslator extends TranslatorBase implements Sas
                     }
                 }
             }
-            solver.addNewClause(lits);
+            solver.addNewClause(lits.getArrayCopy());
         }
     }
     

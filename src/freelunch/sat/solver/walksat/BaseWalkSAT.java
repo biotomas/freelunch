@@ -30,7 +30,6 @@ import freelunch.core.planning.model.BasicSettings;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.SatContradictionException;
-import freelunch.utilities.IntVector;
 import freelunch.utilities.Stopwatch;
 
 
@@ -253,14 +252,14 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     }
 
     @Override
-    public void addNewClause(IntVector literals) throws SatContradictionException {
-        clManager.addPermanentClause(new LSClause(literals.getArrayCopy()));
+    public void addNewClause(int[] literals) throws SatContradictionException {
+        clManager.addPermanentClause(new LSClause(literals));
     }
 
     @Override
-    public int addRemovableClause(IntVector literals) throws SatContradictionException {
+    public int addRemovableClause(int[] literals) throws SatContradictionException {
         lastRemovableClauseId++;
-        LSClause c = new LSClause(literals.getArrayCopy());
+        LSClause c = new LSClause(literals);
         clManager.addRemovableClause(c);
         removableClauseMap.put(lastRemovableClauseId, c);
         return lastRemovableClauseId;
@@ -282,8 +281,8 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     }
 
     @Override
-    public void addAtMostOneConstraint(IntVector literals) throws SatContradictionException {
-        int[] lits = literals.getArrayCopy();
+    public void addAtMostOneConstraint(int[] literals) throws SatContradictionException {
+        int[] lits = literals;
         for (int i = 0; i < lits.length; i++) {
             for (int j = i+1; j < lits.length; j++) {
                 clManager.addPermanentClause(new LSClause(new int[] {-lits[i], -lits[j]}));
@@ -292,9 +291,9 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     }
 
     @Override
-    public int addRemovableAtMostOneConstraint(IntVector literals) throws SatContradictionException {
+    public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
         lastRemovableClauseId++;
-        int[] lits = literals.getArrayCopy();
+        int[] lits = literals;
         List<LSClause> cls = new ArrayList<LSClause>(lits.length * (lits.length - 1));
         for (int i = 0; i < lits.length; i++) {
             for (int j = i+1; j < lits.length; j++) {

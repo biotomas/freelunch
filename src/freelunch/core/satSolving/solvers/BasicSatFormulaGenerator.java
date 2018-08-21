@@ -26,7 +26,6 @@ import java.util.Map;
 import freelunch.core.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.SatContradictionException;
-import freelunch.utilities.IntVector;
 
 
 /**
@@ -72,14 +71,14 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public void addNewClause(IntVector literals) throws SatContradictionException {
-		clauses.add(literals.getArrayCopy());
+	public void addNewClause(int[] literals) throws SatContradictionException {
+		clauses.add(literals);
 	}
 
 	@Override
-	public int addRemovableClause(IntVector literals) throws SatContradictionException {
+	public int addRemovableClause(int[] literals) throws SatContradictionException {
 		removableClauseId++;
-		removableClauses.put(removableClauseId, literals.getArrayCopy());
+		removableClauses.put(removableClauseId, literals);
 		return removableClauseId;
 	}
 
@@ -89,8 +88,8 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public void addAtMostOneConstraint(IntVector literals) throws SatContradictionException {
-		int[] lits = literals.getArrayCopy();
+	public void addAtMostOneConstraint(int[] literals) throws SatContradictionException {
+		int[] lits = literals;
 		for (int i = 0; i < lits.length; i++) {
 			for (int j = i+1; j < lits.length; j++) {
 				clauses.add(new int[] {-lits[i], -lits[j]});
@@ -99,7 +98,7 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public int addRemovableAtMostOneConstraint(IntVector literals) throws SatContradictionException {
+	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
 		throw new UnsupportedOperationException();
 	}
 
