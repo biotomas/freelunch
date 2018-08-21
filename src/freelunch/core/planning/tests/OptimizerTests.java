@@ -43,9 +43,9 @@ import freelunch.core.planning.sase.optimizer.model.SubPlanStructure;
 import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.core.satSolving.maxsat.PartialMaxSatFormula;
-import freelunch.core.satSolving.maxsat.Sat4JMaxsatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
+import freelunch.maxsat.PartialMaxSatFormula;
+import freelunch.maxsat.Sat4JMaxsatSolver;
 import freelunch.utilities.Stopwatch;
 
 public class OptimizerTests extends TestCase {

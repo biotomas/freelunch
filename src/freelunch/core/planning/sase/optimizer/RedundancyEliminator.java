@@ -14,15 +14,15 @@ import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
-import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.satSolving.maxsat.MaxSatSolver;
-import freelunch.core.satSolving.maxsat.PartialMaxSatFormula;
-import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula;
-import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.satSolving.solvers.SatSolver;
+import freelunch.maxsat.MaxSatSolver;
+import freelunch.maxsat.PartialMaxSatFormula;
+import freelunch.maxsat.WeightedPartialMaxSatFormula;
+import freelunch.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.IntVector;
 
 public class RedundancyEliminator {

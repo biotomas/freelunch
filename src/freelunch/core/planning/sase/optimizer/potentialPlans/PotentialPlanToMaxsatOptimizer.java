@@ -9,13 +9,13 @@ import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.translator.CompactDirect;
-import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.satSolving.maxsat.MaxSatSolver;
-import freelunch.core.satSolving.maxsat.Sat4JMaxsatSolver;
-import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula;
-import freelunch.core.satSolving.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.maxsat.MaxSatSolver;
+import freelunch.maxsat.Sat4JMaxsatSolver;
+import freelunch.maxsat.WeightedPartialMaxSatFormula;
+import freelunch.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.sat.modelling.IntVarGroupManager.IntVarGroup;
 import freelunch.utilities.IntVector;
 

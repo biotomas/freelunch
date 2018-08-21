@@ -24,10 +24,10 @@ import java.util.List;
 import freelunch.core.planning.model.SasAction;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 
 public class DirectTranslatorSingleAction extends TranslatorBase implements SasToSatTranslator {
     

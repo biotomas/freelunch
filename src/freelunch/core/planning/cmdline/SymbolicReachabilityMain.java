@@ -28,9 +28,9 @@ import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.optimizer.PlanVerifier;
 import freelunch.core.planning.sase.sasToSat.SasIO;
 import freelunch.core.planning.sase.sasToSat.symbolicReachability.SymbolicReachabilityProblemGenerator;
-import freelunch.core.satSolving.symbolicReachability.SymbolicReachVerifier;
-import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProblem;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.reachability.SymbolicReachVerifier;
+import freelunch.sat.reachability.SymbolicReachabilityProblem;
 
 
 public class SymbolicReachabilityMain {

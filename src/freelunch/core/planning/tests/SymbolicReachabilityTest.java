@@ -28,7 +28,7 @@ import freelunch.core.planning.model.StateVariable;
 import freelunch.core.planning.model.StringActionInfo;
 import freelunch.core.planning.sase.sasToSat.SasProblemBuilder;
 import freelunch.core.planning.sase.sasToSat.symbolicReachability.SymbolicReachabilityProblemGenerator;
-import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProblem;
+import freelunch.sat.reachability.SymbolicReachabilityProblem;
 import junit.framework.TestCase;
 
 public class SymbolicReachabilityTest extends TestCase {

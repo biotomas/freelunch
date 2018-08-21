@@ -25,9 +25,9 @@ import freelunch.core.planning.model.BasicSettings;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.TransitionExistStepTranslator;
-import freelunch.core.satSolving.FormulaAnalyzer;
 import freelunch.core.satSolving.solvers.SatSolver;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.FormulaAnalyzer;
 import freelunch.utilities.Stopwatch;
 
 public class IterativeSatBasedSolver implements Solver {

@@ -5,8 +5,8 @@ import java.io.IOException;
 import freelunch.core.planning.SasProblemAnalyzer;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.SasIO;
-import freelunch.core.satSolving.FormulaAnalyzer;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.FormulaAnalyzer;
 
 public class Analyzer {
 

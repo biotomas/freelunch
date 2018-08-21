@@ -31,8 +31,8 @@ import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.StateVariable;
 import freelunch.core.planning.model.Transition;
 import freelunch.core.planning.model.Transition.TransitionType;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.IntVector;
 import freelunch.utilities.Pair;
 

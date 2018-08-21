@@ -29,10 +29,10 @@ import freelunch.core.planning.cmdline.Translator.TranslationMethod;
 import freelunch.core.planning.model.SasParallelPlan;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.BasicSatFormulaGenerator;
-import freelunch.core.satSolving.symbolicReachability.SymbolicReachVerifier;
-import freelunch.core.satSolving.symbolicReachability.SymbolicReachabilityProblem;
+import freelunch.sat.model.SatContradictionException;
+import freelunch.sat.reachability.SymbolicReachVerifier;
+import freelunch.sat.reachability.SymbolicReachabilityProblem;
 
 
 public class SymbolicReachabilityProblemGenerator {

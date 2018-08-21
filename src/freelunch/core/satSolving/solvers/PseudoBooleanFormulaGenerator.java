@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanEquality;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;

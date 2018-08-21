@@ -29,8 +29,8 @@ import org.sat4j.specs.IConstr;
 import org.sat4j.specs.ISolver;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.IntVector;
 import freelunch.utilities.Stopwatch;
 

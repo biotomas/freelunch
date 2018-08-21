@@ -38,10 +38,10 @@ import freelunch.core.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
 import freelunch.core.planning.sase.sasToSat.translator.DirectExistStepTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings;
-import freelunch.core.satSolving.FormulaAnalyzer;
-import freelunch.core.satSolving.SatContradictionException;
-import freelunch.core.satSolving.FormulaAnalyzer.FormulaProperties;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
+import freelunch.sat.model.FormulaAnalyzer;
+import freelunch.sat.model.SatContradictionException;
+import freelunch.sat.model.FormulaAnalyzer.FormulaProperties;
 import freelunch.utilities.Logger;
 import freelunch.utilities.Stopwatch;
 

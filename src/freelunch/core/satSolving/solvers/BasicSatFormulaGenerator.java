@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.IntVector;
 
 

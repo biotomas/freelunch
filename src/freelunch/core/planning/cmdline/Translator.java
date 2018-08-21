@@ -45,8 +45,8 @@ import freelunch.core.planning.sase.sasToSat.translator.SasToSatTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslator;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings;
 import freelunch.core.planning.sase.sasToSat.translator.SelectiveTranslator;
-import freelunch.core.satSolving.FormulaAnalyzer;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.FormulaAnalyzer;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 
 public class Translator {

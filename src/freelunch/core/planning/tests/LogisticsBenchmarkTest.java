@@ -57,7 +57,7 @@ import freelunch.core.planning.sase.sasToSat.translator.TransitionExistStepTrans
 import freelunch.core.satSolving.solvers.ExternalSatSolver;
 import freelunch.core.satSolving.solvers.Sat4JSolver;
 import freelunch.core.satSolving.solvers.SatSolver;
-import freelunch.core.satSolving.walksat.Sparrow;
+import freelunch.sat.solver.walksat.Sparrow;
 import freelunch.utilities.Stopwatch;
 import junit.framework.TestCase;
 

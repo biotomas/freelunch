@@ -14,8 +14,8 @@ import freelunch.core.planning.model.Transition;
 import freelunch.core.planning.sase.sasToSat.TransitionGenerator;
 import freelunch.core.planning.sase.sasToSat.translator.TopsortActionRanker;
 import freelunch.core.planning.sase.sasToSat.translator.TranslatorBase;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.Logger;
 
 public class SasProblemAnalyzer extends TranslatorBase {

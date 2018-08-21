@@ -21,9 +21,9 @@ package freelunch.core.planning.sase.sasToSat.translator;
 import java.util.List;
 
 import freelunch.core.planning.model.SasParallelPlan;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 
 

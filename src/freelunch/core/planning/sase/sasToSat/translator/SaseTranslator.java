@@ -21,8 +21,8 @@ package freelunch.core.planning.sase.sasToSat.translator;
 import freelunch.core.planning.model.SasProblem;
 import freelunch.core.planning.model.Transition;
 import freelunch.core.planning.sase.sasToSat.translator.SaseTranslatorSettings.TransitionProgressionType;
-import freelunch.core.satSolving.SatContradictionException;
 import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.sat.model.SatContradictionException;
 
 
 public class SaseTranslator extends TranslatorBase implements SasToSatTranslator {

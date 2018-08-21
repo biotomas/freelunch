@@ -19,7 +19,7 @@
 package freelunch.core.satSolving.solvers;
 
 import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.SatContradictionException;
+import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.IntVector;
 
 /**
