@@ -1,5 +1,7 @@
 package freelunch.sat.solver;
 
+import freelunch.sat.model.SatSolver;
+
 public interface LocalSearchSatSolver extends SatSolver {
 	
 	/**

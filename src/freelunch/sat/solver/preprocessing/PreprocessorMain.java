@@ -26,7 +26,7 @@ public class PreprocessorMain {
 			return;
 		}
 		OneProvableEmpoweringClauses opec = new OneProvableEmpoweringClauses();
-		long limit = Long.parseLong(args[2]);
+		int limit = Integer.parseInt(args[2]);
 		int oldCls = f.clauses.size();
 		boolean res = opec.addOneProvableEmpoweringClauses(f, 4, limit);
 		if (!res) {

@@ -1,8 +1,8 @@
 package freelunch.sat.solver.walksat;
 
-import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.solvers.SatSolver;
+import freelunch.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.SatSolver;
 import freelunch.sat.solver.walksat.BaseWalkSAT.BaseWalkSatSettings;
 import freelunch.utilities.Stopwatch;
 

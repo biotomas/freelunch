@@ -42,7 +42,7 @@ public class BaseWalkSAT implements LocalSearchSatSolver {
 	protected int[] assignment;
 	protected int[] bestAssignment;
 	protected double[] distribution;
-    protected long timeLimit;
+    protected int timeLimit;
     
     public BaseWalkSAT(LocalSearchSelector selector, long seed) {
     	this.selector = selector;
@@ -108,12 +108,6 @@ public class BaseWalkSAT implements LocalSearchSatSolver {
         lsData.flipRates = new int[variables+1];
     }
     
-
-    @Override
-    public void setTimeout(long nanoseconds) {
-        this.timeLimit = nanoseconds;
-    }
-    
     @Override
     public Boolean isSatisfiable(CnfSatFormula formula) {
     	lsData.clManager = new SimpleClauseManager();
@@ -167,5 +161,16 @@ public class BaseWalkSAT implements LocalSearchSatSolver {
     public int[] getModel() {
         return bestAssignment;
     }
+
+	@Override
+	public long getSolveTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setTimeout(int seconds) {
+		this.timeLimit = seconds;
+	}
 
 }

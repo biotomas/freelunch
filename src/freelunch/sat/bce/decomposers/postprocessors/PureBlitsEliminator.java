@@ -84,7 +84,7 @@ public class PureBlitsEliminator implements DecompositionPostprocessor {
 	}
 
 	@Override
-	public void setTimeLimit(long nanoseconds) {
+	public void setTimeLimit(int seconds) {
 	}
 	
 	

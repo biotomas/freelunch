@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import freelunch.core.planning.TimeoutException;
-import freelunch.core.planning.model.BasicSettings;
-import freelunch.core.satSolving.solvers.IncrementalSatSolver;
+import freelunch.planning.TimeoutException;
+import freelunch.planning.model.BasicSettings;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.IncrementalSatSolver;
 import freelunch.sat.model.SatContradictionException;
 import freelunch.utilities.Stopwatch;
 

@@ -16,7 +16,7 @@ public class QuickDecompose implements DecompositionPostprocessor {
 	private CnfSatFormula small;
 	private List<int[]> garbage;
 	private Stopwatch watch;
-	private long timelimit = 0;
+	private int timelimit = 0;
 
 	@Override
 	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
@@ -63,8 +63,8 @@ public class QuickDecompose implements DecompositionPostprocessor {
 	}
 
 	@Override
-	public void setTimeLimit(long nanoseconds) {
-		this.timelimit = nanoseconds;
+	public void setTimeLimit(int seconds) {
+		this.timelimit = seconds;
 	}
 
 }

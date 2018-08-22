@@ -4,16 +4,17 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.List;
 
+import freelunch.planning.TimeoutException;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
-import freelunch.sat.solver.Sat4JSolver;
 import junit.framework.TestCase;
 
 public class AnalyzerTests extends TestCase {
 	
-	public void testBinarySatPreprocessor() {
+	public void testBinarySatPreprocessor() throws TimeoutException {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(5);
 		CnfSatFormula f = rfg.getRandomFormula(5, 7, 0);
 		BinarySatPreprocessor bsp = new BinarySatPreprocessor();

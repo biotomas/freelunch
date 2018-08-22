@@ -11,7 +11,7 @@ import freelunch.sat.satLifter.Stopwatch;
 
 public class SimplifiedArminsBCEliminator implements BCEliminator {
 	
-	private long timelimit = 0;
+	private int timelimit = 0;
 	
 	@Override
 	public ArrayList<int[]> eliminateBlockedClauses(CnfSatFormula formula) {
@@ -55,8 +55,8 @@ public class SimplifiedArminsBCEliminator implements BCEliminator {
 	}
 
 	@Override
-	public void setTimeLimit(long nanoseconds) {
-		this.timelimit = nanoseconds;
+	public void setTimeLimit(int seconds) {
+		this.timelimit = seconds;
 	}
 
 }

@@ -2,6 +2,7 @@ package freelunch.sat.solver;
 
 import java.util.Arrays;
 
+import freelunch.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
@@ -78,15 +79,20 @@ public class LocalSearchMain {
 				selector = new Revolver();
 				break;
 		}
-		long timelimit = 0;
+		int timelimit = 0;
 		if (args.length > 2) {
-			timelimit = Long.parseLong(args[2]);
+			timelimit = Integer.parseInt(args[2]);
 		}
 		String sname = selector.getClass().getCanonicalName().replace("satSolver.localSearch.selectors.", "");
 		System.out.println(String.format("c running %s for %d seconds", sname, timelimit));
 		LocalSearchSatSolver solver = new BaseWalkSAT(selector, 2013);
-		solver.setTimeout(timelimit*1000000000);
-		Boolean sat = solver.isSatisfiable(f);
+		solver.setTimeout(timelimit);
+		Boolean sat = null;
+		try {
+			sat = solver.isSatisfiable(f);
+		} catch (TimeoutException e) {
+			System.out.println("c Time Limit Exceeded.");
+		}
 		System.out.println(String.format("c %s time %s flips %d fps %.0f restarts %d", sname, watch.elapsedFormatedSeconds(), 
 				solver.getFlipsCount(), solver.getFlipsCount()/watch.elapsedSecondsFloat(),	solver.getRestartsCount()));
 		

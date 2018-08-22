@@ -73,8 +73,8 @@ public class Stopwatch {
      * @param limit time limit in nanoseconds
      * @return true if time limit exceeded
      */
-    public boolean timeLimitExceeded(long nanoseconds) {
-        return (nanoseconds != 0) && (elapsedNanoSeconds() >= nanoseconds);
+    public boolean timeLimitExceeded(int seconds) {
+        return (seconds != 0) && (elapsedSeconds() >= seconds);
     }
 
     /**

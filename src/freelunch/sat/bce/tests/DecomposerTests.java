@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import freelunch.planning.TimeoutException;
 import freelunch.sat.bce.decomposers.CombinedDecomposer;
 import freelunch.sat.bce.decomposers.FormulaDecomposer;
 import freelunch.sat.bce.decomposers.PureDecomposer;
@@ -21,9 +22,9 @@ import freelunch.sat.bce.eliminators.SimplifiedArminsBCEliminator;
 import freelunch.sat.bce.utilities.FormulaAnalyzer;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
-import freelunch.sat.solver.Sat4JSolver;
 import junit.framework.TestCase;
 
 public class DecomposerTests extends TestCase {
@@ -149,7 +150,7 @@ public class DecomposerTests extends TestCase {
 
 	}
 	
-	public void testDecompositionCorrectness() {
+	public void testDecompositionCorrectness() throws TimeoutException {
 		Logger.setVerbosity(2);
 		final int tests = 100;
 		final int vars = 150;
@@ -228,7 +229,7 @@ public class DecomposerTests extends TestCase {
 
 	}
 	
-	public void testSatGenParams() {
+	public void testSatGenParams() throws TimeoutException {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2013);
 		Sat4JSolver solver = new Sat4JSolver();
 

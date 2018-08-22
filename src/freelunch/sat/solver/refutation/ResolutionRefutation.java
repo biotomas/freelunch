@@ -8,7 +8,7 @@ import java.util.Set;
 
 import freelunch.sat.bce.utilities.ClauseIndex;
 import freelunch.sat.model.CnfSatFormula;
-import freelunch.sat.solver.SatSolver;
+import freelunch.sat.model.SatSolver;
 
 public class ResolutionRefutation implements SatSolver {
 	
@@ -79,7 +79,14 @@ public class ResolutionRefutation implements SatSolver {
 	}
 
 	@Override
-	public void setTimeout(long nanoseconds) {
+	public long getSolveTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void setTimeout(int seconds) {
 		// TODO Auto-generated method stub
 		
 	}

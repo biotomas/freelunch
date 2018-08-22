@@ -10,7 +10,7 @@ import freelunch.sat.satLifter.Stopwatch;
 
 public class CombinedClauseMover implements DecompositionPostprocessor {
 
-	private long timelimit = 0;
+	private int timelimit = 0;
 	private static final float[] PARTS = new float[]{0.4f, 0.3f, 0.2f}; 
 
 
@@ -58,7 +58,7 @@ public class CombinedClauseMover implements DecompositionPostprocessor {
 
 
 	@Override
-	public void setTimeLimit(long nanoseconds) {
-		this.timelimit = nanoseconds;
+	public void setTimeLimit(int seconds) {
+		this.timelimit = seconds;
 	}
 }

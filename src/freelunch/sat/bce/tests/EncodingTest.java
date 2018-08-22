@@ -3,15 +3,16 @@ package freelunch.sat.bce.tests;
 import java.util.ArrayList;
 import java.util.BitSet;
 
-import junit.framework.TestCase;
+import freelunch.planning.TimeoutException;
 import freelunch.sat.bce.decomposers.PureDecomposer;
 import freelunch.sat.bce.encoding.DualRailEncoder;
 import freelunch.sat.bce.encoding.ReconstructionEncoder;
 import freelunch.sat.bce.utilities.LockedProvider;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
-import freelunch.sat.solver.Sat4JSolver;
+import junit.framework.TestCase;
 
 public class EncodingTest extends TestCase {
 	
@@ -32,7 +33,7 @@ public class EncodingTest extends TestCase {
 		//System.out.println(enc);
 	}
 	
-	public void testReencodingOnRandom() {
+	public void testReencodingOnRandom() throws TimeoutException {
 		final int tests = 100;
 		final int vars = 150;
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(5000);

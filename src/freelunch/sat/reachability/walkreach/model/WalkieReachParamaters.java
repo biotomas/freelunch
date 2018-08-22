@@ -18,7 +18,7 @@
  ******************************************************************************/
 package freelunch.sat.reachability.walkreach.model;
 
-import freelunch.core.planning.model.BasicSettings;
+import freelunch.planning.model.BasicSettings;
 
 public class WalkieReachParamaters extends BasicSettings {
     

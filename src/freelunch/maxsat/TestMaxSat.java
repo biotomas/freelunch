@@ -1,11 +1,11 @@
 package freelunch.maxsat;
 
-import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.solvers.Sat4JSolver;
-import freelunch.core.satSolving.solvers.SatSolver;
 import freelunch.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
+import freelunch.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.RandomFormulaGenerator;
+import freelunch.sat.model.Sat4JSolver;
+import freelunch.sat.model.SatSolver;
 import junit.framework.TestCase;
 
 public class TestMaxSat extends TestCase {

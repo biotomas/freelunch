@@ -33,7 +33,7 @@ public class OneProvableEmpoweringClauses {
 	private Stack<Integer> trail;
 	private Statistics stats;
 	private Stopwatch watch;
-	private long timelimit;
+	private int timelimit;
 	
 	/**
 	 * Add one-provable empowering clauses of the specified maximum 
@@ -43,10 +43,10 @@ public class OneProvableEmpoweringClauses {
 	 * @param maxLength maximum length of the added clauses
 	 * @return false if the formula is UNSAT
 	 */
-	public boolean addOneProvableEmpoweringClauses(CnfSatFormula f, int maxLength, long seconds) {
+	public boolean addOneProvableEmpoweringClauses(CnfSatFormula f, int maxLength, int seconds) {
 		stats = new Statistics();
 		watch = new Stopwatch();
-		timelimit = seconds*1000*1000*1000;
+		timelimit = seconds;
 		if (null == UnitPropagationSimplifier.simplifyByUnitPropagation(f, true)) {
 			Logger.print(1, stats.toString());
 			return false;

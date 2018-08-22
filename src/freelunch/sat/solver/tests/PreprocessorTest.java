@@ -1,15 +1,16 @@
 package freelunch.sat.solver.tests;
 
+import freelunch.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
-import freelunch.sat.solver.Sat4JSolver;
 import freelunch.sat.solver.preprocessing.LookAheadPreprocessor;
 import freelunch.sat.solver.preprocessing.OneProvableEmpoweringClauses;
 import junit.framework.TestCase;
 
 public class PreprocessorTest extends TestCase {
 	
-	public void testOneProvableEmpClause() {
+	public void testOneProvableEmpClause() throws TimeoutException {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2014);
 		OneProvableEmpoweringClauses opec = new OneProvableEmpoweringClauses();
 		Sat4JSolver solver = new Sat4JSolver();
@@ -31,7 +32,7 @@ public class PreprocessorTest extends TestCase {
 		}
 	}
 	
-	public void testRandom3Sat() {
+	public void testRandom3Sat() throws TimeoutException {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(2014);
 		LookAheadPreprocessor fce = new LookAheadPreprocessor();
 		Sat4JSolver solver = new Sat4JSolver();

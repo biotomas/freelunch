@@ -5,13 +5,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import freelunch.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.Sat4JSolver;
+import freelunch.sat.model.SatSolver;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;
 import freelunch.sat.solver.LocalSearchMain;
 import freelunch.sat.solver.LocalSearchSatSolver;
-import freelunch.sat.solver.Sat4JSolver;
-import freelunch.sat.solver.SatSolver;
 import freelunch.sat.solver.localSearch.BaseWalkSAT;
 import freelunch.sat.solver.localSearch.hitandwalk.HitAndWalkSolver;
 import freelunch.sat.solver.localSearch.selectors.ProbSat;
@@ -20,7 +21,7 @@ import junit.framework.TestCase;
 
 public class Random3SatLocal extends TestCase {
 	
-	public void testOnFiles() {
+	public void testOnFiles() throws TimeoutException {
 		String path = "/home/tbalyo/workspace/bcd/data/myrandom/out";
         File benchDir = new File(path);
         File[] files = benchDir.listFiles();
@@ -33,7 +34,7 @@ public class Random3SatLocal extends TestCase {
         // gatling 107.00	7.394
         // revolve 10.867	2.350
 		LocalSearchSatSolver local = new BaseWalkSAT(new ProbSat(), 2013);
-		local.setTimeout(5000000000l); //5s
+		local.setTimeout(5); //5s
 		Stopwatch totalTime = new Stopwatch();
 		totalTime.pause();
 		int problemNr = 1;
@@ -68,7 +69,7 @@ public class Random3SatLocal extends TestCase {
 				totalTime.elapsedFormatedSeconds(), timeouts, files.length, totalFps/files.length, totalFlips));
 	}
 	
-	public void testQudraticUnsat() {
+	public void testQudraticUnsat() throws TimeoutException {
 		CnfSatFormula f = new CnfSatFormula();
 		f.variablesCount = 2;
 		f.clauses = new ArrayList<int[]>();
@@ -81,7 +82,7 @@ public class Random3SatLocal extends TestCase {
 		System.out.println(res);
 	}
 
-	public void testRefutationOnRandom() {
+	public void testRefutationOnRandom() throws TimeoutException {
 		int vars = 20;
 		int clauses = vars*4 + vars/4;
 		int tests = 100;
@@ -117,14 +118,14 @@ public class Random3SatLocal extends TestCase {
 		System.out.println("Total time: " + totalTime.elapsedFormatedSeconds());
 	}
 	
-	public void testHitAndWalk() {
+	public void testHitAndWalk() throws TimeoutException {
 		RandomFormulaGenerator rfg = new RandomFormulaGenerator(5000);
 		CnfSatFormula f = rfg.getRandomSatisfiableFormula(100, 430);
 		SatSolver s = new HitAndWalkSolver(2017);
 		System.out.println(s.isSatisfiable(f));
 	}
 
-	public void testLocalSearchPerformance() throws IOException {
+	public void testLocalSearchPerformance() throws IOException, TimeoutException {
 		int vars = 300;
 		int clauses = (int) (vars*4.3);
 		int tests = 100;

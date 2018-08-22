@@ -16,7 +16,7 @@ import freelunch.sat.satLifter.Stopwatch;
 
 public class IncrementalMaximalMover implements DecompositionPostprocessor {
 	
-	private long timelimit = 0;
+	private int timelimit = 0;
 
 	@Override
 	public int moveToLarge(CnfSatFormula large, CnfSatFormula small) {
@@ -118,8 +118,8 @@ public class IncrementalMaximalMover implements DecompositionPostprocessor {
 	}
 
 	@Override
-	public void setTimeLimit(long nanoseconds) {
-		this.timelimit = nanoseconds;
+	public void setTimeLimit(int seconds) {
+		this.timelimit = seconds;
 	}
 
 }

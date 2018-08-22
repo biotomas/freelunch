@@ -19,6 +19,6 @@ public interface BCEliminator {
 	 * Set the time limit for elimination
 	 * @param seconds
 	 */
-	public void setTimeLimit(long nanoseconds);
+	public void setTimeLimit(int seconds);
 
 }

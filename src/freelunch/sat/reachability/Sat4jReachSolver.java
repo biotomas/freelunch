@@ -21,10 +21,10 @@ package freelunch.sat.reachability;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import freelunch.core.planning.TimeoutException;
-import freelunch.core.satSolving.solvers.IncrementalSatSolver;
-import freelunch.core.satSolving.solvers.Sat4JSolver;
+import freelunch.planning.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
+import freelunch.sat.model.IncrementalSatSolver;
+import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.model.SatContradictionException;
 
 

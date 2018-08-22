@@ -16,6 +16,6 @@ public interface DecompositionPostprocessor {
 	 * Set the time limit for post-processing
 	 * @param nanoseconds
 	 */
-	public void setTimeLimit(long nanoseconds);
+	public void setTimeLimit(int seconds);
 
 }
