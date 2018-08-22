@@ -388,30 +388,4 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
         }
     }
     
-    /**
-     * Exist step semantics. Preconditions of an action must not be destroyed by another
-     * action in the same horizon if that action has a lower rank.
-     * requires <i>assignmentVariables</i> and <i>actionRanks</i> and <i>assignmentOpposingActions</i>
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void universal_actionPreconditionMustNotBeDestroyed(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        IntVector vec = new IntVector(2);
-        for (SasAction a : actions) {
-            for (Condition c : a.getPreconditions()) {
-                int id = assignmentIds[c.getVariable().getId()][c.getValue()];
-                
-                for (SasAction oppa : assignmentOpposingActions[id]) {
-                    if (actionRanks[oppa.getId()] < actionRanks[a.getId()]) {
-                        vec.clear();
-                        vec.add(-actionVariables.getVariable(a.getId(), time));
-                        vec.add(-actionVariables.getVariable(oppa.getId(), time));
-                        solver.addNewClause(vec.getArrayCopy());
-                    }
-                }                
-            }
-        }
-    }
-
 }

@@ -27,16 +27,12 @@ import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
 import freelunch.planning.optimizer.PlanVerifier;
-import freelunch.planning.planners.satplan.translator.ActionOrientedTranslator;
-import freelunch.planning.planners.satplan.translator.BinaryReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.CompactDirect;
 import freelunch.planning.planners.satplan.translator.CompactReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.DirectDoubleLinkedTranslator;
 import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
 import freelunch.planning.planners.satplan.translator.DirectTranslator;
-import freelunch.planning.planners.satplan.translator.DirectTranslatorSingleAction;
 import freelunch.planning.planners.satplan.translator.DisertDirectTranslator;
-import freelunch.planning.planners.satplan.translator.MiniBinTranslator;
 import freelunch.planning.planners.satplan.translator.ReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
 import freelunch.planning.planners.satplan.translator.SaseTranslator;
@@ -50,7 +46,7 @@ import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 public class Translator {
     
     public enum TranslationMethod {
-        shortest, direct, sase, isase, action, linear, reinforced, exist, disertDirect, compactDirect, compactReinforced, binaryReinforced, selective, miniBin;
+        direct, sase, isase, linear, reinforced, exist, disertDirect, compactDirect, compactReinforced, selective;
     }
 
     public static void main(String[] args) {
@@ -151,17 +147,11 @@ public class Translator {
 	    case direct:
 	        translator = new DirectTranslator(problem);
 	        break;
-	    case shortest:
-	    	translator = new DirectTranslatorSingleAction(problem);
-	    	break;
 	    case sase:
 	        SaseTranslatorSettings settings = new SaseTranslatorSettings();
 	        settings.setUseOriginalGoalEncoding(true);
 	        settings.setUseOriginalInitialStateEncoding(true);
 	        translator = new SaseTranslator(problem, settings);
-	        break;
-	    case action:
-	        translator = new ActionOrientedTranslator(problem);
 	        break;
 	    case linear:
 	        translator = new DirectDoubleLinkedTranslator(problem);
@@ -180,12 +170,6 @@ public class Translator {
 	        break;
 	    case compactReinforced:
 	        translator = new CompactReinforcedSaseTranslator(problem);
-	        break;
-	    case binaryReinforced:
-	        translator = new BinaryReinforcedSaseTranslator(problem);
-	        break;
-	    case miniBin:
-	        translator = new MiniBinTranslator(problem);
 	        break;
 	    case selective:
 	        translator = new SelectiveTranslator(problem);

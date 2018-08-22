@@ -53,9 +53,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     protected IntVarGroup transitionVariables = null;
     protected IntVarGroup actionVariables;
     protected IntVarGroup chainVariables = null;
-    protected IntVarGroup actionMutexHelperVariables = null;
-    protected IntVarGroup varUnchangedVariables = null;
-    protected IntVarGroup binaryActionVariables = null;
     
 
     protected Set<Pair<SasAction>> interferingActionPairs;
@@ -154,222 +151,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
     }
     
-    protected void initializeVarUnchangedVariables() {
-        varUnchangedVariables = varManager.createNewVarGroup(2);
-        varUnchangedVariables.setDimensionSize(0, problem.getVariables().size());
-        varUnchangedVariables.setDimensionSize(1, 1);
-    }
-    
-    protected void initializeBinaryActionVariables() {
-        binaryActionVariables = varManager.createNewVarGroup(2);
-        int log = 32 - Integer.numberOfLeadingZeros(actions.size() - 1);
-        binaryActionVariables.setDimensionSize(0, log);
-        binaryActionVariables.setDimensionSize(1, 1);
-    }
-    
-    protected void transition_binaryActionsImplyEffects(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        int log = 32 - Integer.numberOfLeadingZeros(actions.size() - 1);
-        int cap = 2 * Integer.highestOneBit(actions.size());
-        int ind = 0;
-        int count = 0;
-        for (SasAction a : actions) {
-            // first we get the binary code of the action
-            int[] binCode = new int[log];
-            Arrays.fill(binCode, -1);            
-            if (count < cap - actions.size()) {
-                for (int bit = 1; bit < log; bit++) {
-                    int on = (ind & (1 << bit)) >> bit;
-                    int val = 2*on - 1;
-                    int lit = val * binaryActionVariables.getVariable(bit, time);
-                    binCode[bit] = -lit;
-                }
-                ind += 2;
-            } else {
-                for (int bit = 0; bit < log; bit++) {
-                    int on = (ind & (1 << bit)) >> bit;
-                    int val = 2*on - 1;
-                    int lit = val * binaryActionVariables.getVariable(bit, time);
-                    binCode[bit] = -lit;
-                }
-                ind += 1;
-            }
-            count++;
-            // shorter codes
-            if (binCode[0] == -1) {
-                binCode = Arrays.copyOfRange(binCode, 1, log);
-            }
-            // action implies its effects
-            for (Condition c : a.getEffects()) {
-                IntVector iv = new IntVector(binCode);
-                iv.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));
-                solver.addNewClause(iv.getArrayCopy());
-            }
-        }
-    }
-
-    /**
-     * variable assignment implies that the variable assignment was the the same in the previous state
-     * or the variable value was changed
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void transition_unchangedVarAssignmentsMustNotChange(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        IntVector lits = new IntVector(3);
-        for (StateVariable var : problem.getVariables()) {
-            int varId = var.getId();
-            for (int val = 0; val < var.getDomain(); val++) {
-                lits.clear();
-                lits.add(-assignmentVariables.getVariable(assignmentIds[varId][val], time+1));
-                lits.add(assignmentVariables.getVariable(assignmentIds[varId][val], time));
-                lits.add(-varUnchangedVariables.getVariable(var.getId(), time));
-                solver.addNewClause(lits.getArrayCopy());
-            }
-        }
-    }
-    
-    protected void universal_binaryActionsImplyPreconditionsAndNoChanges(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        int log = 32 - Integer.numberOfLeadingZeros(actions.size() - 1);
-        int cap = 2 * Integer.highestOneBit(actions.size());
-        int ind = 0;
-        int count = 0;
-        for (SasAction a : actions) {
-            // first we get the binary code of the action
-            int[] binCode = new int[log];
-            Arrays.fill(binCode, -1);            
-            if (count < cap - actions.size()) {
-                for (int bit = 1; bit < log; bit++) {
-                    int on = (ind & (1 << bit)) >> bit;
-                    int val = 2*on - 1;
-                    int lit = val * binaryActionVariables.getVariable(bit, time);
-                    binCode[bit] = -lit;
-                }
-                ind += 2;
-            } else {
-                for (int bit = 0; bit < log; bit++) {
-                    int on = (ind & (1 << bit)) >> bit;
-                    int val = 2*on - 1;
-                    int lit = val * binaryActionVariables.getVariable(bit, time);
-                    binCode[bit] = -lit;
-                }
-                ind += 1;
-            }
-            count++;
-            // shorter codes
-            if (binCode[0] == -1) {
-                binCode = Arrays.copyOfRange(binCode, 1, log);
-            }
-            
-
-            // action implies its preconditions
-            for (Condition c : a.getPreconditions()) {
-                IntVector iv = new IntVector(binCode);
-                iv.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(iv.getArrayCopy());
-            }
-            // action implies no changes
-            Collection<Integer> scope = getEffectsScope(a);
-            for (StateVariable var : problem.getVariables()) {
-                if (scope.contains(var.getId())) {
-                    continue;
-                }
-                IntVector iv = new IntVector(binCode);
-                iv.add(varUnchangedVariables.getVariable(var.getId(), time));
-                solver.addNewClause(iv.getArrayCopy());
-            }
-            
-            //solver.addNewClause(vec.getArrayCopy());
-        }
-    }
-    
-    protected void initializeActionMutexHelperVariables() {
-        int helpers = 0;
-        for (Set<SasAction> grp : actionVariableIndex) {
-            if (grp.size() < 3) {
-                continue;
-            }
-            int log = 32 - Integer.numberOfLeadingZeros(grp.size());
-            helpers += log;
-        }
-        actionMutexHelperVariables = varManager.createNewVarGroup(2);
-        actionMutexHelperVariables.setDimensionSize(0, helpers);
-        actionMutexHelperVariables.setDimensionSize(1, 1);
-    }
-    
-    protected void universal_actionMutexQuadratic(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        for (Set<SasAction> grp : actionVariableIndex) {
-            if (grp.size() < 2) {
-                continue;
-            }
-            IntVector vec = new IntVector(2);
-            List<SasAction> acts = new ArrayList<>(grp);
-            for (int i = 0; i < acts.size(); i++) {
-                for (int j = i+1; j < acts.size(); j++) {
-                    vec.clear();
-                    vec.add(-actionVariables.getVariable(acts.get(i).getId(), time));
-                    vec.add(-actionVariables.getVariable(acts.get(j).getId(), time));
-                    solver.addNewClause(vec.getArrayCopy());
-                }
-            }
-        }
-    }
-    
-    /**
-     * Binary encoding of action mutex. We use the binary encoding of the at-most-one constraint.
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void universal_actionMutexBinaryEnc(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        int pos = 0;
-        for (Set<SasAction> grp : actionVariableIndex) {
-            if (grp.size() < 2) {
-                continue;
-            }
-            if (grp.size() == 2) {
-                IntVector vec = new IntVector(2);
-                List<SasAction> acts = new ArrayList<>(grp);
-                vec.add(-actionVariables.getVariable(acts.get(0).getId(), time));
-                vec.add(-actionVariables.getVariable(acts.get(1).getId(), time));
-                solver.addNewClause(vec.getArrayCopy());
-                continue;
-            }
-            
-            int log = 32 - Integer.numberOfLeadingZeros(grp.size());
-            int cap = 2 * Integer.highestOneBit(grp.size());
-            int ind = 0;
-            int count = 0;
-            IntVector vec = new IntVector(1+log);
-            for (SasAction a : grp) {
-                vec.clear();
-                vec.add(actionVariables.getVariable(a.getId(), time));
-                
-                if (count + 1 < cap - grp.size()) {
-                    for (int bit = 1; bit < log; bit++) {
-                        int on = (ind & (1 << bit)) >> bit;
-                        int val = 2*on - 1;
-                        int lit = val * actionMutexHelperVariables.getVariable(pos+bit, time); 
-                        vec.add(-lit);
-                        solver.addNewClause(new int[] {-actionVariables.getVariable(a.getId(), time), lit});
-                    }
-                    ind += 2;
-                } else {
-                    for (int bit = 0; bit < log; bit++) {
-                        int on = (ind & (1 << bit)) >> bit;
-                        int val = 2*on - 1;
-                        int lit = val * actionMutexHelperVariables.getVariable(pos+bit, time); 
-                        vec.add(-lit);
-                        solver.addNewClause(new int[] {-actionVariables.getVariable(a.getId(), time), lit});
-                    }
-                    ind += 1;
-                }
-                solver.addNewClause(vec.getArrayCopy());
-                count++;
-            }
-            pos += log;
-        }
-    }
-
     protected void initializeActionVariables() {
         actionVariables = varManager.createNewVarGroup(2);
         actionVariables.setDimensionSize(0, actions.size());
@@ -551,42 +332,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         return true;
     }
     
-    protected void computeInterferingActionsAll() {
-        interferingActionPairs = new HashSet<Pair<SasAction>>();
-        for (SasAction a1 : actions) {
-            for (SasAction a2 : actions) {
-                if (a1.getId() < a2.getId()) {
-                    // save some time on symmetry
-                    interferingActionPairs.add(new Pair<SasAction>(a1, a2));
-                }
-            }
-        }   	
-    }
-    
-    //TODO remove transition dependency
-    protected void computeInterferingActionPairsTransitionBased() {
-        interferingActionPairs = new HashSet<Pair<SasAction>>();
-        for (StateVariable var : problem.getVariables()) {
-            int varId = var.getId();
-            List<Transition> transitions = transitionVariableIndex[varId];
-            for (Transition transition : transitions) {
-                if (transition.getType().equals(TransitionType.PREVAILING)) {
-                    continue;
-                }
-                Set<SasAction> supports = transition.getSupportingActions();
-                if (supports.size() > 1) {
-                    for (SasAction a1 : supports) {
-                        for (SasAction a2 : supports) {
-                            if (a1.getId() < a2.getId()) {
-                                interferingActionPairs.add(new Pair<SasAction>(a1, a2));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * Two actions are interfering if one destroys a precondition of the other
      * @param a1
@@ -741,21 +486,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
     }
     
-    /**
-     * At most one action per step is allowed.
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void universal_atMostOneAction(IncrementalSatSolver solver, int time) throws SatContradictionException {
-    	//TODO fixme
-        IntVector vec = new IntVector(10);
-        for (SasAction a : actions) {
-        	vec.add(actionVariables.getVariable(a.getId(), time));
-        }
-        solver.addAtMostOneConstraint(vec.getArrayCopy());
-    }
-    
     protected void universal_transitionsImplyPreconditonAssignment(IncrementalSatSolver solver, int time) throws SatContradictionException {
         IntVector lits = new IntVector(2);
         for (Transition t : transitions) {
@@ -842,24 +572,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
     }
 
-    /**
-     * At least one action must occur for each state variable.
-     * requires <i>actionVariablesIndex</i>
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void universal_atLeastOneActionForEachVariable(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        for (int var = 0; var < problem.getVariables().size(); var++) {
-            Set<SasAction> varActions = actionVariableIndex[var];
-            IntVector vec = new IntVector(varActions.size());
-            for (SasAction a : varActions) {
-                vec.add(actionVariables.getVariable(a.getId(), time));
-            }
-            solver.addNewClause(vec.getArrayCopy());
-        }
-    }
-    
     /**
      * Each transition implies that at least one of its supporting actions must be true.
      * @param solver
@@ -1082,26 +794,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     }
     
     /**
-     * Each action at the following time forbids all actions in the given time
-     * that destroy its precondition.
-     * requires <i>actionOpposingActions</i>
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void transition_actionDisablesPreviousOpposingActions(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        IntVector vec = new IntVector(2);
-        for (SasAction a : actions) {
-            for (SasAction opponent : actionOpposingActions[a.getId()]) {
-                vec.clear();
-                vec.add(-actionVariables.getVariable(a.getId(), time + 1));
-                vec.add(-actionVariables.getVariable(opponent.getId(), time));
-                solver.addNewClause(vec.getArrayCopy());
-            }
-        }
-    }
-    
-    /**
      * Each transition at the following time implies that at least compatible transition must
      * be true in the current time.
      * requires <i>transitionVariables</i>
@@ -1169,24 +861,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
     }
 
-    
-    /**
-     * Unit clauses forbid actions that have effects opposing a goal condition.
-     * requires <i>goalOpposingActions</i>
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void goal_actionsOpposingGoalConditionsDisabled(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        goalConditionIds.clear();
-        // actions opposing a goal condition are forbidden
-        for (SasAction action : goalOpposingActions) {
-            IntVector vec = new IntVector(new int[] {-actionVariables.getVariable(action.getId(), time)});
-            int constraintId = solver.addRemovableClause(vec.getArrayCopy());
-            goalConditionIds.add(constraintId);
-        }
-    }
-    
     /**
      * Add a unit clause for each assignment that holds in the goal state.
      * requires <i>assignmentVariables</i>
@@ -1214,28 +888,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             vec.clear();
             int varValId = assignmentIds[c.getVariable().getId()][c.getValue()];
             //vec.add(assignmentVariables.getVariable(varValId, time));
-            for (SasAction a : assignmentSupportingActions[varValId]) {
-                vec.add(actionVariables.getVariable(a.getId(), time));
-            }
-            int cid = solver.addRemovableClause(vec.getArrayCopy());
-            goalConditionIds.add(cid);
-        }
-    }
-    
-    /**
-     * Variable value assignments in the goal must be supported by an action
-     * requires <i>assignmentVariables</i> and <i>assignmentSupportingActions</i>
-     * Actions must imply their effects.
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void goal_goalAssignmentMustBeSupportedByActionsOrAssignments(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        IntVector vec = new IntVector(10);
-        for (Condition c : problem.getGoal()) {
-            vec.clear();
-            int varValId = assignmentIds[c.getVariable().getId()][c.getValue()];
-            vec.add(assignmentVariables.getVariable(varValId, time));
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
@@ -1300,15 +952,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
         if (chainVariables != null) {
             chainVariables.setDimensionSize(1, time + 1);
-        }
-        if (actionMutexHelperVariables != null) {
-            actionMutexHelperVariables.setDimensionSize(1, time+1);
-        }
-        if (binaryActionVariables != null) {
-            binaryActionVariables.setDimensionSize(1, time+1);
-        }
-        if (varUnchangedVariables != null) {
-            varUnchangedVariables.setDimensionSize(1, time+1);
         }
         return varManager.getTotalVarsCount();
     }

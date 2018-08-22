@@ -57,7 +57,7 @@ public class TopsortActionRanker {
         return ranksById;
     }
     
-    public void visit(SasAction a) {
+    private void visit(SasAction a) {
         if (visited[a.getId()]) {
             // cycle detected, but we ignore them
             ignoredCycles++;
@@ -74,118 +74,6 @@ public class TopsortActionRanker {
         lastRank++;
     }
     
-    public long evalueateRanking(final int[] ranking, ActionAssignmentTransitionIndices indices) {
-        /* Sort actions by ranks
-        List<SasAction> acts = new ArrayList<>(indices.actions);
-        Collections.sort(acts, new Comparator<SasAction>() {
-            @Override
-            public int compare(SasAction o1, SasAction o2) {
-                return ranking[o1.getId()] - ranking[o2.getId()];
-            }
-        });
-        */
-        
-        long lowerSupps = 0;
-        long higherSupps = 0;
-        long lowerOpps = 0;
-        long higherOpps = 0;
-        //long inBetweenOpps = 0;
-        int left = 0;
-        int right = 0;
-        int sleft = 0;
-        int sright = 0;
-        long supSqr = 0;
-        long oppSqr = 0;
-        long sqr;
-        for (SasAction a : indices.actions) {
-            int rankA = ranking[a.getId()];
-            int l = 0;
-            int r = 0;
-            for (SasAction b : indices.actionOpposingActions[a.getId()]) {
-                if (ranking[b.getId()] < rankA) {
-                    lowerOpps++;
-                    l++;
-                } else {
-                    higherOpps++;
-                    r++;
-                }
-            }
-            sqr = (l-r)*(l-r);
-            if (l > r) {
-                left++;
-                oppSqr -= sqr;
-            } else {
-                right++;
-                oppSqr += sqr;
-            }
-            
-            l = 0;
-            r = 0;
-            for (SasAction b : indices.getSupportingActions(a)) {
-                int rankB = ranking[b.getId()]; 
-                if (rankB < rankA) {
-                    lowerSupps++;
-                    l++;
-                } else {
-                    higherSupps++;
-                    r++;
-                }
-                /*
-                for (SasAction c : indices.actionOpposingActions[a.getId()]) {
-                    int rankC = ranking[c.getId()];
-                    if (rankC > rankB && rankC < rankA) {
-                        inBetweenOpps++;
-                    }
-                }/**/
-            }
-            sqr = (l-r)*(l-r);
-            if (l > r) {
-                sleft++;
-                supSqr += sqr;
-            } else {
-                sright++;
-                supSqr -= sqr;
-            }
-            
-        }
-        //System.out.println(String.format("inbetween opps: %d, %.2f, lower supps: %d, higher supps %d, lower opps: %d, higher opps %d", 
-          //      inBetweenOpps, (float)inBetweenOpps/lowerSupps , lowerSupps, higherSupps, lowerOpps, higherOpps));
-        System.out.println(String.format("lol s-sqr %10d, o-sqr %10d, supp diff %d, opp diff %d, supps: l=%d, r=%d, l-r=%d opps: l=%d, r=%d, l-r=%d", 
-                supSqr, oppSqr, lowerSupps - higherSupps, higherOpps - lowerOpps, sleft, sright, sleft-sright, left, right, left-right));
-        /*
-        long assPrevOpps = 0;
-        long assNextOpps = 0;
-        long gold = 0;
-        long x = 0;
-        BitSet reg = new BitSet(indices.actions.size());
-        for (StateVariable var : indices.problem.getVariables()) {
-            for (int val = 0; val < var.getDomain(); val++) {
-                int aid = indices.assignmentIds[var.getId()][val];
-                reg.clear();
-                for (SasAction a : indices.assignmentSupportingActions[aid]) {
-                    for (SasAction b : indices.assignmentOpposingActions[aid]) {
-                        int rankA = ranking[a.getId()];
-                        int rankB = ranking[b.getId()];
-                        if (rankB < rankA) {
-                            reg.set(b.getId());
-                            assPrevOpps++;
-                        } else {
-                            assNextOpps++;
-                        }
-                    }
-                }
-                gold += reg.cardinality();
-                x += indices.assignmentOpposingActions[aid].size();
-            }
-        }
-        System.out.println(String.format("gold %d, %d, ass prev opps: %d, ass next opps: %d", 
-                gold, x, assPrevOpps, assNextOpps));
-        /**/
-        
-        
-        return 0;
-    }
-
     /**
      * Return the ranks of the action by their IDs
      * @param actions

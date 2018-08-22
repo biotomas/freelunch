@@ -24,7 +24,6 @@ import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.TimeoutException;
 import freelunch.planning.planners.Planner;
 import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
-import freelunch.planning.planners.satplan.translator.TransitionExistStepTranslator;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.FormulaAnalyzer;
 import freelunch.sat.model.SatSolver;
@@ -95,10 +94,6 @@ public class IterativeSatBasedSolver implements Planner {
             }
             
             if (solver.isSatisfiable(formula)) {
-                if (settings.isVerbose() && translator instanceof TransitionExistStepTranslator) {
-                    System.out.println("Transition Plan:");
-                    ((TransitionExistStepTranslator)translator).printTransitionPlan(solver.getModel(), makespan);
-                }
                 satTime += solver.getSolveTime();
                 stats.satTime = satTime;
                 stats.totalTime = watch.elapsedFormatedSeconds();

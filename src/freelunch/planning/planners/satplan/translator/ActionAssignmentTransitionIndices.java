@@ -58,18 +58,9 @@ public abstract class ActionAssignmentTransitionIndices {
      */
     protected Set<SasAction>[] assignmentOpposingActions;
     /**
-     * The list of actions that have an effect that destroys the precondition of the action. 
-     * indexed by action IDs
-     */
-    protected Set<SasAction>[] actionOpposingActions;
-    /**
      * The sets of action that use a given variable. Indexed by variable IDs
      */
     protected Set<SasAction>[] actionVariableIndex;
-    /**
-     * Actions that have an effect that destroys a goal condition.
-     */
-    protected Set<SasAction> goalOpposingActions;
     /**
      * The list of all transitions.
      */
@@ -127,26 +118,6 @@ public abstract class ActionAssignmentTransitionIndices {
         return vars;
     }
     
-    protected Set<Integer> getEffectsScope(SasAction a) {
-        Set<Integer> vars = new HashSet<Integer>();
-        for (Condition c : a.getEffects()) {
-            vars.add(c.getVariable().getId());
-        }
-        return vars;
-    }
-
-    @SuppressWarnings("unchecked")
-    protected void initializeActionOpposingActions() {
-        actionOpposingActions = new Set[actions.size()];
-        for (SasAction a : actions) {
-            actionOpposingActions[a.getId()] = new HashSet<SasAction>();
-            for (Condition prec : a.getPreconditions()) {
-                Set<SasAction> opponents = getOpposingActions(prec);
-                actionOpposingActions[a.getId()].addAll(opponents);
-            }
-        }
-    }
-    
     @SuppressWarnings("unchecked")
     protected void initializeAssignmentOpposingActions() {
         assignmentOpposingActions = new Set[totalAssignments];
@@ -160,20 +131,13 @@ public abstract class ActionAssignmentTransitionIndices {
         }
     }
     
-    protected void initializeGoalOpposingActions() {
-        goalOpposingActions = new HashSet<SasAction>();
-        for (Condition goal : problem.getGoal()) {
-            goalOpposingActions.addAll(getOpposingActions(goal));            
-        }
-    }
-
     /**
      * Get the list of actions that destroy the given condition by
      * their effect (or prevailing condition)
      * @param condition
      * @return
      */
-    protected Set<SasAction> getOpposingActions(Condition condition) {
+    private Set<SasAction> getOpposingActions(Condition condition) {
         Set<SasAction> opponents = new HashSet<SasAction>();
         candidateTest:
         for (SasAction candidate : actionVariableIndex[condition.getVariable().getId()]) {

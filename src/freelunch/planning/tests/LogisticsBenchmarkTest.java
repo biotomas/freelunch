@@ -34,8 +34,8 @@ import freelunch.planning.optimizer.PlanVerifier;
 import freelunch.planning.optimizer.model.PlanOptimizerParameters;
 import freelunch.planning.planners.Planner;
 import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver;
-import freelunch.planning.planners.forwardSearch.ForwardSearchSettings;
 import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver.ForwardSearchStatistics;
+import freelunch.planning.planners.forwardSearch.ForwardSearchSettings;
 import freelunch.planning.planners.forwardSearch.heuristics.NeverRestartHeuristic;
 import freelunch.planning.planners.forwardSearch.heuristics.SparrowHeuristic;
 import freelunch.planning.planners.optimal.SimpleAstarPlanner;
@@ -45,15 +45,15 @@ import freelunch.planning.planners.satplan.SasProblemBuilder;
 import freelunch.planning.planners.satplan.incremental.IncrementalSolver;
 import freelunch.planning.planners.satplan.incremental.IncrementalSolverSettings;
 import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.CompactDirect;
 import freelunch.planning.planners.satplan.translator.DirectDoubleLinkedTranslator;
 import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
 import freelunch.planning.planners.satplan.translator.DirectTranslator;
-import freelunch.planning.planners.satplan.translator.DirectTranslatorSingleAction;
+import freelunch.planning.planners.satplan.translator.ReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
 import freelunch.planning.planners.satplan.translator.SaseTranslator;
 import freelunch.planning.planners.satplan.translator.SaseTranslatorSettings;
 import freelunch.planning.planners.satplan.translator.SelectiveTranslator;
-import freelunch.planning.planners.satplan.translator.TransitionExistStepTranslator;
 import freelunch.sat.model.ExternalSatSolver;
 import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.model.SatSolver;
@@ -128,7 +128,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         Stopwatch time = new Stopwatch();
         while (sasProb != null) {
             //IterativeSatBasedSolver s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(sasProb,1));
-            IterativeSatBasedSolver s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectTranslatorSingleAction(sasProb));
+            IterativeSatBasedSolver s = new IterativeSatBasedSolver(new Sat4JSolver(), new CompactDirect(sasProb));
             s.getSettings().setVerbose(true);
             solveProblem(s, sasProb, false, true);
             sasProb = pp.getNext();
@@ -247,7 +247,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         BenchmarkProvider pp = getHardSet();
         SasProblem sasProb = pp.getNext();
         while (sasProb != null) {
-            TransitionExistStepTranslator tr = new TransitionExistStepTranslator(sasProb);
+            ReinforcedSaseTranslator tr = new ReinforcedSaseTranslator(sasProb);
             Planner s = new IterativeSatBasedSolver(solver, tr);
             s.getSettings().setTimelimit(10);
             //s.getSettings().setVerbose(true);
