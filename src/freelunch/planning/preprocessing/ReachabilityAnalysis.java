@@ -31,17 +31,11 @@ public class ReachabilityAnalysis {
 				if (reachableConds.containsAll(a.getPreconditions())) {
 					reachableConds.addAll(a.getEffects());
 				}
-			}
-			for (SasAction a : problem.getConditionalOperators()) {
-				if (reachableConds.containsAll(a.getPreconditions())) {
-					reachableConds.addAll(a.getEffects());
-				}
 				for (ConditionalEffect ce : a.getConditionalEffects()) {
 					if (reachableConds.containsAll(ce.getEffectConditions())) {
 						reachableConds.add(new Condition(ce.getVar(), ce.getNewValue()));
 					}
 				}
-				
 			}
 		}
 		

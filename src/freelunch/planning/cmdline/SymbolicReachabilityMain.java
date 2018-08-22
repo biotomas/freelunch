@@ -88,7 +88,6 @@ public class SymbolicReachabilityMain {
 			try {
 				TranslationMethod translation = TranslationMethod.valueOf(args[1]);
 				SasProblem problem = SasIO.parse(args[2]);
-				problem.compileConditionalActions();
 	            SymbolicReachabilityProblemGenerator gen = new SymbolicReachabilityProblemGenerator(problem, translation);
 			    // read and verify the SR solution
 			    ArrayList<int[]> model = gen.getSrtModelFromFile(args[3]);
@@ -120,7 +119,6 @@ public class SymbolicReachabilityMain {
 		// Default action is encoding
         try {
 			SasProblem problem = SasIO.parse(args[1]);
-			problem.compileConditionalActions();
 			TranslationMethod translation = TranslationMethod.valueOf(args[0]);		
             SymbolicReachabilityProblemGenerator gen = new SymbolicReachabilityProblemGenerator(problem, translation);
 		    // generate a problem

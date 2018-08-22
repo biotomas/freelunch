@@ -70,11 +70,6 @@ public abstract class AbstractPlanner implements Planner {
                 operatorsIndex[c.getVariable().getId()][c.getValue()].add(op);
             }
         }
-        for (SasAction op : problem.getConditionalOperators()) {
-            for (Condition c : op.getPreconditions()) {
-                operatorsIndex[c.getVariable().getId()][c.getValue()].add(op);
-            }
-        }
     }
 
     protected Set<SasAction> getApplicableActions(int[] state) {

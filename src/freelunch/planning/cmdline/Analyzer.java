@@ -47,7 +47,6 @@ public class Analyzer {
                 System.out.println(spa.analyzeSasProblem());
                 //Logger.print(0, "done");
                 System.out.println("----------------------");
-                prob.compileConditionalActions();
                 spa = new SasProblemAnalyzer(prob);
                 System.out.println(spa.analyzeSasProblem());
             } catch (IOException e) {

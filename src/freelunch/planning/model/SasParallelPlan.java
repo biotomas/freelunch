@@ -209,9 +209,6 @@ public class SasParallelPlan {
         for (SasAction a : problem.getOperators()) {
             actions.put(a.getActionInfo().getName().toUpperCase(), a);
         }
-        for (SasAction a : problem.getConditionalOperators()) {
-            actions.put(a.getActionInfo().getName().toUpperCase(), a);
-        }
         List<List<SasAction>> plan = new ArrayList<List<SasAction>>();
         for (String line : planString.split("\n")) {
             if (line.startsWith("(")) {

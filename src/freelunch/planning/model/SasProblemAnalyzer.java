@@ -82,7 +82,7 @@ public class SasProblemAnalyzer extends TranslatorBase {
         res.name = problem.getDescription();
         res.variables = problem.getVariables().size();
         res.operators = problem.getOperators().size();
-        res.operatorsWithConds = problem.getConditionalOperators().size();
+        res.operatorsWithConds = 0;
         List<Integer> domains = new ArrayList<>();
         res.totalDomain = 0;
         res.varMutexSize = 0;
@@ -103,13 +103,13 @@ public class SasProblemAnalyzer extends TranslatorBase {
         res.preconditions = 0;
         res.effects = 0;
         res.actionVars = 0;
-        int actionId = 0;
         for (SasAction a : problem.getOperators()) {
-            a.setId(actionId);
-            actionId++;
             if (isMoveAction(a)) res.moves++;
             if (isConditionalMove(a)) res.condMoves++;
             if (isSwapAction(a)) res.swaps++;
+            if (a.getConditionalEffects().size() > 0) {
+            	res.operatorsWithConds++;
+            }
             res.preconditions += a.getPreconditions().size();
             res.effects += a.getEffects().size();
             res.actionVars += getActionScope(a).size();

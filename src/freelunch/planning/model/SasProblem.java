@@ -27,14 +27,8 @@ public class SasProblem {
     private List<Condition> goal;
     private List<StateVariable> variables;
     private List<SasAction> operators;
-    private List<SasAction> conditionalOperators;
     private List<List<Condition>> mutexGroups;
     private String description;
-    private boolean conditionalEffectsCompiled = false;
-    
-    public boolean isConditionalEffectsCompiled() {
-    	return conditionalEffectsCompiled;
-    }
     
     private void resetActionIDs() {
         int actionId = 0;
@@ -44,77 +38,6 @@ public class SasProblem {
 	            actionId++;
 	        }
         }
-        
-        if (conditionalOperators != null) {
-	        for (SasAction op : conditionalOperators) {
-	        	op.setId(actionId);
-	        	actionId++;
-	        }
-        }
-    }
-    
-    public void compileConditionalActions() {
-		int sizeBefore = operators.size();
-    	for (SasAction csa : conditionalOperators) {
-    		compileAwayConditionalAction(csa);
-    	}
-    	conditionalOperators.clear();
-		System.err.println(String.format("Compiled %d conditional actions into %s actions", 
-				conditionalOperators.size(), (operators.size() - sizeBefore)));
-		conditionalEffectsCompiled = true;
-    	resetActionIDs();
-    }
-    
-    private void compileAwayConditionalAction(SasAction csa) {
-    	//System.err.println("Compiling action " + csa.toString());
-   		ConditionalEffect ce = csa.getConditionalEffects().get(0);
-   		if (ce.getEffectConditions().size() > 2) {
-    		throw new RuntimeException("ERROR: Conditional effects with more than 2 conditions are not supported.");
-   		}
-   		if (ce.getEffectConditions().size() == 1) {
-   			// 1 effect condition
-	   		Condition effectCond = ce.getEffectConditions().get(0);
-	   		for (int val = 0; val < effectCond.getVariable().getDomain(); val++) {
-	   			SasAction a = new SasAction(csa);
-	   			a.getConditionalEffects().remove(0);
-	   			if (val == effectCond.getValue()) {
-	   				a.getPreconditions().add(effectCond);
-	   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
-	   			} else {
-	   				a.getPreconditions().add(new Condition(effectCond.getVariable(), val));
-	   			}
-	   			if (a.getConditionalEffects().size() == 0) {
-	   				operators.add(a);
-	   				//System.out.println("Compilation added action " + a.toString());
-	   			} else {
-	   				compileAwayConditionalAction(a);
-	   			}
-	   		}
-   		} else {
-   			// 2 effect conditions
-	   		Condition ec1 = ce.getEffectConditions().get(0);
-	   		Condition ec2 = ce.getEffectConditions().get(0);
-	   		for (int val1 = 0; val1 < ec1.getVariable().getDomain(); val1++) {   			
-		   		for (int val2 = 0; val2 < ec2.getVariable().getDomain(); val2++) {
-		   			SasAction a = new SasAction(csa);
-		   			a.getConditionalEffects().remove(0);
-		   			if (val1 == ec1.getValue() && val2 == ec2.getValue()) {
-		   				a.getPreconditions().add(ec1);
-		   				a.getPreconditions().add(ec2);
-		   				a.getEffects().add(new Condition(ce.getVar(), ce.getNewValue()));
-		   			} else {
-		   				a.getPreconditions().add(new Condition(ec1.getVariable() , val1));
-		   				a.getPreconditions().add(new Condition(ec2.getVariable() , val2));
-		   			}
-		   			if (a.getConditionalEffects().size() == 0) {
-		   				operators.add(a);
-		   				//System.out.println("Compilation added action " + a.toString());
-		   			} else {
-		   				compileAwayConditionalAction(a);
-		   			}
-		   		}
-	   		}
-   		}
     }
     
     /**
@@ -127,9 +50,7 @@ public class SasProblem {
 		this.variables = other.variables;
 		this.operators = other.operators;
 		this.mutexGroups = other.mutexGroups;
-		this.conditionalOperators = other.conditionalOperators;
 		this.description = other.description;
-		this.conditionalEffectsCompiled = other.conditionalEffectsCompiled;
 	}
 
 	public SasProblem() {
@@ -234,22 +155,10 @@ public class SasProblem {
         	if (!operators.equals(o.operators)) {
         		return false;
         	}
-        	if (!conditionalOperators.equals(o.conditionalOperators)) {
-        		return false;
-        	}
     		return true;
     	} else {
     		return false;
     	}
     }
-
-	public List<SasAction> getConditionalOperators() {
-		return conditionalOperators;
-	}
-
-	public void setConditionalOperators(List<SasAction> conditionalOperators) {
-		this.conditionalOperators = conditionalOperators;
-		resetActionIDs();
-	}
 
 }

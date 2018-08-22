@@ -239,7 +239,6 @@ public class SasIO {
 
         //operators
         List<SasAction> operatorList = new ArrayList<SasAction>();
-        List<SasAction> conditionalOperatorList = new ArrayList<>();
         
         int operators = Integer.parseInt(reader.readLine());
         for (int i = 0; i < operators; i++) {
@@ -307,14 +306,9 @@ public class SasIO {
             	reader.close();
                 throw new RuntimeException("SAS format error, 'end operator' expected");
             }
-            if (op.getConditionalEffects().isEmpty()) {
-            	operatorList.add(op);
-            } else {
-            	conditionalOperatorList.add(op);
-            }
+        	operatorList.add(op);
         }
         problem.setOperators(new ArrayList<SasAction>(operatorList));
-        problem.setConditionalOperators(new ArrayList<SasAction>(conditionalOperatorList));
         
         // axiom rules
         line = reader.readLine();

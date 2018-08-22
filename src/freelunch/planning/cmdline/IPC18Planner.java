@@ -82,7 +82,6 @@ public class IPC18Planner {
 
         } else if (mode.equals("srt")) {
         	System.out.println("generating srt file");
-            problem.compileConditionalActions();
         	SymbolicReachabilityProblemGenerator gen = 
         			new SymbolicReachabilityProblemGenerator(problem, TranslationMethod.selective);
         	try {

@@ -53,7 +53,6 @@ public class BFSSolver {
         String planFile = params.getParameter(1);
         try {
             SasProblem problem = SasIO.parse(filename);
-            problem.compileConditionalActions();
             
             if (params.isSet("p")) {
             	int unreach = ReachabilityAnalysis.testGoalReachabilityAndRemoveUnreachableActions(problem);
