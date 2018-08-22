@@ -969,12 +969,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     protected void universal_actionImpliesItsEffects(IncrementalSatSolver solver, int time) throws SatContradictionException {
         IntVector vec = new IntVector(2);
         for (SasAction a : actions) {
-            for (Condition c : a.getPrevailConditions()) {
-                vec.clear();
-                vec.add(-actionVariables.getVariable(a.getId(), time));
-                vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
-                solver.addNewClause(vec.getArrayCopy());
-            }
             for (Condition c : a.getEffects()) {
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
@@ -982,6 +976,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 solver.addNewClause(vec.getArrayCopy());
             }
         }
+        //TODO conditional effects
 
     }
     
@@ -1076,12 +1071,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     protected void transition_actionsImplyEffects(IncrementalSatSolver solver, int time) throws SatContradictionException {
         IntVector vec = new IntVector(2);
         for (SasAction a : actions) {
-            for (Condition c : a.getPrevailConditions()) {
-                vec.clear();
-                vec.add(-actionVariables.getVariable(a.getId(), time));
-                vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));
-                solver.addNewClause(vec.getArrayCopy());
-            }
             for (Condition c : a.getEffects()) {
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
@@ -1089,6 +1078,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 solver.addNewClause(vec.getArrayCopy());
             }
         }
+        //TODO conditional effects?
     }
     
     /**

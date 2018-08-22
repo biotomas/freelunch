@@ -305,7 +305,7 @@ public class DirectExistStepTranslator extends TranslatorBase implements SasToSa
     protected void transition_actionImpliesEffectsOrAnotherAction(IncrementalSatSolver solver, int time) throws SatContradictionException {
         IntVector vec = new IntVector(2);
         for (SasAction a : actions) {
-            for (Condition c : a.getPrevailConditions()) {
+            for (Condition c : a.getPreconditions()) {
                 vec.clear();
                 vec.add(-actionVariables.getVariable(a.getId(), time));
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));

@@ -26,7 +26,6 @@ public class SasAction {
 
     private final ActionInfo actionInfo;
     private List<Condition> preconditions;
-    private List<Condition> prevailConditions = null;
     private List<Condition> effects;
 	private List<ConditionalEffect> conditionalEffects;
 
@@ -124,25 +123,6 @@ public class SasAction {
     @Override
     public int hashCode() {
         return this.id;
-    }
-
-    /**
-     * @return the prevailConditions
-     */
-    public List<Condition> getPrevailConditions() {
-        if (prevailConditions == null) {
-            prevailConditions = new ArrayList<Condition>();
-            prevailConditionSearch:
-            for (Condition p : preconditions) {
-                for (Condition e : effects) {
-                    if (e.getVariable().getId() == p.getVariable().getId()) {
-                        continue prevailConditionSearch;
-                    }
-                }
-                prevailConditions.add(p);
-            }
-        }
-        return prevailConditions;
     }
 
     /**

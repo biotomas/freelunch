@@ -78,10 +78,21 @@ public class SasIO {
 		// operators
 		out.write(String.format("%d\n", problem.getOperators().size()));
 		for (SasAction a : problem.getOperators()) {
+			List<Condition> prevailConditions = new ArrayList<>();
+			precondLoop:
+			for (Condition pc : a.getPreconditions()) {
+				for (Condition e : a.getEffects()) {
+					if (e.getVariable().getId() == pc.getVariable().getId() && e.getValue() != pc.getValue()) {
+						continue precondLoop;
+					}
+				}
+				prevailConditions.add(pc);
+			}
+			
 			out.write("begin_operator\n");
 			out.write(a.getActionInfo().getName() + "\n");
-			out.write(String.format("%d\n", a.getPrevailConditions().size()));
-			for (Condition prev : a.getPrevailConditions()) {
+			out.write(String.format("%d\n", prevailConditions.size()));
+			for (Condition prev : prevailConditions) {
 				out.write(String.format("%d %d\n", prev.getVariable().getId(), prev.getValue()));
 			}
 			out.write(String.format("%d\n", a.getEffects().size()));
