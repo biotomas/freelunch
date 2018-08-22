@@ -18,17 +18,17 @@
  ******************************************************************************/
 package freelunch.planning.tutorials;
 
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.TimeoutException;
-import freelunch.planning.forwardSearch.BasicForwardSearchSolver;
 import freelunch.planning.model.Condition;
+import freelunch.planning.model.NonexistentPlanException;
 import freelunch.planning.model.SasAction;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
 import freelunch.planning.model.StateVariable;
 import freelunch.planning.model.StringActionInfo;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.sasToSat.SasProblemBuilder;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver;
+import freelunch.planning.planners.satplan.SasProblemBuilder;
 
 public class LogisticsExample {
 

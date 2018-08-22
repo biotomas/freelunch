@@ -22,21 +22,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import junit.framework.TestCase;
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.SasProblemAnalyzer;
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
 import freelunch.planning.benchmarking.PlannerBenchmarking.BenchmarkResultData;
 import freelunch.planning.benchmarking.providers.SasFilesBenchmarkProvider;
-import freelunch.planning.forwardSearch.BasicForwardSearchSolver;
-import freelunch.planning.forwardSearch.ForwardSearchSettings;
-import freelunch.planning.forwardSearch.MemoryEfficientForwardSearchSolver;
-import freelunch.planning.forwardSearch.heuristics.SparrowHeuristic;
-import freelunch.planning.forwardSearch.heuristics.StateVariablesValueGoalDistanceHeuristic;
-import freelunch.planning.forwardSearch.heuristics.StatisticsRuledRestartHeuristic;
+import freelunch.planning.model.NonexistentPlanException;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.PlanVerifier;
+import freelunch.planning.model.SasProblemAnalyzer;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver;
+import freelunch.planning.planners.forwardSearch.ForwardSearchSettings;
+import freelunch.planning.planners.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.planners.forwardSearch.heuristics.SparrowHeuristic;
+import freelunch.planning.planners.forwardSearch.heuristics.StateVariablesValueGoalDistanceHeuristic;
+import freelunch.planning.planners.forwardSearch.heuristics.StatisticsRuledRestartHeuristic;
 import freelunch.utilities.Stopwatch;
 
 public class BfsBenchmarking extends TestCase {
@@ -90,7 +90,7 @@ public class BfsBenchmarking extends TestCase {
 		System.out.println("svvgd");
 		evaluateSolver(new SolverMaker() {
 			@Override
-			public Solver makeSolver(SasProblem problem) {
+			public Planner makeSolver(SasProblem problem) {
 	            ForwardSearchSettings settings = new ForwardSearchSettings();
 	            settings.setHeuristic(new StateVariablesValueGoalDistanceHeuristic(problem, 100));
 	            settings.setTimelimit(TIMELIMIT);
@@ -103,7 +103,7 @@ public class BfsBenchmarking extends TestCase {
 		System.out.println("sparrow");
 		evaluateSolver(new SolverMaker() {
 			@Override
-			public Solver makeSolver(SasProblem problem) {
+			public Planner makeSolver(SasProblem problem) {
 	            ForwardSearchSettings settings = new ForwardSearchSettings();
 	            settings.setHeuristic(new SparrowHeuristic(problem, 100));
 	            settings.setTimelimit(TIMELIMIT);
@@ -116,7 +116,7 @@ public class BfsBenchmarking extends TestCase {
 		System.out.println("svvgd + restart");
 		evaluateSolver(new SolverMaker() {
 			@Override
-			public Solver makeSolver(SasProblem problem) {
+			public Planner makeSolver(SasProblem problem) {
 	            ForwardSearchSettings settings = new ForwardSearchSettings();
 	            settings.setHeuristic(new StateVariablesValueGoalDistanceHeuristic(problem, 100));
 	            settings.setRestartHeuristic(new StatisticsRuledRestartHeuristic());
@@ -130,7 +130,7 @@ public class BfsBenchmarking extends TestCase {
 		System.out.println("sparrow + restart");
 		evaluateSolver(new SolverMaker() {
 			@Override
-			public Solver makeSolver(SasProblem problem) {
+			public Planner makeSolver(SasProblem problem) {
 	            ForwardSearchSettings settings = new ForwardSearchSettings();
 	            settings.setHeuristic(new SparrowHeuristic(problem, 100));
 	            settings.setRestartHeuristic(new StatisticsRuledRestartHeuristic());
@@ -141,7 +141,7 @@ public class BfsBenchmarking extends TestCase {
 	}
 	
 	public interface SolverMaker {
-		public Solver makeSolver(SasProblem problem);
+		public Planner makeSolver(SasProblem problem);
 	}
 	
 	public void evaluateSolver(SolverMaker smaker, BenchmarkProvider bp) {
@@ -155,7 +155,7 @@ public class BfsBenchmarking extends TestCase {
         SasProblem problem = bp.getNext();
         while (problem != null) {
         	problems++;
-            Solver solver = smaker.makeSolver(problem); 
+            Planner solver = smaker.makeSolver(problem); 
             String domName = problem.getDescription().split("-")[0];
             BenchmarkResultData data = results.get(domName);
             if (data == null) {

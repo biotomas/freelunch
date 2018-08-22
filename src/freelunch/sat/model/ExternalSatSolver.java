@@ -30,7 +30,7 @@ import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.utilities.Stopwatch;
 
 public class ExternalSatSolver implements SatSolver {

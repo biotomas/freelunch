@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.bce.decomposers.CombinedDecomposer;
 import freelunch.sat.bce.decomposers.FormulaDecomposer;
 import freelunch.sat.bce.decomposers.PureDecomposer;

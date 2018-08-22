@@ -2,7 +2,7 @@ package freelunch.sat.solver;
 
 import java.util.Arrays;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.satLifter.Stopwatch;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;

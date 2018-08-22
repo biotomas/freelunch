@@ -18,12 +18,12 @@
  ******************************************************************************/
 package freelunch.planning.tests;
 
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.TimeoutException;
+import freelunch.planning.benchmarking.problemGenerator.SlidingPuzzleGenerator;
+import freelunch.planning.model.NonexistentPlanException;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.problemGenerator.SlidingPuzzleGenerator;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolver;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolver;
 import junit.framework.TestCase;
 
 public class SlidingPuzzleGeneratorTest extends TestCase {

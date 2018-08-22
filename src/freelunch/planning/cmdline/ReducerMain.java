@@ -7,19 +7,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 import freelunch.planning.PlanningUtils;
-import freelunch.planning.TimeoutException;
 import freelunch.planning.model.SasAction;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.ActionEliminationOptimizer;
-import freelunch.planning.sase.optimizer.PlanLoader;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.optimizer.RedundancyEliminator;
-import freelunch.planning.sase.optimizer.potentialPlans.HeuristicPotentialPlanMaker;
-import freelunch.planning.sase.optimizer.potentialPlans.PotentialPlan;
-import freelunch.planning.sase.optimizer.potentialPlans.PotentialPlanMaker;
-import freelunch.planning.sase.optimizer.potentialPlans.RecursivePotentialPlanMaker;
-import freelunch.planning.sase.sasToSat.SasIO;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.ActionEliminationOptimizer;
+import freelunch.planning.optimizer.PlanLoader;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.optimizer.RedundancyEliminator;
+import freelunch.planning.optimizer.potentialPlans.HeuristicPotentialPlanMaker;
+import freelunch.planning.optimizer.potentialPlans.PotentialPlan;
+import freelunch.planning.optimizer.potentialPlans.PotentialPlanMaker;
+import freelunch.planning.optimizer.potentialPlans.RecursivePotentialPlanMaker;
 import freelunch.utilities.Stopwatch;
 
 public class ReducerMain {

@@ -28,7 +28,7 @@ import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.IConstr;
 import org.sat4j.specs.ISolver;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.utilities.Stopwatch;
 
 

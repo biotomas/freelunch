@@ -19,9 +19,9 @@
 package freelunch.planning.benchmarking.providers;
 
 import freelunch.planning.benchmarking.BenchmarkProvider;
+import freelunch.planning.benchmarking.problemGenerator.LogisticsProblemGenerator;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.problemGenerator.LogisticsProblemGenerator;
-import freelunch.planning.sase.sasToSat.SasProblemBuilder;
+import freelunch.planning.planners.satplan.SasProblemBuilder;
 
 public class LogisticsBenchmarkProvider implements BenchmarkProvider {
 

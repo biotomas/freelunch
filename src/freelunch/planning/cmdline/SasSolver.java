@@ -20,16 +20,16 @@ package freelunch.planning.cmdline;
 
 import java.io.IOException;
 
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.NonexistentPlanException;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.sasToSat.SasIO;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolverSettings;
-import freelunch.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.planning.sase.sasToSat.translator.SasToSatTranslator;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolverSettings;
+import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
+import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
 import freelunch.sat.model.Sat4JSolver;
 import freelunch.utilities.Stopwatch;
 

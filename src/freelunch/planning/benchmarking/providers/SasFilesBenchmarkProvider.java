@@ -25,8 +25,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import freelunch.planning.benchmarking.BenchmarkProvider;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.sasToSat.SasIO;
 
 public class SasFilesBenchmarkProvider implements BenchmarkProvider {
 

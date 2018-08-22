@@ -2,9 +2,9 @@ package freelunch.planning.cmdline;
 
 import java.io.IOException;
 
-import freelunch.planning.SasProblemAnalyzer;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.sasToSat.SasIO;
+import freelunch.planning.model.SasProblemAnalyzer;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.FormulaAnalyzer;
 

@@ -3,7 +3,7 @@ package freelunch.sat.bce.tests;
 import java.util.ArrayList;
 import java.util.BitSet;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.bce.decomposers.PureDecomposer;
 import freelunch.sat.bce.encoding.DualRailEncoder;
 import freelunch.sat.bce.encoding.ReconstructionEncoder;

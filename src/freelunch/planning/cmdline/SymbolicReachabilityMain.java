@@ -23,11 +23,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import freelunch.planning.cmdline.Translator.TranslationMethod;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.sasToSat.SasIO;
-import freelunch.planning.sase.sasToSat.symbolicReachability.SymbolicReachabilityProblemGenerator;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.satplan.symbolicReachability.SymbolicReachabilityProblemGenerator;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.reachability.SymbolicReachVerifier;
 import freelunch.sat.reachability.SymbolicReachabilityProblem;

@@ -3,7 +3,7 @@ package freelunch.sat.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanEquality;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula.PseudoBooleanObjectiveFunction;

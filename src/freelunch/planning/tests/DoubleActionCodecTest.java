@@ -23,20 +23,20 @@ import java.util.List;
 
 import freelunch.planning.benchmarking.BenchmarkProvider;
 import freelunch.planning.benchmarking.providers.LogisticsBenchmarkProvider;
-import freelunch.planning.forwardSearch.BasicForwardSearchSolver;
-import freelunch.planning.forwardSearch.ForwardSearchSettings;
-import freelunch.planning.forwardSearch.BasicForwardSearchSolver.ForwardSearchStatistics;
-import freelunch.planning.forwardSearch.heuristics.ForwardSearchSelectorFunction;
-import freelunch.planning.forwardSearch.heuristics.NeverRestartHeuristic;
-import freelunch.planning.forwardSearch.heuristics.StateVariablesValueGoalDistanceHeuristic;
 import freelunch.planning.model.Condition;
 import freelunch.planning.model.SasAction;
 import freelunch.planning.model.SasProblem;
 import freelunch.planning.model.StateVariable;
 import freelunch.planning.model.StringActionInfo;
-import freelunch.planning.sase.preprocessing.DoubleActionCodec;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolver;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolverSettings;
+import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver;
+import freelunch.planning.planners.forwardSearch.ForwardSearchSettings;
+import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver.ForwardSearchStatistics;
+import freelunch.planning.planners.forwardSearch.heuristics.ForwardSearchSelectorFunction;
+import freelunch.planning.planners.forwardSearch.heuristics.NeverRestartHeuristic;
+import freelunch.planning.planners.forwardSearch.heuristics.StateVariablesValueGoalDistanceHeuristic;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolver;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolverSettings;
+import freelunch.planning.preprocessing.DoubleActionCodec;
 import junit.framework.TestCase;
 
 public class DoubleActionCodecTest extends TestCase {

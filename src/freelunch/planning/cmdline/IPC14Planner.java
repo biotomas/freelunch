@@ -2,19 +2,19 @@ package freelunch.planning.cmdline;
 
 import java.io.IOException;
 
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
-import freelunch.planning.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.ActionEliminationOptimizer;
-import freelunch.planning.sase.optimizer.PlanOptimizer;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters;
-import freelunch.planning.sase.sasToSat.SasIO;
-import freelunch.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.planning.sase.sasToSat.translator.SasToSatTranslator;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.ActionEliminationOptimizer;
+import freelunch.planning.optimizer.PlanOptimizer;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
+import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
 import freelunch.sat.model.ExternalSatSolver;
 
 public class IPC14Planner {
@@ -34,7 +34,7 @@ public class IPC14Planner {
         SasParallelPlan plan = null;
         
         // first try blind forward for 10 seconds
-        Solver planner = new MemoryEfficientForwardSearchSolver(problem);
+        Planner planner = new MemoryEfficientForwardSearchSolver(problem);
         planner.getSettings().setTimelimit(10);
         try {
             plan = planner.solve();
@@ -48,7 +48,7 @@ public class IPC14Planner {
         if (plan == null) {
             // SAT search
             SasToSatTranslator translator = new DirectExistStepTranslator(problem);
-            Solver solver = new IterativeSatBasedSolver(new ExternalSatSolver(), translator);
+            Planner solver = new IterativeSatBasedSolver(new ExternalSatSolver(), translator);
             //Solver solver = new IterativeSatBasedSolver(new Sat4JSolver(), translator);
             try {
                 plan = solver.solve();

@@ -20,16 +20,16 @@ package freelunch.planning.cmdline;
 
 import java.io.IOException;
 
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
-import freelunch.planning.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.model.NonexistentPlanException;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.ActionEliminationOptimizer;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.preprocessing.ReachabilityAnalysis;
-import freelunch.planning.sase.sasToSat.SasIO;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.ActionEliminationOptimizer;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.preprocessing.ReachabilityAnalysis;
 import freelunch.utilities.ParametersProcessor;
 import freelunch.utilities.Stopwatch;
 
@@ -60,7 +60,7 @@ public class BFSSolver {
                 System.out.println(String.format("preprocessing removed %d unreachable actions.", unreach));
             }
             
-            Solver solver = new MemoryEfficientForwardSearchSolver(problem);
+            Planner solver = new MemoryEfficientForwardSearchSolver(problem);
 
             SasParallelPlan plan = solver.solve();
             planSize = plan.getPlanLength();

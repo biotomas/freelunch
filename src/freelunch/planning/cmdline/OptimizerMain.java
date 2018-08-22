@@ -22,14 +22,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.PlanLoader;
-import freelunch.planning.sase.optimizer.PlanOptimizer;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerStatistics;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters.SelectionAlgorithm;
-import freelunch.planning.sase.sasToSat.SasIO;
+import freelunch.planning.optimizer.PlanLoader;
+import freelunch.planning.optimizer.PlanOptimizer;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters;
+import freelunch.planning.optimizer.model.PlanOptimizerStatistics;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters.SelectionAlgorithm;
 import freelunch.utilities.Stopwatch;
 
 

@@ -1,6 +1,6 @@
 package freelunch.sat.solver.tests;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.satLifter.tests.RandomFormulaGenerator;

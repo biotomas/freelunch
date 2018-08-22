@@ -1,7 +1,7 @@
 package freelunch.maxsat;
 
 import freelunch.maxsat.WeightedPartialMaxSatFormula.WeightedClause;
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.RandomFormulaGenerator;
 import freelunch.sat.model.Sat4JSolver;

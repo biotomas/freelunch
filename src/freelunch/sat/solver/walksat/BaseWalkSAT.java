@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import freelunch.planning.TimeoutException;
 import freelunch.planning.model.BasicSettings;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.IncrementalSatSolver;
 import freelunch.sat.model.SatContradictionException;

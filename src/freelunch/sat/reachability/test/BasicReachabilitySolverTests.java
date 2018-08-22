@@ -21,23 +21,23 @@ package freelunch.sat.reachability.test;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
+import freelunch.planning.benchmarking.problemGenerator.LogisticsProblemGenerator;
 import freelunch.planning.cmdline.Translator;
 import freelunch.planning.cmdline.Translator.TranslationMethod;
 import freelunch.planning.model.Condition;
+import freelunch.planning.model.NonexistentPlanException;
 import freelunch.planning.model.SasAction;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
 import freelunch.planning.model.StateVariable;
 import freelunch.planning.model.StringActionInfo;
-import freelunch.planning.problemGenerator.LogisticsProblemGenerator;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.sasToSat.SasProblemBuilder;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolver;
-import freelunch.planning.sase.sasToSat.symbolicReachability.SymbolicReachabilityProblemGenerator;
-import freelunch.planning.sase.sasToSat.translator.SasToSatTranslator;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.satplan.SasProblemBuilder;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolver;
+import freelunch.planning.planners.satplan.symbolicReachability.SymbolicReachabilityProblemGenerator;
+import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
 import freelunch.sat.reachability.Sat4jReachSolver;
 import freelunch.sat.reachability.SymbolicReachVerifier;
 import freelunch.sat.reachability.SymbolicReachabilityProblem;
@@ -47,7 +47,7 @@ public class BasicReachabilitySolverTests extends TestCase {
     
     public void testGenerator() {
         SasProblem p = createProblem(5).getSasProblem();
-        Solver s = new IncrementalSolver(p);
+        Planner s = new IncrementalSolver(p);
         try {
             SasParallelPlan plan = s.solve();
             System.out.println(plan);

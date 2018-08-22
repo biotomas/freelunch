@@ -18,7 +18,7 @@
  ******************************************************************************/
 package freelunch.sat.model;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 
 /**
  * Interface for incremental SAT solvers

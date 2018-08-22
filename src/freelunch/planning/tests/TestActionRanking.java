@@ -22,15 +22,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
+import freelunch.planning.benchmarking.problemGenerator.MultiRobotPathPlanningGenerator;
+import freelunch.planning.model.NonexistentPlanException;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.problemGenerator.MultiRobotPathPlanningGenerator;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.ExternalSatSolver;
 import freelunch.sat.model.Sat4JSolver;
@@ -64,7 +64,7 @@ public class TestActionRanking extends TestCase {
         int totalLength = 0;
         for (int i = 0; i < 30; i++) {
             SasProblem problem = MultiRobotPathPlanningGenerator.generateProblem(6, 40, 4, 2013+i);
-            Solver solver = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(problem));
+            Planner solver = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(problem));
             SasParallelPlan plan = solver.solve();
             boolean valid = PlanVerifier.verifyPlan(problem, plan);
             assertTrue(valid);

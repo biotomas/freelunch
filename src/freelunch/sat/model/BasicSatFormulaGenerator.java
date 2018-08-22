@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 
 
 /**

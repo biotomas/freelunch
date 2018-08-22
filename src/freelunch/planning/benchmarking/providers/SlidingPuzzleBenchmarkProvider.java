@@ -19,8 +19,8 @@
 package freelunch.planning.benchmarking.providers;
 
 import freelunch.planning.benchmarking.BenchmarkProvider;
+import freelunch.planning.benchmarking.problemGenerator.SlidingPuzzleGenerator;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.problemGenerator.SlidingPuzzleGenerator;
 
 public class SlidingPuzzleBenchmarkProvider implements BenchmarkProvider {
     

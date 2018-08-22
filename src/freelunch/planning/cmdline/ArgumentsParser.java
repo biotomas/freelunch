@@ -18,8 +18,8 @@
  ******************************************************************************/
 package freelunch.planning.cmdline;
 
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolverSettings;
-import freelunch.planning.sase.sasToSat.translator.SaseTranslatorSettings.TransitionProgressionType;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolverSettings;
+import freelunch.planning.planners.satplan.translator.SaseTranslatorSettings.TransitionProgressionType;
 
 /**
  * Class for parsing command line arguments

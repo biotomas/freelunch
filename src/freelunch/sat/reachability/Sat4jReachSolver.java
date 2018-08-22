@@ -21,7 +21,7 @@ package freelunch.sat.reachability;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.IncrementalSatSolver;
 import freelunch.sat.model.Sat4JSolver;

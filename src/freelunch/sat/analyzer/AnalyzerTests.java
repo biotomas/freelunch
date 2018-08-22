@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.List;
 
-import freelunch.planning.TimeoutException;
+import freelunch.planning.model.TimeoutException;
 import freelunch.sat.bce.utilities.Logger;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.Sat4JSolver;

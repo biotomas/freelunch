@@ -24,27 +24,27 @@ import java.util.List;
 import junit.framework.TestCase;
 import freelunch.maxsat.PartialMaxSatFormula;
 import freelunch.maxsat.Sat4JMaxsatSolver;
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
 import freelunch.planning.benchmarking.BenchmarkProvider;
 import freelunch.planning.benchmarking.providers.LogisticsBenchmarkProvider;
 import freelunch.planning.benchmarking.providers.SasFilesBenchmarkProvider;
-import freelunch.planning.forwardSearch.MemoryEfficientForwardSearchSolver;
 import freelunch.planning.model.Condition;
+import freelunch.planning.model.NonexistentPlanException;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.ActionEliminationOptimizer;
-import freelunch.planning.sase.optimizer.PlanLoader;
-import freelunch.planning.sase.optimizer.PlanOptimizer;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.optimizer.RedundancyEliminator;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters;
-import freelunch.planning.sase.optimizer.model.SubPlanStructure;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters.SelectionAlgorithm;
-import freelunch.planning.sase.sasToSat.SasIO;
-import freelunch.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.ActionEliminationOptimizer;
+import freelunch.planning.optimizer.PlanLoader;
+import freelunch.planning.optimizer.PlanOptimizer;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.optimizer.RedundancyEliminator;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters;
+import freelunch.planning.optimizer.model.SubPlanStructure;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters.SelectionAlgorithm;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
 import freelunch.sat.model.Sat4JSolver;
 import freelunch.utilities.Stopwatch;
 
@@ -53,7 +53,7 @@ public class OptimizerTests extends TestCase {
 	public void testMaxSatOptimizer() throws IOException, TimeoutException, NonexistentPlanException {
 		LogisticsBenchmarkProvider lbp = new LogisticsBenchmarkProvider(3, 3, 5, 10, 5, 10);
 		SasProblem problem = lbp.getNext();
-        Solver planner = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(problem));
+        Planner planner = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(problem));
         SasParallelPlan plan = planner.solve();
         System.out.println(plan.getPlanCost());
         
@@ -67,7 +67,7 @@ public class OptimizerTests extends TestCase {
     
     public void testMaxSatEncoding() throws IOException, TimeoutException, NonexistentPlanException {
         SasProblem problem = SasIO.parse("testfiles/ipcbench/visitall-problem12.sas");
-        Solver planner = new MemoryEfficientForwardSearchSolver(problem);
+        Planner planner = new MemoryEfficientForwardSearchSolver(problem);
         SasParallelPlan plan = planner.solve();
         RedundancyEliminator elim = new RedundancyEliminator();
         PartialMaxSatFormula pmaxf = elim.encodeToPMaxSat(problem, plan);
@@ -83,7 +83,7 @@ public class OptimizerTests extends TestCase {
         ActionEliminationOptimizer optimizer1 = new ActionEliminationOptimizer();
         //RedundancyEliminator optimizer2 = new RedundancyEliminator();
         while (problem != null) {
-            Solver planner = new MemoryEfficientForwardSearchSolver(problem);
+            Planner planner = new MemoryEfficientForwardSearchSolver(problem);
             planner.getSettings().setTimelimit(20);
             try {
                 SasParallelPlan plan  = planner.solve();
@@ -122,7 +122,7 @@ public class OptimizerTests extends TestCase {
         SasProblem problem = bp.getNext();
         ActionEliminationOptimizer optimizer = new ActionEliminationOptimizer();
         while (problem != null) {
-            Solver planner = new MemoryEfficientForwardSearchSolver(problem);
+            Planner planner = new MemoryEfficientForwardSearchSolver(problem);
             planner.getSettings().setTimelimit(20);
             try {
                 SasParallelPlan plan  = planner.solve();

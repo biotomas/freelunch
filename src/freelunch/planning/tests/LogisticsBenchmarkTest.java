@@ -20,40 +20,40 @@ package freelunch.planning.tests;
 
 import java.io.IOException;
 
-import freelunch.planning.NonexistentPlanException;
-import freelunch.planning.SasProblemAnalyzer;
-import freelunch.planning.Solver;
-import freelunch.planning.TimeoutException;
 import freelunch.planning.benchmarking.BenchmarkProvider;
+import freelunch.planning.benchmarking.problemGenerator.LogisticsProblemGenerator;
 import freelunch.planning.benchmarking.providers.LogisticsBenchmarkProvider;
-import freelunch.planning.forwardSearch.BasicForwardSearchSolver;
-import freelunch.planning.forwardSearch.ForwardSearchSettings;
-import freelunch.planning.forwardSearch.BasicForwardSearchSolver.ForwardSearchStatistics;
-import freelunch.planning.forwardSearch.heuristics.NeverRestartHeuristic;
-import freelunch.planning.forwardSearch.heuristics.SparrowHeuristic;
+import freelunch.planning.model.NonexistentPlanException;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.optimal.SimpleAstarPlanner;
-import freelunch.planning.optimal.heuristics.SimpleGoalDistanceHeuristic;
-import freelunch.planning.optimal.heuristics.TrivialAdmissibleHeuristic;
-import freelunch.planning.problemGenerator.LogisticsProblemGenerator;
-import freelunch.planning.sase.optimizer.PlanOptimizer;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters;
-import freelunch.planning.sase.sasToSat.SasIO;
-import freelunch.planning.sase.sasToSat.SasProblemBuilder;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolver;
-import freelunch.planning.sase.sasToSat.incremental.IncrementalSolverSettings;
-import freelunch.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
-import freelunch.planning.sase.sasToSat.translator.DirectDoubleLinkedTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectTranslatorSingleAction;
-import freelunch.planning.sase.sasToSat.translator.SasToSatTranslator;
-import freelunch.planning.sase.sasToSat.translator.SaseTranslator;
-import freelunch.planning.sase.sasToSat.translator.SaseTranslatorSettings;
-import freelunch.planning.sase.sasToSat.translator.SelectiveTranslator;
-import freelunch.planning.sase.sasToSat.translator.TransitionExistStepTranslator;
+import freelunch.planning.model.SasProblemAnalyzer;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.PlanOptimizer;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver;
+import freelunch.planning.planners.forwardSearch.ForwardSearchSettings;
+import freelunch.planning.planners.forwardSearch.BasicForwardSearchSolver.ForwardSearchStatistics;
+import freelunch.planning.planners.forwardSearch.heuristics.NeverRestartHeuristic;
+import freelunch.planning.planners.forwardSearch.heuristics.SparrowHeuristic;
+import freelunch.planning.planners.optimal.SimpleAstarPlanner;
+import freelunch.planning.planners.optimal.heuristics.SimpleGoalDistanceHeuristic;
+import freelunch.planning.planners.optimal.heuristics.TrivialAdmissibleHeuristic;
+import freelunch.planning.planners.satplan.SasProblemBuilder;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolver;
+import freelunch.planning.planners.satplan.incremental.IncrementalSolverSettings;
+import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.DirectDoubleLinkedTranslator;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
+import freelunch.planning.planners.satplan.translator.DirectTranslator;
+import freelunch.planning.planners.satplan.translator.DirectTranslatorSingleAction;
+import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
+import freelunch.planning.planners.satplan.translator.SaseTranslator;
+import freelunch.planning.planners.satplan.translator.SaseTranslatorSettings;
+import freelunch.planning.planners.satplan.translator.SelectiveTranslator;
+import freelunch.planning.planners.satplan.translator.TransitionExistStepTranslator;
 import freelunch.sat.model.ExternalSatSolver;
 import freelunch.sat.model.Sat4JSolver;
 import freelunch.sat.model.SatSolver;
@@ -202,7 +202,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         
         SasProblem sasProb = pp.getNext();
         while (sasProb != null) {
-            Solver s = new IterativeSatBasedSolver(new ExternalSatSolver(), new SaseTranslator(sasProb));
+            Planner s = new IterativeSatBasedSolver(new ExternalSatSolver(), new SaseTranslator(sasProb));
             s.getSettings().setTimelimit(10);
             solveProblem(s, sasProb, false, false);
             sasProb = pp.getNext();
@@ -218,7 +218,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         int i = 0;
         SasProblem sasProb = pp.getNext();
         while (sasProb != null) {
-            Solver s = new IterativeSatBasedSolver(new Sat4JSolver(), new SaseTranslator(sasProb, settings));
+            Planner s = new IterativeSatBasedSolver(new Sat4JSolver(), new SaseTranslator(sasProb, settings));
             s.getSettings().setTimelimit(10);
             int makespan = solveProblem(s, sasProb, false, false);
             assertEquals(hardSetMakespans[i], makespan);
@@ -234,7 +234,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         BenchmarkProvider pp = getHardSet();
         //SasProblem sasProb = pp.getNext();
         while (sasProb != null) {
-            Solver s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(sasProb));
+            Planner s = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectExistStepTranslator(sasProb));
             s.getSettings().setTimelimit(10);
             //s.getSettings().setVerbose(true);
             solveProblem(s, sasProb, false, true);
@@ -248,7 +248,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         SasProblem sasProb = pp.getNext();
         while (sasProb != null) {
             TransitionExistStepTranslator tr = new TransitionExistStepTranslator(sasProb);
-            Solver s = new IterativeSatBasedSolver(solver, tr);
+            Planner s = new IterativeSatBasedSolver(solver, tr);
             s.getSettings().setTimelimit(10);
             //s.getSettings().setVerbose(true);
             solveProblem(s, sasProb, false, true);
@@ -264,7 +264,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         int i = 0;
         while (sasProb != null) {
             //Solver s = new IterativeSatBasedSolver(solver, new DirectDoubleLinkedTranslator(sasProb));
-            Solver s = new IterativeSatBasedSolver(solver, new DirectTranslator(sasProb));
+            Planner s = new IterativeSatBasedSolver(solver, new DirectTranslator(sasProb));
             s.getSettings().setTimelimit(10);
             int makespan = solveProblem(s, sasProb, false, false);
             // check makespan length
@@ -315,7 +315,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         System.out.println(String.format("Plan length %d time %s", plan.getPlanLength(), watch.elapsedFormatedSeconds()));
     }
     
-    public static int solveProblem(Solver planner, SasProblem problem, boolean improve, boolean printPlan) {
+    public static int solveProblem(Planner planner, SasProblem problem, boolean improve, boolean printPlan) {
         System.out.print("Solving " + problem.getDescription() + " ");
         Stopwatch watch = new Stopwatch();
         try {

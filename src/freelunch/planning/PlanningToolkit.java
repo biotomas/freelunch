@@ -1,18 +1,21 @@
 package freelunch.planning;
 
 import freelunch.maxsat.Sat4JMaxsatSolver;
-import freelunch.planning.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.model.NonexistentPlanException;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.ActionEliminationOptimizer;
-import freelunch.planning.sase.optimizer.PlanOptimizer;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.optimizer.RedundancyEliminator;
-import freelunch.planning.sase.optimizer.model.PlanOptimizerParameters;
-import freelunch.planning.sase.sasToSat.iterative.IterativeSatBasedSolver;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.planning.sase.sasToSat.translator.ReinforcedSaseTranslator;
-import freelunch.planning.sase.sasToSat.translator.SelectiveTranslator;
+import freelunch.planning.model.TimeoutException;
+import freelunch.planning.optimizer.ActionEliminationOptimizer;
+import freelunch.planning.optimizer.PlanOptimizer;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.optimizer.RedundancyEliminator;
+import freelunch.planning.optimizer.model.PlanOptimizerParameters;
+import freelunch.planning.planners.Planner;
+import freelunch.planning.planners.forwardSearch.MemoryEfficientForwardSearchSolver;
+import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
+import freelunch.planning.planners.satplan.translator.ReinforcedSaseTranslator;
+import freelunch.planning.planners.satplan.translator.SelectiveTranslator;
 import freelunch.sat.model.Sat4JSolver;
 
 /**
@@ -55,7 +58,7 @@ public class PlanningToolkit {
 	 * @throws NonexistentPlanException
 	 */
 	public static SasParallelPlan findPlan(SasProblem problem, PlanningAlgorithm algorithm) throws TimeoutException, NonexistentPlanException {
-		Solver planner = null;
+		Planner planner = null;
 		switch (algorithm) {
 		case greedyForward:
 			planner = new MemoryEfficientForwardSearchSolver(problem);

@@ -19,8 +19,8 @@
 package freelunch.planning.benchmarking.providers;
 
 import freelunch.planning.benchmarking.BenchmarkProvider;
+import freelunch.planning.benchmarking.problemGenerator.MultiRobotPathPlanningGenerator;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.problemGenerator.MultiRobotPathPlanningGenerator;
 
 public class MultiRobotPathPlanningBenchmarkProvider implements BenchmarkProvider {
     

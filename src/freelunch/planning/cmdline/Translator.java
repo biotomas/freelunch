@@ -23,28 +23,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import freelunch.planning.model.SasAction;
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.preprocessing.DoubleActionCodec;
-import freelunch.planning.sase.sasToMultiSat.MultiValuedCNF;
-import freelunch.planning.sase.sasToMultiSat.SasToMVSat;
-import freelunch.planning.sase.sasToSat.SasIO;
-import freelunch.planning.sase.sasToSat.translator.ActionOrientedTranslator;
-import freelunch.planning.sase.sasToSat.translator.BinaryReinforcedSaseTranslator;
-import freelunch.planning.sase.sasToSat.translator.CompactDirect;
-import freelunch.planning.sase.sasToSat.translator.CompactReinforcedSaseTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectDoubleLinkedTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectExistStepTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectTranslator;
-import freelunch.planning.sase.sasToSat.translator.DirectTranslatorSingleAction;
-import freelunch.planning.sase.sasToSat.translator.DisertDirectTranslator;
-import freelunch.planning.sase.sasToSat.translator.MiniBinTranslator;
-import freelunch.planning.sase.sasToSat.translator.ReinforcedSaseTranslator;
-import freelunch.planning.sase.sasToSat.translator.SasToSatTranslator;
-import freelunch.planning.sase.sasToSat.translator.SaseTranslator;
-import freelunch.planning.sase.sasToSat.translator.SaseTranslatorSettings;
-import freelunch.planning.sase.sasToSat.translator.SelectiveTranslator;
+import freelunch.planning.optimizer.PlanVerifier;
+import freelunch.planning.planners.satplan.translator.ActionOrientedTranslator;
+import freelunch.planning.planners.satplan.translator.BinaryReinforcedSaseTranslator;
+import freelunch.planning.planners.satplan.translator.CompactDirect;
+import freelunch.planning.planners.satplan.translator.CompactReinforcedSaseTranslator;
+import freelunch.planning.planners.satplan.translator.DirectDoubleLinkedTranslator;
+import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
+import freelunch.planning.planners.satplan.translator.DirectTranslator;
+import freelunch.planning.planners.satplan.translator.DirectTranslatorSingleAction;
+import freelunch.planning.planners.satplan.translator.DisertDirectTranslator;
+import freelunch.planning.planners.satplan.translator.MiniBinTranslator;
+import freelunch.planning.planners.satplan.translator.ReinforcedSaseTranslator;
+import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
+import freelunch.planning.planners.satplan.translator.SaseTranslator;
+import freelunch.planning.planners.satplan.translator.SaseTranslatorSettings;
+import freelunch.planning.planners.satplan.translator.SelectiveTranslator;
+import freelunch.planning.preprocessing.DoubleActionCodec;
 import freelunch.sat.model.CnfSatFormula;
 import freelunch.sat.model.FormulaAnalyzer;
 import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
@@ -59,7 +57,7 @@ public class Translator {
         if (args.length < 3) {
             System.out.println("USAGE:\njava -jar translator.jar encode <problem.sas> <method> <makespan> OPTIONS\n-OR-\n"
             		+ "java -jar translator.jar decode <problem.sas> <method> <makespan> <sat-model.txt> OPTIONS\n"
-            		+ "OPTIONS:\n -m : multivalued sat output\n -a : add double actions\n -p : pseudo Boolean output\n" +
+            		+ "OPTIONS:\n -a : add double actions\n -p : pseudo Boolean output\n" +
             		" -s : staticstics of formula");
             System.out.println("Methods: " + Arrays.toString(TranslationMethod.values()));
             return;
@@ -77,7 +75,6 @@ public class Translator {
         if (!encode) {
         	satModelFile = args[4];
         }
-        boolean multiValued = contains(args, "-m");
         boolean doubleActions = contains(args, "-a");
         boolean statistics = contains(args, "-s");
         boolean pseudoBoolean = contains(args, "-p");
@@ -122,7 +119,7 @@ public class Translator {
                 SasToSatTranslator translator = makeTranslator(problem, method, 5);
                 PseudoBooleanFormula pbf = translator.makePseudoBooleanFormulaForMakespan(makeSpan);
                 pbf.printFormula(System.out);
-            } else if (!multiValued) {
+            } else  {
                 SasToSatTranslator translator = makeTranslator(problem, method, 5);
                 CnfSatFormula formula = translator.makeFormulaForMakespan(makeSpan);
                 if (statistics) {
@@ -131,10 +128,6 @@ public class Translator {
                 } else {
                     formula.printDimacs(System.out);
                 }
-            } else {
-                SasToMVSat translator = new SasToMVSat();
-                MultiValuedCNF cnf = translator.translate(problem, makeSpan);
-                cnf.printNoGoodFormat(System.out);
             }
         } catch (IOException e) {
             e.printStackTrace();

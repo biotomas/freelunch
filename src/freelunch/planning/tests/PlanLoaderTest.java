@@ -21,11 +21,11 @@ package freelunch.planning.tests;
 import java.io.File;
 import java.io.IOException;
 
+import freelunch.planning.model.SasIO;
 import freelunch.planning.model.SasParallelPlan;
 import freelunch.planning.model.SasProblem;
-import freelunch.planning.sase.optimizer.PlanLoader;
-import freelunch.planning.sase.optimizer.PlanVerifier;
-import freelunch.planning.sase.sasToSat.SasIO;
+import freelunch.planning.optimizer.PlanLoader;
+import freelunch.planning.optimizer.PlanVerifier;
 import junit.framework.TestCase;
 
 
