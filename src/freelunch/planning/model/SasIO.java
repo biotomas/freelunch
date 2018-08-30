@@ -259,7 +259,6 @@ public class SasIO {
 
             int effects = Integer.parseInt(line);
             preConditions.clear();
-            List<Condition> effectList = new ArrayList<Condition>();
             for (int ef = 0; ef < effects; ef++) {
                 line = reader.readLine().trim();
                 String[] parts = line.split(" ");
@@ -270,7 +269,7 @@ public class SasIO {
 	                int reqVal = Integer.parseInt(parts[parts.length-2]);
 	                int newVal = Integer.parseInt(parts[parts.length-1]);
                 	if (reqVal != -1) {
-                		preConditions.add(new Condition(var, reqVal));
+                		op.getPreconditions().add(new Condition(var, reqVal));
                 	}
 
 	                ConditionalEffect ceff = new ConditionalEffect(var, newVal);	                
@@ -289,13 +288,11 @@ public class SasIO {
 	                int newVal = Integer.parseInt(parts[parts.length-1]);
 	                // -1 means no required value
 	                if (reqVal != -1) {
-	                    preConditions.add(new Condition(var, reqVal));
+	                    op.getPreconditions().add(new Condition(var, reqVal));
 	                }
-	                effectList.add(new Condition(var, newVal));
+	                op.getEffects().add(new Condition(var, newVal));
                 }
             }
-            op.setEffects(new ArrayList<Condition>(effectList));
-            op.setPreconditions(new ArrayList<Condition>(preConditions));
             op.getPreconditions().addAll(prevailConditions);
             line = reader.readLine();
             int cost = Integer.parseInt(line.trim());

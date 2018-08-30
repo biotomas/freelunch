@@ -35,13 +35,13 @@ public class SasAction {
 
     public SasAction(ActionInfo actionInfo) {
         this.actionInfo = actionInfo;
+        preconditions = new ArrayList<>();
+        conditionalEffects = new ArrayList<>();
+        effects = new ArrayList<>();        
     }
 
     public SasAction(String name) {
-        this.actionInfo = new StringActionInfo(name);
-        preconditions = new ArrayList<>();
-        conditionalEffects = new ArrayList<>();
-        effects = new ArrayList<>();
+        this(new StringActionInfo(name));
     }
 
     public SasAction(SasAction other) {
@@ -56,19 +56,6 @@ public class SasAction {
     	return conditionalEffects;
     }
 
-	/**
-     * @param preconditions the preconditions to set
-     */
-    public void setPreconditions(List<Condition> preconditions) {
-        this.preconditions = preconditions;
-    }
-
-    /**
-     * @param effects the effects to set
-     */
-    public void setEffects(List<Condition> effects) {
-        this.effects = effects;
-    }
 
     /**
      * @return the name

@@ -20,9 +20,7 @@ package freelunch.planning.preprocessing;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import freelunch.planning.model.ActionInfo;
 import freelunch.planning.model.Condition;
@@ -47,24 +45,20 @@ public class DoubleActionCodec {
     
     private SasAction join(SasAction a1, SasAction a2) {
         SasAction result = new SasAction(new DoubleActionInfo(a1, a2));
-        Set<Condition> preconditions = new HashSet<Condition>();
-        Set<Condition> effects = new HashSet<Condition>();
         
-        preconditions.addAll(a1.getPreconditions());
-        preconditions.addAll(a2.getPreconditions());
-        preconditions.removeAll(a1.getEffects());
+        result.getPreconditions().addAll(a1.getPreconditions());
+        result.getPreconditions().addAll(a2.getPreconditions());
+        result.getPreconditions().removeAll(a1.getEffects());
         
-        effects.addAll(a2.getEffects());
-        effects.addAll(a1.getEffects());
+        result.getEffects().addAll(a2.getEffects());
+        result.getEffects().addAll(a1.getEffects());
         // remove non prevailing preconditions of a2
         for (Condition c : a2.getPreconditions()) {
             if (false == isPrevailCondition(c, a2)) {
-                effects.remove(c);
+            	result.getEffects().remove(c);
             }
         }
 
-        result.setPreconditions(new ArrayList<Condition>(preconditions));
-        result.setEffects(new ArrayList<Condition>(effects));
         return result;
     }
     

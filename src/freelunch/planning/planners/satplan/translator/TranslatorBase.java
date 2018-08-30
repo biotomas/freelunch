@@ -140,9 +140,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         for (StateVariable var : problem.getVariables()) {
             for (int value = 0; value < var.getDomain(); value++) {
                 SasAction a = new SasAction(new NoopActionInfo(var, value));
-                a.setPreconditions(new ArrayList<Condition>(1));
                 a.getPreconditions().add(new Condition(var, value));
-                a.setEffects(new ArrayList<Condition>());
                 a.getEffects().add(new Condition(var, value));
                 a.setId(actionId);
                 actionId++;

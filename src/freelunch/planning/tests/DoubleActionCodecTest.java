@@ -44,16 +44,10 @@ public class DoubleActionCodecTest extends TestCase {
     public void testMakeActionPairs() {
         
         SasAction a1 = new SasAction(new StringActionInfo("a1"));
-        a1.setPreconditions(new ArrayList<Condition>());
-        a1.setEffects(new ArrayList<Condition>());
         
         SasAction a2 = new SasAction(new StringActionInfo("a2"));
-        a2.setPreconditions(new ArrayList<Condition>());
-        a2.setEffects(new ArrayList<Condition>());
         
         SasAction a3 = new SasAction(new StringActionInfo("a3"));
-        a3.setPreconditions(new ArrayList<Condition>());
-        a3.setEffects(new ArrayList<Condition>());
 
         StateVariable var0 = new StateVariable(0, 3);
         StateVariable var1 = new StateVariable(1, 3);

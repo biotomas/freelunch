@@ -57,8 +57,6 @@ public class SasProblemBuilder {
      */
     public SasAction newAction(ActionInfo actionInfo) {
         SasAction op = new SasAction(actionInfo);
-        op.setPreconditions(new ArrayList<Condition>());
-        op.setEffects(new ArrayList<Condition>());
         operators.add(op);
         return op;
     }

@@ -1,6 +1,7 @@
 package freelunch.sat.bce.tests;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Set;
 import junit.framework.TestCase;
 import freelunch.sat.bce.utilities.SparseTable;
 import freelunch.sat.satLifter.Stopwatch;
+import freelunch.utilities.ArrayUtils;
 
 public class UtilitiesTest extends TestCase {
 	
@@ -18,6 +20,14 @@ public class UtilitiesTest extends TestCase {
 		sa.add(new int[]{1,2,3});
 		sa.add(new int[]{1,2,3});
 		System.out.println(sa.size());		
+	}
+	
+	public void testUniqueArrayRange() {
+		for (int i = 0; i < 10; i++) {
+			int[] x = ArrayUtils.randUniqueArrayRange(10, i, i+50, i);
+			Arrays.sort(x);
+			System.out.println(Arrays.toString(x));
+		}
 	}
 	
 	public void testSparseTable() {

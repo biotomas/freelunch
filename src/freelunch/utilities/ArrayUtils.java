@@ -28,6 +28,16 @@ public class ArrayUtils {
         return res;
     }
     
+    public static int[] randUniqueArrayRange(int items, int min, int max, long seed) {
+    	int[] tmp = sequence(max - min);
+    	shuffle(tmp, seed);
+    	int[] res = new int[items];
+    	for (int i = 0; i < items; i++) {
+    		res[i] = tmp[i] + min;
+    	}
+    	return res;
+    }
+    
     public static void invert(int[] array, int n) {
         for (int i = 0; i < array.length; i++) {
             array[i] = n - array[i];
