@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 import freelunch.planning.model.Condition;
+import freelunch.planning.model.ConditionalEffect;
 import freelunch.planning.model.NoopActionInfo;
 import freelunch.planning.model.SasAction;
 import freelunch.planning.model.SasParallelPlan;
@@ -280,7 +281,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     protected void computeInterferingActionPairsMinimal() {
         interferingActionPairs = new HashSet<Pair<SasAction>>();
 
-        for (List<SasAction> candidates : assignmentSupportingActions) {
+        for (Set<SasAction> candidates : assignmentSupportingActions) {
             // a1 and a2 have at least one common effect
             for (SasAction a1 : candidates) {
                 for (SasAction a2 : candidates) {
@@ -345,6 +346,13 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                     }
                 }
             }
+            for (ConditionalEffect ce : a2.getConditionalEffects()) {
+            	if (ce.getVar().getId() == prec.getVariable().getId()) {
+            		if (ce.getNewValue() != prec.getValue()) {
+            			return true;
+            		}
+            	}
+            }
         }
         for (Condition prec : a2.getPreconditions()) {
             for (Condition effect : a1.getEffects()) {
@@ -353,6 +361,13 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                         return true;
                     }
                 }
+            }
+            for (ConditionalEffect ce : a1.getConditionalEffects()) {
+            	if (ce.getVar().getId() == prec.getVariable().getId()) {
+            		if (ce.getNewValue() != prec.getValue()) {
+            			return true;
+            		}
+            	}
             }
         }
         return false;
@@ -737,6 +752,11 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             }
             solver.addNewClause(vec.getArrayCopy());
         }
+        
+        for (int varValId = 0; varValId < assignmentSupportingConditionalEffectActions.length; varValId++) {
+        	//TODO how to deal with this?
+        }
+        
     }
     
     /**

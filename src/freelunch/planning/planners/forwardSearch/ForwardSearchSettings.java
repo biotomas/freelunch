@@ -33,6 +33,7 @@ public class ForwardSearchSettings extends BasicSettings {
 
     private ForwardSearchSelectorFunction heuristic = new RandomHeuristic();
     private ForwardSearchRestartHeuristic restartHeuristic = new NeverRestartHeuristic();
+    private int maximumDepth = 0;
 
     public ForwardSearchSettings() {
         super();
@@ -75,5 +76,13 @@ public class ForwardSearchSettings extends BasicSettings {
     public void setRestartHeuristic(ForwardSearchRestartHeuristic restartHeuristic) {
         this.restartHeuristic = restartHeuristic;
     }
+
+	public int getMaximumDepth() {
+		return maximumDepth;
+	}
+
+	public void setMaximumDepth(int maximumDepth) {
+		this.maximumDepth = maximumDepth;
+	}
 
 }

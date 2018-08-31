@@ -112,6 +112,7 @@ public class MemoryEfficientForwardSearchSolver extends AbstractPlanner implemen
         visitedStates.add(encodeState(state));
         Set<SasAction> applicableActions = getApplicableActions(state);
         List<SasAction> candidateActions = new ArrayList<SasAction>();
+        int maxDepth = settings.getMaximumDepth();
 
         while (!isGoalState(state)) {
             if (timelimit > 0 && watch.limitExceeded(timelimit)) {
@@ -142,7 +143,7 @@ public class MemoryEfficientForwardSearchSolver extends AbstractPlanner implemen
         		restoreState(state, oldvalues);
             }
             
-            if (candidateActions.isEmpty()) {
+            if (candidateActions.isEmpty() || (maxDepth != 0 && statistics.depth > maxDepth)) {
                 if (plan.isEmpty()) {
                 	statistics.print();
                     throw new NonexistentPlanException();

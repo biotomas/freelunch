@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import freelunch.planning.planners.satplan.TransitionGenerator;
 import freelunch.planning.planners.satplan.translator.TopsortActionRanker;
@@ -194,7 +195,7 @@ public class SasProblemAnalyzer extends TranslatorBase {
             supportFlag.clear();
             for (Condition p : a.getPreconditions()) {
                 int condId = assignmentIds[p.getVariable().getId()][p.getValue()];
-                List<SasAction> supporters = assignmentSupportingActions[condId];
+                Set<SasAction> supporters = assignmentSupportingActions[condId];
                 for (SasAction sup : supporters) {
                     supportFlag.set(sup.getId());
                 }

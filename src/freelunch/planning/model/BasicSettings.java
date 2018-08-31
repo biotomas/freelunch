@@ -30,7 +30,6 @@ public class BasicSettings {
     private int timelimit = 0;
     private int satLimit = 0;
     private boolean verbose = false;
-    private boolean tracingEnabled = true;
 
     public BasicSettings() {
     }
@@ -80,24 +79,6 @@ public class BasicSettings {
      */
     public void setTimelimit(int timelimit) {
         this.timelimit = timelimit;
-    }
-
-    /**
-     * Is tracing of the solver algorithm enabled.
-     * 
-     * @return is tracing enabled
-     */
-    public boolean isTracingEnabled() {
-        return tracingEnabled;
-    }
-
-    /**
-     * Set tracing of the solver algorithm.
-     * 
-     * @param tracingEnabled is tracing enabled
-     */
-    public void setTracingEnabled(boolean tracingEnabled) {
-        this.tracingEnabled = tracingEnabled;
     }
 
     /**

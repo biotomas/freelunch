@@ -3,6 +3,7 @@ package freelunch.planning.planners.optimal.heuristics;
 import java.util.BitSet;
 
 import freelunch.planning.model.Condition;
+import freelunch.planning.model.ConditionalEffect;
 import freelunch.planning.model.SasAction;
 import freelunch.planning.model.SasProblem;
 
@@ -30,6 +31,11 @@ public class SimpleGoalDistanceHeuristic implements StateGoalDistanceHeuristic {
 			int effs = 0;
 			for (Condition e : a.getEffects()) {
 				if (goalVars.get(e.getVariable().getId())) {
+					effs++;
+				}
+			}
+			for (ConditionalEffect ce : a.getConditionalEffects()) {
+				if (goalVars.get(ce.getVar().getId())) {
 					effs++;
 				}
 			}

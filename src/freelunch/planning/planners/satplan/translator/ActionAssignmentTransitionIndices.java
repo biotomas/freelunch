@@ -18,13 +18,13 @@
  ******************************************************************************/
 package freelunch.planning.planners.satplan.translator;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import freelunch.planning.model.Condition;
+import freelunch.planning.model.ConditionalEffect;
 import freelunch.planning.model.SasAction;
 import freelunch.planning.model.SasProblem;
 import freelunch.planning.model.StateVariable;
@@ -51,7 +51,12 @@ public abstract class ActionAssignmentTransitionIndices {
      * The lists of actions supporting an assignment (by their (prevailing) effect)
      * indexed by assignment IDs
      */
-    protected List<SasAction>[] assignmentSupportingActions;
+    protected Set<SasAction>[] assignmentSupportingActions;
+    /**
+     * The lists of actions supporting an assignment (by one of their conditional effects)
+     * indexed by assignment IDs
+     */
+    protected Set<SasAction>[] assignmentSupportingConditionalEffectActions;
     /**
      * The lists of actions opposing an assignment (by their (prevailing) effect)
      * indexed by assignment IDs
@@ -179,22 +184,27 @@ public abstract class ActionAssignmentTransitionIndices {
         Set<SasAction> supports = new HashSet<SasAction>();
         for (Condition p : a.getPreconditions()) {
             int condId = assignmentIds[p.getVariable().getId()][p.getValue()];
-            List<SasAction> supporters = assignmentSupportingActions[condId];
-            supports.addAll(supporters);
+            supports.addAll(assignmentSupportingActions[condId]);
         }
         return supports;
     }
     
     @SuppressWarnings("unchecked")
     protected void initializeAssignmentSupportingActions() {
-        assignmentSupportingActions = new List[totalAssignments];
+        assignmentSupportingActions = new Set[totalAssignments];
+        assignmentSupportingConditionalEffectActions = new Set[totalAssignments];
         for (int i = 0; i < totalAssignments; i++) {
-            assignmentSupportingActions[i] = new ArrayList<SasAction>();
+            assignmentSupportingActions[i] = new HashSet<SasAction>();
+            assignmentSupportingConditionalEffectActions[i] = new HashSet<SasAction>();
         }
         for (SasAction a: actions) {
             for (Condition e : a.getEffects()) {
                 int id = assignmentIds[e.getVariable().getId()][e.getValue()];
                 assignmentSupportingActions[id].add(a);
+            }
+            for (ConditionalEffect ce : a.getConditionalEffects()) {
+            	int id = assignmentIds[ce.getVar().getId()][ce.getNewValue()];
+            	assignmentSupportingConditionalEffectActions[id].add(a);
             }
         }
     }

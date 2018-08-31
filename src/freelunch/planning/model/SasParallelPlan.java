@@ -193,7 +193,7 @@ public class SasParallelPlan {
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
             while (line != null) {
-            	planString += line;
+            	planString += line + "\n";
                 line = reader.readLine();
             }
             fr.close();
