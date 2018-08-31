@@ -31,7 +31,6 @@ import freelunch.planning.planners.satplan.translator.CompactDirect;
 import freelunch.planning.planners.satplan.translator.CompactReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.DirectDoubleLinkedTranslator;
 import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
-import freelunch.planning.planners.satplan.translator.DirectTranslator;
 import freelunch.planning.planners.satplan.translator.DisertDirectTranslator;
 import freelunch.planning.planners.satplan.translator.ReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
@@ -46,7 +45,7 @@ import freelunch.sat.modelling.modelObjects.PseudoBooleanFormula;
 public class Translator {
     
     public enum TranslationMethod {
-        direct, sase, isase, linear, reinforced, exist, disertDirect, compactDirect, compactReinforced, selective;
+        sase, isase, linear, reinforced, exist, disertDirect, compactDirect, compactReinforced, selective;
     }
 
     public static void main(String[] args) {
@@ -143,9 +142,6 @@ public class Translator {
 	    switch (translation) {
 	    case isase:
 	        translator = new SaseTranslator(problem);
-	        break;
-	    case direct:
-	        translator = new DirectTranslator(problem);
 	        break;
 	    case sase:
 	        SaseTranslatorSettings settings = new SaseTranslatorSettings();

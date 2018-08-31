@@ -14,7 +14,7 @@ import freelunch.planning.planners.Planner;
 import freelunch.planning.planners.optimal.SimpleAstarPlanner;
 import freelunch.planning.planners.optimal.heuristics.SimpleGoalDistanceHeuristic;
 import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
-import freelunch.planning.planners.satplan.translator.DirectTranslator;
+import freelunch.planning.planners.satplan.translator.DisertDirectTranslator;
 import freelunch.sat.model.Sat4JSolver;
 import junit.framework.TestCase;
 
@@ -25,7 +25,7 @@ public class SatBenchmarking extends TestCase {
 		SasProblem problem = bp.getNext();
 		while (problem != null) {
 			System.out.print("solving " + problem.getDescription());
-			Planner planner = new IterativeSatBasedSolver(new Sat4JSolver(), new DirectTranslator(problem));
+			Planner planner = new IterativeSatBasedSolver(new Sat4JSolver(), new DisertDirectTranslator(problem));
 			//Planner planner;// = new SimpleAstarPlanner(problem, new SimpleGoalDistanceHeuristic(problem));
 			//ForwardSearchSettings settings = new ForwardSearchSettings();
 			//settings.setMaximumDepth(20);

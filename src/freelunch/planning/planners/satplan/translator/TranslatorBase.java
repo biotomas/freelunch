@@ -736,31 +736,6 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     
     /**
      * Variable value assignments in the next time window must be supported by
-     * an action in the given time window. Requires NOOP actions.
-     * requires <i>assignmentVariables</i> and <i>assignmentSupportingActions</i>
-     * @param solver
-     * @param time
-     * @throws SatContradictionException
-     */
-    protected void transition_assignmentsMustBeSupportedByActions(IncrementalSatSolver solver, int time) throws SatContradictionException {
-        IntVector vec = new IntVector(10);
-        for (int varValId = 0; varValId < assignmentSupportingActions.length; varValId++) {
-            vec.clear();
-            vec.add(-assignmentVariables.getVariable(varValId, time+1));
-            for (SasAction a : assignmentSupportingActions[varValId]) {
-                vec.add(actionVariables.getVariable(a.getId(), time));
-            }
-            solver.addNewClause(vec.getArrayCopy());
-        }
-        
-        for (int varValId = 0; varValId < assignmentSupportingConditionalEffectActions.length; varValId++) {
-        	//TODO how to deal with this?
-        }
-        
-    }
-    
-    /**
-     * Variable value assignments in the next time window must be supported by
      * an action or a current assignment in the given time window. Actions must imply
      * their effects for this to be sufficient. 
      * requires <i>assignmentVariables</i> and <i>assignmentSupportingActions</i>

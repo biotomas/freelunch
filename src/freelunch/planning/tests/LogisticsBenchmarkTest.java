@@ -48,7 +48,7 @@ import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
 import freelunch.planning.planners.satplan.translator.CompactDirect;
 import freelunch.planning.planners.satplan.translator.DirectDoubleLinkedTranslator;
 import freelunch.planning.planners.satplan.translator.DirectExistStepTranslator;
-import freelunch.planning.planners.satplan.translator.DirectTranslator;
+import freelunch.planning.planners.satplan.translator.DisertDirectTranslator;
 import freelunch.planning.planners.satplan.translator.ReinforcedSaseTranslator;
 import freelunch.planning.planners.satplan.translator.SasToSatTranslator;
 import freelunch.planning.planners.satplan.translator.SaseTranslator;
@@ -264,7 +264,7 @@ public class LogisticsBenchmarkTest extends TestCase {
         int i = 0;
         while (sasProb != null) {
             //Solver s = new IterativeSatBasedSolver(solver, new DirectDoubleLinkedTranslator(sasProb));
-            Planner s = new IterativeSatBasedSolver(solver, new DirectTranslator(sasProb));
+            Planner s = new IterativeSatBasedSolver(solver, new DisertDirectTranslator(sasProb));
             s.getSettings().setTimelimit(10);
             int makespan = solveProblem(s, sasProb, false, false);
             // check makespan length
