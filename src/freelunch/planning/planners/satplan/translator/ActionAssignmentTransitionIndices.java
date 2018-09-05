@@ -48,15 +48,18 @@ public abstract class ActionAssignmentTransitionIndices {
      */
     protected int totalAssignments = 0;
     /**
+     * The set of conditional effect supporting as assignment
+     */
+    protected Set<ConditionalEffect>[] assignmentSupportingConditionalEffects;
+    /**
+     * The list of all conditional effects    
+     */
+    protected List<ConditionalEffect> conditionalEffects;
+    /**
      * The lists of actions supporting an assignment (by their (prevailing) effect)
      * indexed by assignment IDs
      */
     protected Set<SasAction>[] assignmentSupportingActions;
-    /**
-     * The lists of actions supporting an assignment (by one of their conditional effects)
-     * indexed by assignment IDs
-     */
-    protected Set<SasAction>[] assignmentSupportingConditionalEffectActions;
     /**
      * The lists of actions opposing an assignment (by their (prevailing) effect)
      * indexed by assignment IDs
@@ -119,6 +122,9 @@ public abstract class ActionAssignmentTransitionIndices {
         }
         for (Condition c : a.getEffects()) {
             vars.add(c.getVariable().getId());
+        }
+        for (ConditionalEffect ce : a.getConditionalEffects()) {
+        	vars.add(ce.getVar().getId());
         }
         return vars;
     }
@@ -192,19 +198,27 @@ public abstract class ActionAssignmentTransitionIndices {
     @SuppressWarnings("unchecked")
     protected void initializeAssignmentSupportingActions() {
         assignmentSupportingActions = new Set[totalAssignments];
-        assignmentSupportingConditionalEffectActions = new Set[totalAssignments];
         for (int i = 0; i < totalAssignments; i++) {
             assignmentSupportingActions[i] = new HashSet<SasAction>();
-            assignmentSupportingConditionalEffectActions[i] = new HashSet<SasAction>();
         }
         for (SasAction a: actions) {
             for (Condition e : a.getEffects()) {
                 int id = assignmentIds[e.getVariable().getId()][e.getValue()];
                 assignmentSupportingActions[id].add(a);
             }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+	protected void initializeAssignmentSupportingConditionalEffects() {
+    	assignmentSupportingConditionalEffects = new Set[totalAssignments];
+        for (int i = 0; i < totalAssignments; i++) {
+        	assignmentSupportingConditionalEffects[i] = new HashSet<ConditionalEffect>();
+        }
+        for (SasAction a: actions) {
             for (ConditionalEffect ce : a.getConditionalEffects()) {
             	int id = assignmentIds[ce.getVar().getId()][ce.getNewValue()];
-            	assignmentSupportingConditionalEffectActions[id].add(a);
+            	assignmentSupportingConditionalEffects[id].add(ce);
             }
         }
     }

@@ -82,7 +82,7 @@ public class CollectorProblemGenerator {
 									if (ix >= 0 && ix < gridSize && iy >= 0 && iy < gridSize) {
 										for (int i = 0; i < items; i++) {
 											if (itemPosition[i] == ix*gridSize+iy) {
-												ConditionalEffect ce = new ConditionalEffect(itemCollected[i], 1);
+												ConditionalEffect ce = new ConditionalEffect(itemCollected[i], 1,a);
 												ce.addEffectCondition(new Condition(itemCollected[i], 0));
 												a.getConditionalEffects().add(ce);
 											}

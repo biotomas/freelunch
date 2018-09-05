@@ -11,8 +11,6 @@ import freelunch.planning.model.SasProblem;
 import freelunch.planning.model.TimeoutException;
 import freelunch.planning.optimizer.PlanVerifier;
 import freelunch.planning.planners.Planner;
-import freelunch.planning.planners.optimal.SimpleAstarPlanner;
-import freelunch.planning.planners.optimal.heuristics.SimpleGoalDistanceHeuristic;
 import freelunch.planning.planners.satplan.iterative.IterativeSatBasedSolver;
 import freelunch.planning.planners.satplan.translator.DisertDirectTranslator;
 import freelunch.sat.model.Sat4JSolver;
@@ -30,13 +28,13 @@ public class SatBenchmarking extends TestCase {
 			//ForwardSearchSettings settings = new ForwardSearchSettings();
 			//settings.setMaximumDepth(20);
 			//planner = new MemoryEfficientForwardSearchSolver(problem, settings);
-			planner.getSettings().setTimelimit(10);
+			//planner.getSettings().setTimelimit(10);
 			planner.getSettings().setVerbose(true);
 			try {
 				SasParallelPlan plan = planner.solve();
+				System.out.println(plan.toString());
 				if (PlanVerifier.verifyPlan(problem, plan)) {
 					System.out.println("Found  valid plan :)");
-					System.out.println(plan.toString());
 				} else {
 					System.out.println("Found INVALID PLAN !!!");
 				}
@@ -45,8 +43,8 @@ public class SatBenchmarking extends TestCase {
 			} catch (NonexistentPlanException e) {
 				System.out.println("Ain't no none plan");
 			}
-			
-			problem = bp.getNext();
+			break;
+			//problem = bp.getNext();
 		}
 		
 	}
@@ -64,12 +62,18 @@ public class SatBenchmarking extends TestCase {
 	}
 	
 	public void testSatOnCollector() throws TimeoutException, NonexistentPlanException {
-		SasProblem problem = CollectorProblemGenerator.generateProblem(6, 10, 2);
-		Planner planner = new SimpleAstarPlanner(problem, new SimpleGoalDistanceHeuristic(problem));
-		SasParallelPlan plan = planner.solve();
-		System.out.println(plan.toString());
-		if (PlanVerifier.verifyPlan(problem, plan)) {
-			System.out.println("plan verified");
+		for (int i = 2; i < 100; i++) {
+			SasProblem problem = CollectorProblemGenerator.generateProblem(7, 20, i);
+			//Planner planner = new SimpleAstarPlanner(problem, new SimpleGoalDistanceHeuristic(problem));
+			Planner planner = new IterativeSatBasedSolver(new Sat4JSolver(), new DisertDirectTranslator(problem));
+			SasParallelPlan plan = planner.solve();
+			System.out.println(plan.toString());
+			if (PlanVerifier.verifyPlan(problem, plan)) {
+				System.out.println("plan verified");
+			} else {
+				System.out.println("wrong");
+				break;
+			}
 		}
 	}
 

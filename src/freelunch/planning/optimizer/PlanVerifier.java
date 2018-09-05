@@ -18,6 +18,7 @@
  ******************************************************************************/
 package freelunch.planning.optimizer;
 
+import java.util.Arrays;
 import java.util.List;
 
 import freelunch.planning.model.Condition;
@@ -39,13 +40,19 @@ public class PlanVerifier {
      */
     public static boolean verifyPlan(SasProblem problem, SasParallelPlan plan) {
         int[] state = new int[problem.getVariables().size()];
-        // set up the initial state
+        // set up the initial state        
         for (Condition c : problem.getInitialState()) {
             state[c.getVariable().getId()] = c.getValue();
         }
         int time = 0;
         for (List<SasAction> actions : plan.getPlan()) {
             for (SasAction op : actions) {
+            	System.out.println("State at time " + time);
+            	for (int vid = 0; vid < state.length; vid++) {
+            		System.out.print("var"+vid+"="+state[vid]+", ");
+            	}
+            	System.out.println("Applying action:");
+            	System.out.println(op.toString());
                 //check preconditions
                 for (Condition precond : op.getPreconditions()) {
                     int var = precond.getVariable().getId();
@@ -66,12 +73,16 @@ public class PlanVerifier {
 	                			continue outer;
 	                		}
 	                	}
-	                	state[cef.getVar().getId()] = cef.getNewValue();                	
+	                	System.out.println(String.format("COND Changing var%s from %d to %d", cef.getVar().getId(),
+	                			state[cef.getVar().getId()], cef.getNewValue()));
+	                	state[cef.getVar().getId()] = cef.getNewValue();
 	                }
                 }
                 //apply effects
                 for (Condition eff : op.getEffects()) {
                     int var = eff.getVariable().getId();
+                	System.out.println(String.format("Changing var%s from %d to %d", eff.getVariable().getId(),
+                			state[var], eff.getValue()));
                     state[var] = eff.getValue();
                 }
             }

@@ -35,7 +35,9 @@ public class DisertDirectTranslator extends TranslatorBase implements SasToSatTr
         super(problem);
         initializeActionVariables();
         initializeAssignmentVariables();
+        initializeConditionalEffectVariables();
         initializeAssignmentSupportingActions();
+        initializeAssignmentSupportingConditionalEffects();
         computeInterferingActionPairsMinimal();
     }
 
@@ -55,6 +57,7 @@ public class DisertDirectTranslator extends TranslatorBase implements SasToSatTr
     public void addTransitionConstraints(IncrementalSatSolver solver, int time) throws SatContradictionException {
         transition_assignmentsMustBeSupportedByActionsOrAssignments(solver, time);
         transition_actionsImplyEffects(solver, time);
+        transition_conditionalEffectRequiresActionAndConditions(solver, time);
     }
 
     @Override
@@ -67,6 +70,7 @@ public class DisertDirectTranslator extends TranslatorBase implements SasToSatTr
         BasicSatFormulaGenerator sgen = new BasicSatFormulaGenerator();
         actionVariables.setDimensionSize(1, makespan);
         assignmentVariables.setDimensionSize(1, makespan + 1);
+        conditionalEffectVariables.setDimensionSize(1, makespan+1);
         int vars = varManager.getTotalVarsCount();
         sgen.setVariablesCount(vars);
         try {

@@ -51,6 +51,7 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
     
     protected final IntVarGroupManager varManager;
     protected IntVarGroup assignmentVariables = null;
+    protected IntVarGroup conditionalEffectVariables = null;
     protected IntVarGroup transitionVariables = null;
     protected IntVarGroup actionVariables;
     protected IntVarGroup chainVariables = null;
@@ -167,7 +168,20 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         transitionVariables.setDimensionSize(1, 1);
     }
     
-    
+    protected void initializeConditionalEffectVariables() {
+    	conditionalEffects = new ArrayList<ConditionalEffect>();
+    	for (SasAction a : actions) {
+    		conditionalEffects.addAll(a.getConditionalEffects());
+    	}
+    	int id = 0;
+    	for (ConditionalEffect ce : conditionalEffects) {
+    		ce.setId(id);
+    		id++;
+    	}
+    	conditionalEffectVariables = varManager.createNewVarGroup(2);
+    	conditionalEffectVariables.setDimensionSize(0, conditionalEffects.size());
+    	conditionalEffectVariables.setDimensionSize(1, 1);
+    }
     
     protected void initializeAssignmentVariables() {
         if (assignmentIds == null) {
@@ -700,9 +714,18 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));
                 solver.addNewClause(vec.getArrayCopy());
             }
+            for (ConditionalEffect ce : a.getConditionalEffects()) {
+            	vec.clear();
+                vec.add(-actionVariables.getVariable(a.getId(), time));
+                // add the condition of the effect
+                for (Condition c : ce.getEffectConditions()) {
+                    vec.add(-assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));                                	
+                }
+                // add the effect
+                vec.add(assignmentVariables.getVariable(assignmentIds[ce.getVar().getId()][ce.getNewValue()], time+1));
+                solver.addNewClause(vec.getArrayCopy());
+            }
         }
-        //TODO conditional effects
-
     }
     
     protected void universal_mutexGroups(IncrementalSatSolver solver, int time) throws SatContradictionException {
@@ -754,10 +777,25 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
             for (SasAction a : assignmentSupportingActions[varValId]) {
                 vec.add(actionVariables.getVariable(a.getId(), time));
             }
+            for (ConditionalEffect ce : assignmentSupportingConditionalEffects[varValId]) {
+            	vec.add(conditionalEffectVariables.getVariable(ce.getId(), time));
+            }
             solver.addNewClause(vec.getArrayCopy());
         }
     }
     
+    protected void transition_conditionalEffectRequiresActionAndConditions(IncrementalSatSolver solver, int time) throws SatContradictionException {
+    	for (ConditionalEffect ce : conditionalEffects) {
+    		int ceid = conditionalEffectVariables.getVariable(ce.getId(), time);
+    		solver.addNewClause(new int[] {-ceid, actionVariables.getVariable(ce.getAction().getId(),time)});
+    		for (Condition effectCond : ce.getEffectConditions()) {
+    			solver.addNewClause(new int[] {-ceid, assignmentVariables.getVariable(
+    					assignmentIds[effectCond.getVariable().getId()][effectCond.getValue()], time)});
+    		}
+    	}
+    }
+    
+
     protected void transition_assignmentsMustBeSupportedByActionsNowOrAssignmentsBefore(IncrementalSatSolver solver, int time) throws SatContradictionException {
         IntVector vec = new IntVector(10);
         for (int varValId = 0; varValId < assignmentSupportingActions.length; varValId++) {
@@ -782,8 +820,18 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
                 vec.add(assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time+1));
                 solver.addNewClause(vec.getArrayCopy());
             }
+            for (ConditionalEffect ce : a.getConditionalEffects()) {
+            	vec.clear();
+                vec.add(-actionVariables.getVariable(a.getId(), time));
+                // add the condition of the effect
+                for (Condition c : ce.getEffectConditions()) {
+                    vec.add(-assignmentVariables.getVariable(assignmentIds[c.getVariable().getId()][c.getValue()], time));                                	
+                }
+                // add the effect
+                vec.add(assignmentVariables.getVariable(assignmentIds[ce.getVar().getId()][ce.getNewValue()], time+1));
+                solver.addNewClause(vec.getArrayCopy());
+            }
         }
-        //TODO conditional effects?
     }
     
     /**
@@ -945,6 +993,9 @@ public abstract class TranslatorBase extends ActionAssignmentTransitionIndices i
         }
         if (chainVariables != null) {
             chainVariables.setDimensionSize(1, time + 1);
+        }
+        if (conditionalEffectVariables != null) {
+        	conditionalEffectVariables.setDimensionSize(1, time+1);
         }
         return varManager.getTotalVarsCount();
     }

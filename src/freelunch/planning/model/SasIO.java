@@ -272,7 +272,7 @@ public class SasIO {
                 		op.getPreconditions().add(new Condition(var, reqVal));
                 	}
 
-	                ConditionalEffect ceff = new ConditionalEffect(var, newVal);	                
+	                ConditionalEffect ceff = new ConditionalEffect(var, newVal, op);
                 	for (int eci = 0; eci < effectConditions; eci++) {
                 		int ecivarid = Integer.parseInt(parts[1+2*eci]);
                 		StateVariable ecivar = problem.getVariables().get(ecivarid);

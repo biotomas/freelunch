@@ -7,18 +7,32 @@ public class ConditionalEffect {
 	
 	private StateVariable var;
 	private int newValue;
+	private SasAction action;
+	private int id;
 	
 	private List<Condition> effectConditions;
 	
-	public ConditionalEffect(StateVariable var, int newValue) {
+	public ConditionalEffect(StateVariable var, int newValue, SasAction action) {
 		this.var = var;
 		this.newValue = newValue;
 		this.effectConditions = new ArrayList<Condition>();
+		this.action = action;
 	}
-	
 	
 	public StateVariable getVar() {
 		return var;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public SasAction getAction() {
+		return action;
 	}
 	
 	public void addEffectCondition(Condition condition) {
