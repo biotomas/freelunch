@@ -18,7 +18,6 @@
  ******************************************************************************/
 package freelunch.planning.optimizer;
 
-import java.util.Arrays;
 import java.util.List;
 
 import freelunch.planning.model.Condition;
