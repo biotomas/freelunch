@@ -42,7 +42,7 @@ public class ReducerMain {
      */
     public static void main(String[] args) {
         if (args.length < 3) {
-            System.out.println("USAGE: java -jar fl.jar (ae | gae | sat | aegaesat | pmax | wpmax | eval | rpp | hpp | sas) problem.sas plan.sol (maxsat.wcnf | maxsat.out)");
+            System.out.println("USAGE: java -jar fl.jar (ae | gae | sat | aegaesat | pmax | wpmax | eval | rpp | hpp | sas) problem.sas plan.sol (newplan.sol | maxsat.wcnf | maxsat.out)");
             System.out.println(" where: ae = action elimination, gae = greedy action elimination, sat = sat reduction, " +
             		"pmax = partial maxsat reduction, wpmax = " +
             		"weighted partial maxsat reduction, eval = evaluate maxsat result");
@@ -142,9 +142,15 @@ public class ReducerMain {
                 return;
             }
             
+           
             System.out.println("header;algorithm;filename;orig-cost;new-cost;org-length;new-length;time");
             System.out.println(String.format("data;%s;%s;%d;%d;%d;%d;%s", args[0], args[1], oldPlanCost, newPlanCost, 
                     oldPlanLength, newPlanLength, timer.elapsedFormatedSeconds()));
+            System.out.println("actions removed: " + (oldPlanLength - newPlanLength));
+            if (args.length > 3) {
+            	plan.saveToFileIpcFormat(args[3]);
+            	System.out.println("saved new plan to " + args[3]);
+            }
             
         } catch (IOException e) {
             System.out.println("Problem or plan file cannot be opened.");
