@@ -82,7 +82,7 @@ public class StateVariable {
 
     @Override
     public int hashCode() {
-        return new Integer(id).hashCode();
+        return id;
     }
 
 }
