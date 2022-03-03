@@ -18,7 +18,6 @@
  ******************************************************************************/
 package freelunch.sat.solver.walksat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -255,6 +254,11 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     public void addNewClause(int[] literals) throws SatContradictionException {
         clManager.addPermanentClause(new LSClause(literals));
     }
+    
+    @Override
+    public void addDNF(int[][] terms) throws SatContradictionException {
+    	throw new UnsupportedOperationException();
+    }
 
     @Override
     public int addRemovableClause(int[] literals) throws SatContradictionException {
@@ -291,29 +295,10 @@ public abstract class BaseWalkSAT implements IncrementalSatSolver {
     }
 
     @Override
-    public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
-        lastRemovableClauseId++;
-        int[] lits = literals;
-        List<LSClause> cls = new ArrayList<LSClause>(lits.length * (lits.length - 1));
-        for (int i = 0; i < lits.length; i++) {
-            for (int j = i+1; j < lits.length; j++) {
-                LSClause c = new LSClause(new int[] {-lits[i], -lits[j]});
-                cls.add(c);
-                clManager.addRemovableClause(c);
-            }
-        }
-        removableAtMostOnesMap.put(lastRemovableClauseId, cls);
-        return lastRemovableClauseId;
+    public void addNativeAtMostOneConstraint(int[] literals) throws SatContradictionException {
+    	addAtMostOneConstraint(literals);
     }
 
-    @Override
-    public void removeAtMostOneConstraint(int constraintId) {
-        for (LSClause c : removableAtMostOnesMap.get(constraintId)) {
-            clManager.removeClause(c);
-        }
-        removableAtMostOnesMap.remove(constraintId);
-    }
-    
     @Override
     public void reset() {
         removableClauseMap.clear();

@@ -25,26 +25,28 @@ import java.util.Map;
 
 import freelunch.planning.model.TimeoutException;
 
-
 /**
- * A fake solver used only to generate a SAT formula through
- * the {@link IncrementalSatSolver} interface. It can not actually
- * solve a formula, it only records the clauses and variables.
+ * A fake solver used only to generate a SAT formula through the
+ * {@link IncrementalSatSolver} interface. It can not actually solve a formula,
+ * it only records the clauses and variables.
  *
- * @author Tomas Balyo
- * 31.10.2012
+ * @author Tomas Balyo 31.10.2012
  */
 public class BasicSatFormulaGenerator implements IncrementalSatSolver {
-	
+
 	private int variables;
 	private List<int[]> clauses;
+	private List<int[]> atMostOnes;
+	private List<int[][]> dnfs;
 	private Map<Integer, int[]> removableClauses;
 	private int removableClauseId;
-	
+
 	public BasicSatFormulaGenerator() {
 		variables = 0;
 		removableClauseId = 0;
 		clauses = new ArrayList<int[]>();
+		dnfs = new ArrayList<int[][]>();
+		atMostOnes = new ArrayList<int[]>();
 		removableClauses = new HashMap<Integer, int[]>();
 	}
 
@@ -96,25 +98,21 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
-		throw new UnsupportedOperationException();
+	public void addNativeAtMostOneConstraint(int[] literals) throws SatContradictionException {
+		atMostOnes.add(literals);
 	}
 
-	@Override
-	public void removeAtMostOneConstraint(int constraintId) {
-		throw new UnsupportedOperationException();
-	}
-	
 	/**
 	 * Get the current formula.
+	 * 
 	 * @return
 	 */
 	public CnfSatFormula getFormula() {
 		List<int[]> fclauses = new ArrayList<int[]>(clauses);
 		fclauses.addAll(removableClauses.values());
-		return new CnfSatFormula(variables, fclauses);
+		return new CnfSatFormula(variables, fclauses, atMostOnes, dnfs);
 	}
-	
+
 	/**
 	 * Clear the formula i.e. remove all clauses and variables
 	 */
@@ -124,29 +122,34 @@ public class BasicSatFormulaGenerator implements IncrementalSatSolver {
 		variables = 0;
 	}
 
-    @Override
-    public void clearRemovableClauses() {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public void clearRemovableClauses() {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public void reset() {
-        clear();
-    }
+	@Override
+	public void reset() {
+		clear();
+	}
 
-    @Override
-    public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
-        throw new UnsupportedOperationException();
-    }
-    
-    @Override
-    public String toString() {
-        return getFormula().toString();
-    }
+	@Override
+	public Boolean isSatisfiable(CnfSatFormula formula) throws TimeoutException {
+		throw new UnsupportedOperationException();
+	}
 
-    @Override
-    public long getSolveTime() {
-        throw new UnsupportedOperationException();
-    }
+	@Override
+	public String toString() {
+		return getFormula().toString();
+	}
+
+	@Override
+	public long getSolveTime() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void addDNF(int[][] terms) throws SatContradictionException {
+		dnfs.add(terms);
+	}
 
 }

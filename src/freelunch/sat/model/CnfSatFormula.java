@@ -15,6 +15,8 @@ import java.util.List;
 public class CnfSatFormula {
     public int variablesCount;
     public List<int[]> clauses;
+    public List<int[]> atMostOneConstraints;
+    public List<int[][]> dnfConstraints;
     
     public CnfSatFormula(int vars) {
     	variablesCount = vars;
@@ -24,6 +26,13 @@ public class CnfSatFormula {
 	public CnfSatFormula(int variables, List<int[]> clauses) {
 		this.variablesCount = variables;
 		this.clauses = clauses;
+	}
+	
+	public CnfSatFormula(int variables, List<int[]> clauses, List<int[]> atMostOnes, List<int[][]> dnfs) {
+		this.variablesCount = variables;
+		this.clauses = clauses;
+		this.atMostOneConstraints = atMostOnes;
+		this.dnfConstraints = dnfs;
 	}
 	
     public CnfSatFormula() {
@@ -61,6 +70,26 @@ public class CnfSatFormula {
         	sb.append(clauseToString(cl));
         }
         out.println(sb.toString());
+    }
+    
+    public void printRichDimacs(PrintStream out) {
+        out.println(String.format("p cnf %d %d\n", variablesCount, clauses.size() + atMostOneConstraints.size() + dnfConstraints.size()));
+        for (int[] clause : clauses) {
+        	out.print(clauseToString(clause));
+        }
+        for (int[] amo : atMostOneConstraints) {
+        	out.print("AMO " + clauseToString(amo));
+        }
+        for (int[][] dnf : dnfConstraints) {
+        	out.print("DNF ");
+        	for (int [] term : dnf) {
+        		for (int lit : term) {
+        			out.print(lit + " ");
+        		}
+        		out.print("0 ");
+        	}
+        	out.println("0");
+        }
     }
     
 	public static void validateCnfFile(String filename) {

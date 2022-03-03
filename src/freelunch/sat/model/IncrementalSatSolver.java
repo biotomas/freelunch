@@ -49,6 +49,13 @@ public interface IncrementalSatSolver extends SatSolver {
 	public void addNewClause(int[] literals) throws SatContradictionException;
 	
 	/**
+	 * Add a new permanent DNF formula
+	 * @param terms
+	 * @throws SatContradictionException
+	 */
+	public void addDNF(int[][] terms) throws SatContradictionException;
+	
+	/**
 	 * Add a new removable clause to the formula
 	 * The IntVector object can be reused.
 	 * @param literals
@@ -70,26 +77,17 @@ public interface IncrementalSatSolver extends SatSolver {
 	
 	/**
 	 * Add a permanent constraint that at most one of the literals can be true
-	 * The IntVector object can be reused.
 	 * @param literals
 	 * @throws SatContradictionException if the formula is unsatisfiable after adding the clause
 	 */
 	public void addAtMostOneConstraint(int[] literals) throws SatContradictionException;
 
 	/**
-	 * Add a removable constraint that at most one of the literals can be true
-	 * The IntVector object can be reused.
+	 * Add a permanent constraint that at most one of the literals can be true
 	 * @param literals
-	 * @return the constraintId used for removing 
 	 * @throws SatContradictionException if the formula is unsatisfiable after adding the clause
 	 */
-	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException;
-	
-	/**
-	 * Remove the specified at-most-one constraint
-	 * @param constraintId
-	 */
-	public void removeAtMostOneConstraint(int constraintId);
+	public void addNativeAtMostOneConstraint(int[] literals) throws SatContradictionException;
 
 	/**
 	 * Reset the solver to its initial state - remove all variables and clauses

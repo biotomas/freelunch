@@ -132,15 +132,8 @@ public class Sat4JSolver implements IncrementalSatSolver {
 	}
 
 	@Override
-	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
-		try {
-			IConstr constr = solver.addAtMost(new VecInt(literals), 1);
-			lastConstrId++;
-			constraintsMap.put(lastConstrId, constr);
-			return lastConstrId;
-		} catch (ContradictionException e) {
-			throw new SatContradictionException();
-		}
+	public void addNativeAtMostOneConstraint(int[] literals) throws SatContradictionException {
+		addAtMostOneConstraint(literals);
 	}
 
 	@Override
@@ -150,12 +143,6 @@ public class Sat4JSolver implements IncrementalSatSolver {
 			solver.removeConstr(constr);
 		}
 		constraintsMap.remove(clauseId);
-	}
-
-	@Override
-	public void removeAtMostOneConstraint(int constraintId) {
-		// the same as remove clause for sat4j
-		removeClause(constraintId);
 	}
 
     @Override
@@ -175,5 +162,10 @@ public class Sat4JSolver implements IncrementalSatSolver {
     public long getSolveTime() {
         return satTime;
     }
+
+	@Override
+	public void addDNF(int[][] terms) throws SatContradictionException {
+		throw new UnsupportedOperationException();
+	}
 
 }

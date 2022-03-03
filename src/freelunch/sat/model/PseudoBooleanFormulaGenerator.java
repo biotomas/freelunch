@@ -94,13 +94,8 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 	}
 
 	@Override
-	public int addRemovableAtMostOneConstraint(int[] literals) throws SatContradictionException {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void removeAtMostOneConstraint(int constraintId) {
-		throw new UnsupportedOperationException();
+	public void addNativeAtMostOneConstraint(int[] literals) throws SatContradictionException {
+		addAtMostOneConstraint(literals);
 	}
 
 	@Override
@@ -108,6 +103,11 @@ public class PseudoBooleanFormulaGenerator implements IncrementalSatSolver {
 		clauses.clear();
 		amoConstraints.clear();
 		variables = 0;
+	}
+
+	@Override
+	public void addDNF(int[][] terms) throws SatContradictionException {
+		throw new UnsupportedOperationException();
 	}
 
 }
